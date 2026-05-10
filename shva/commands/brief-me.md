@@ -1,6 +1,6 @@
 ---
 description: "Pre-project vocabulary briefing. Returns a 20-25 term domain glossary before starting any GenAI build (code, design, video, music, art). Use BEFORE briefing the AI on your real project — it prevents drift by aligning your vocabulary with the AI's first."
-allowed-tools: ["Read", "AskUserQuestion", "Write", "Bash"]
+allowed-tools: ["Read", "Write", "Bash"]
 model: sonnet
 argument-hint: "[project-type, e.g. '2D browser game' or 'AI music track in Suno']"
 ---
@@ -24,25 +24,37 @@ argument-hint: "[project-type, e.g. '2D browser game' or 'AI music track in Suno
 
 ## Step 1 — Resolve the project type
 
-If `$ARGUMENTS` is non-empty, treat it as `project_type`.
+If `$ARGUMENTS` is non-empty, treat it as `project_type` and continue
+straight to Step 2.
 
-Otherwise, ask the user via `AskUserQuestion`:
+Otherwise, ask the user as a **single plain-text prompt** (not via
+`AskUserQuestion`) — project types are open-ended free text, and a
+multiple-choice picker discards the specificity this skill is trying
+to elicit. Render the examples as inspiration prose, not options:
 
-> "What are you about to build? (Be specific — domain matters more than scale.)"
+> "What are you about to build? (Be specific — domain matters more
+> than scale.)
+>
+> Examples to nudge specificity:
+> • 2D browser game in Phaser
+> • SaaS dashboard in Next.js + shadcn
+> • AI music track in Suno
+> • AI video in Runway / Kling
+> • Mobile-first landing page
+> • Midjourney art series — editorial photography
+> • ElevenLabs documentary podcast
+> • Remotion explainer animation
+> • Pitch deck in Canva / Keynote"
 
-Suggest these examples to nudge specificity:
-- "2D browser game in Phaser"
-- "SaaS dashboard in Next.js + shadcn"
-- "AI music track in Suno"
-- "AI video in Runway / Kling"
-- "Mobile-first landing page"
-- "Midjourney art series — editorial photography"
-- "ElevenLabs documentary podcast"
-- "Remotion explainer animation"
-- "Pitch deck in Canva / Keynote"
+Then wait for the user's reply and use it verbatim as `project_type`.
+
+**Do not call `AskUserQuestion` here.** It caps at 4 options, which
+forces a lossy collapse of the example list and turns inspiration
+into a forced-choice menu.
 
 If the user gives a vague answer (e.g. "a website"), push once for the
-domain — *what kind* of website, *for whom*, *with what tech*. Then proceed.
+domain — *what kind* of website, *for whom*, *with what tech*. Then
+proceed to Step 2.
 
 ---
 
@@ -105,7 +117,128 @@ Then add a one-line note:
 
 ---
 
-## Step 5 (optional) — Persist the glossary
+## Step 5 (optional) — Visual mental model
+
+**Trigger:** user says "visual", "diagram", "explain visually", "draw it",
+"HTML", or "show me".
+
+When triggered, hand off to `visual-explainer:generate-web-diagram` (or
+write the HTML directly) with an **analogical brief**, not a structural
+one. The job is to make the domain *click*, not to inventory it.
+
+**Constraints — read before generating:**
+
+- **One diagram, not three.** A single Mermaid flowchart showing the
+  spatial shape of the domain — 4 to 6 nodes, never more. No sequence
+  diagrams. No comparison tables. No nested vocabulary stacks. If the
+  user wants those, they will ask. Pull, don't push.
+
+- **Pick one running metaphor and stay in it.** Restaurant, factory,
+  postal system, USB peripheral, library, plumbing — pick *one* and
+  ride it for the whole page. Never switch metaphors mid-explanation;
+  that's the move that makes pages feel patchworked.
+
+- **Warm, not dramatic.** The job is fast comprehension, not a reading
+  experience. State the metaphor flat. Don't open with rhetorical
+  framing ("there are X ways…"), don't withhold ("imagine this:"),
+  don't address the reader's experience ("here's how to think about
+  it"), don't write essay-openers. Vivid one-line compressions are
+  good ("Tools without handlers are pictures of food"); theatrical
+  setups are not. Cut every sentence whose job is *commentary on the
+  explanation* rather than *the explanation itself*.
+
+  *Bad:* "There are smarter ways to explain MCP. There are no warmer
+  ones than this: imagine a small restaurant."
+
+  *Good:* "Picture a small restaurant."
+
+  *Bad:* "People make a fuss about transports. They shouldn't."
+
+  *Good:* (just delete it — say what transport is, move on.)
+
+- **Analogize technical concepts only — not everything.** Don't
+  decorate every term with a metaphor. The User is a user. The Client
+  is the client (Claude Code, Desktop, Cursor). The Server is your
+  code. State plain things plainly. Reach for analogy *only* when the
+  concept is abstract, unnamed in everyday language, or its
+  relationship to other terms is non-obvious — that's typically 3-5
+  terms per domain, not 10. Forced analogy on every line is just
+  dramatic prose wearing a metaphor's clothes.
+
+  *MCP example — analogize:* Tools (menu), Handlers (cooks), Schemas
+  (order ticket), Roots (pantry fence). The structural relationships
+  are non-obvious; the metaphor earns its place.
+
+  *MCP example — don't:* User, Client, Server, Transport. These do
+  their own work. Adding "the diner / the customer / the kitchen /
+  the cable" decorates without informing.
+
+- **Each beat gets a small companion visual.** The big diagram at the
+  top shows topology — how all the pieces sit together. Each beat's
+  mini-diagram (right of the prose, ~180-220px wide) shows *that one
+  concept* in isolation. Two or three boxes and an arrow is plenty.
+  The point is fast pattern-grasp; don't redraw the big diagram in
+  miniature. Use inline SVG (not Mermaid) — these need to be tiny,
+  cheap, and predictable.
+
+- **Edge labels: short and plain.** Mermaid + ELK can clip long edge
+  labels in foreignObject containers. Keep edge labels under 12
+  characters where possible ("ask", "tool call", "result", "reply"
+  — not "I want pasta", "places order", "plated dish"). Long labels
+  also cost the reader's attention; short ones reinforce the topology
+  they're already seeing.
+
+- **Indian English vocabulary by default.** When picking analogies,
+  examples, food references, and cultural touchstones, prefer terms
+  familiar to Indian English readers. Same intuition, different
+  surface vocabulary. This is a Shiva-default — calibrate accordingly.
+
+  *Good:* Central government, station, lakh, chicken, biryani,
+  thali, dal, raita, paneer, autorickshaw, chai
+
+  *Bad:* Federal government, freeway, million, bacon, carbonara,
+  pancetta, sandwich, taco, soccer (use football)
+
+  **Avoid alcohol-centric references** (wine cellar, beer pong, bar
+  tab) and **pork references** (bacon, pancetta, ham) by default —
+  they exclude readers and add zero analogical value over neutral
+  alternatives. A "spice rack" reads better than a "wine cellar"
+  in nearly every metaphor anyway.
+
+- **Analogical prose around the diagram.** Cover 4-6 core terms only —
+  not the full glossary. For each one, give:
+    1. A one-line plain explanation of what it is.
+    2. A *"think of it as ___"* anchor that maps it to the running metaphor.
+    3. Its relationship to at least one other term, expressed *through*
+       the same metaphor.
+
+  *Bad:* "Handlers do the actual work."
+
+  *Good:* "Handlers are the code that runs when a tool is called — think
+  of them as the kitchen behind the menu. The menu is what the customer
+  sees; the kitchen is what actually cooks the dish."
+
+- **Reader assumption: builder, not layperson.** Assume fluency in HTTP,
+  JSON, filesystems, processes, APIs, basic CLI. Don't explain those.
+  Explain only the things specific to the domain you're briefing — the
+  *new* vocabulary, not the universal one.
+
+- **Resist exhaustiveness.** The glossary already covers breadth
+  (20-25 terms); the visual covers depth (4-6 core terms, rich analogies).
+  Different jobs. Don't try to put the whole glossary in the diagram.
+
+- **End with an opening, not a closing.** Name 1-2 follow-on questions
+  the reader could ask ("want to see the lifecycle?", "want the Tool vs
+  Resource comparison?") but don't pre-render them. The reader pulls;
+  you don't push.
+
+If the user wants more after the first pass — lifecycle, comparisons,
+deep dives — that's a follow-up prompt. Treat the visual as a launchpad,
+not a deliverable.
+
+---
+
+## Step 6 (optional) — Persist the glossary
 
 Ask: *"Save this glossary to your project notes? (y/N)"*
 
@@ -138,6 +271,11 @@ If **N** or no answer: skip silently.
   brief using nothing but the glossary terms, you nailed it. If they'd
   still need to say "you know, the box that pops up over the screen"
   instead of "modal" — you missed a slot.
+- **Analogies > definitions for visuals.** Glossary entries get plain
+  one-line definitions (Step 2). Visuals (Step 5) require analogies —
+  single running metaphor, 4-6 core terms only, relationships expressed
+  *through* the metaphor. Glossary covers breadth; visual covers depth.
+  Different jobs.
 
 ---
 
