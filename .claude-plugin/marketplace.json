@@ -1,0 +1,18 @@
+{
+  "name": "shva",
+  "description": "Shiva Kakkar's personal Claude Code plugins. Cross-cutting tools that aren't tied to any single product — vocabulary briefings, prompt scaffolds, and personal workflow accelerators.",
+  "owner": {
+    "name": "Shiva Kakkar"
+  },
+  "plugins": [
+    {
+      "name": "shva",
+      "description": "Personal command pack. v0.1.0 ships /shva:brief-me — a domain-agnostic pre-project vocabulary briefing that returns a 20-25 term glossary (Creative/Style · Technical/Process · Prompt/Direction) before any GenAI build (code, design, video, music, art). Forces vocabulary alignment between user and AI before instructions are given, reducing drift and hallucination. Includes the 'flag terms I'm using incorrectly' coda that turns Claude into a real-time vocabulary coach.",
+      "version": "0.1.0",
+      "source": "./shva",
+      "author": {
+        "name": "Shiva Kakkar"
+      }
+    }
+  ]
+}
