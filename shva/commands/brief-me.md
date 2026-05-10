@@ -117,14 +117,18 @@ Then add a one-line note:
 
 ---
 
-## Step 5 (optional) — Visual mental model
+## Step 5 — Visual mental model
 
-**Trigger:** user says "visual", "diagram", "explain visually", "draw it",
-"HTML", or "show me".
+**Default behavior.** Run after Step 4 unless the user opted out.
+The visual is part of brief-me's deliverable, not a follow-on perk —
+a glossary and a visual mental model land together, the same way a
+good textbook ships prose and diagrams together. Skip *only* if the
+user explicitly said "glossary only", "no visual", "skip the diagram",
+or similar.
 
-When triggered, hand off to `visual-explainer:generate-web-diagram` (or
-write the HTML directly) with an **analogical brief**, not a structural
-one. The job is to make the domain *click*, not to inventory it.
+Hand off to `visual-explainer:generate-web-diagram` (or write the HTML
+directly) with an **analogical brief**, not a structural one. The job
+is to make the domain *click*, not to inventory it.
 
 **Constraints — read before generating:**
 
@@ -238,7 +242,7 @@ not a deliverable.
 
 ---
 
-## Step 6 (optional) — Persist the glossary
+## Step 6 (optional) — Persist the glossary + visual
 
 Ask: *"Save this glossary to your project notes? (y/N)"*
 

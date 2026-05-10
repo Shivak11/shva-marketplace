@@ -1,6 +1,6 @@
 {
   "name": "shva",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Personal command pack for Shiva. v0.1.0 ships /shva:brief-me — domain-agnostic pre-project vocabulary briefing for any GenAI build (code, design, video, music, art). Returns a 20-25 term glossary in three buckets (Creative/Style · Technical/Process · Prompt/Direction), asks 3 clarifying questions, and provides a correction-coda prompt that turns Claude into a real-time vocabulary coach. The 5-minute step that prevents 5-hour AI drifts.",
   "author": {
     "name": "Shiva Kakkar"
