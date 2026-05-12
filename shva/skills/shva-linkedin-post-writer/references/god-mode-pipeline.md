@@ -40,7 +40,7 @@
 | **G5** | Image Generation | — | PNG saved to `linkedin-images/{date}-{slug}.png` |
 | **G6** | Visual Audit + Learnings Capture | `learnings-protocol.md` | Audit report + JSONL captures |
 | **G7** | Final Output + Publish | `linkedin-publish-rules.md` | Post live on LinkedIn + post-publish verified |
-| **G8** | Wiki Save + Taste Capture | SKILL.md Step 9 | Wiki page at `drafts/linkedin-posts/...` + log.md / index.md updates + recurring-pattern promotion |
+| **G8** | Wiki Save + Taste Capture | SKILL.md Step 9 | Wiki page at `linkedin-posts/...` + log.md / index.md updates + recurring-pattern promotion |
 
 ---
 
@@ -281,8 +281,8 @@ Default vault location:
 If `~/.obsidian-wiki/config` exists, read it and use `OBSIDIAN_VAULT_PATH` from there instead. If `Obsidian Wiki/.env` exists at the default path, that's authoritative (current state: `OBSIDIAN_VAULT_PATH` is `/Users/shivakakkar/Python Projects/Obsidian Wiki`).
 
 ```
-Post:       $VAULT/drafts/linkedin-posts/YYYY-MM-DD-slug.md
-Attachment: $VAULT/drafts/linkedin-posts/attachments/YYYY-MM-DD-slug-<descriptor>.png
+Post:       $VAULT/linkedin-posts/YYYY-MM-DD-slug.md
+Attachment: $VAULT/linkedin-posts/attachments/YYYY-MM-DD-slug-<descriptor>.png
 ```
 
 ### Step G8d: Copy the image (if G2 = yes)
@@ -291,7 +291,7 @@ In god-mode, the image lives at `linkedin-images/{date}-{slug}.png` inside the l
 
 ```bash
 cp "linkedin-images/{date}-{slug}.png" \
-   "$VAULT/drafts/linkedin-posts/attachments/{date}-{slug}-<descriptor>.png"
+   "$VAULT/linkedin-posts/attachments/{date}-{slug}-<descriptor>.png"
 ```
 
 Keep the original in `linkedin-images/` — the linkedin-mcp-server repo continues to be the source-of-truth for the image used by the LinkedIn publish protocol. The wiki copy is for cross-referencing inside Obsidian.
@@ -302,16 +302,16 @@ Direct append, no Skill delegation (god-mode preference for full autonomy):
 
 ```bash
 # Append to log.md
-echo "- [<ISO-IST>] LINKEDIN_POST status=<status> page=\"drafts/linkedin-posts/<file>.md\" title=\"<title>\" lenses=\"<lenses>\" hook_archetype=\"<hook>\" focus=\"<gist>\"" >> "$VAULT/log.md"
+echo "- [<ISO-IST>] LINKEDIN_POST status=<status> page=\"linkedin-posts/<file>.md\" title=\"<title>\" lenses=\"<lenses>\" hook_archetype=\"<hook>\" focus=\"<gist>\"" >> "$VAULT/log.md"
 ```
 
-For `index.md`: read the "## LinkedIn Posts" section if it exists (create if missing, place after "## Synthesis (Recent)"); add the new entry as `- [[drafts/linkedin-posts/<file>|<title>]] — <summary>. <status>.`
+For `index.md`: read the "## LinkedIn Posts" section if it exists (create if missing, place after "## Synthesis (Recent)"); add the new entry as `- [[linkedin-posts/<file>|<title>]] — <summary>. <status>.`
 
 For `hot.md`: skip unless the post is unusually high-signal (a release announcement, a contrarian take that may seed downstream commentary, a post that ships a new framework). Default: don't touch hot.md from inside god-mode.
 
 ### Step G8f: Promotion check
 
-Read the Taste Notes sections of the previous 2-5 LinkedIn posts in `drafts/linkedin-posts/` (sort by date desc). Look for repeating patterns — the same hook archetype + lens pair winning, the same tone-axis deviation earning its place, the same banned-pattern near-miss recurring.
+Read the Taste Notes sections of the previous 2-5 LinkedIn posts in `linkedin-posts/` (sort by date desc). Look for repeating patterns — the same hook archetype + lens pair winning, the same tone-axis deviation earning its place, the same banned-pattern near-miss recurring.
 
 If a pattern has appeared in **≥3 posts including this one**, append it as a bullet under "Taste Topics" in `synthesis/linkedin-roster-theme-system.md`. Do NOT create a new page.
 
@@ -325,7 +325,7 @@ Example promotion:
 After all G8 substeps complete, output ONE additional line to the user (after the G7 image block):
 
 ```
-📝 Wiki: drafts/linkedin-posts/YYYY-MM-DD-slug.md  ·  log.md ✓  ·  index.md ✓  [· promoted to synthesis ✓ — if applicable]
+📝 Wiki: linkedin-posts/YYYY-MM-DD-slug.md  ·  log.md ✓  ·  index.md ✓  [· promoted to synthesis ✓ — if applicable]
 ```
 
 Keep it terse. The user already has the post (copied/published). The wiki line is incidental confirmation.

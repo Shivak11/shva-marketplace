@@ -504,12 +504,12 @@ Every post becomes a dual artifact: the ship-ready text the user copies, *and* a
 ### 9.1 Target path
 
 ```
-/Users/shivakakkar/Python Projects/Obsidian Wiki/drafts/linkedin-posts/YYYY-MM-DD-slug.md
+/Users/shivakakkar/Python Projects/Obsidian Wiki/linkedin-posts/YYYY-MM-DD-slug.md
 ```
 
 - **One file per post.** No `-v1`/`-v2`/`-shipped` suffix variants — the personal-vault pattern of artifact-snapshots is *not* the wiki idiom. Evolution lives inside the file (`note:` field + history in Taste Notes section).
 - **Slug**: first 4-6 meaningful words of the H1 or post opener, lowercased, hyphen-joined, no stopwords. e.g. `experience-as-liability`, `by-2028-you-wont-manage-5-people`.
-- **Attachments** (god-mode images, etc.) go to `drafts/linkedin-posts/attachments/YYYY-MM-DD-slug-<descriptor>.png` and are wikilinked from the post file as `![[attachments/...]]`.
+- **Attachments** (god-mode images, etc.) go to `linkedin-posts/attachments/YYYY-MM-DD-slug-<descriptor>.png` and are wikilinked from the post file as `![[attachments/...]]`.
 
 ### 9.2 Frontmatter contract
 
@@ -517,8 +517,7 @@ Every post becomes a dual artifact: the ship-ready text the user copies, *and* a
 ---
 title: >-
   [post H1 or working title — folded scalar style, wiki convention]
-category: drafts
-subcategory: linkedin-posts
+category: linkedin-posts
 tags: [linkedin, content-system, <2-3 more from _meta/taxonomy.md>]   # ≤5 total; prefer canonical thinking tags (distribution, workflow-design, taste-system, etc.)
 date: YYYY-MM-DD                                                       # the post date — preserved from personal-vault format
 status: draft | scheduled | shipped                                    # preserved — drives downstream behavior
@@ -605,7 +604,7 @@ If no image — omit this section entirely.
 
 ### 9.4 Promotion rule (recurring patterns → synthesis page)
 
-When the **same taste observation surfaces in ≥3 posts** (check the Taste Notes sections of recent posts under `drafts/linkedin-posts/`), append it as a new bullet under "Taste Topics" in:
+When the **same taste observation surfaces in ≥3 posts** (check the Taste Notes sections of recent posts under `linkedin-posts/`), append it as a new bullet under "Taste Topics" in:
 
 ```
 /Users/shivakakkar/Python Projects/Obsidian Wiki/synthesis/linkedin-roster-theme-system.md
@@ -626,12 +625,12 @@ After the post file is written, **either**:
 
 1. **`log.md`** — append one line at the end of the file:
    ```
-   - [<ISO-timestamp-with-IST-offset>] LINKEDIN_POST status=<status> page="drafts/linkedin-posts/YYYY-MM-DD-slug.md" title="<title>" lenses="<primary+secondary>" hook_archetype="<hook>" focus="<one-line gist>"
+   - [<ISO-timestamp-with-IST-offset>] LINKEDIN_POST status=<status> page="linkedin-posts/YYYY-MM-DD-slug.md" title="<title>" lenses="<primary+secondary>" hook_archetype="<hook>" focus="<one-line gist>"
    ```
 
 2. **`index.md`** — add an entry under a "## LinkedIn Posts" section (create the section if missing, place it after "## Synthesis (Recent)"):
    ```
-   - [[drafts/linkedin-posts/YYYY-MM-DD-slug|<title>]] — <one-line summary>. <status>.
+   - [[linkedin-posts/YYYY-MM-DD-slug|<title>]] — <one-line summary>. <status>.
    ```
 
 3. **`hot.md`** — if the post represents an active thread or a fresh decision worth surfacing, add a line to "Recent Activity" or "Key Takeaways". If it's a routine post, skip hot.md — not everything earns space there.
@@ -643,7 +642,7 @@ If `~/.obsidian-wiki/config` exists (check first via `ls ~/.obsidian-wiki/config
 ### 9.6 Output-contract safety (Step 7 must still hold)
 
 - Step 9 runs *after* Step 7's zero-wrapper post output is in the chat. Nothing in Step 9 leaks into the post body.
-- After Step 9 completes, the user-facing message that follows the post should be ONE short line: e.g., "📝 Saved to wiki: `drafts/linkedin-posts/2026-05-12-<slug>.md`" — nothing more. The user reads the post first; the wiki confirmation is incidental.
+- After Step 9 completes, the user-facing message that follows the post should be ONE short line: e.g., "📝 Saved to wiki: `linkedin-posts/2026-05-12-<slug>.md`" — nothing more. The user reads the post first; the wiki confirmation is incidental.
 - In god-mode, the image block (Step G7's `─────────────` separator block) appears between the post and the wiki confirmation line.
 
 ### 9.7 Skip rule (the ONE case where Step 9 is deferred)
@@ -666,7 +665,7 @@ If the post failed the Hook Test or Cringe Test and is being discarded mid-flow 
 7. **Output**: Post text only (no wrapper text)
 7.5. **Mechanics Gate**: Auto-invoke `linkedin-posts` for char/See-more/image/format validation. Apply clash table — voice/length/CTA prescriptions REJECTED; mechanics fixes APPLIED. Shiva wins every writing-style clash.
 8. **After publish**: First-hour reply discipline; 24-hour substantive commenting on others; no pods
-9. **Wiki Save + Taste Capture (MANDATORY)**: Write post + frontmatter + Taste Notes section to `Obsidian Wiki/drafts/linkedin-posts/YYYY-MM-DD-slug.md`. Append `log.md`, add to `index.md` under "LinkedIn Posts" section. If pattern recurs across ≥3 posts, promote into `synthesis/linkedin-roster-theme-system.md` "Taste Topics". Skip ONLY on explicit "don't save" or Step 5.5 kill.
+9. **Wiki Save + Taste Capture (MANDATORY)**: Write post + frontmatter + Taste Notes section to `Obsidian Wiki/linkedin-posts/YYYY-MM-DD-slug.md`. Append `log.md`, add to `index.md` under "LinkedIn Posts" section. If pattern recurs across ≥3 posts, promote into `synthesis/linkedin-roster-theme-system.md` "Taste Topics". Skip ONLY on explicit "don't save" or Step 5.5 kill.
 
 ---
 
@@ -696,7 +695,7 @@ If the post failed the Hook Test or Cringe Test and is being discarded mid-flow 
 | **G5** | Image Generation via fal.ai SeedDream (only if G2 = yes) | — | PNG saved to `linkedin-images/{date}-{slug}.png` |
 | **G6** | Visual Audit + Learnings Capture | `references/learnings-protocol.md` | Audit report + JSONL entries for any HIGH findings |
 | **G7** | Final Output + Publish (if requested) | `references/linkedin-publish-rules.md` | Post text + image block + (optional) live LinkedIn post |
-| **G8** | Wiki Save + Taste Capture | Step 9 of basic skill (above) | Wiki page at `Obsidian Wiki/drafts/linkedin-posts/...` + `log.md` entry + image attachment copied |
+| **G8** | Wiki Save + Taste Capture | Step 9 of basic skill (above) | Wiki page at `Obsidian Wiki/linkedin-posts/...` + `log.md` entry + image attachment copied |
 
 ### Step Details
 
@@ -780,5 +779,5 @@ G4  SeedDream prompt         → Two-part: content + style cluster + Chinese key
 G5  Image generation         → fal.ai → Gemini fallback → text-only last resort
 G6  Audit + learnings        → Aspect/text/face/bg/hands checks + JSONL capture
 G7  Final output + publish   → Post (zero-wrapper) + image block + (optional) 6-step LinkedIn publish protocol
-G8  Wiki save + taste        → drafts/linkedin-posts/YYYY-MM-DD-slug.md + log.md + index.md ; attachments mirrored ; ≥3-recurrence patterns promoted into synthesis/linkedin-roster-theme-system.md
+G8  Wiki save + taste        → linkedin-posts/YYYY-MM-DD-slug.md + log.md + index.md ; attachments mirrored ; ≥3-recurrence patterns promoted into synthesis/linkedin-roster-theme-system.md
 ```
