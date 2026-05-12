@@ -185,7 +185,7 @@ Write the file to `<working_dir>/src/data/blog/<slug>.md` unless `dry_run=true`.
 - The output filepath
 - Word count
 - Self-audit results summary (✅ all checks passed / ⚠️ N issues, see below)
-- Suggested next step: `gh pr create` → merge → wait for Vercel deploy → `/shva:medium-post <slug>`
+- Suggested next step: `gh pr create` → merge → wait for Vercel deploy → `/shva:shva-medium-poster <slug>`
 
 ## Voice Corpus (Read At Runtime)
 

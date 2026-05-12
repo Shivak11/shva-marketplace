@@ -38,7 +38,7 @@ If returns `false`:
    Medium's importer is likely serving cached content from before your latest deploy.
    
    Options:
-     a) Wait ~1 hour and rerun /shva:medium-post <slug>
+     a) Wait ~1 hour and rerun /shva:shva-medium-poster <slug>
      b) Bump the source slug (requires PR + redeploy + loses canonical SEO)
      c) Pass force_proceed: true to skip this check and edit the Medium draft manually
    ```
