@@ -1,11 +1,25 @@
 {
   "name": "shva",
-  "version": "0.2.1",
-  "description": "Personal command pack for Shiva. v0.1.0 ships /shva:brief-me — domain-agnostic pre-project vocabulary briefing for any GenAI build (code, design, video, music, art). Returns a 20-25 term glossary in three buckets (Creative/Style · Technical/Process · Prompt/Direction), asks 3 clarifying questions, and provides a correction-coda prompt that turns Claude into a real-time vocabulary coach. The 5-minute step that prevents 5-hour AI drifts.",
+  "version": "0.3.0",
+  "description": "Personal command + skill pack for Shiva. v0.1.0 shipped /shva:brief-me — domain-agnostic pre-project vocabulary briefing for any GenAI build (returns a 20-25 term glossary in three buckets: Creative/Style · Technical/Process · Prompt/Direction; asks 3 clarifying questions; provides a correction-coda that turns Claude into a real-time vocabulary coach). v0.3.0 adds /shva:shva-linkedin-post-writer — write LinkedIn posts in Dr. Shiva Kakkar's distinctive systems-thinker voice using the three signature lenses (Sequence Inversion, Constraint Migration, Authority Redesign), six-tier MCP source hierarchy (Readwise → Voicenotes → Plaud → Gemini files → LlamaCloud → Web), Hook Test and Cringe Test gates, the kostja mechanics clash table, and a god-mode end-to-end pipeline that handles post + visual + publish protocol + self-learning JSONL loop + Wiki Save + Taste Capture into the Obsidian LLM wiki.",
   "author": {
     "name": "Shiva Kakkar"
   },
-  "keywords": ["personal", "vocabulary", "briefing", "prompting", "domain-agnostic", "genai", "shva"],
+  "keywords": [
+    "personal",
+    "vocabulary",
+    "briefing",
+    "prompting",
+    "domain-agnostic",
+    "genai",
+    "shva",
+    "linkedin",
+    "content-system",
+    "systems-thinking",
+    "workflow-design",
+    "taste-system",
+    "obsidian-wiki"
+  ],
   "commands": [
     "./commands/help.md",
     "./commands/brief-me.md"
