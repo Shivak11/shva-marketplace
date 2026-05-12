@@ -16,6 +16,9 @@ model: haiku
 | Command | What it does | When to use |
 |---|---|---|
 | `/shva:brief-me [project-type]` | Returns a 20–25 term domain glossary in three buckets (Creative/Style · Technical/Process · Prompt/Direction), then 3 clarifying questions, then a "flag terms I'm using incorrectly" coda. | **Before starting any new GenAI build.** Code, design, video, music, art — domain-agnostic. The 5-minute step that prevents 5-hour drifts. |
+| `/shva:medium-write <topic>` | Drafts a 1500-2000 word Medium-grade essay in Shiva's voice. Uses wiki + 6-tier MCP source hierarchy. Outputs to `src/data/blog/<slug>.md` with Astro frontmatter, FOMO question title, ≥3 tier-1 institutional co-citations, and the v1.0 bio footer. | **Before opening a PR on shivakakkar.com.** Anywhere you'd write a long-form post. |
+| `/shva:medium-post <url-or-slug>` | Publishes a deployed shivakakkar.com post to Medium under "Built at Rehearsal" via Chrome automation. Trims " \| Dr. Shiva Kakkar" title suffix, deletes embedded images + empty-paragraph gaps, sets up to 5 tags, submits for editorial review (default). | **After the post is live on shivakakkar.com.** Once Vercel deploy is propagated. |
+| `/shva:shva-linkedin-post-writer` | Write LinkedIn posts in Shiva's systems-thinker voice. Three signature lenses, 6-tier source hierarchy, Hook/Cringe Test gates, god-mode pipeline. | **For any LinkedIn post request.** Voicenote-to-post, news reaction, content system runs. |
 | `/shva:help` | This screen. | When you forget what's installed. |
 
 ---
@@ -26,8 +29,30 @@ model: haiku
 /shva:brief-me 2D browser game in Phaser
 /shva:brief-me AI music track in Suno — lo-fi hip-hop
 /shva:brief-me Midjourney editorial photography series
-/shva:brief-me SaaS dashboard in Next.js with shadcn
 /shva:brief-me                                          # asks you what you're building
+
+/shva:medium-write AI expertise paradox
+/shva:medium-write Why India's AI talent builds for Americans
+/shva:medium-write                                      # asks you for a topic
+
+/shva:medium-post https://www.shivakakkar.com/posts/india-ai-readiness-tier-2-problem/
+/shva:medium-post india-ai-readiness-tier-2-problem
+/shva:medium-post                                       # asks you for a URL or slug
+```
+
+---
+
+## Typical Medium workflow
+
+```
+1. /shva:medium-write "AI in Indian B-schools"
+   → drafts src/data/blog/why-ai-in-iim-courses-fails.md
+2. Review the draft; edit if needed
+3. gh pr create  (PR flow — auto-mode blocks pushes to main)
+4. User merges via GitHub UI
+5. Wait ~60s for Vercel deploy to propagate
+6. /shva:medium-post why-ai-in-iim-courses-fails
+   → Medium draft submitted to Built at Rehearsal, pending review
 ```
 
 ---

@@ -1,7 +1,7 @@
 {
   "name": "shva",
-  "version": "0.3.0",
-  "description": "Personal command + skill pack for Shiva. v0.1.0 shipped /shva:brief-me — domain-agnostic pre-project vocabulary briefing for any GenAI build (returns a 20-25 term glossary in three buckets: Creative/Style · Technical/Process · Prompt/Direction; asks 3 clarifying questions; provides a correction-coda that turns Claude into a real-time vocabulary coach). v0.3.0 adds /shva:shva-linkedin-post-writer — write LinkedIn posts in Dr. Shiva Kakkar's distinctive systems-thinker voice using the three signature lenses (Sequence Inversion, Constraint Migration, Authority Redesign), six-tier MCP source hierarchy (Readwise → Voicenotes → Plaud → Gemini files → LlamaCloud → Web), Hook Test and Cringe Test gates, the kostja mechanics clash table, and a god-mode end-to-end pipeline that handles post + visual + publish protocol + self-learning JSONL loop + Wiki Save + Taste Capture into the Obsidian LLM wiki.",
+  "version": "0.4.0",
+  "description": "Personal command + skill pack for Shiva. v0.1.0 shipped /shva:brief-me — domain-agnostic pre-project vocabulary briefing. v0.3.0 added /shva:shva-linkedin-post-writer — write LinkedIn posts in Dr. Shiva Kakkar's distinctive systems-thinker voice using the three signature lenses (Sequence Inversion, Constraint Migration, Authority Redesign), six-tier MCP source hierarchy (Readwise → Voicenotes → Plaud → Gemini files → LlamaCloud → Web), Hook Test and Cringe Test gates, and a god-mode end-to-end pipeline. v0.4.0 adds the Medium duo: /shva:medium-write (drafts a 1500-2000 word essay in Shiva's voice for shivakakkar.com, with Astro frontmatter + SEO/AI-SEO co-citation rules) and /shva:medium-post (publishes the deployed essay to Medium under 'Built at Rehearsal' via Chrome automation — state machine over import → cleanup → tags → submit-for-review, with cache-staleness detection and the full failure-recovery playbook from the 4-essay 2026-05-12 session).",
   "author": {
     "name": "Shiva Kakkar"
   },
@@ -14,14 +14,21 @@
     "genai",
     "shva",
     "linkedin",
+    "medium",
     "content-system",
     "systems-thinking",
     "workflow-design",
     "taste-system",
-    "obsidian-wiki"
+    "obsidian-wiki",
+    "chrome-automation",
+    "seo",
+    "geo",
+    "ai-seo"
   ],
   "commands": [
     "./commands/help.md",
-    "./commands/brief-me.md"
+    "./commands/brief-me.md",
+    "./commands/medium-write.md",
+    "./commands/medium-post.md"
   ]
 }
