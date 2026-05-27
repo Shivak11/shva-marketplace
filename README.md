@@ -7,7 +7,7 @@
 
 | Plugin | Version | What it does |
 |---|---|---|
-| [`shva`](./shva) | 0.1.0 | Personal command pack. Currently ships `/shva:brief-me` — pre-project vocabulary briefing for any GenAI build (code, design, video, music, art). |
+| [`shva`](./shva) | 0.5.0 | Personal command pack: `/shva:brief-me`, SHVA LinkedIn writer, and Medium writer/poster. v0.5.0 adds the anti-staccato LinkedIn cadence rule and explicit LinkedIn MCP confirmation guidance. |
 
 ## Why a separate marketplace
 

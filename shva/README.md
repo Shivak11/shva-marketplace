@@ -4,6 +4,12 @@
 > Commands in this plugin start with `/shva:` — that's the `shva` namespace tag.
 > (Yes, the missing "i" is on purpose. Easier to remember, impossible to collide.)
 
+## v0.5.0 — LinkedIn Cadence + Publish Confirmation
+
+The SHVA LinkedIn writer now treats anti-staccato cadence as a durable voice rule: a hard hook can stand alone, but the body should usually move as connected paragraph reasoning rather than template one-line laddering.
+
+The LinkedIn publish rules also now document the Cloudflare MCP confirmation path: preview tools return an Action ID, and publishing requires `linkedin_confirm` with `confirmation="POST IT"` rather than rerunning the post tool.
+
 ## v0.1.0 — `/shva:brief-me`
 
 **Pre-project vocabulary briefing for any GenAI build.**

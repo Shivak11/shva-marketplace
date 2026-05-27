@@ -29,6 +29,7 @@ Note: B-school students/parents/recruiters and Indian-education-policy audiences
 - **No false humility** — state strong claims plainly when earned.
 - **Industry voice validation** — CEO/researcher/operator quotes outweigh personal opinion when used (sparingly).
 - **Quick, dry humor** when it earns its place — never as the load-bearing element.
+- **Connected cadence, not staccato** — a hard hook can stand alone, but the body should usually move in connected paragraphs. Avoid template LinkedIn one-line laddering unless the pause changes the argument.
 
 **Source pipeline.** See the MCP Source Hierarchy section below — 6 tiers, sourcing-first then web-as-support, never inverted.
 
@@ -366,6 +367,7 @@ If any answer is shaky, kill the personal frame and rewrite as observation/data 
 - Create visual white space - makes posts scannable on mobile
 - User's style: Spaced paragraphs encourage scrolling and reading
 - Short paragraphs (2-4 sentences max) separated by blank lines
+- Do not convert every sentence into its own line. Validated 2026-05-27: the approved "Most people can't think in workflows" post kept the hard hook, then used connected paragraph reasoning with one grounded operational example.
 
 **Source URL**:
 - When post references a news announcement or article, include the original URL
@@ -380,6 +382,8 @@ These are principles, not commandments — but every one of them is here because
 **Source-naming silence.** Don't mention book names ("from Made to Stick"), framework authors ("Daugherty's fusion skills"), or quote source material verbatim. Why: borrowed authority signals a derivative voice. Posts that name their sources read like book reports; posts that absorb the insight and re-author it in the writer's frame read as the writer's own thinking. Rewrite every concept in Shiva's voice and idiom — that's how the credential of *original thinker* gets built.
 
 **Structural variety over framework comfort.** Don't ship "Three X Moves" or "Four-Layer Framework" structures every week. Why: pattern fatigue is the silent killer of LinkedIn reach — once readers can predict your structure from line 1, they scroll. The 5 hook archetypes table exists to force rotation. If you catch the draft repeating last week's structure, change one axis (numeric vs. narrative, escalation vs. comparison, quote-led vs. observation-led).
+
+**Anti-staccato cadence rule.** Do not mistake LinkedIn readability for chopped one-line prose. Shiva may ask for a sharp first line, but the argument should usually unfold as paragraphs: hard hook -> concrete operational contrast -> hidden system -> practical implication. A post that turns every sentence into a dramatic line reads like template LinkedIn copy, even if the content is good.
 
 **Personal voice over institutional positioning.** Default to writing as Shiva-the-thinker, not Shiva-of-[institution]. Why: institutional affiliation caps the brand at the institution's ceiling; personal insight scales independently and travels when Shiva's role changes. Mention institutional work only when (a) it's concrete proof of execution, (b) it's a Release-theme post sharing an open resource, or (c) the institutional fact is *the* news.
 
@@ -408,6 +412,7 @@ These are principles, not commandments — but every one of them is here because
 - Generic inspirational padding
 - Only appeals to one audience
 - Formulaic pattern from previous post
+- Staccato one-line laddering throughout the body
 - **Ends with labeled-audience close ("Leaders:/Operators:/Industry:") — labels are bad regardless of which labels**
 
 ## Output Format

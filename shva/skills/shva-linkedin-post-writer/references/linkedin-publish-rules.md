@@ -99,6 +99,10 @@ Step 3  Draft Readback Verify  (linkedin_drafts_get)
 
 Step 4  Publish Draft  (linkedin_drafts_publish + confirm POST IT)
         Promote the draft to published.
+        Cloudflare MCP confirmation is a separate call: when the preview
+        returns an Action ID, call linkedin_confirm with that
+        pending_action_id and confirmation="POST IT". Do not rerun
+        linkedin_drafts_publish or linkedin_post; that creates a new preview.
 
 Step 5  Post-Publish History Verify  (linkedin_posts_history limit=1)
         Fetch the just-published post from history. Diff returned text
