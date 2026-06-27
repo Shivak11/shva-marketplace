@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<!--
+  TEACHING DESIGNER TEMPLATE (worked example: XLRI "Not Deeper, Wider").
+  This is a complete, validated example to adapt, not an empty skeleton.
+  Keep the CSS, the collapsible block taxonomy, the principle banners, the
+  revision recap, the Mermaid setup, and the print rules. Replace the content.
+  Rules: no em or en dashes (time badges read "0 to 12 min"); no author names
+  on participant surfaces or in the spoken script (citations only in evidence
+  and framework cards and the sources block). Validate diagrams, then run
+  scripts/render_check.sh before shipping.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Not Deeper, Wider · XLRI Session</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ece4d6;
+    --paper:#faf6ed;
+    --paper-2:#f3ecdd;
+    --ink:#21252e;
+    --ink-soft:#3a3f4b;
+    --muted:#7a7263;
+    --line:#ddd3bf;
+    --line-soft:#e8e0cf;
+
+    --teach:#27314e;     --teach-soft:#eceef4;   --teach-ink:#1f2740;
+    --evid:#3a5a7a;      --evid-soft:#e9eef3;     --evid-ink:#243b52;
+    --nudge:#a4701a;     --nudge-soft:#f6edda;    --nudge-ink:#724c0f;
+    --hands:#2f6b54;     --hands-soft:#e6f1ea;    --hands-ink:#1e4a39;
+    --video:#a8472f;     --video-soft:#f6e7e1;    --video-ink:#7c3120;
+
+    --shadow:0 1px 2px rgba(33,37,46,.05), 0 10px 30px rgba(33,37,46,.07);
+    --shadow-sm:0 1px 2px rgba(33,37,46,.05);
+    --serif:'Newsreader', Georgia, serif;
+    --display:'Fraunces', Georgia, serif;
+    --sans:'Hanken Grotesk', -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;color:var(--ink);
+    background:var(--bg);
+    background-image:radial-gradient(rgba(120,108,80,.05) 1px, transparent 1px);
+    background-size:4px 4px;
+    font-family:var(--serif);font-size:18px;line-height:1.62;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px 130px}
+  ::selection{background:#d8c79a;color:#21252e}
+
+  /* ---------- Masthead ---------- */
+  header{padding:70px 0 34px;position:relative}
+  .eyebrow{font-family:var(--sans);font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--teach);font-weight:600;margin-bottom:22px;display:flex;align-items:center;gap:12px}
+  .eyebrow::after{content:"";height:1px;flex:1;background:var(--line)}
+  h1{font-family:var(--display);font-weight:600;font-size:62px;line-height:.98;margin:0;letter-spacing:-.015em}
+  h1 em{font-style:italic;font-weight:500;color:var(--teach)}
+  .dek{font-family:var(--serif);font-size:21px;line-height:1.45;color:var(--ink-soft);
+    margin:20px 0 0;max-width:30em;font-weight:400}
+  .meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:28px}
+  .pill{font-family:var(--sans);font-size:12.5px;font-weight:500;letter-spacing:.01em;
+    background:var(--paper);border:1px solid var(--line);border-radius:100px;padding:6px 14px;color:var(--ink-soft)}
+
+  /* ---------- One idea band ---------- */
+  .bigidea{background:var(--ink);color:#f4f0e6;border-radius:4px;padding:34px 38px;margin:36px 0 40px;
+    position:relative;overflow:hidden;box-shadow:var(--shadow)}
+  .bigidea::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:#c79a3f}
+  .bigidea .tag{font-family:var(--sans);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
+    color:#b9b09a;font-weight:600;margin-bottom:15px}
+  .bigidea p{font-family:var(--display);font-size:27px;line-height:1.3;margin:0;font-weight:400;letter-spacing:-.01em}
+  .bigidea b{color:#e7c879;font-weight:600;font-style:italic}
+
+  /* ---------- Two panels ---------- */
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:46px}
+  @media(max-width:700px){.twocol{grid-template-columns:1fr}}
+  .panel{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:24px 26px;box-shadow:var(--shadow-sm)}
+  .panel h3{margin:0 0 16px;font-family:var(--sans);font-size:12px;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--muted);font-weight:600}
+  .panel ol,.panel ul{margin:0;padding-left:20px}
+  .panel li{margin-bottom:11px;font-size:16.5px;line-height:1.5}
+  .panel li:last-child{margin-bottom:0}
+  .panel li::marker{color:var(--teach);font-family:var(--sans);font-weight:600}
+
+  /* ---------- Toolbar / legend ---------- */
+  .toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+    margin-bottom:30px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+  .legend{display:flex;flex-wrap:wrap;gap:18px}
+  .lg{display:flex;align-items:center;gap:8px;font-family:var(--sans);font-size:12.5px;font-weight:500;color:var(--muted)}
+  .sw{width:13px;height:13px;border-radius:3px;flex:none}
+  .s-teach{background:var(--teach)} .s-evid{background:var(--evid)} .s-nudge{background:var(--nudge)}
+  .s-hands{background:var(--hands)} .s-video{background:var(--video)}
+  .btn{font-family:var(--sans);font-size:12.5px;font-weight:600;cursor:pointer;border:1px solid var(--ink);
+    background:transparent;color:var(--ink);border-radius:100px;padding:8px 18px;transition:.18s}
+  .btn:hover{background:var(--ink);color:var(--paper)}
+
+  /* ---------- Section ---------- */
+  .sec{margin-bottom:30px}
+  .sec-head{display:flex;gap:20px;align-items:baseline;padding:22px 0 16px;border-top:2px solid var(--ink)}
+  .num{font-family:var(--display);font-weight:600;font-size:17px;color:var(--teach);flex:none;
+    width:34px;font-variant-numeric:tabular-nums}
+  .sec-head .htext{flex:1}
+  .phase-tag{font-family:var(--sans);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);font-weight:600;margin-bottom:7px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .clock{color:var(--teach);background:var(--teach-soft);border-radius:4px;padding:2px 9px;letter-spacing:.06em}
+  .sec h2{font-family:var(--display);font-size:33px;font-weight:600;margin:0 0 11px;line-height:1.08;letter-spacing:-.015em}
+  .summary{font-size:18.5px;color:var(--ink-soft);margin:0;max-width:42em}
+  .thread{font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.02em;color:var(--hands-ink);
+    margin:13px 0 0;display:inline-flex;align-items:center;gap:9px;background:var(--hands-soft);
+    border:1px solid #bcd9cb;border-radius:100px;padding:5px 14px}
+  .thread b{color:var(--muted);font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:10.5px}
+
+  /* ---------- Principle banner ---------- */
+  .principle{display:flex;gap:17px;align-items:flex-start;background:#fbf7ec;border:1px solid #e7d9b4;
+    border-left:4px solid #c79a3f;border-radius:5px;padding:17px 22px;margin:18px 0 4px}
+  .principle .seal{flex:none;width:34px;height:34px;border-radius:50%;background:#c79a3f;color:#fff;
+    display:grid;place-items:center;font-family:var(--display);font-weight:600;font-size:15px;margin-top:2px}
+  .principle .pname{font-family:var(--sans);font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+    font-weight:700;color:#977528;margin-bottom:6px}
+  .principle .pmaxim{font-family:var(--display);font-size:21px;line-height:1.3;font-weight:500;color:var(--ink);letter-spacing:-.005em}
+
+  /* ---------- Revision recap ---------- */
+  .revision{background:var(--ink);color:#f3efe4;border-radius:5px;padding:34px 38px;margin-bottom:30px;box-shadow:var(--shadow)}
+  .revision .rtag{font-family:var(--sans);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:#b9b09a;font-weight:600;margin-bottom:8px}
+  .revision h3{font-family:var(--display);font-size:30px;font-weight:600;margin:0 0 22px;color:#fff;letter-spacing:-.01em}
+  .revision ol{margin:0;padding:0;list-style:none;counter-reset:rev}
+  .ritem{display:flex;gap:18px;padding:17px 0;border-top:1px solid rgba(255,255,255,.13)}
+  .ritem:first-child{border-top:none;padding-top:0}
+  .ritem .rn{counter-increment:rev;flex:none;width:30px;height:30px;border-radius:50%;border:1.5px solid #c79a3f;
+    color:#e7c879;display:grid;place-items:center;font-family:var(--display);font-weight:600;font-size:15px}
+  .ritem .rn::before{content:counter(rev)}
+  .ritem .rbody{flex:1}
+  .ritem .rname{font-family:var(--display);font-size:20px;font-weight:600;color:#fff;line-height:1.2;margin-bottom:3px}
+  .ritem .rrule{font-size:16px;color:#cfd0cf;margin:0 0 7px;line-height:1.45}
+  .ritem .rapply{font-family:var(--sans);font-size:14px;color:#e7c879;line-height:1.45}
+  .ritem .rapply b{font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:11px;color:#b9b09a;margin-right:7px}
+
+  /* ---------- Blocks ---------- */
+  .blocks{margin-top:18px;display:flex;flex-direction:column;gap:13px}
+  .block{border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--paper)}
+  .block-head{display:flex;align-items:center;gap:13px;cursor:pointer;padding:15px 20px;user-select:none}
+  .block-head .ic{width:30px;height:30px;border-radius:7px;flex:none;display:grid;place-items:center;
+    color:#fff;font-family:var(--sans);font-size:15px;font-weight:700}
+  .block-head .htitle{font-family:var(--sans);font-weight:700;font-size:15px;letter-spacing:.01em}
+  .block-head .htag{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--muted);margin-left:2px}
+  .block-head .chev{margin-left:auto;color:var(--muted);transition:transform .28s ease;flex:none}
+  .block.open .chev{transform:rotate(90deg)}
+  .block-inner{max-height:0;overflow:hidden;transition:max-height .34s cubic-bezier(.4,0,.2,1)}
+  .block-content{padding:2px 24px 24px}
+  .block-head .htag.line{margin-left:auto;margin-right:14px}
+
+  .t-teach{border-left:4px solid var(--teach)} .t-teach .ic{background:var(--teach)} .t-teach .htitle{color:var(--teach-ink)}
+  .t-evid{border-left:4px solid var(--evid)}   .t-evid .ic{background:var(--evid)}   .t-evid .htitle{color:var(--evid-ink)}
+  .t-nudge{border-left:4px solid var(--nudge)} .t-nudge .ic{background:var(--nudge)} .t-nudge .htitle{color:var(--nudge-ink)}
+  .t-hands{border-left:4px solid var(--hands)} .t-hands .ic{background:var(--hands)} .t-hands .htitle{color:var(--hands-ink)}
+  .t-video{border-left:4px solid var(--video)} .t-video .ic{background:var(--video)} .t-video .htitle{color:var(--video-ink)}
+
+  /* ---------- Script prose ---------- */
+  .script{font-size:18.5px;line-height:1.72;color:var(--ink)}
+  .script p{margin:0 0 15px}
+  .script p:last-child{margin-bottom:0}
+  .script .cue{color:var(--teach);font-style:italic;font-family:var(--serif);font-weight:500}
+  .script .say{display:block;font-family:var(--display);font-size:21px;line-height:1.42;color:var(--ink);
+    border-left:3px solid #c79a3f;padding:6px 0 6px 20px;margin:18px 0;font-weight:500}
+  .dropcap::first-letter{font-family:var(--display);font-size:64px;line-height:.78;float:left;
+    padding:6px 12px 0 0;color:var(--teach);font-weight:600}
+  .label{display:inline-block;font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--teach);background:var(--teach-soft);border-radius:4px;padding:4px 10px;margin-bottom:9px}
+
+  /* ---------- Evidence ---------- */
+  .stat-row{display:flex;gap:22px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
+  .stat{font-family:var(--display);font-size:74px;line-height:.85;font-weight:600;color:var(--evid);letter-spacing:-.03em}
+  .stat-cap{font-family:var(--serif);font-size:17px;color:var(--ink-soft);max-width:24em}
+  .source-line{font-family:var(--sans);font-size:12.5px;color:var(--muted);margin:0 0 16px;font-weight:500}
+  .pullquote{font-family:var(--display);font-size:20px;line-height:1.4;font-style:italic;color:var(--evid-ink);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;margin:18px 0}
+  .pullquote .attr{display:block;font-family:var(--sans);font-style:normal;font-size:12px;font-weight:600;
+    letter-spacing:.04em;color:var(--muted);margin-top:9px;text-transform:uppercase}
+  .evid-body{font-size:17.5px}
+  .evid-body p{margin:0 0 13px}
+
+  /* ---------- Framework card ---------- */
+  .fw{background:var(--paper-2);border:1px solid var(--line);border-radius:5px;padding:20px 22px;margin:6px 0 16px}
+  .fw-h{font-family:var(--sans);font-size:11px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;
+    color:var(--teach);margin:0 0 4px}
+  .fw-t{font-family:var(--display);font-size:19px;font-weight:600;margin:0 0 4px;line-height:1.2}
+  .fw-cite{font-family:var(--sans);font-size:12px;color:var(--muted);margin:0 0 13px;font-weight:500}
+  .fw p{font-size:16.5px;margin:0 0 10px}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 4px}
+  @media(max-width:640px){.steps{grid-template-columns:1fr 1fr}}
+  .step{background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:13px 14px}
+  .step .n{font-family:var(--sans);font-size:11px;font-weight:700;color:#fff;background:var(--teach);
+    width:21px;height:21px;border-radius:50%;display:grid;place-items:center;margin-bottom:9px}
+  .step .st{font-family:var(--sans);font-weight:700;font-size:13.5px;margin-bottom:4px;color:var(--teach-ink)}
+  .step .sd{font-size:14px;line-height:1.4;color:var(--ink-soft)}
+
+  /* ---------- Versus / side-by-side ---------- */
+  .versus{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0 6px;position:relative}
+  @media(max-width:640px){.versus{grid-template-columns:1fr}}
+  .vside{border-radius:5px;padding:18px 20px;border:1px solid var(--line)}
+  .vside.old{background:var(--paper-2)}
+  .vside.new{background:var(--hands-soft);border-color:#bcd9cb}
+  .vside .vh{font-family:var(--sans);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-bottom:10px}
+  .vside.old .vh{color:var(--muted)} .vside.new .vh{color:var(--hands-ink)}
+  .vside .vrole{font-family:var(--display);font-size:20px;font-weight:600;margin-bottom:10px;line-height:1.15}
+  .vside ul{margin:0;padding-left:18px}
+  .vside li{font-size:15.5px;margin-bottom:7px;line-height:1.42}
+  .vside li:last-child{margin-bottom:0}
+
+  /* ---------- Diagram figure ---------- */
+  .figure{background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:20px 22px 16px;margin:6px 0 14px}
+  .fig-h{font-family:var(--sans);font-size:11px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--evid);margin:0 0 14px}
+  .diagram-pair{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:760px){.diagram-pair{grid-template-columns:1fr}}
+  .dwrap{text-align:center}
+  .dwrap .dlabel{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:8px;justify-content:center}
+  .dwrap .dlabel .d-be{color:var(--nudge-ink);background:var(--nudge-soft);border-radius:3px;padding:2px 8px}
+  .dwrap .dlabel .d-af{color:var(--hands-ink);background:var(--hands-soft);border-radius:3px;padding:2px 8px}
+  .mermaid{background:transparent;font-family:var(--sans)!important}
+  .mermaid svg{max-width:100%;height:auto}
+  .fig-cap{font-size:15px;color:var(--muted);margin:14px 0 0;line-height:1.45;font-style:italic}
+
+  /* ---------- Nudge questions ---------- */
+  .qlist{margin:0;padding:0;list-style:none}
+  .qlist li{background:var(--nudge-soft);border:1px solid #ecdcb9;border-radius:6px;padding:14px 16px 14px 46px;
+    position:relative;margin-bottom:10px;font-size:17px;color:var(--nudge-ink);line-height:1.45}
+  .qlist li:last-child{margin-bottom:0}
+  .qlist li::before{counter-increment:q;content:"Q"counter(q);position:absolute;left:13px;top:13px;
+    font-family:var(--sans);font-size:11px;font-weight:700;color:#fff;background:var(--nudge);
+    border-radius:4px;padding:3px 5px;letter-spacing:.02em}
+  .qfacil{font-family:var(--serif);font-size:15px;color:var(--muted);margin:13px 0 0;font-style:italic}
+  .has-q{counter-reset:q}
+
+  /* ---------- Hands-on / exercise ---------- */
+  .hands{font-size:17px;color:var(--hands-ink)}
+  .hands p{margin:0 0 11px;color:var(--ink-soft)}
+  .hands ol{margin:0 0 6px;padding-left:20px}
+  .hands ol li{margin-bottom:8px}
+  .nudge-scaffold{background:var(--hands-soft);border:1px solid #bcd9cb;border-radius:5px;padding:15px 18px;margin:14px 0}
+  .nudge-scaffold .nh{font-family:var(--sans);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    font-weight:700;color:var(--hands-ink);margin-bottom:9px}
+  .nudge-scaffold ol{margin:0;padding-left:18px}
+  .model{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:5px;
+    overflow:hidden;margin-top:14px;font-size:15px}
+  @media(max-width:560px){.model{grid-template-columns:1fr}}
+  .model div{padding:13px 15px}
+  .model .mo{background:var(--paper-2);border-right:1px solid var(--line)}
+  .model .mn{background:var(--hands-soft)}
+  .model .mlab{font-family:var(--sans);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+    margin-bottom:6px;color:var(--muted)}
+  .model .mn .mlab{color:var(--hands-ink)}
+
+  /* ---------- Video ---------- */
+  .vid{font-size:16.5px}
+  .vtitle{font-family:var(--display);font-weight:600;font-size:19px;margin:0 0 4px;color:var(--video-ink);line-height:1.2}
+  .vmeta{font-size:15.5px;color:var(--ink-soft);margin:0 0 10px}
+  .vwhy{margin:0 0 12px;color:var(--ink-soft)}
+  .vlink{display:inline-block;font-family:var(--sans);font-size:12.5px;font-weight:600;color:#fff;background:var(--video);
+    text-decoration:none;border-radius:100px;padding:8px 17px;transition:.18s}
+  .vlink:hover{filter:brightness(1.08)}
+  .verify{font-family:var(--serif);font-size:14px;color:var(--muted);margin-top:11px;font-style:italic}
+
+  /* ---------- Facilitation + sources ---------- */
+  .closer{margin-top:46px}
+  .facil{background:var(--paper);border:1px dashed #c7bca4;border-radius:5px;padding:26px 28px}
+  .facil h3{margin:0 0 16px;font-family:var(--display);font-size:23px;font-weight:600}
+  .facil ul{margin:0;padding-left:20px}
+  .facil li{margin-bottom:12px;font-size:16.5px;line-height:1.5}
+  .sources{margin-top:26px;padding:24px 28px;background:var(--paper-2);border:1px solid var(--line);border-radius:5px}
+  .sources h3{margin:0 0 14px;font-family:var(--sans);font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .sources ul{margin:0;padding-left:18px}
+  .sources li{font-size:14.5px;margin-bottom:9px;line-height:1.45;color:var(--ink-soft)}
+  .sources a{color:var(--evid)}
+  .footnote{font-size:14px;color:var(--muted);margin-top:24px;line-height:1.6;font-style:italic}
+
+  @media print{
+    body{background:#fff;background-image:none}
+    .toolbar{display:none}
+    .block-inner{max-height:none!important}
+    .block{break-inside:avoid}
+    .bigidea{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">XLRI · Change Management for AI Adoption</div>
+    <h1>Not Deeper,<br><em>Wider</em></h1>
+    <p class="dek">What AI does to human capital, and why human capital management practices are the lever that decides whether adoption works.</p>
+    <div class="meta">
+      <span class="pill">90 minutes</span>
+      <span class="pill">Senior HR audience</span>
+      <span class="pill">Light, discussion-led</span>
+      <span class="pill">Individual → Team → Organization</span>
+    </div>
+  </header>
+
+  <div class="bigidea">
+    <div class="tag">The one idea, scaled three times</div>
+    <p>Upskilling makes a person <b>deeper</b> inside one silo. AI rewards the opposite. It rewards going <b>wider</b>, and directing work in domains you do not own. As AI starts to delegate to AI, the human stops being a link in the chain and moves to the <b>decision points</b>. Cross-skilling is what that move demands.</p>
+  </div>
+
+  <div class="twocol">
+    <div class="panel">
+      <h3>What they can do after</h3>
+      <ul>
+        <li>Tell upskilling (depth) apart from cross-skilling (breadth and direction), and say why AI rewards the second.</li>
+        <li>Read the high failure rate of AI pilots as an organizational design problem, not a technology problem.</li>
+        <li>Spot where handoffs between roles are collapsing in their own teams.</li>
+        <li>See the delegation flip: from a chain of humans to a tree of agents with humans at the decision points, and treat job redesign as the primary HR response.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>The lines to leave in the room</h3>
+      <ul>
+        <li>AI makes execution cheap, so value shifts from depth in one silo to breadth and judgment across silos.</li>
+        <li>The pilots are not failing because the model is weak. They fail on the floor, in the workflows and the org design around the model.</li>
+        <li>Work is flipping from human-to-human delegation, with AI as a tool in the chain, to AI-to-AI delegation, with humans only at the key decisions.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="legend">
+      <span class="lg"><span class="sw s-teach"></span>Teaching script</span>
+      <span class="lg"><span class="sw s-evid"></span>Evidence</span>
+      <span class="lg"><span class="sw s-nudge"></span>Discussion</span>
+      <span class="lg"><span class="sw s-hands"></span>Exercise</span>
+      <span class="lg"><span class="sw s-video"></span>Video</span>
+    </div>
+    <button class="btn" id="toggleAll">Expand all</button>
+  </div>
+
+  <!-- ================= 1. HOOK ================= -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="num">01</div>
+      <div class="htext">
+        <div class="phase-tag"><span class="clock">0 to 10 min</span> Opening hook · cold and unrelated</div>
+        <h2>The factory that bought the motor and gained nothing</h2>
+        <p class="summary">Start far from AI. Tell the electrified-factory story, then turn it on the room. This sets up the closing callback, and it sets up the evidence section that follows: the motor was never the problem.</p>
+        <p class="thread"><b>Where the human stands</b> the floor, not the motor</p>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="seal">✦</div>
+      <div class="pmain">
+        <div class="pname">Principle 01 · The Floor, Not the Motor</div>
+        <div class="pmaxim">"New technology gives you nothing until you redesign the work around it."</div>
+      </div>
+    </div>
+    <div class="blocks">
+
+      <div class="block t-teach">
+        <div class="block-head"><span class="ic">¶</span><span class="htitle">Teaching script</span><span class="htag line">spoken word</span><span class="chev">›</span></div>
+        <div class="block-inner"><div class="block-content script">
+          <p class="dropcap">Around 1900, factories in America did something that looked very smart. They bought electric motors. <span class="cue">[Do not put a title slide up. Start talking before they have settled.]</span></p>
+          <p>For a hundred years before that, a factory was built around one giant steam engine in the basement. A single shaft ran up through the building, and belts came off that shaft to drive every machine. The whole layout, which machine sat where, who worked next to whom, was decided by the length of a belt.</p>
+          <p>Then electricity arrived, and the owners did the obvious thing. They pulled out the steam engine and dropped one big electric motor into the same spot. <span class="cue">[pause]</span> And for almost twenty years, productivity barely moved.</p>
+          <p class="say">"They had the new technology. They had no new results."</p>
+          <p>The gains came only when a later generation stopped asking how to power the old factory, and started asking what a factory should look like if every machine had its own small motor. Now you could lay the floor out by the flow of work, not by the length of a belt. That redesign, not the motor, is what doubled productivity.</p>
+          <p><span class="cue">[Walk to the centre. Lower the voice.]</span></p>
+          <p class="say">"Most of you, right now, are bolting AI onto your old factory floor. You bought the motor. You are standing in year two of a twenty-year story, wondering why nothing has changed."</p>
+          <p>Today is not about the motor. Everyone has the motor. Today is about the floor. And in your world, the floor is people. It is how work is organised, who does what, what we hire for, what we reward. So here is the real question of this session. When the motor is this good, what happens to the people side of the business.</p>
+          <p><span class="cue">[Hold. Move into the evidence.]</span></p>
+        </div></div>
+      </div>
+
+      <div class="block t-nudge">
+        <div class="block-head"><span class="ic">?</span><span class="htitle">Opening poll</span><span class="htag line">quick, keep it moving</span><span class="chev">›</span></div>
+        <div class="block-inner"><div class="block-content has-q">
+          <ul class="qlist">
+            <li>Show of hands: whose organization has rolled out an AI tool in the last year? Now keep your hand up only if you can point to one number on a dashboard that moved because of it.</li>
+          </ul>
+          <p class="qfacil">Most hands drop on the second half. Name that you saw it, do not explain it yet. The next section explains it.</p>
+        </div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= 2. EVIDENCE ================= -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="num">02</div>
+      <div class="htext">
+        <div class="phase-tag"><span class="clock">10 to 22 min</span> Evidence and discussion</div>
+        <h2>The 95% that did not fail for the reason you think</h2>
+        <p class="summary">A recent study became famous for saying almost all enterprise GenAI pilots fail. The headline got misread as "AI does not work." The real finding is the opposite, and it is exactly the factory point: the failure is on the floor, not in the motor.</p>
+        <p class="thread"><b>Where the human stands</b> still deciding who does the work</p>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="seal">✦</div>
+      <div class="pmain">
+        <div class="pname">Principle 02 · The 70 Percent Rule</div>
+        <div class="pmaxim">"AI value is 10% the algorithm, 20% the data, and 70% your people and process."</div>
+      </div>
+    </div>
+    <div class="blocks">
+
+      <div class="block t-evid">
+        <div class="block-head"><span class="ic">▤</span><span class="htitle">The evidence</span><span class="htag line">to quote on a slide</span><span class="chev">›</span></div>
+        <div class="block-inner"><div class="block-content evid-body">
+          <div class="stat-row">
+            <div class="stat">95%</div>
+            <div class="stat-cap">of custom enterprise GenAI pilots show no measurable profit-and-loss impact within six months of going live.</div>
+          </div>
+          <p class="source-line">Source: "The GenAI Divide: State of AI in Business 2025," MIT Project NANDA, 2025.</p>
+          <div class="pullquote">"This divide does not seem to be driven by model quality or regulation, but seems to be determined by approach."
+            <span class="attr">MIT Project NANDA, 2025</span></div>
+          <p>The report is blunt about where the barrier sits. In its words, the core barrier to scaling is not infrastructure, regulation, or talent. It is learning: most of these systems do not retain feedback, do not adapt to context, and do not improve with use. The pilots that did cross over succeeded by changing how work and ownership were organised, not by buying a better model.</p>
+          <p>Read against the factory, the message is clean. The motor works. The pilots fail on the floor: workflows that will not bend, no clear owner for the rollout, and tools that never learn the organization's own context.</p>
+          <div class="pullquote">"Companies succeed when they decentralize implementation authority but retain accountability."
+            <span class="attr">MIT Project NANDA, 2025 · on organizational design as the real barrier</span></div>
+          <p>A larger, more conventional study says the same thing in numbers. BCG, surveying about a thousand executives in 2024, found that 74% of companies had yet to show tangible value from AI. Their rule of thumb for the firms that do: put 10% of the effort into the algorithm, 20% into data and technology, and 70% into people and process. The work is mostly on the floor.</p>
+        </div></div>
+      </div>
+
+      <div class="block t-nudge">
+        <div class="block-head"><span class="ic">?</span><span class="htitle">Discussion</span><span class="htag line">open the room, 6 to 8 min</span><span class="chev">›</span></div>
+        <div class="block-inner"><div class="block-content has-q">
+          <ul class="qlist">
+            <li>If 70% of the work is people and process, what share of your AI budget and your own attention this year is going there, versus into the tool?</li>
+            <li>Think of one AI pilot in your organization that stalled. Be honest: did the model fail, or did the floor around it fail, the workflow, the ownership, the willingness to change a routine?</li>
+            <li>What is one routine or procedure in your function that an AI pilot would hit and bounce off, because the routine itself will not bend?</li>
+          </ul>
+          <p class="qfacil">Caveat to hold in your back pocket, not on the slide: the MIT sample is small and the lab that wrote it favours agentic AI, so treat 95% as directional. The defensible claim is that the binding constraint is integration and organizational design, not model intelligence. BCG's 10-20-70 is your backup if anyone challenges the number.</p>
+        </div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= 3. ACT 1 ================= -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="num">03</div>
+      <div class="htext">
+        <div class="phase-tag"><span class="clock">22 to 44 min</span> Act 1 · the Individual</div>
+        <h2>The T gets a wider top</h2>
+        <p class="summary">For thirty years HCM rewarded depth. AI flips the scarce skill to breadth: framing the problem, holding enough vocabulary in a domain you do not own to direct AI in it, and judging whether the output is any good.</p>
+        <p class="thread"><b>Where the human stands</b> from doer to director</p>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="seal">✦</div>
+      <div class="pmain">
+        <div class="pname">Principle 03 · Wider, Not Deeper</div>
+        <div class="pmaxim">"Fluency is now free, so judgment is the scarce thing. Hire for breadth and direction."</div>
+      </div>
+    </div>
+    <div class="blocks">
+
+      <div class="block t-teach">
+        <div class="block-head"><span class="ic">¶</span><span class="htitle">Teaching script</span><span class="htag line">spoken word</span><span class="chev">›</span></div>
+        <div class="block-inner"><div class="block-content script">
+          <p>For most of our careers, we built people the same way. We took a graduate and we made them deep. Deep in finance, deep in litigation, deep in supply chain. We drew a letter T on the whiteboard and we said the vertical line is your depth, that is your value, go make it longer. The specialist won.</p>
+          <p>AI does something uncomfortable to that picture. The things that used to require depth, the first draft, the summary, the analysis, the clean deck, the polished email, are now cheap. Not free, but cheap. So if the vertical line of the T is getting cheaper, where does the value go.</p>
+          <p class="say">"It goes to the top of the T. It goes wider."</p>
+          <p>The valuable person is no longer the one who knows the most inside one box. It is the one who can stand at the top, frame the right problem, and direct work across three boxes they are not expert in. And the skill nobody is naming for you is not prompting. It is vocabulary.</p>
+          <p><span class="label">Analogy · the music director</span></p>
+          <p>Think of a music director in a film. <span class="cue">[slow down]</span> A good one cannot play the tabla. They cannot play the violin. They probably cannot play the synth. But they sit in that studio and say to the tabla player, give me a slower theka, bring the sam forward. They tell the strings, take it to a minor, more legato. They direct instruments they cannot physically play, because they own the vocabulary of each one.</p>
+          <p class="say">"That is exactly what your best people now do with AI. They direct work they could not produce themselves, because they have just enough vocabulary in each domain to steer it, and enough judgment to catch it when it is wrong."</p>
+          <p>So the cross-skilled manager does not need to become a coder, a designer, and an analyst. They need enough of the language of each to direct, and the judgment to spot a confident, fluent, completely wrong answer. Fluency is now free. Judgment is the scarce thing.</p>
+          <p>Notice what just happened to this person. <span class="cue">[slow, mark it]</span> They stopped being the one who does the task. They became the one who directs it and decides if it is good. Hold that image. For the rest of this session, watch the human keep moving in that same direction: up, and out of the doing. <span class="cue">[Bridge to the clip, then the exercise.]</span></p>
+        </div></div>
+      </div>
+
+      <div class="block t-video">
+        <div class="block-head"><span class="ic">▷</span><span class="htitle">Video</span><span class="htag line">2 to 3 min</span><span class="chev">›</span></div>
+        <div class="block-inner"><div class="block-content vid">
+          <p class="vtitle">Demis Hassabis at Stanford, on pairing AI with a domain workflow</p>
+          <p class="vmeta">Candidate clip. The useful segment is the point that people who learn to pair AI with their own domain workflow become disproportionately more capable than people who use AI generically.</p>
+          <p class="vwhy">Why this clip: it makes "breadth plus direction beats generic tool use" land from a credible voice, so you do not have to argue it yourself.</p>
+          <a class="vlink" href="https://www.youtube.com/results?search_query=demis+hassabis+stanford+ai+future+of+work" target="_blank" rel="noopener">Find on YouTube</a>
+          <p class="verify">To verify before locking: exact in and out timestamps, and that the segment runs under three minutes.</p>
+        </div></div>
+      </div>
+
+      <div class="block t-hands">
+        <div class="block-head"><span class="ic">✎</span><span class="htitle">Exercise · rewrite the JD</span><span class="htag line">in pairs · 10 min</span><span class="chev">›</span></div>
+        <div class="block-inner"><div class="block-content hands">
+          <p>This is the heart of Act 1. Most JDs were written for the old factory floor. The task is to redraft one so it rewards breadth and direction, not only depth.</p>
+          <ol>
+            <li>In pairs, take the JD of one real role you both know. Read it once.</li>
+            <li>Mark every line that only rewards depth in a single box.</li>
+            <li>Rewrite three lines using the nudges below. Eight minutes, no perfection required.</li>
+            <li>Two pairs read their best new line aloud. The room reacts.</li>
+          </ol>
+          <div class="nudge-scaffold">
+            <div class="nh">Nudges to put on the slide</div>
+            <ol>
+              <li>Add one responsibility that rewards directing work across two functions the person is not expert in.</li>
+              <li>Add one line that rewards judgment: noticing when confident output is wrong.</li>
+              <li>Turn one "must have X years in Y" into "must be able to learn and direct Z."</li>
+              <li>Cut one line that rewards depth purely for its own sake.</li>
+            </ol>
+          </div>
+          <div class="model">
+            <div class="mo"><div class="mlab">Before</div>Five plus years of sourcing experience. Expert in Boolean search and the ATS.</div>
+            <div class="mn"><div class="mlab">After</div>Can direct AI sourcing into unfamiliar domains, judge whether a shortlist is actually good, and catch a confident match that is wrong.</div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="block t-nudge">
+        <div class="block-head"><span class="ic">?</span><span class="htitle">Discussion</span><span class="htag line">harvest 3 or 4</span><span class="chev">›</span></div>
+        <div class="block-inner"><div class="block-content has-q">
+          <ul class="qlist">
+            <li>Think of your strongest performer. Is their edge that they are the deepest, or that they move across the most areas?</li>
+            <li>If fluent first drafts are now free, what is the one thing you would now pay a premium to hire for?</li>
+          </ul>
+          <p class="qfacil">If the room is quiet, narrow it: ask one person to answer about a real role, then open it up.</p>
+        </div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= 4. ACT 2 ================= -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="num">04</div>
+      <div class="htext">
+        <div class="phase-tag"><span class="clock">44 to 62 min</span> Act 2 · the Team</div>
+        <h2>The handoffs are disappearing</h2>
+        <p class="summary">A team is a chain of handoffs between specialists. AI dissolves the handoffs, so the unit of work re-bundles. The seams between roles move, and that is what breaks individual-based performance management.</p>
+        <p class="thread"><b>Where the human stands</b> the human chain shortens</p>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="seal">✦</div>
+      <div class="pmain">
+        <div class="pname">Principle 04 · The Vanishing Handoff</div>
+        <div class="pmaxim">"When AI removes the reason for a handoff, the role built around that handoff re-bundles."</div>
+      </div>
+    </div>
+    <div class="blocks">
+
+      <div class="block t-teach">
+        <div class="block-head"><span class="ic">¶</span><span class="htitle">Teaching script</span><span class="htag line">spoken word</span><span class="chev">›</span></div>
+        <div class="block-inner"><div class="block-content script">
+          <p>We just looked at one person. Widen the lens to a team. Here is a fact we rarely say out loud. A team is mostly a machine for handing work off. The analyst pulls the numbers and hands them to the writer. The writer drafts the note and hands it to the designer. The designer builds the deck and hands it back up. Three people, two handoffs, one output.</p>
+          <p>Why do those handoffs exist at all. They exist because no single person could hold all three skills at a high enough level. The handoff is a workaround for the limits of one human. <span class="cue">[pause]</span> AI quietly removes that limit. And when the reason for a handoff disappears, the handoff disappears, and so does the role that was defined around it.</p>
+          <p><span class="label">Analogy · the relay baton</span></p>
+          <p>The old team was a relay race. Each runner was excellent on their leg, and the event was about clean handoffs of the baton. <span class="cue">[mime the pass]</span> The new team is not a faster relay. It is one runner holding all three batons, because the model carries the parts they are weak at. The team did not shrink because someone was fired. It shrank because the seams between the roles dissolved.</p>
+          <p>There is good language for the two ways people actually work with AI, and it comes from a real study, not a metaphor. <span class="cue">[gesture to the framework card]</span> Some people work as a centaur, with a clean line: human on top, machine below, this part is mine, that part is the model's. Others work as a cyborg, braided together moment to moment, no visible seam. Centaur teams keep the old handoffs. Cyborg teams lose them. The shift you are managing is the shift from one to the other.</p>
+          <p class="say">"Here is the trap. When the work is one braided output from a human and a machine, who gets the performance rating?"</p>
+          <p>Our entire appraisal system assumes an individual produced an individual result. That assumption is quietly breaking on the team floor, and most HR functions have not noticed.</p>
+          <p>And keep watching the thread from Act 1. <span class="cue">[mark it]</span> Every handoff that disappears is one less human link in the chain. The chain of humans is getting shorter. The question we are walking toward is simple: if the chain keeps shortening, where do the humans end up standing.</p>
+        </div></div>
+      </div>
+
+      <div class="block t-evid">
+        <div class="block-head"><span class="ic">▤</span><span class="htitle">Framework · Centaur and Cyborg</span><span class="htag line">name the source</span><span class="chev">›</span></div>
+        <div class="block-inner"><div class="block-content">
+          <div class="fw" style="margin:0">
+            <p class="fw-h">The framework</p>
+            <p class="fw-t">Centaur and Cyborg working patterns</p>
+            <p class="fw-cite">From "Navigating the Jagged Technological Frontier," Dell'Acqua, McFowland, Mollick and colleagues, Harvard Business School working paper, 2023.</p>
+            <p>A field experiment with 758 consultants using GPT-4. Inside the tasks AI is good at, AI users did markedly better and faster. Outside that "jagged frontier," AI could quietly make the work worse. Two stable working styles emerged: the <b>centaur</b> splits tasks cleanly between human and machine; the <b>cyborg</b> interweaves them continuously. Centaur work preserves the old division of labour and its handoffs. Cyborg work dissolves the seams, which is where roles re-bundle.</p>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="block t-evid">
+        <div class="block-head"><span class="ic">◫</span><span class="htitle">Diagram · a hiring team, before and after</span><span class="htag line">visual</span><span class="chev">›</span></div>
+        <div class="block-inner"><div class="block-content">
+          <div class="figure" style="margin:0">
+            <p class="fig-h">Where the handoffs go</p>
+            <div class="diagram-pair">
+              <div class="dwrap">
+                <div class="dlabel"><span class="d-be">Before</span> a relay of handoffs</div>
+                <div class="mermaid">
+flowchart TB
+  A["Recruiter<br/>writes JD"]:::h --> B["Coordinator<br/>schedules"]:::h --> C["Screener<br/>filters CVs"]:::h --> D["Interviewer<br/>assesses"]:::h --> E["Recruiter<br/>makes offer"]:::h
+  classDef h fill:#faf6ed,stroke:#a4701a,stroke-width:1.5px,color:#3a2f1a;
+                </div>
+              </div>
+              <div class="dwrap">
+                <div class="dlabel"><span class="d-af">After</span> the seams collapse</div>
+                <div class="mermaid">
+flowchart TB
+  TA["Talent Advisor"]:::hu
+  AI(["AI layer:<br/>screen · schedule · draft · cite"]):::ai
+  J["Human judgment:<br/>fit · story · close"]:::hu
+  TA <--> AI
+  AI --> J
+  TA --> J
+  classDef ai fill:#e9eef3,stroke:#3a5a7a,stroke-width:1.5px,color:#22364a;
+  classDef hu fill:#e6f1ea,stroke:#2f6b54,stroke-width:1.5px,color:#1d4034;
+                </div>
+              </div>
+            </div>
+            <p class="fig-cap">Five roles in a line become one human role wrapped around an AI layer. The transactional steps fold into the model. The human keeps judgment. The two handoffs vanish, and so does the question of who owned each leg.</p>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="block t-video">
+        <div class="block-head"><span class="ic">▷</span><span class="htitle">Video</span><span class="htag line">2 to 4 min</span><span class="chev">›</span></div>
+        <div class="block-inner"><div class="block-content vid">
+          <p class="vtitle">A real team re-bundling roles around AI</p>
+          <p class="vmeta">Candidate clip. A short segment where one person now does what used to be two or three roles, in marketing, recruiting, or L&D. The IBM HR clip is a usable backup.</p>
+          <p class="vwhy">Why this clip: it turns the abstract "seams move" idea into a concrete before-and-after the room can picture in their own function.</p>
+          <a class="vlink" href="https://www.youtube.com/results?search_query=how+AI+changed+our+team+roles+HR" target="_blank" rel="noopener">Find on YouTube</a>
+          <p class="verify">To verify before locking: confirm it shows a real role merge, not a generic tool demo.</p>
+        </div></div>
+      </div>
+
+      <div class="block t-nudge">
+        <div class="block-head"><span class="ic">?</span><span class="htitle">Discussion</span><span class="htag line">pairs, then 2 shares</span><span class="chev">›</span></div>
+        <div class="block-inner"><div class="block-content has-q">
+          <ul class="qlist">
+            <li>Name one workflow in your team where, if AI did its part perfectly, two roles would fold into one. Who owns the result, and who owns the rating?</li>
+            <li>Where in your team is the handoff itself the bottleneck: the waiting, the rework, the lost context, rather than any one person's skill?</li>
+            <li>Is your strongest junior a centaur or a cyborg today? What would move the whole team one safe step toward cyborg?</li>
+          </ul>
+          <p class="qfacil">Let them talk in pairs for two minutes first. The role-merge question is uncomfortable, and pairs make it sayable.</p>
+        </div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= 5. ACT 3 ================= -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="num">05</div>
+      <div class="htext">
+        <div class="phase-tag"><span class="clock">62 to 80 min</span> Act 3 · the Organization</div>
+        <h2>Jobs change when the architecture changes</h2>
+        <p class="summary">The change-management heart. Jobs do not vanish because tasks vanish. They change when the architecture of work no longer needs the old shape. So the primary HR move is not training. It is job redesign, and the redesigner has to understand AI to do it.</p>
+        <p class="thread"><b>Where the human stands</b> split decisions from execution</p>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="seal">✦</div>
+      <div class="pmain">
+        <div class="pname">Principle 05 · Two Piles</div>
+        <div class="pmaxim">"Do not automate a job. Break it into tasks, send execution to the machine, keep the decisions human."</div>
+      </div>
+    </div>
+    <div class="blocks">
+
+      <div class="block t-teach">
+        <div class="block-head"><span class="ic">¶</span><span class="htitle">Teaching script</span><span class="htag line">spoken word</span><span class="chev">›</span></div>
+        <div class="block-inner"><div class="block-content script">
+          <p>One person, then one team. Now the whole organization, and this is where change management actually lives.</p>
+          <p>There is a fear in every room like this, usually unspoken. AI automates tasks, tasks add up to jobs, so jobs go away. It feels logical. It is also the wrong model. A job is not a pile of tasks. A job is a shape that exists because of how the work around it is organised. <span class="cue">[pause]</span> Jobs do not disappear because a few tasks got automated. They change when the architecture of the work no longer needs that shape.</p>
+          <p>And something the fear ignores: when AI removes some tasks, new tasks appear right next to them. Someone has to check the model, set the boundaries, own the edge cases, carry the evidence, decide when to refuse. Work is not only displaced. It is also reinstated in a new form. So the question is never only what can AI do. It is what should the work look like once AI can do that.</p>
+          <p class="say">"That question has a name in HR. It is job redesign. And it is the primary move, not the afterthought."</p>
+          <p><span class="cue">[Gesture to the framework, then the side-by-side.]</span> There is a clean method for it. You do not automate a job. You break the job into tasks, you ask what each task is really worth, you match each task to the right kind of automation or keep it human, and then you reassemble the work into a new human and machine combination. The recruiter on the right of that panel is not a smaller recruiter. It is a redesigned role that sits higher up the value line.</p>
+          <p>And here is the move that connects this whole session. <span class="cue">[slow]</span> When you deconstruct a job, you are really sorting its tasks into two piles. One pile is execution: the drafting, the screening, the scheduling, the work that can go to the machine. The other pile is decisions: the judgment calls that stay human. Remember that split. In a few minutes it is going to redraw the entire organization.</p>
+          <p>Now the catch, and it is the one HR most needs to hear. <span class="cue">[slow]</span></p>
+          <p class="say">"You cannot redesign work around a capability you do not understand. Job redesign is an AI literacy task before it is an HR task."</p>
+          <p>If you do not know what the machine can and cannot do, you will deconstruct the wrong tasks and automate the wrong half. That is why the redesigner has to understand AI: not to code, but to judge which task goes to the model and which stays human.</p>
+          <p>And step back once more, to the floor. <span class="cue">[return to the factory voice]</span> The productivity dip we saw in the pilots, the J-curve, that dip is this redesign work. Resistance is not stupidity. The employee dragging their feet built their status on the old floor plan, and you are rebuilding the floor under them. You do not fix that with one more webinar. You fix it by redesigning roles so there is a high-status place for them to stand on the new floor. That redesign is the value of human capital management practices.</p>
+        </div></div>
+      </div>
+
+      <div class="block t-evid">
+        <div class="block-head"><span class="ic">▤</span><span class="htitle">Framework · deconstruct and reconstruct</span><span class="htag line">name the source</span><span class="chev">›</span></div>
+        <div class="block-inner"><div class="block-content">
+          <div class="fw" style="margin:0">
+            <p class="fw-h">The framework</p>
+            <p class="fw-t">From the job to the task, and back again</p>
+            <p class="fw-cite">Jesuthasan and Boudreau, "Reinventing Jobs" (2018) and "Work Without Jobs" (2022). Coordination lens from Sangeet Paul Choudary, "Reshuffle" (2025).</p>
+            <div class="steps">
+              <div class="step"><div class="n">1</div><div class="st">Deconstruct</div><div class="sd">Break the job into its component tasks. The job is the wrong unit. The task is the right one.</div></div>
+              <div class="step"><div class="n">2</div><div class="st">Value the task</div><div class="sd">Ask how performance on each task turns into value. Some tasks reward only "no errors," others reward excellence.</div></div>
+              <div class="step"><div class="n">3</div><div class="st">Match it</div><div class="sd">Send each task to the right kind of automation, augment the human, or keep it fully human.</div></div>
+              <div class="step"><div class="n">4</div><div class="st">Reconstruct</div><div class="sd">Reassemble the tasks into a new human and machine combination, and redeploy the freed-up time.</div></div>
+            </div>
+            <p style="margin-top:14px">Their later book widens this into a way of running the organization: start with the work, not the job; design the human and machine combination on purpose; use the full range of engagements, not only full-time roles; and let people flow to the work by skill. Choudary adds the altitude above it: AI's deepest effect is on how work is coordinated, not only on single tasks, so sometimes the honest answer is to redraw the boxes, not optimise inside them.</p>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="block t-hands">
+        <div class="block-head"><span class="ic">✎</span><span class="htitle">Exercise · decompose a job</span><span class="htag line">in pairs · 10 min</span><span class="chev">›</span></div>
+        <div class="block-inner"><div class="block-content hands">
+          <p>This is the four-step method, done by hand on a role they own. It also quietly sets up the close, because the two piles they make are the agent layer and the human job.</p>
+          <ol>
+            <li>Pick one role you both know. Write its six to eight core tasks down a column. That is the deconstruct step.</li>
+            <li>Tag each task: <span style="font-family:var(--sans);font-weight:700;font-size:12px;background:#e9eef3;color:#22364a;border-radius:4px;padding:1px 7px">E</span> for execution that could move to a machine, <span style="font-family:var(--sans);font-weight:700;font-size:12px;background:#f6edda;color:#724c0f;border-radius:4px;padding:1px 7px">A</span> for augment where human and AI work together, <span style="font-family:var(--sans);font-weight:700;font-size:12px;background:#e6f1ea;color:#1e4a39;border-radius:4px;padding:1px 7px">D</span> for a decision you would never hand over.</li>
+            <li>Read down the tags. The <b>E</b> tasks are your future agent layer. The <b>D</b> tasks are the redesigned human job.</li>
+            <li>The hard question, for one pair to answer aloud: is the <b>D</b> pile, on its own, a whole and respected role? If not, what would you add to it?</li>
+          </ol>
+          <div class="nudge-scaffold">
+            <div class="nh">Worked example to show after they try · the recruiter</div>
+            <ul style="margin:0;padding-left:2px;list-style:none;font-size:15.5px;line-height:1.7">
+              <li><span style="display:inline-block;width:24px;font-family:var(--sans);font-weight:700;font-size:11px;color:#22364a">E</span> Schedule interviews, send status updates</li>
+              <li><span style="display:inline-block;width:24px;font-family:var(--sans);font-weight:700;font-size:11px;color:#22364a">E</span> Draft and dispatch offer letters</li>
+              <li><span style="display:inline-block;width:24px;font-family:var(--sans);font-weight:700;font-size:11px;color:#724c0f">A</span> Source candidates and screen CVs (AI proposes, human audits for bias)</li>
+              <li><span style="display:inline-block;width:24px;font-family:var(--sans);font-weight:700;font-size:11px;color:#1e4a39">D</span> Decide the final shortlist</li>
+              <li><span style="display:inline-block;width:24px;font-family:var(--sans);font-weight:700;font-size:11px;color:#1e4a39">D</span> Coach the hiring manager</li>
+              <li><span style="display:inline-block;width:24px;font-family:var(--sans);font-weight:700;font-size:11px;color:#1e4a39">D</span> Close a wavering candidate</li>
+            </ul>
+          </div>
+          <p>The E and A rows are exactly what becomes the AI layer in the panel below. The D rows are what is left for the human. Keep that picture: it is the seed of the work tree in the close.</p>
+        </div></div>
+      </div>
+
+      <div class="block t-evid">
+        <div class="block-head"><span class="ic">◫</span><span class="htitle">Side by side · the recruiter, redesigned</span><span class="htag line">compare and contrast</span><span class="chev">›</span></div>
+        <div class="block-inner"><div class="block-content">
+          <div class="versus">
+            <div class="vside old">
+              <div class="vh">Old: the job</div>
+              <div class="vrole">Recruiter</div>
+              <ul>
+                <li>One fixed bundle: source, screen, schedule, interview, offer, comply.</li>
+                <li>One person owns the whole bundle, end to end.</li>
+                <li>Hired for years of sourcing experience and tool expertise.</li>
+                <li>Measured on activity inside the bundle.</li>
+              </ul>
+            </div>
+            <div class="vside new">
+              <div class="vh">New: redesigned work</div>
+              <div class="vrole">Talent Advisor</div>
+              <ul>
+                <li>Transactional tasks (screen, schedule, draft, cite) run on an AI layer.</li>
+                <li>The human moves to candidate relationships, hiring-manager consulting, and skills-based workforce planning.</li>
+                <li>Hired for judgment and the ability to direct AI across domains.</li>
+                <li>Same headcount covers more roles, and the human work moves up the value line.</li>
+              </ul>
+            </div>
+          </div>
+          <p class="fig-cap">Run the same four steps on an L&D specialist or an HR business partner and the shape repeats: a transactional layer drops to the machine, and the human role is redrawn around judgment, relationship, and design.</p>
+        </div></div>
+      </div>
+
+      <div class="block t-nudge">
+        <div class="block-head"><span class="ic">?</span><span class="htitle">Discussion</span><span class="htag line">the payoff, protect this time</span><span class="chev">›</span></div>
+        <div class="block-inner"><div class="block-content has-q">
+          <ul class="qlist">
+            <li>Pick one role you own. Deconstruct it out loud into five tasks. Which two would you send to the machine, and which one would you protect as the human core?</li>
+            <li>Where is your organization on the J-curve right now: before the dip, in the dip, or climbing out? What single signal would tell you for sure?</li>
+            <li>Name one role whose authority rests on the old floor plan. What would a high-status place for that person look like after redesign?</li>
+          </ul>
+          <p class="qfacil">If you are behind on time, cut the Act 2 video, never this discussion. This is the reason the session exists.</p>
+        </div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= 6. CLOSE ================= -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="num">06</div>
+      <div class="htext">
+        <div class="phase-tag"><span class="clock">80 to 90 min</span> Close · the inversion, then one sentence</div>
+        <h2>From the chain to the work tree</h2>
+        <p class="summary">Pull the whole arc together with one inversion. Work used to be a chain of humans handing off to humans, with AI as a tool in the middle. It is flipping into a tree of AI agents delegating to AI agents, with humans only at the key decisions. That is where the migrating human finally lands.</p>
+        <p class="thread"><b>Where the human stands</b> at the decision points of the tree</p>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="seal">✦</div>
+      <div class="pmain">
+        <div class="pname">Principle 06 · Stand at the Decision Points</div>
+        <div class="pmaxim">"As AI delegates to AI, move your people from the chain to the goal and the key decisions. You are the HR of your agents."</div>
+      </div>
+    </div>
+    <div class="blocks">
+
+      <div class="block t-evid">
+        <div class="block-head"><span class="ic">◫</span><span class="htitle">Diagram · the delegation flips</span><span class="htag line">the culmination</span><span class="chev">›</span></div>
+        <div class="block-inner"><div class="block-content">
+          <div class="figure" style="margin:0">
+            <p class="fig-h">From a chain of humans to a tree of agents</p>
+            <div class="diagram-pair">
+              <div class="dwrap">
+                <div class="dlabel"><span class="d-be">Before</span> a chain of humans</div>
+                <div class="mermaid">
+flowchart TB
+  H1["Analyst"]:::hu --> H2["Writer"]:::hu --> H3["Manager"]:::hu --> H4["Approver"]:::hu
+  T(["AI tool"]):::ai
+  T -.->|used by| H2
+  classDef hu fill:#faf6ed,stroke:#a4701a,stroke-width:1.5px,color:#3a2f1a;
+  classDef ai fill:#e9eef3,stroke:#3a5a7a,stroke-width:1.5px,color:#22364a;
+                </div>
+              </div>
+              <div class="dwrap">
+                <div class="dlabel"><span class="d-af">After</span> a tree of agents</div>
+                <div class="mermaid">
+flowchart TB
+  H["Human<br/>sets goal · owns the decision"]:::hu
+  O(["AI orchestrator"]):::ai
+  A1(["Agent"]):::ai
+  A2(["Agent"]):::ai
+  A3(["Agent"]):::ai
+  S1(["Sub-agent"]):::ai
+  S2(["Sub-agent"]):::ai
+  D{"Key<br/>decision"}:::dec
+  H --> O
+  O --> A1
+  O --> A2
+  O --> A3
+  A1 --> S1
+  A1 --> S2
+  A2 -.->|escalates| D
+  D -.->|approve| A2
+  H -.->|sits at| D
+  classDef hu fill:#2f6b54,color:#ffffff,stroke:#2f6b54;
+  classDef ai fill:#e9eef3,stroke:#3a5a7a,color:#22364a;
+  classDef dec fill:#f6edda,stroke:#a4701a,stroke-width:2px,color:#724c0f;
+                </div>
+              </div>
+            </div>
+            <p class="fig-cap">On the left, work is a line of humans handing off to humans, and AI is a tool one of them picks up. On the right, the human sets the goal, an AI orchestrator delegates to agents, agents delegate to sub-agents, and the human reappears only at the key decision, the escalation, the approval. The execution pile from the exercise becomes the tree. The decision pile becomes where the human stands.</p>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="block t-teach">
+        <div class="block-head"><span class="ic">¶</span><span class="htitle">Teaching script</span><span class="htag line">spoken word</span><span class="chev">›</span></div>
+        <div class="block-inner"><div class="block-content script">
+          <p><span class="cue">[Come back to the front. Quieter than the room expects.]</span></p>
+          <p>Let me put the whole session into one picture. We have been following one quiet movement the entire time. Where does the human stand. <span class="cue">[count it on fingers]</span> In Act 1 the person stopped doing the task and started directing it. In Act 2 the handoffs between humans collapsed and the chain got shorter. In Act 3 we split every job into two piles, execution and decision, and sent execution to the machine. Each step moved the human the same way: up, and out of the doing.</p>
+          <p>This is the last step, and it is the one that should change how you plan. <span class="cue">[turn to the diagram]</span> For thirty years, work was a chain. A human did something, handed it to another human, who handed it to another human. When AI arrived, we slotted it in as a tool that one of those humans picked up. The chain stayed human.</p>
+          <p class="say">"What is now emerging inverts that. The work becomes a tree of AI agents delegating to other AI agents, and the human appears only at the key decisions."</p>
+          <p>An AI orchestrator takes the goal and delegates to agents. Those agents delegate to sub-agents. The execution pile from your exercise runs down that tree. And you, the human, are no longer a link in the chain. You sit at the root, where the goal is set, and at the branch points, where a decision is too important or too risky to leave to the machine.</p>
+          <p>This is not only a lab idea. <span class="cue">[name it lightly]</span> Microsoft has started calling the result a Work Chart instead of an org chart, teams forming around a goal and a set of agents, and it calls the new manager an agent boss. The head of Nvidia put it more bluntly for a room like this one: in the future, he said, the IT department becomes the HR department of AI agents. <span class="cue">[pause, let the HR room feel that]</span> Someone has to hire, onboard, set the boundaries for, and hold accountable a workforce of agents. That someone is you.</p>
+          <p>And now the wider T from the very first act pays off. <span class="cue">[slow]</span> If your place is the decision points across a whole tree of agents working in finance, in legal, in operations, in brand, then depth in one box is not what saves you. Breadth and judgment across all of them is. That is cross-skilling. That is the skill the tree demands.</p>
+          <p><span class="cue">[Return to the factory voice.]</span> So back to where we began. The firms that won the electricity era were not the ones with the best motor. They were the ones who redesigned the floor, and who understood how work and people fit together. That is you. HR is not standing next to this. HR is holding the redesign: the wider T, the re-bundled team, the redesigned job, and the move from a chain of humans to a tree of agents.</p>
+          <p class="say">"So the job this year is not to upskill your people deeper. It is to cross-skill them wider, and to move them to the decision points of a tree of agents that will do the rest."</p>
+          <p><span class="cue">[Beat. Then the exit question.]</span></p>
+          <p>One question, and I do not want the answer now. I want it on Monday. Take one workflow you own. Which parts of it are you still doing in a human chain, and what would it look like if the execution ran as a tree of agents, with you standing only at the one or two decisions that truly need you.</p>
+          <p><span class="cue">[Stop. Do not summarise. Let it sit.]</span></p>
+        </div></div>
+      </div>
+
+      <div class="block t-nudge">
+        <div class="block-head"><span class="ic">?</span><span class="htitle">Exit reflection</span><span class="htag line">one line, written</span><span class="chev">›</span></div>
+        <div class="block-inner"><div class="block-content has-q">
+          <ul class="qlist">
+            <li>On one card: name one workflow you will turn from a human chain into an agent tree, and the one decision inside it you will keep for a human.</li>
+          </ul>
+          <p class="qfacil">Collecting the cards is optional. The act of writing it is the point.</p>
+        </div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= CLOSER ================= -->
+  <div class="closer">
+
+    <div class="revision">
+      <div class="rtag">Revision · the six principles</div>
+      <h3>What to carry out of the room</h3>
+      <ol>
+        <li class="ritem"><span class="rn"></span><div class="rbody">
+          <div class="rname">The Floor, Not the Motor</div>
+          <p class="rrule">New technology gives you nothing until you redesign the work around it.</p>
+          <p class="rapply"><b>Apply</b>Before any AI rollout, ask what the workflow would look like if the tool were perfect, and redesign that first.</p>
+        </div></li>
+        <li class="ritem"><span class="rn"></span><div class="rbody">
+          <div class="rname">The 70 Percent Rule</div>
+          <p class="rrule">AI value is 10% the algorithm, 20% the data, and 70% your people and process.</p>
+          <p class="rapply"><b>Apply</b>Put most of your AI budget and attention into workflow, ownership, and adoption, not the tool.</p>
+        </div></li>
+        <li class="ritem"><span class="rn"></span><div class="rbody">
+          <div class="rname">Wider, Not Deeper</div>
+          <p class="rrule">Fluency is now free, so judgment and breadth are the scarce things.</p>
+          <p class="rapply"><b>Apply</b>Rewrite one job description to reward directing work across domains and catching confident wrong answers.</p>
+        </div></li>
+        <li class="ritem"><span class="rn"></span><div class="rbody">
+          <div class="rname">The Vanishing Handoff</div>
+          <p class="rrule">When AI removes the reason for a handoff, the role built around it re-bundles.</p>
+          <p class="rapply"><b>Apply</b>Pick one team handoff AI can remove, and decide now who owns the merged result and its rating.</p>
+        </div></li>
+        <li class="ritem"><span class="rn"></span><div class="rbody">
+          <div class="rname">Two Piles</div>
+          <p class="rrule">Do not automate a job. Break it into tasks, send execution to the machine, keep the decisions human, then reassemble.</p>
+          <p class="rapply"><b>Apply</b>Take one role, list its tasks, tag each as execution, augment, or decision, and rebuild the human role around the decisions.</p>
+        </div></li>
+        <li class="ritem"><span class="rn"></span><div class="rbody">
+          <div class="rname">Stand at the Decision Points</div>
+          <p class="rrule">Work is flipping from a chain of humans to a tree of agents. Humans belong at the goal and the key decisions.</p>
+          <p class="rapply"><b>Apply</b>Turn one workflow into an agent tree and keep yourself only at the one or two decisions that truly need a human.</p>
+        </div></li>
+      </ol>
+    </div>
+
+    <div class="facil">
+      <h3>Facilitation notes</h3>
+      <ul>
+        <li>On the 95% figure, do not overclaim. The MIT study is small and the lab favours agentic AI. Lead with the defensible version: the binding constraint is integration and organizational design, not model intelligence. Keep BCG's 10-20-70 ready as backup.</li>
+        <li>If someone insists AI will simply replace these jobs, do not argue. Move them to the architecture question: which task goes away, and what new task appears next to it. That converts a fear into the reinstatement point.</li>
+        <li>If a participant reduces the session to "we already use ChatGPT," accept it and raise the altitude. Ask which team handoff it removed, and who now owns the merged result.</li>
+        <li>"Work tree" is your own visual name for the close, and you should say so once. The structure itself is real: engineers call it a tree of agents or the orchestrator-worker pattern (Anthropic), and Microsoft calls the org-design version the Work Chart, with the human as an agent boss. Say "I am calling this a work tree as a picture; the literature calls it a tree of agents or a Work Chart." That honesty inoculates you against the one person who knows the term is informal.</li>
+        <li>Keep the inversion grounded, not breathless. The agent tree is production-real in software today, but the org version is a direction of travel, not the standard operating model yet. The human-at-the-decision-point can become the bottleneck if every branch needs approval, so the design question is which decisions auto-run and which escalate.</li>
+        <li>Job deconstruction has limits. Some roles get their value from integration and relationship, which a task list misses. Say so. That honesty is also a good discussion prompt.</li>
+        <li>Time risk: Act 3 carries the payoff. If you are behind, cut the Act 2 clip, not the Act 3 discussion.</li>
+      </ul>
+    </div>
+
+    <div class="sources">
+      <h3>Sources and citations</h3>
+      <ul>
+        <li>MIT Project NANDA, "The GenAI Divide: State of AI in Business 2025" (2025). The 95% figure and the "approach, not model quality" and "learning" lines. <a href="https://mlq.ai/media/quarterly_decks/v0.1_State_of_AI_in_Business_2025_Report.pdf" target="_blank" rel="noopener">report PDF</a>.</li>
+        <li>BCG, "Where's the Value in AI?" (2024). 74% see no tangible value; the 10-20-70 people-and-process rule.</li>
+        <li>Dell'Acqua, McFowland, Mollick et al., "Navigating the Jagged Technological Frontier," Harvard Business School working paper 24-013 (2023). 758 consultants, GPT-4, centaur and cyborg patterns.</li>
+        <li>Jesuthasan and Boudreau, "Reinventing Jobs" (2018) and "Work Without Jobs" (MIT Press, 2022). Deconstruct, value, match, reconstruct.</li>
+        <li>Sangeet Paul Choudary, "Reshuffle" (2025). AI re-architects how work is coordinated.</li>
+        <li>Brynjolfsson, Rock, Syverson, "The Productivity J-Curve" (NBER, 2018; AEJ Macroeconomics, 2021). The dip before the lift.</li>
+        <li>Microsoft Work Trend Index 2025, "The Year the Frontier Firm Is Born." The Work Chart replacing the org chart, and the "agent boss." <a href="https://www.microsoft.com/en-us/worklab/work-trend-index/2025-the-year-the-frontier-firm-is-born" target="_blank" rel="noopener">microsoft.com</a>.</li>
+        <li>Jensen Huang (Nvidia), CES 2025 keynote: "the IT department of every company is going to be the HR department of AI agents." Reported by Fortune, Jan 2025.</li>
+        <li>Anthropic, "How we built our multi-agent research system" (2025). The orchestrator-worker delegation pattern, the technical "tree of agents."</li>
+        <li>SHRM Labs, "The Org Chart of the Future: Managing a Workforce of Humans and AI Agents" (2025). The HR-native framing of the same shift.</li>
+      </ul>
+    </div>
+
+    <p class="footnote">Video rows are search candidates to timestamp-verify before the final run. Verbatim Readwise lines to be added once the rate-limit clears. Diagrams render live in the browser; use the browser print to PDF for a handout, which opens every block automatically.</p>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad:true,
+    securityLevel:'loose',
+    theme:'base',
+    themeVariables:{
+      fontFamily:'"Hanken Grotesk", sans-serif',
+      fontSize:'13px',
+      lineColor:'#9a9079',
+      primaryColor:'#faf6ed',
+      primaryTextColor:'#21252e',
+      primaryBorderColor:'#b9b3a6',
+      clusterBkg:'#f3ecdd',
+      clusterBorder:'#ddd3bf'
+    },
+    flowchart:{ curve:'basis', padding:14, nodeSpacing:34, rankSpacing:40, htmlLabels:true, useMaxWidth:true }
+  });
+
+  function inner(b){ return b.querySelector('.block-inner'); }
+  function openB(b){
+    b.classList.add('open');
+    var el = inner(b);
+    el.style.maxHeight = el.scrollHeight + 'px';
+    el.addEventListener('transitionend', function te(){ if(b.classList.contains('open')) el.style.maxHeight='none'; el.removeEventListener('transitionend', te); });
+  }
+  function closeB(b){
+    var el = inner(b);
+    el.style.maxHeight = el.scrollHeight + 'px';
+    requestAnimationFrame(function(){ b.classList.remove('open'); el.style.maxHeight='0px'; });
+  }
+  document.querySelectorAll('.block-head').forEach(function(h){
+    h.addEventListener('click', function(){
+      var b = h.parentElement;
+      if(b.classList.contains('open')) closeB(b); else openB(b);
+    });
+  });
+
+  // open the diagram + framework + evidence blocks by default once mermaid has drawn
+  function openDefaults(){
+    document.querySelectorAll('.block.t-evid').forEach(function(b){
+      b.classList.add('open'); inner(b).style.maxHeight='none';
+    });
+  }
+  window.addEventListener('load', function(){ setTimeout(openDefaults, 350); });
+
+  var btn = document.getElementById('toggleAll');
+  btn.addEventListener('click', function(){
+    var expand = btn.textContent.trim() === 'Expand all';
+    document.querySelectorAll('.block').forEach(function(b){
+      if(expand){ b.classList.add('open'); inner(b).style.maxHeight='none'; }
+      else { b.classList.remove('open'); inner(b).style.maxHeight='0px'; }
+    });
+    btn.textContent = expand ? 'Collapse all' : 'Expand all';
+  });
+</script>
+</body>
+</html>
