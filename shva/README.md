@@ -4,6 +4,26 @@
 > Commands in this plugin start with `/shva:` — that's the `shva` namespace tag.
 > (Yes, the missing "i" is on purpose. Easier to remember, impossible to collide.)
 
+## v0.7.0 — `/shva:teaching-designer`
+
+**The facilitator-side teaching artifact.** Where `worksheet-generator` makes the sheet participants fill in, `teaching-designer` makes what you teach *from*: a light, discussion-led executive keynote delivered as a session plan, a spoken script, and an aesthetic interactive HTML doc (lesson plan plus click-to-expand script).
+
+Pipeline: AskUserQuestion discovery, then parallel research across the Obsidian wiki, LlamaCloud, Readwise, YouTube, and book-search (with provenance labels and caveats), then a scaled-spine arc (one contrarian idea traced across Individual, Team, and Organization with a single running thread and a wrapper analogy opened cold and closed at higher resolution), a memorable named principle per section, micro-exercises, evidence cards with real citations, before and after Mermaid diagrams (validated before embedding), and a collapsible colour-coded HTML house style with a render-check.
+
+```
+/shva:teaching-designer <topic>      # or run blank to be asked
+```
+
+## v0.6.0 — `/shva:worksheet-generator`
+
+**Hands-on workshop worksheets from a topic plus rough ideas.** Produces an AI-resistant, self-contained, print-ready participant worksheet (HTML first for review, then a ReportLab PDF) in Shiva's voice.
+
+Seven-stage pipeline: AskUserQuestion intake; parallel research across LlamaCloud, the Obsidian wiki, Readwise, YouTube, book-search, and Mobbin design taste; a carried-forward content arc with one worked example threaded through; the hard formatting rules (no author names, no em or en dashes, plain language, proportional boxes, contextual "Be Mindful!" panels, real signing space); an HTML house-style template with a render-and-eyeball verify loop; and a ReportLab print build. Bundles the aesthetic-pdf-creator guide, a worked builder, the HTML template, a banned-string lint, and a render-check script.
+
+```
+/shva:worksheet-generator <topic>    # or run blank to be asked
+```
+
 ## v0.5.0 — LinkedIn Cadence + Publish Confirmation
 
 The SHVA LinkedIn writer now treats anti-staccato cadence as a durable voice rule: a hard hook can stand alone, but the body should usually move as connected paragraph reasoning rather than template one-line laddering.

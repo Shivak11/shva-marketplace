@@ -7,7 +7,7 @@
 
 | Plugin | Version | What it does |
 |---|---|---|
-| [`shva`](./shva) | 0.5.0 | Personal command pack: `/shva:brief-me`, SHVA LinkedIn writer, and Medium writer/poster. v0.5.0 adds the anti-staccato LinkedIn cadence rule and explicit LinkedIn MCP confirmation guidance. |
+| [`shva`](./shva) | 0.7.0 | Personal command pack: `/shva:brief-me`, the SHVA LinkedIn writer, the Medium writer/poster, and the teaching pair. v0.6.0 added `/shva:worksheet-generator` (AI-resistant participant worksheets, HTML then ReportLab PDF). v0.7.0 added `/shva:teaching-designer` (the facilitator-side session plan, spoken script, and interactive lesson HTML). |
 
 ## Why a separate marketplace
 

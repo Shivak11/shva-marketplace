@@ -20,7 +20,10 @@ model: haiku
 | `/shva:shva-medium-poster <url-or-slug>` | Publishes a deployed shivakakkar.com post to Medium under "Built at Rehearsal" via Chrome automation. Trims " \| Dr. Shiva Kakkar" title suffix, deletes embedded images + empty-paragraph gaps, sets up to 5 tags, submits for editorial review (default). | **After the post is live on shivakakkar.com.** Once Vercel deploy is propagated. |
 | `/shva:shva-linkedin-post-writer` | Write LinkedIn posts in Shiva's systems-thinker voice. Three signature lenses, 6-tier source hierarchy, Hook/Cringe Test gates, god-mode pipeline. | **For any LinkedIn post request.** Voicenote-to-post, news reaction, content system runs. |
 | `/shva:worksheet-generator [topic]` | Turns a topic plus rough ideas into an AI-resistant, self-contained teaching worksheet (HTML first, then a ReportLab PDF) in Shiva's voice. Asks intake questions, researches in parallel across the wiki + LlamaCloud + Readwise + YouTube + book-search + Mobbin, builds a carried-forward arc with one worked example, applies the hard formatting rules, and ships clean print pages. | **When you need a hands-on workshop or session sheet.** A decision, tension, workflow, or skill traced to its end. |
+| `/shva:teaching-designer [topic]` | The facilitator-side sibling. Turns a teaching brief into a light, discussion-led executive keynote: a session plan, a spoken script, and an aesthetic interactive HTML doc (lesson plan plus click-to-expand script). Same parallel research, contrarian story-driven voice, evidence cards with citations, and before/after Mermaid diagrams. | **When you need what you teach FROM, not what participants fill in.** Session plans, teaching scripts, course outlines, executive keynotes (XLRI/MDP). |
 | `/shva:help` | This screen. | When you forget what's installed. |
+
+> **Two teaching siblings:** `worksheet-generator` makes the **participant** artifact (a fillable worksheet); `teaching-designer` makes the **facilitator** artifact (plan, script, interactive lesson). Use both for one session.
 
 ---
 
@@ -34,6 +37,9 @@ model: haiku
 
 /shva:worksheet-generator GenAI change management for HR leaders
 /shva:worksheet-generator                              # asks you what you want to teach
+
+/shva:teaching-designer the AI expertise paradox for senior managers
+/shva:teaching-designer                                # asks you what you're teaching
 
 /shva:shva-medium-writer AI expertise paradox
 /shva:shva-medium-writer Why India's AI talent builds for Americans
