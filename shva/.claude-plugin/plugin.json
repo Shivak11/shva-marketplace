@@ -1,7 +1,7 @@
 {
   "name": "shva",
-  "version": "0.5.0",
-  "description": "Personal command + skill pack for Shiva. v0.1.0 shipped /shva:brief-me — domain-agnostic pre-project vocabulary briefing. v0.3.0 added /shva:shva-linkedin-post-writer — write LinkedIn posts in Dr. Shiva Kakkar's distinctive systems-thinker voice using the three signature lenses (Sequence Inversion, Constraint Migration, Authority Redesign), six-tier MCP source hierarchy (Readwise → Voicenotes → Plaud → Gemini files → LlamaCloud → Web), Hook Test and Cringe Test gates, and a god-mode end-to-end pipeline. v0.4.0 adds the Medium duo: /shva:shva-medium-writer (drafts a 1500-2000 word essay in Shiva's voice for shivakakkar.com, with Astro frontmatter + SEO/AI-SEO co-citation rules) and /shva:shva-medium-poster (publishes the deployed essay to Medium under 'Built at Rehearsal' via Chrome automation — state machine over import → cleanup → tags → submit-for-review, with cache-staleness detection and the full failure-recovery playbook from the 4-essay 2026-05-12 session). v0.5.0 promotes the LinkedIn anti-staccato cadence rule and the explicit LinkedIn MCP confirmation step.",
+  "version": "0.6.0",
+  "description": "Personal command + skill pack for Shiva. v0.1.0 shipped /shva:brief-me — domain-agnostic pre-project vocabulary briefing. v0.3.0 added /shva:shva-linkedin-post-writer — write LinkedIn posts in Dr. Shiva Kakkar's distinctive systems-thinker voice using the three signature lenses (Sequence Inversion, Constraint Migration, Authority Redesign), six-tier MCP source hierarchy (Readwise → Voicenotes → Plaud → Gemini files → LlamaCloud → Web), Hook Test and Cringe Test gates, and a god-mode end-to-end pipeline. v0.4.0 adds the Medium duo: /shva:shva-medium-writer (drafts a 1500-2000 word essay in Shiva's voice for shivakakkar.com, with Astro frontmatter + SEO/AI-SEO co-citation rules) and /shva:shva-medium-poster (publishes the deployed essay to Medium under 'Built at Rehearsal' via Chrome automation — state machine over import → cleanup → tags → submit-for-review, with cache-staleness detection and the full failure-recovery playbook from the 4-essay 2026-05-12 session). v0.5.0 promotes the LinkedIn anti-staccato cadence rule and the explicit LinkedIn MCP confirmation step. v0.6.0 adds /shva:worksheet-generator — turns a topic plus rough ideas into an AI-resistant, self-contained, print-ready teaching worksheet (HTML first, then a ReportLab PDF) in Shiva's voice via a 7-stage pipeline (AskUserQuestion intake; parallel research across LlamaCloud, the Obsidian wiki, Readwise, YouTube, book-search, and Mobbin design taste; a carried-forward content arc with one worked example; the hard formatting rules and contextual Be Mindful panels; an HTML house-style template with a render-and-eyeball loop; and a ReportLab build), bundling the aesthetic-pdf-creator guide, the worked builder, the HTML template, a banned-string lint, and a render-check script.",
   "author": {
     "name": "Shiva Kakkar"
   },
@@ -23,7 +23,15 @@
     "chrome-automation",
     "seo",
     "geo",
-    "ai-seo"
+    "ai-seo",
+    "worksheet",
+    "teaching-worksheet",
+    "workshop",
+    "course-design",
+    "reportlab",
+    "pdf",
+    "html",
+    "mobbin"
   ],
   "commands": [
     "./commands/help.md",

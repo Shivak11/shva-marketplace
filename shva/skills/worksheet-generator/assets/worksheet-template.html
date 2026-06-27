@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Worksheet (House-Style Template)</title>
+<style>
+  :root{
+    --ink:#211d17;
+    --rust:#9a3b2e;
+    --green:#2f5d3a;
+    --paper:#ffffff;
+    --cream:#faf7f1;
+    --sand:#f1ece1;
+    --line:#cfc8b8;
+    --rule:#e2dccd;
+    --muted:#6a6453;
+    --faint:#a39c8a;
+    --greentint:#eef3ec;
+    --greenline:#c2d4bc;
+    --rusttint:#fbf1ee;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:#e9e5db; color:var(--ink);
+    font-family:"Helvetica Neue", Arial, sans-serif; line-height:1.5;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+
+  .page{
+    width:210mm; min-height:297mm; margin:12mm auto; padding:16mm 16mm 14mm;
+    background:var(--paper); box-shadow:0 3px 18px rgba(0,0,0,.16); position:relative;
+  }
+
+  /* ---------- stage header ---------- */
+  .stage-head{ display:flex; align-items:flex-start; gap:18px;
+    border-bottom:3px solid var(--ink); padding-bottom:12px; margin-bottom:16px; }
+  .stagenum{ font-size:58px; font-weight:800; line-height:.8; color:var(--rust);
+    letter-spacing:-2px; flex:none; }
+  .stage-head h1{ font-size:29px; font-weight:800; margin:2px 0 5px; letter-spacing:-.4px; }
+  .stage-head .sub{ font-size:15.5px; color:var(--muted); margin:0; max-width:60ch; }
+
+  /* ---------- cover ---------- */
+  .cover .eyebrow{ font-size:14px; font-weight:700; color:var(--rust); letter-spacing:.4px; margin:0 0 12px; }
+  .cover h1{ font-size:44px; font-weight:800; line-height:1.03; letter-spacing:-1px; margin:0 0 14px; max-width:16ch; }
+  .cover .lede{ font-size:17px; color:var(--muted); max-width:58ch; margin:0 0 22px; }
+  .rule-card{ border:2px solid var(--ink); border-radius:8px; padding:16px 20px; margin:4px 0 26px; }
+  .rule-card .h{ font-weight:800; font-size:16px; margin:0 0 7px; }
+  .rule-card p{ margin:0; font-size:15.5px; }
+  .arc-row{ display:flex; gap:16px; padding:13px 0; border-top:1px solid var(--rule); align-items:flex-start; }
+  .arc-row:last-child{ border-bottom:1px solid var(--rule); }
+  .arc-row .n{ font-size:24px; font-weight:800; color:var(--rust); width:38px; flex:none; line-height:1; }
+  .arc-row h3{ font-size:17px; font-weight:700; margin:0 0 3px; }
+  .arc-row p{ font-size:14.5px; color:var(--muted); margin:0; }
+  .arc-row .out{ font-size:13.5px; color:var(--green); font-weight:700; margin-top:4px; }
+
+  /* ---------- how-to strip (mechanical, top) ---------- */
+  .howto{ display:flex; gap:12px; align-items:baseline; background:var(--cream);
+    border-left:4px solid var(--rust); border-radius:0 6px 6px 0; padding:11px 16px; margin:0 0 18px; }
+  .howto .tag{ font-size:11px; font-weight:800; color:var(--rust); letter-spacing:.6px;
+    text-transform:uppercase; white-space:nowrap; flex:none; padding-top:1px; }
+  .howto p{ margin:0; font-size:14.5px; }
+
+  /* ---------- carry bands ---------- */
+  .carry-in{ border:1.5px dashed var(--greenline); background:var(--greentint); border-radius:7px;
+    padding:9px 15px; margin:0 0 16px; }
+  .carry-in .lab{ font-size:12px; font-weight:800; color:var(--green); letter-spacing:.3px; }
+  .carry-in .ln{ display:block; border-bottom:1.5px solid var(--greenline); height:22px; margin-top:5px; }
+  .carry-out{ border:2px solid var(--green); background:var(--greentint); border-radius:8px;
+    padding:13px 17px; margin:20px 0 0; }
+  .carry-out .lab{ font-size:12.5px; font-weight:800; color:var(--green); letter-spacing:.4px; text-transform:uppercase; }
+  .carry-out .slot{ font-weight:700; font-size:14px; margin-top:9px; }
+  .carry-out .ln{ display:block; border-bottom:1.6px solid #a9c0a3; height:26px; margin-top:5px; }
+
+  /* ---------- be mindful (contextual tip) ---------- */
+  .mindful{ display:flex; gap:13px; background:var(--greentint); border:1px solid var(--greenline);
+    border-radius:9px; padding:13px 16px; margin:6px 0 18px; }
+  .mindful .bulb{ flex:none; width:26px; height:26px; }
+  .mindful .body .h{ font-weight:800; font-size:14.5px; color:var(--green); margin:0 0 3px; }
+  .mindful .body p{ margin:0; font-size:14px; color:#384a37; }
+
+  /* ---------- fields ---------- */
+  .field{ margin:0 0 17px; }
+  .field .q{ font-size:16.5px; font-weight:700; margin:0 0 3px; }
+  .field .help{ font-size:13.5px; color:var(--muted); margin:0 0 8px; }
+  .writebox{ border:1px solid var(--line); border-radius:6px; width:100%;
+    background:repeating-linear-gradient(transparent, transparent 30px, var(--rule) 30px, var(--rule) 31px); }
+  .h2{ height:62px; } .h3{ height:92px; } .draw{ height:220px; background:#fdfbf6; }
+  .example{ font-size:13px; color:var(--faint); font-style:italic; margin:6px 2px 0; }
+  .example b{ font-style:normal; font-weight:700; color:#8a8270; }
+
+  /* ---------- fill-in sentence (madlib) ---------- */
+  .madlib{ font-size:18px; line-height:2.0; margin:2px 0 0; }
+  .blank{ display:inline-block; border-bottom:1.6px solid var(--line); min-width:170px; height:1.1em; }
+
+  /* ---------- two columns ---------- */
+  .two{ display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+  .lens{ border:1.5px solid var(--line); border-radius:8px; padding:13px 15px; }
+  .lens.fix{ border-color:#8c8670; background:var(--cream); }
+  .lens.redesign{ border-color:var(--rust); background:var(--rusttint); }
+  .lens h4{ font-size:15px; font-weight:800; margin:0 0 4px; }
+  .lens.fix h4{ color:#4a4636; } .lens.redesign h4{ color:var(--rust); }
+  .lens .help{ font-size:12.5px; color:var(--muted); margin:0 0 7px; }
+  .lens .writebox{ height:54px; }
+  .lens .example{ font-size:12px; margin-top:5px; }
+
+  .pathcards{ display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+  .path{ border:1.5px solid var(--line); border-radius:8px; padding:13px 16px; }
+  .path.fix{ border-color:#8c8670; background:var(--cream); }
+  .path.redesign{ border-color:var(--rust); background:var(--rusttint); }
+  .path h4{ font-size:15.5px; font-weight:800; margin:0 0 7px; }
+  .path.fix h4{ color:#4a4636; } .path.redesign h4{ color:var(--rust); }
+  .path ul{ margin:0; padding-left:18px; font-size:13.5px; } .path li{ margin-bottom:4px; }
+
+  .ticks{ font-size:14.5px; margin:2px 0 6px; }
+  .verdict{ font-size:14px; font-weight:700; }
+
+  /* ---------- power map 2x2 ---------- */
+  .map{ width:100%; border-collapse:separate; border-spacing:9px; }
+  .map td{ vertical-align:top; }
+  .map .colh{ font-size:12.5px; font-weight:800; text-align:center; padding-bottom:0; }
+  .map .rowh{ font-size:12.5px; font-weight:800; width:78px; text-align:center; color:var(--ink); }
+  .quad{ border:1.5px solid var(--line); border-radius:8px; padding:10px 12px; min-height:96px; }
+  .quad.rises{ border-color:var(--green); background:var(--greentint); }
+  .quad.dissolve{ border-color:var(--rust); background:var(--rusttint); }
+  .quad .qt{ font-size:13.5px; font-weight:800; margin:0 0 3px; }
+  .quad.rises .qt{ color:var(--green); } .quad.dissolve .qt{ color:var(--rust); }
+  .quad .qd{ font-size:11.8px; color:var(--muted); line-height:1.3; margin:0 0 6px; }
+  .quad .role{ font-size:12px; color:var(--ink); border-top:1px dashed var(--line); padding-top:6px; }
+
+  /* ---------- closing + signature ---------- */
+  .closing{ border:2px solid var(--ink); background:var(--cream); border-radius:9px; padding:16px 20px; margin-top:8px; }
+  .closing .h{ font-weight:800; font-size:15.5px; margin:0 0 8px; }
+  .sign{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:26px; margin-top:22px; }
+  .sign .cell .space{ height:46px; }
+  .sign .cell .ln{ border-bottom:1.6px solid var(--ink); }
+  .sign .cell .lab{ font-size:12.5px; color:var(--muted); margin-top:5px; }
+
+  .foot{ margin-top:16px; padding-top:8px; border-top:1px solid var(--rule);
+    font-size:11.5px; color:var(--faint); display:flex; justify-content:space-between; }
+
+  .toolbar{ position:fixed; top:14px; right:14px; z-index:50; }
+  .btn{ background:var(--rust); color:#fff; border:none; border-radius:6px; padding:10px 16px;
+    font-size:14px; font-weight:700; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.2); }
+
+  @media print{
+    html,body{ background:#fff; } .toolbar{ display:none; }
+    .page{ margin:0; box-shadow:none; min-height:auto; page-break-after:always; }
+    .field,.mindful,.carry-in,.carry-out,.lens,.path,.quad,.closing,.rule-card,.arc-row{ break-inside:avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="toolbar"><button class="btn" onclick="window.print()">Print / Save PDF</button></div>
+
+<!-- lightbulb svg reused -->
+<svg width="0" height="0" style="position:absolute"><symbol id="bulb" viewBox="0 0 24 24">
+<path fill="none" stroke="#2f5d3a" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
+ d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/>
+</symbol></svg>
+
+<!-- ===================== COVER ===================== -->
+<section class="page cover">
+  <p class="eyebrow">CHANGE MANAGEMENT THROUGH GENAI · WORKING SESSION</p>
+  <h1>From One Decision to a New Org Chart</h1>
+  <p class="lede">In this session you take one real decision that you keep putting off, open it up, follow it through your own workflow, and see how it changes who does the work and who holds power. By the last page you will have redrawn a part of your own organisation on paper.</p>
+
+  <div class="rule-card">
+    <div class="h">One rule before you start</div>
+    <p>Every box should hold something real from your own organisation: a name, a number, a place, or a consequence. Use the GPT to think along with you. But if a sentence you write could have been written by someone who has never seen your workplace, it is too general, and it is the wrong answer here.</p>
+  </div>
+
+  <div class="arc">
+    <div class="arc-row"><div class="n">0</div><div><h3>Find the real decision</h3>
+      <p>You think the problem is a pending task, such as a vacancy to fill. A short conversation with the GPT helps you see the decision sitting underneath it.</p>
+      <div class="out">Carries forward: the decision.</div></div></div>
+    <div class="arc-row"><div class="n">1</div><div><h3>Separate prediction from judgment</h3>
+      <p>You split that decision into the part a machine can work out, which is predicting what is likely, and the part only you can own, which is the judgment you are answerable for.</p>
+      <div class="out">Carries forward: the prediction part and the judgment part.</div></div></div>
+    <div class="arc-row"><div class="n">2</div><div><h3>Trace the workflow, then choose</h3>
+      <p>The decision sits inside a chain of steps. You map it, find where GenAI can help, and decide between a small fix and a full redesign.</p>
+      <div class="out">Carries forward: your chosen path.</div></div></div>
+    <div class="arc-row"><div class="n">3</div><div><h3>See where the power moves</h3>
+      <p>When the work changes, the hardest part of the job moves, and influence moves with it. You map who gains, who loses, and who should now own the process.</p>
+      <div class="out">Ends with: the new owner of the process.</div></div></div>
+  </div>
+
+  <div class="foot"><span>Change Management Through GenAI · DHRL</span><span>Page 1</span></div>
+</section>
+
+<!-- ===================== STAGE 0 ===================== -->
+<section class="page">
+  <div class="stage-head"><div class="stagenum">0</div><div>
+    <h1>Find the Real Decision</h1>
+    <p class="sub">The thing slowing you down is often a decision no one has made, not a task that is pending.</p>
+  </div></div>
+
+  <div class="howto"><span class="tag">How to use</span>
+    <p>Open the <b>Decision Decomposer GPT</b> and tell it the pressure you feel at work. Let it keep asking until you reach the decision underneath. Fill the boxes as you talk.</p></div>
+
+  <div class="field">
+    <div class="q">1.&nbsp; What is the pressure you would name first?</div>
+    <div class="help">The symptom, in the words you would use with a colleague.</div>
+    <div class="writebox h2"></div>
+    <div class="example"><b>Example:</b> We keep losing good people in the regional sales team and the numbers are slipping.</div>
+  </div>
+
+  <div class="mindful"><svg class="bulb"><use href="#bulb"/></svg><div class="body">
+    <div class="h">Be Mindful!</div>
+    <p>A task is something you <i>do</i>. A decision is a choice you <i>make</i>. “We are short of people” is a task. The decision hiding under it might be whether to promote from inside or hire from outside. Keep pushing past the task until you reach a choice only you can make.</p>
+  </div></div>
+
+  <div class="field">
+    <div class="q">2.&nbsp; What is the decision that is actually stuck?</div>
+    <div class="help">Write one sentence. Start it with a verb, such as “Whether to…”, “Which…”, or “How much…”.</div>
+    <div class="writebox h3"></div>
+    <div class="example"><b>Example:</b> Whether to promote Anita from inside or bring in a senior sales head from outside.</div>
+  </div>
+
+  <div class="field">
+    <div class="q">3.&nbsp; How long has it been open, and what is the delay costing?</div>
+    <div class="help">The time it has stayed open, and the cost of each week of waiting: in money, a missed chance, a person, or a risk you keep carrying.</div>
+    <div class="writebox h2"></div>
+    <div class="example"><b>Example:</b> Open for four months. We lose about two strong candidates a week and the team stays leaderless.</div>
+  </div>
+
+  <div class="field">
+    <div class="q">4.&nbsp; Now say it plainly.</div>
+    <div class="madlib">This was never a <span class="blank"></span> problem.<br>
+      It is a <span class="blank"></span> decision I have been avoiding.</div>
+    <div class="example"><b>Example:</b> This was never a <i>staffing</i> problem. It is a <i>promote-or-hire</i> decision I have been avoiding.</div>
+  </div>
+
+  <div class="carry-out"><div class="lab">Carry this forward to the next page</div>
+    <div class="slot">The decision, written in one sentence:</div><span class="ln"></span></div>
+
+  <div class="foot"><span>Stage 0 · Find the real decision</span><span>Page 2</span></div>
+</section>
+
+<!-- ===================== STAGE 1 ===================== -->
+<section class="page">
+  <div class="stage-head"><div class="stagenum">1</div><div>
+    <h1>Separate Prediction from Judgment</h1>
+    <p class="sub">It helps to separate what machines do well from what only a person can be answerable for.</p>
+  </div></div>
+
+  <div class="carry-in"><span class="lab">From the previous page · the decision you wrote</span><span class="ln"></span></div>
+
+  <div class="howto"><span class="tag">How to use</span>
+    <p>Take the decision you carried over and split it into two parts: the part a machine can work out, and the part only you can own.</p></div>
+
+  <div class="mindful"><svg class="bulb"><use href="#bulb"/></svg><div class="body">
+    <div class="h">Be Mindful!</div>
+    <p><b>Prediction</b> is working out what is likely, from facts, patterns and past cases. Machines are cheap and fast at this. <b>Judgment</b> is making the call and being answerable for it. Only a person holds that. If a line you write contains “decide”, “weigh”, or “who is answerable”, it belongs on the judgment side.</p>
+  </div></div>
+
+  <div class="field">
+    <div class="q">1.&nbsp; What is the prediction inside this decision?</div>
+    <div class="help">What is mostly about working out what is likely: the facts, scores, forecasts, and first drafts a machine could produce.</div>
+    <div class="writebox h3"></div>
+    <div class="example"><b>Example:</b> Who is likely to hit targets, judged from past performance, test scores, and track record.</div>
+  </div>
+
+  <div class="field">
+    <div class="q">2.&nbsp; What is the judgment inside this decision?</div>
+    <div class="help">The part only you can own: the trade-off, the final call, and what you would answer for if it went wrong.</div>
+    <div class="writebox h3"></div>
+    <div class="example"><b>Example:</b> Whether I trust this person to hold the team together through a hard year. I will answer for that call.</div>
+  </div>
+
+  <div class="field">
+    <div class="q">3.&nbsp; A quick test.</div>
+    <div class="help">Imagine a machine handed you a perfect prediction tomorrow. What would still be left for you to decide? Whatever remains is the real judgment.</div>
+    <div class="writebox h2"></div>
+    <div class="example"><b>Example:</b> Even with a perfect ranking, I still have to choose who I can trust with the whole region.</div>
+  </div>
+
+  <div class="field">
+    <div class="q">4.&nbsp; Who decides this today?</div>
+    <div class="help">Who actually makes the judgment call now. Are they truly attending to it, or quietly leaving it to a tool, a junior, or a default, while keeping the title?</div>
+    <div class="writebox h2"></div>
+    <div class="example"><b>Example:</b> On paper, me. Lately I just approve whoever the shortlist tool puts on top.</div>
+  </div>
+
+  <div class="carry-out"><div class="lab">Carry this forward to the next page</div>
+    <div class="slot">The prediction part, which a machine could take over:</div><span class="ln"></span>
+    <div class="slot">The judgment part, which you keep:</div><span class="ln"></span></div>
+
+  <div class="foot"><span>Stage 1 · Separate prediction from judgment</span><span>Page 3</span></div>
+</section>
+
+<!-- ===================== STAGE 2 ===================== -->
+<section class="page">
+  <div class="stage-head"><div class="stagenum">2</div><div>
+    <h1>Trace the Workflow, Then Choose</h1>
+    <p class="sub">The decision sits inside a chain of steps. Map the chain, then decide how far to change it.</p>
+  </div></div>
+
+  <div class="carry-in"><span class="lab">From the previous page · the prediction part and the judgment part</span><span class="ln"></span></div>
+
+  <div class="howto"><span class="tag">How to use</span>
+    <p>Draw the chain of steps this decision passes through. Then look at it twice: once for a small fix, once for a redesign.</p></div>
+
+  <div class="field">
+    <div class="q">A.&nbsp; Draw the workflow.</div>
+    <div class="help">Left to right, from the trigger that starts the work to the final outcome, usually five to nine steps. Put a circle around every step where GenAI could do the work or help with it.</div>
+    <div class="writebox draw"></div>
+    <div class="example"><b>Example:</b> Vacancy raised → JD written → CVs screened → shortlist made → interviews held → offer sent → candidate joins.</div>
+  </div>
+
+  <div class="mindful"><svg class="bulb"><use href="#bulb"/></svg><div class="body">
+    <div class="h">Be Mindful!</div>
+    <p>A <b>small fix</b> gives a clerk a faster calculator: the work still flows the same way. A <b>redesign</b> asks whether you need that step at all, once the calculator does the thinking. The small fix is safe and quick. The redesign is harder and slower, but it is what sets the leaders apart from the ones who only keep up.</p>
+  </div></div>
+
+  <div class="two">
+    <div class="lens fix"><h4>The small fix</h4>
+      <div class="help">Where could GenAI make one step faster, with nothing else changing?</div>
+      <div class="writebox"></div>
+      <div class="example"><b>Example:</b> Screen and summarise CVs so the recruiter starts from a ready shortlist.</div></div>
+    <div class="lens redesign"><h4>The redesign</h4>
+      <div class="help">If predicting and drafting were free, which steps would you delete, and how would it look built fresh?</div>
+      <div class="writebox"></div>
+      <div class="example"><b>Example:</b> Drop the CV-and-shortlist funnel; keep a live model of internal talent the tool maintains.</div></div>
+  </div>
+
+  <div class="field" style="margin-top:17px">
+    <div class="q">C.&nbsp; How much else has to change?</div>
+    <div class="help">Tick each item that would also have to change for your idea to actually work.</div>
+    <div class="ticks">☐&nbsp; an approval or sign-off step &nbsp;&nbsp; ☐&nbsp; another team’s work &nbsp;&nbsp; ☐&nbsp; a standard procedure or policy &nbsp;&nbsp; ☐&nbsp; who holds authority</div>
+    <div class="verdict">Number of ticks: <span class="blank" style="min-width:60px"></span> &nbsp; Zero or one is a small fix · two means run a small trial first · three or more is a redesign.</div>
+  </div>
+
+  <div class="field">
+    <div class="q">D.&nbsp; Compare the two paths.</div>
+    <div class="pathcards">
+      <div class="path fix"><h4>A small fix</h4><ul>
+        <li>Low risk, and easy to undo.</li><li>A quick but limited gain.</li>
+        <li>Keeps the current structure.</li><li>Quietly locks in the old way of working.</li></ul></div>
+      <div class="path redesign"><h4>A redesign</h4><ul>
+        <li>Higher risk, and hard to undo.</li><li>A large gain, but it takes time.</li>
+        <li>Sets up the next generation of the company.</li><li>Forces the structure to change.</li></ul></div>
+    </div>
+  </div>
+
+  <div class="carry-out"><div class="lab">Carry this forward to the next page</div>
+    <div class="slot">My choice (tick one):&nbsp;&nbsp; ☐ a small fix &nbsp;&nbsp; ☐ a redesign.&nbsp;&nbsp; In one line, why:</div><span class="ln"></span>
+    <div class="example" style="color:#88a081"><b>Example:</b> A redesign, because the whole hiring funnel exists only to cope with missing information.</div></div>
+
+  <div class="foot"><span>Stage 2 · Trace the workflow, then choose</span><span>Page 4</span></div>
+</section>
+
+<!-- ===================== STAGE 3 ===================== -->
+<section class="page">
+  <div class="stage-head"><div class="stagenum">3</div><div>
+    <h1>See Where the Power Moves</h1>
+    <p class="sub">When the work changes, the hardest part of the job moves, and influence moves with it.</p>
+  </div></div>
+
+  <div class="carry-in"><span class="lab">From the previous page · your chosen path</span><span class="ln"></span></div>
+
+  <div class="howto"><span class="tag">How to use</span>
+    <p>When the tool takes over the old hard part, the hard part moves somewhere new. Find where it lands, then map who gains and who loses.</p></div>
+
+  <div class="field">
+    <div class="q">1.&nbsp; What was the old hard part?</div>
+    <div class="help">What used to be scarce or slow, the thing this workflow was really built around.</div>
+    <div class="writebox h2"></div>
+    <div class="example"><b>Example:</b> Reading every CV and judging fit by hand. That was the slow, scarce skill.</div>
+  </div>
+
+  <div class="mindful"><svg class="bulb"><use href="#bulb"/></svg><div class="body">
+    <div class="h">Be Mindful!</div>
+    <p>When the old bottleneck is removed, the difficulty does not vanish. It moves, usually to <b>judgment</b>, to <b>handling risk</b>, or to <b>coordinating people</b>. Influence follows wherever it lands. Ask not what the tool can do, but what it makes easy, and who now holds the part it cannot.</p>
+  </div></div>
+
+  <div class="field">
+    <div class="q">2.&nbsp; Where does the hard part move?</div>
+    <div class="help">Tick one, then describe it for your own workplace.</div>
+    <div class="ticks">☐&nbsp; judgment &nbsp;&nbsp; ☐&nbsp; handling risk &nbsp;&nbsp; ☐&nbsp; coordinating people</div>
+    <div class="writebox h2"></div>
+    <div class="example"><b>Example:</b> Risk: standing behind who we trust with a region, when a tool can rank but cannot be blamed.</div>
+  </div>
+
+  <div class="field">
+    <div class="q">3.&nbsp; The Power Map.</div>
+    <div class="help">Write a real role or person from your workplace in each box. The two questions across the top and down the side are the same two halves you separated in Stage 1.</div>
+    <table class="map">
+      <tr><td></td><td class="colh">Their prediction work is<br>NOT yet automated</td><td class="colh">Their prediction work<br>is now automated</td></tr>
+      <tr><td class="rowh">They own the new judgment or risk</td>
+        <td><div class="quad"><div class="qt">Stable, for now</div><div class="qd">They still hold the judgment, and a tool has not yet taken over their prediction work.</div><div class="role">Role: ____________________</div></div></td>
+        <td><div class="quad rises"><div class="qt">Rises: the new owner</div><div class="qd">Lets go of prediction and focuses on the judgment the new process needs. Influence moves here.</div><div class="role">Role: ____________________</div></div></td></tr>
+      <tr><td class="rowh">They do not own it</td>
+        <td><div class="quad"><div class="qt">Exposed soon</div><div class="qd">A tool will take their prediction work next, and they do not yet hold judgment.</div><div class="role">Role: ____________________</div></div></td>
+        <td><div class="quad dissolve"><div class="qt">At risk of dissolving</div><div class="qd">A tool already does their prediction work, and they hold no judgment. The reason for the role is fading.</div><div class="role">Role: ____________________</div></div></td></tr>
+    </table>
+    <div class="example"><b>Example role for “Rises”:</b> the Regional HR head, who now owns the trust call and sits closest to the hire.</div>
+  </div>
+
+  <div class="foot"><span>Stage 3 · See where the power moves</span><span>Page 5</span></div>
+</section>
+
+<!-- ===================== STAGE 3, CONTINUED ===================== -->
+<section class="page">
+  <div class="howto" style="margin-top:0"><span class="tag">Stage 3, continued</span>
+    <p>You found where the hard part moved and who rises. Now name the new owner, the likely resistance, and put it together in one sentence.</p></div>
+
+  <div class="field">
+    <div class="q">4.&nbsp; Who is the new owner?</div>
+    <div class="help">The role that should now own this process: the one that manages the new hard part and sits closest to the decision.</div>
+    <div class="writebox h2"></div>
+    <div class="example"><b>Example:</b> The Regional HR head, who now owns the trust call and sits closest to the hire.</div>
+  </div>
+
+  <div class="field">
+    <div class="q">5.&nbsp; Who will resist, and what are they protecting?</div>
+    <div class="help">These are the people, positions, or roles who would resist this change. Write who they are, and what they are really protecting, which is often a committee or a routine that the tool makes unnecessary.</div>
+    <div class="writebox h3"></div>
+    <div class="example"><b>Example:</b> The screening committee, whose standing came from filtering CVs; they will call the tool “risky” to keep the gate.</div>
+  </div>
+
+  <div class="closing">
+    <div class="h">Put it together in one sentence</div>
+    <div class="madlib">When I bring GenAI into <span class="blank"></span> <span style="color:var(--faint);font-size:13px">(the decision)</span>,<br>
+      the workflow becomes <span class="blank"></span> <span style="color:var(--faint);font-size:13px">(its new shape)</span>,<br>
+      and ownership moves from <span class="blank" style="min-width:140px"></span> to <span class="blank" style="min-width:140px"></span>.</div>
+    <div class="example" style="margin-top:8px"><b>Example:</b> When I bring GenAI into <i>the hiring decision</i>, the workflow becomes <i>a live model of internal talent</i>, and ownership moves from <i>the screening committee</i> to <i>the regional HR head</i>.</div>
+  </div>
+
+  <div class="sign">
+    <div class="cell"><div class="space"></div><div class="ln"></div><div class="lab">Signature</div></div>
+    <div class="cell"><div class="space"></div><div class="ln"></div><div class="lab">Date</div></div>
+    <div class="cell"><div class="space"></div><div class="ln"></div><div class="lab">90-day review</div></div>
+  </div>
+
+  <div class="foot"><span>Stage 3 · See where the power moves</span><span>Page 6</span></div>
+</section>
+
+</body>
+</html>

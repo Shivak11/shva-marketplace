@@ -19,6 +19,7 @@ model: haiku
 | `/shva:shva-medium-writer <topic>` | Drafts a 1500-2000 word Medium-grade essay in Shiva's voice. Uses wiki + 6-tier MCP source hierarchy. Outputs to `src/data/blog/<slug>.md` with Astro frontmatter, FOMO question title, ≥3 tier-1 institutional co-citations, and the v1.0 bio footer. | **Before opening a PR on shivakakkar.com.** Anywhere you'd write a long-form post. |
 | `/shva:shva-medium-poster <url-or-slug>` | Publishes a deployed shivakakkar.com post to Medium under "Built at Rehearsal" via Chrome automation. Trims " \| Dr. Shiva Kakkar" title suffix, deletes embedded images + empty-paragraph gaps, sets up to 5 tags, submits for editorial review (default). | **After the post is live on shivakakkar.com.** Once Vercel deploy is propagated. |
 | `/shva:shva-linkedin-post-writer` | Write LinkedIn posts in Shiva's systems-thinker voice. Three signature lenses, 6-tier source hierarchy, Hook/Cringe Test gates, god-mode pipeline. | **For any LinkedIn post request.** Voicenote-to-post, news reaction, content system runs. |
+| `/shva:worksheet-generator [topic]` | Turns a topic plus rough ideas into an AI-resistant, self-contained teaching worksheet (HTML first, then a ReportLab PDF) in Shiva's voice. Asks intake questions, researches in parallel across the wiki + LlamaCloud + Readwise + YouTube + book-search + Mobbin, builds a carried-forward arc with one worked example, applies the hard formatting rules, and ships clean print pages. | **When you need a hands-on workshop or session sheet.** A decision, tension, workflow, or skill traced to its end. |
 | `/shva:help` | This screen. | When you forget what's installed. |
 
 ---
@@ -30,6 +31,9 @@ model: haiku
 /shva:brief-me AI music track in Suno — lo-fi hip-hop
 /shva:brief-me Midjourney editorial photography series
 /shva:brief-me                                          # asks you what you're building
+
+/shva:worksheet-generator GenAI change management for HR leaders
+/shva:worksheet-generator                              # asks you what you want to teach
 
 /shva:shva-medium-writer AI expertise paradox
 /shva:shva-medium-writer Why India's AI talent builds for Americans
