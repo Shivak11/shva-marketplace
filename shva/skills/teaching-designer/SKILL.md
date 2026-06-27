@@ -54,6 +54,7 @@ Stage 5 happens only when Shiva wants the HTML. Outline, plan, and script can be
 
 ## What "good" looks like (design backward from this)
 
+- **Anticipation over revelation (Shiva's signature, the strongest tell).** Never put the answer on the slide. Pose the question, hand the room the thinking lenses, and let them produce the answer. Hold every reveal until it is earned: state the problem and the wrong conclusion, run the analogy, only then reveal the answer. Diagnose before data (self-diagnose worksheet first, confirming statistic second). Titles can be questions ("How do jobs change when the architecture changes?"). In exercises give thinking principles, not a model answer (keep any worked example as a facilitator back-pocket, never on screen). Cut any slide that tells the audience what they were about to work out. See `references/03-pedagogy-and-taste.md`.
 - **One idea, scaled across altitudes.** Pick a single contrarian idea and trace it through Individual, then Team, then Organization. The same idea at three resolutions, not three topics.
 - **A running thread**, carried through every section and shown as a small recurring chip (for example "Where does the human stand").
 - **A wrapper analogy** opened cold (sounds nothing like the topic) and closed at higher resolution.

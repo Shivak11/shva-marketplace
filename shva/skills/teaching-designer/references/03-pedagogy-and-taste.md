@@ -4,6 +4,13 @@ The laws that make a session land, and the reusable patterns.
 
 ## Pedagogy laws
 
+- Anticipation over revelation. This is the first law and Shiva's signature. Never put the answer on the slide. Pose the question, hand the room the thinking lenses, let them produce the answer, and hold every punchline until it is earned. The concrete moves:
+  - Hold the reveal. State the problem and the wrong conclusion, run the analogy, only then reveal the answer. Opening on "ninety-five percent of pilots fail, everyone says AI is hype, hold that thought", running the factory, then revealing "it was never the model, it was the process" is right. Putting "It Is Not the Model" on slide one is wrong.
+  - Diagnose, then data. Let them self-diagnose on a worksheet first (tick the lines true for their own stalled pilot), and only after they have found it, show the confirming statistic (the 10-20-70 slide).
+  - Questions, not assertions, as titles. "How do jobs change when the architecture changes?" beats "Jobs change when the architecture changes."
+  - Thinking principles, not model answers, in exercises. Do not show a before/after rewrite. Pose "How would you make this JD AI-ready?" and give the lenses (does the line reward what the machine now does cheaply; would your best hire and an average one write the same answer; does it reward knowing or directing and judging; swap the domain and see if it still holds). Keep any worked example as a facilitator back-pocket only.
+  - One-line prompts over written-out content. A single provocative line the facilitator riffs on live beats a paragraph of pre-baked examples.
+  - Cut the slide that over-explains. If a slide tells the audience what they were about to work out, remove it.
 - Experience before explanation. Never define a framework before the room has felt the thing. Use a poll, a micro-exercise, or a clip first, then name it.
 - Intellectual tension precedes resolution. Comfort is not the goal. Open a gap, then close it.
 - One idea, scaled. Trace a single contrarian idea across Individual, Team, Organization. Do not spread across three unrelated topics.

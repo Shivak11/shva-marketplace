@@ -10,6 +10,7 @@ Bundled copy of the canonical method. The wiki source of truth is `maps/executiv
 - A memorable named principle per section, plus an end revision recap listing all of them with a short "Apply it" action each.
 - Light, not dense. One analogy, one short clip, one discussion prompt per act.
 - Experience before explanation. A micro-exercise or poll lets the room discover the point before it is named.
+- Anticipation over revelation (Shiva's signature). Never put the answer on the slide. Pose the question, hand the room the thinking lenses, let them produce the answer, and hold every reveal until earned. Diagnose before data, question titles over assertions, thinking principles not model answers, and cut any slide that over-explains. Full detail in `03-pedagogy-and-taste.md`.
 - Evidence with honesty: real citations, quotable lines, and a caveat held in the facilitation notes.
 
 ## The four-beat rhythm inside an act
