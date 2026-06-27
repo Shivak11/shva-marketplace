@@ -4,6 +4,22 @@
 > Commands in this plugin start with `/shva:` — that's the `shva` namespace tag.
 > (Yes, the missing "i" is on purpose. Easier to remember, impossible to collide.)
 
+## v0.8.0 — three workflow skills from matured wiki methods
+
+Three personal accelerators, each promoted from a method that had stabilised in the Obsidian wiki.
+
+**`/shva:genai-use-case-finder`** is an analysis generator. Feed it a function, org, industry, or process and it fills a prioritized GenAI use-case portfolio for that real organization by running the four-move method: MAP (dual-lens discovery, Stream lens for point candidates and Flip-It lens for system candidates), GATE (the five-question point-versus-system tell), SCORE (value by feasibility, risk as a veto, verifiability as the autonomy axis), and SEQUENCE (the named quadrants: Lighthouses, Strategic Bets, Quick Wins, Park or Kill). It is the analysis sibling of the two teaching skills: it fills the matrix for a real org, it does not teach the method.
+
+**`/shva:mdp-source-finder`** is a raw-material assembler. Give it a course, MDP, FDP, or workshop brief and it returns a source pack of repos, tools, references, and demos indexed by session beat (hands-on lab, opening hook, case study, live demo, pre-read, course scaffold to borrow), with a "why this, here" line on each. It queries Raindrop and the wiki live rather than echoing a frozen list, and hands off to `teaching-designer` to build the session.
+
+**`/shva:persona-profile-from-text`** builds an evidence-anchored profile of a person from their own text, with every observation quoting the source line. Two modes: mirror mode reflects a Rehearsal user's recordings back to deepen self-fascination (engagement, not coaching), and voice-harvest mode reads a target leader's voice and concerns for B2B outreach. Frameworks (Big Five, Schwartz values, affect) organize the reasoning but are never printed as scores or type codes, surprises are offered as questions not verdicts, extraction branches by source type over an append-only signal log, and profiling consent sits at a higher tier than plain fact-memory.
+
+```
+/shva:genai-use-case-finder claims at a mid-size insurer
+/shva:mdp-source-finder AI workflows with open-source tools
+/shva:persona-profile-from-text reflect my last month of voice notes back to me
+```
+
 ## v0.7.0 — `/shva:teaching-designer`
 
 **The facilitator-side teaching artifact.** Where `worksheet-generator` makes the sheet participants fill in, `teaching-designer` makes what you teach *from*: a light, discussion-led executive keynote delivered as a session plan, a spoken script, and an aesthetic interactive HTML doc (lesson plan plus click-to-expand script).

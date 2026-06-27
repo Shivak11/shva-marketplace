@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GenAI Use-Case Portfolio</title>
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --muted: #5a5a6e;
+    --line: #d8d8e0;
+    --green: #1f7a4d;
+    --amber: #b8860b;
+    --red: #b23a48;
+    --bg: #fafafb;
+    --card: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    margin: 0;
+    padding: 40px;
+    line-height: 1.5;
+  }
+  header { max-width: 980px; margin: 0 auto 28px; }
+  h1 { font-size: 1.6rem; margin: 0 0 6px; }
+  .sub { color: var(--muted); font-size: 0.95rem; margin: 0; }
+  .grid-wrap { max-width: 980px; margin: 0 auto; }
+  .axis-y {
+    writing-mode: vertical-rl; transform: rotate(180deg);
+    text-align: center; color: var(--muted); font-weight: 600; font-size: 0.85rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .layout { display: grid; grid-template-columns: 28px 1fr; gap: 10px; }
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+    border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+    background: var(--card);
+  }
+  .quad { padding: 18px 20px; border: 0.5px solid var(--line); min-height: 200px; }
+  .quad h2 { font-size: 1.05rem; margin: 0 0 2px; }
+  .quad .role { color: var(--muted); font-size: 0.82rem; margin: 0 0 12px; }
+  .strategic { background: #fff8f0; }
+  .lighthouse { background: #f0f8f4; }
+  .park { background: #f7f7f9; }
+  .quick { background: #f0f4fb; }
+  ul.cands { list-style: none; padding: 0; margin: 0; }
+  ul.cands li { font-size: 0.9rem; padding: 4px 0; display: flex; align-items: baseline; gap: 8px; }
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; flex: 0 0 auto; }
+  .g { background: var(--green); }
+  .a { background: var(--amber); }
+  .r { background: var(--red); }
+  .axis-x { text-align: center; color: var(--muted); font-weight: 600; font-size: 0.85rem;
+    letter-spacing: 0.08em; text-transform: uppercase; margin-top: 8px; }
+  .legend { max-width: 980px; margin: 22px auto 0; font-size: 0.85rem; color: var(--muted); }
+  .legend span { margin-right: 18px; white-space: nowrap; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>GenAI Use-Case Portfolio: [ORGANISATION], [PROCESS]</h1>
+    <p class="sub">Value by Feasibility. Color is risk. System redesigns land as Strategic Bets.</p>
+  </header>
+
+  <div class="grid-wrap">
+    <div class="layout">
+      <div class="axis-y">High value to Low value</div>
+      <div>
+        <div class="grid">
+          <section class="quad strategic">
+            <h2>Strategic Bets</h2>
+            <p class="role">High value, low feasibility. Fund the blocker, do not pilot a model alone.</p>
+            <ul class="cands">
+              <li><span class="dot r"></span> [Candidate], blocker: [data project or redesign mandate]</li>
+            </ul>
+          </section>
+          <section class="quad lighthouse">
+            <h2>Lighthouses</h2>
+            <p class="role">High value, high feasibility. Ship in 90 days. These fund everything else.</p>
+            <ul class="cands">
+              <li><span class="dot g"></span> [Candidate], autonomy: [autonomous / light check]</li>
+            </ul>
+          </section>
+          <section class="quad park">
+            <h2>Park or Kill</h2>
+            <p class="role">Low value, low feasibility. Keep out of the backlog. Red dots park here.</p>
+            <ul class="cands">
+              <li><span class="dot r"></span> [Candidate]</li>
+            </ul>
+          </section>
+          <section class="quad quick">
+            <h2>Quick Wins</h2>
+            <p class="role">Low value, high feasibility. Ship for momentum. Do not oversell.</p>
+            <ul class="cands">
+              <li><span class="dot g"></span> [Candidate]</li>
+            </ul>
+          </section>
+        </div>
+        <div class="axis-x">Low feasibility to High feasibility</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span><span class="dot g" style="display:inline-block"></span> Green: can earn autonomy if verifiability is high.</span>
+    <span><span class="dot a" style="display:inline-block"></span> Amber: human-in-the-loop.</span>
+    <span><span class="dot r" style="display:inline-block"></span> Red: assist-only or parked until mitigated.</span>
+  </div>
+</body>
+</html>

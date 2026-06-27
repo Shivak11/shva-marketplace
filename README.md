@@ -7,7 +7,7 @@
 
 | Plugin | Version | What it does |
 |---|---|---|
-| [`shva`](./shva) | 0.7.0 | Personal command pack: `/shva:brief-me`, the SHVA LinkedIn writer, the Medium writer/poster, and the teaching pair. v0.6.0 added `/shva:worksheet-generator` (AI-resistant participant worksheets, HTML then ReportLab PDF). v0.7.0 added `/shva:teaching-designer` (the facilitator-side session plan, spoken script, and interactive lesson HTML). |
+| [`shva`](./shva) | 0.8.0 | Personal command pack: `/shva:brief-me`, the SHVA LinkedIn writer, the Medium writer/poster, and the teaching pair. v0.6.0 added `/shva:worksheet-generator` (AI-resistant participant worksheets, HTML then ReportLab PDF). v0.7.0 added `/shva:teaching-designer` (the facilitator-side session plan, spoken script, and interactive lesson HTML). v0.8.0 added three workflow skills from matured wiki methods: `/shva:genai-use-case-finder` (fills a prioritized GenAI use-case portfolio for a real org), `/shva:mdp-source-finder` (live source pack for a session, indexed by session beat, feeds teaching-designer), and `/shva:persona-profile-from-text` (evidence-anchored mirror or voice-harvest profile from a person's own writing). |
 
 ## Why a separate marketplace
 

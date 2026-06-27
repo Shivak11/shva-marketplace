@@ -21,9 +21,14 @@ model: haiku
 | `/shva:shva-linkedin-post-writer` | Write LinkedIn posts in Shiva's systems-thinker voice. Three signature lenses, 6-tier source hierarchy, Hook/Cringe Test gates, god-mode pipeline. | **For any LinkedIn post request.** Voicenote-to-post, news reaction, content system runs. |
 | `/shva:worksheet-generator [topic]` | Turns a topic plus rough ideas into an AI-resistant, self-contained teaching worksheet (HTML first, then a ReportLab PDF) in Shiva's voice. Asks intake questions, researches in parallel across the wiki + LlamaCloud + Readwise + YouTube + book-search + Mobbin, builds a carried-forward arc with one worked example, applies the hard formatting rules, and ships clean print pages. | **When you need a hands-on workshop or session sheet.** A decision, tension, workflow, or skill traced to its end. |
 | `/shva:teaching-designer [topic]` | The facilitator-side sibling. Turns a teaching brief into a light, discussion-led executive keynote: a session plan, a spoken script, and an aesthetic interactive HTML doc (lesson plan plus click-to-expand script). Same parallel research, contrarian story-driven voice, evidence cards with citations, and before/after Mermaid diagrams. | **When you need what you teach FROM, not what participants fill in.** Session plans, teaching scripts, course outlines, executive keynotes (XLRI/MDP). |
+| `/shva:genai-use-case-finder [function-or-process]` | Fills a prioritized GenAI use-case portfolio for a REAL org. Runs the four-move method: MAP both lenses (point vs system), GATE every candidate on the five-question tell, SCORE on value by feasibility with risk as a veto and verifiability as the autonomy axis, SEQUENCE into named quadrants. Outputs the filled matrix plus a signed one-page worksheet, with an optional HTML 2x2. | **When a CXO asks "where do we actually use GenAI, and which first?"** An analysis for a real org, not a lesson. If you want to TEACH the method, use teaching-designer instead. |
+| `/shva:mdp-source-finder [topic]` | Assembles a source pack for an MDP, FDP, or workshop, indexed by session beat (hands-on lab, opening hook, case, live demo, pre-read, scaffold to borrow). Queries Raindrop and the wiki LIVE, re-indexes for this brief, and names the 4 to 6 skills to anchor the course. | **When you sit down to design a session and need credible repos, tools, and demos.** Feeds teaching-designer. |
+| `/shva:persona-profile-from-text [whose-text]` | Builds an evidence-anchored profile of a person from their own text, every line quoting the source. Two modes: mirror (reflect a Rehearsal user's recordings back, for engagement) and voice-harvest (read a target leader's voice and concerns, for outreach). Frameworks are a reasoning lens, never printed as scores. Surprises are offered as questions, never verdicts. | **When you want to understand who someone is from what they wrote.** Rehearsal mirror, or B2B voice-harvest. |
 | `/shva:help` | This screen. | When you forget what's installed. |
 
 > **Two teaching siblings:** `worksheet-generator` makes the **participant** artifact (a fillable worksheet); `teaching-designer` makes the **facilitator** artifact (plan, script, interactive lesson). Use both for one session.
+>
+> **Three workflow skills (v0.8.0), each promoted from a matured wiki method:** `genai-use-case-finder` fills a GenAI use-case portfolio for a real org (analysis, not a lesson); `mdp-source-finder` gathers the live source pack for a session and feeds `teaching-designer`; `persona-profile-from-text` mirrors a person from their own writing (Rehearsal engagement, or B2B voice-harvest).
 
 ---
 
@@ -40,6 +45,17 @@ model: haiku
 
 /shva:teaching-designer the AI expertise paradox for senior managers
 /shva:teaching-designer                                # asks you what you're teaching
+
+/shva:genai-use-case-finder claims at a mid-size insurer
+/shva:genai-use-case-finder the CHRO hiring funnel
+/shva:genai-use-case-finder                            # asks you the function or process
+
+/shva:mdp-source-finder AI workflows with open-source tools
+/shva:mdp-source-finder                                # asks you the course topic
+
+/shva:persona-profile-from-text reflect my last month of voice notes back to me
+/shva:persona-profile-from-text profile this leader from their LinkedIn posts
+/shva:persona-profile-from-text                        # asks you whose text and which mode
 
 /shva:shva-medium-writer AI expertise paradox
 /shva:shva-medium-writer Why India's AI talent builds for Americans
