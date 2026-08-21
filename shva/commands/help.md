@@ -24,6 +24,7 @@ model: haiku
 | `/shva:genai-use-case-finder [function-or-process]` | Fills a prioritized GenAI use-case portfolio for a REAL org. Runs the four-move method: MAP both lenses (point vs system), GATE every candidate on the five-question tell, SCORE on value by feasibility with risk as a veto and verifiability as the autonomy axis, SEQUENCE into named quadrants. Outputs the filled matrix plus a signed one-page worksheet, with an optional HTML 2x2. | **When a CXO asks "where do we actually use GenAI, and which first?"** An analysis for a real org, not a lesson. If you want to TEACH the method, use teaching-designer instead. |
 | `/shva:mdp-source-finder [topic]` | Assembles a source pack for an MDP, FDP, or workshop, indexed by session beat (hands-on lab, opening hook, case, live demo, pre-read, scaffold to borrow). Queries Raindrop and the wiki LIVE, re-indexes for this brief, and names the 4 to 6 skills to anchor the course. | **When you sit down to design a session and need credible repos, tools, and demos.** Feeds teaching-designer. |
 | `/shva:persona-profile-from-text [whose-text]` | Builds an evidence-anchored profile of a person from their own text, every line quoting the source. Two modes: mirror (reflect a Rehearsal user's recordings back, for engagement) and voice-harvest (read a target leader's voice and concerns, for outreach). Frameworks are a reasoning lens, never printed as scores. Surprises are offered as questions, never verdicts. | **When you want to understand who someone is from what they wrote.** Rehearsal mirror, or B2B voice-harvest. |
+| `/shva:meditate [artifact\|session\|taste] [subject]` | Runs Shiva's reflection and judgment ritual. Uses the five R's plus the five-question Aliveness Review, tests the emerging rule against counterexamples, and ends with a named insight, next experiment, and explicit record/no-record verdict. It never promotes private material or writes to the wiki automatically. | **After meaningful work, when an artifact feels lifeless, or when you want to understand a recurring preference without flattening different surfaces.** |
 | `/shva:help` | This screen. | When you forget what's installed. |
 
 > **Two teaching siblings:** `worksheet-generator` makes the **participant** artifact (a fillable worksheet); `teaching-designer` makes the **facilitator** artifact (plan, script, interactive lesson). Use both for one session.
@@ -56,6 +57,11 @@ model: haiku
 /shva:persona-profile-from-text reflect my last month of voice notes back to me
 /shva:persona-profile-from-text profile this leader from their LinkedIn posts
 /shva:persona-profile-from-text                        # asks you whose text and which mode
+
+/shva:meditate artifact outputs/taste-meditation.html
+/shva:meditate session today's Rehearsal design work
+/shva:meditate taste what connects my books, interfaces, and writing?
+/shva:meditate                                         # asks for mode and subject
 
 /shva:shva-medium-writer AI expertise paradox
 /shva:shva-medium-writer Why India's AI talent builds for Americans

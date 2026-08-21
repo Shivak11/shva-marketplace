@@ -4,6 +4,24 @@
 > Commands in this plugin start with `/shva:` — that's the `shva` namespace tag.
 > (Yes, the missing "i" is on purpose. Easier to remember, impossible to collide.)
 
+## v0.9.0 — `/shva:meditate`
+
+**A personal reflection and judgment ritual for real work.** Run it on an artifact, a completed session, or a cross-surface taste question. It adapts the five R's of meditation — Review, Relate, Reinforce, Record, Resolve — to Shiva's working system and adds the five-question Aliveness Review:
+
+1. What is the particular bet here?
+2. Where is the charge, and what contains it?
+3. What proves this is real?
+4. What have I over-explained?
+5. Would I recognise this with the logo removed?
+
+The skill ends with one named insight, evidence and confidence, a counterexample or unresolved tension, a next experiment, and an explicit record/no-record verdict. It treats charged specificity as a hypothesis to test rather than a universal doctrine. Private attraction may sharpen contrast, but never automatically explains professional taste, generalizes about women, or crosses into public doctrine. Wiki writes and promotions always require explicit approval.
+
+```
+/shva:meditate artifact outputs/taste-meditation.html
+/shva:meditate session today's Rehearsal design work
+/shva:meditate taste what connects my books, interfaces, and writing?
+```
+
 ## v0.8.0 — three workflow skills from matured wiki methods
 
 Three personal accelerators, each promoted from a method that had stabilised in the Obsidian wiki.
@@ -115,6 +133,24 @@ After editing any command file, reload with:
 /plugin uninstall shva@shva
 /plugin install shva@shva
 ```
+
+To update an existing Claude Code installation from the GitHub marketplace:
+
+```bash
+claude plugin marketplace update shva
+claude plugin update shva@shva --scope user
+```
+
+To install only `meditate` as a global skill copy for Codex, Cursor, and Claude Code:
+
+```bash
+npx skills add https://github.com/Shivak11/shva-marketplace \
+  --skill meditate --global \
+  --agent codex --agent cursor --agent claude-code \
+  --yes --copy
+```
+
+The full Claude Code plugin preserves `/shva:meditate`; the standalone parity install exposes the same skill procedure directly in each harness.
 
 ## Source
 

@@ -7,7 +7,7 @@
 
 | Plugin | Version | What it does |
 |---|---|---|
-| [`shva`](./shva) | 0.8.0 | Personal command pack: `/shva:brief-me`, the SHVA LinkedIn writer, the Medium writer/poster, and the teaching pair. v0.6.0 added `/shva:worksheet-generator` (AI-resistant participant worksheets, HTML then ReportLab PDF). v0.7.0 added `/shva:teaching-designer` (the facilitator-side session plan, spoken script, and interactive lesson HTML). v0.8.0 added three workflow skills from matured wiki methods: `/shva:genai-use-case-finder` (fills a prioritized GenAI use-case portfolio for a real org), `/shva:mdp-source-finder` (live source pack for a session, indexed by session beat, feeds teaching-designer), and `/shva:persona-profile-from-text` (evidence-anchored mirror or voice-harvest profile from a person's own writing). |
+| [`shva`](./shva) | 0.9.0 | Personal command and skill pack for cross-cutting work. v0.9.0 adds `/shva:meditate`: Shiva's three-mode reflection and judgment ritual for artifacts, sessions, and taste, with the five-question Aliveness Review, counterexample testing, explicit record boundaries, and no automatic wiki promotion. |
 
 ## Why a separate marketplace
 
@@ -15,7 +15,7 @@ I keep `rehearsal-dev` (in `~/Python Projects/atom-creator-plugin/`) for product
 
 `shva-marketplace` is for **everything else** — cross-cutting personal tools that should outlive any single product. Vocabulary scaffolds, prompt patterns, personal accelerators.
 
-## Local install
+## Claude Code marketplace install
 
 ```bash
 # 1. Add the marketplace (one-time)
@@ -26,6 +26,28 @@ I keep `rehearsal-dev` (in `~/Python Projects/atom-creator-plugin/`) for product
 ```
 
 Verify with `/shva:help`.
+
+Update an existing Claude Code installation after a release:
+
+```bash
+claude plugin marketplace update shva
+claude plugin update shva@shva --scope user
+```
+
+This preserves the namespaced invocation `/shva:meditate`.
+
+## Codex, Cursor, and Claude Code skill parity
+
+Install only the `meditate` skill as a deterministic global copy in all three harnesses:
+
+```bash
+npx skills add https://github.com/Shivak11/shva-marketplace \
+  --skill meditate --global \
+  --agent codex --agent cursor --agent claude-code \
+  --yes --copy
+```
+
+The standalone copies live under `~/.codex/skills/meditate`, `~/.cursor/skills/meditate`, and `~/.claude/skills/meditate`. Claude Code users who already install the full SHVA plugin should prefer the marketplace update above for the `/shva:meditate` namespace; the global copy is the explicit skill-only parity path.
 
 ## Adding a new personal command
 

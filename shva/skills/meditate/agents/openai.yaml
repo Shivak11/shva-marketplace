@@ -1,0 +1,4 @@
+interface:
+  display_name: "Meditate"
+  short_description: "Reflect, test taste, and consolidate judgment"
+  default_prompt: "Use $meditate to reflect on this artifact, session, or taste pattern and end with an evidence-grounded next experiment."
