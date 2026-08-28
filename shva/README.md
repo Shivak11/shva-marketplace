@@ -4,6 +4,22 @@
 > Commands in this plugin start with `/shva:` — that's the `shva` namespace tag.
 > (Yes, the missing "i" is on purpose. Easier to remember, impossible to collide.)
 
+## v0.9.1 — Hidden Agendas Spotter
+
+**`/shva:hidden-agendas-spotter` sees the reality beneath presented reality.** Use it on a claim, photograph, partnership, metric, policy, ritual, product launch, or everyday performance.
+
+It reads the scene backwards: reconstructs what produced the display, maps what each actor helps the other appear to be, identifies the audience and operative payoff, compares visible proof with costly reality, follows cost-bearing behaviour, tests counterfactuals, and decides whether recurrence reveals the real rule. Every conclusion is labelled as observed, strong inference, plausible reading, or speculation.
+
+The reciprocal-agenda lens is essential. A partnership can create real value while also allowing both parties to certify each other. For example, a technology vendor lends frontier capability to an enterprise partner; the partner lends the vendor scale, market access, and an enterprise success story. The skill asks what each side could not credibly claim alone.
+
+Only after the evidence ledger holds does it compress the suppressed premise into a cartoon situation or memorable principle. It never names a phenomenon merely to sound original and never presents private motive as fact.
+
+```
+/shva:hidden-agendas-spotter TCS and Anthropic provide Claude to 50,000 employees
+/shva:hidden-agendas-spotter this photograph of a leader meditating alone
+/shva:hidden-agendas-spotter
+```
+
 ## v0.9.0 — `/shva:meditate`
 
 **A personal reflection and judgment ritual for real work.** Run it on an artifact, a completed session, or a cross-surface taste question. It adapts the five R's of meditation — Review, Relate, Reinforce, Record, Resolve — to Shiva's working system and adds the five-question Aliveness Review:
@@ -141,16 +157,16 @@ claude plugin marketplace update shva
 claude plugin update shva@shva --scope user
 ```
 
-To install only `meditate` as a global skill copy for Codex, Cursor, and Claude Code:
+To install `meditate` and `hidden-agendas-spotter` as global skill copies for Codex, Cursor, and Claude Code:
 
 ```bash
 npx skills add https://github.com/Shivak11/shva-marketplace \
-  --skill meditate --global \
+  --skill meditate --skill hidden-agendas-spotter --global \
   --agent codex --agent cursor --agent claude-code \
   --yes --copy
 ```
 
-The full Claude Code plugin preserves `/shva:meditate`; the standalone parity install exposes the same skill procedure directly in each harness.
+The full Claude Code plugin preserves the `/shva:` namespace; the standalone parity install exposes the same skill procedures directly in each harness.
 
 ## Source
 

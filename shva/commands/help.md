@@ -25,6 +25,7 @@ model: haiku
 | `/shva:mdp-source-finder [topic]` | Assembles a source pack for an MDP, FDP, or workshop, indexed by session beat (hands-on lab, opening hook, case, live demo, pre-read, scaffold to borrow). Queries Raindrop and the wiki LIVE, re-indexes for this brief, and names the 4 to 6 skills to anchor the course. | **When you sit down to design a session and need credible repos, tools, and demos.** Feeds teaching-designer. |
 | `/shva:persona-profile-from-text [whose-text]` | Builds an evidence-anchored profile of a person from their own text, every line quoting the source. Two modes: mirror (reflect a Rehearsal user's recordings back, for engagement) and voice-harvest (read a target leader's voice and concerns, for outreach). Frameworks are a reasoning lens, never printed as scores. Surprises are offered as questions, never verdicts. | **When you want to understand who someone is from what they wrote.** Rehearsal mirror, or B2B voice-harvest. |
 | `/shva:meditate [artifact\|session\|taste] [subject]` | Runs Shiva's reflection and judgment ritual. Uses the five R's plus the five-question Aliveness Review, tests the emerging rule against counterexamples, and ends with a named insight, next experiment, and explicit record/no-record verdict. It never promotes private material or writes to the wiki automatically. | **After meaningful work, when an artifact feels lifeless, or when you want to understand a recurring preference without flattening different surfaces.** |
+| `/shva:hidden-agendas-spotter [claim-or-artifact]` | **Hidden Agendas Spotter.** Reads the reality beneath a claim, image, partnership, metric, ritual, or behaviour. Reconstructs the apparatus, maps what actors certify for each other, finds the real audience and payoff, compares visible proof with costly reality, tests alternatives, and labels confidence before optional satirical compression. | **Before accepting the official explanation or writing a truth-bomb cartoon.** Especially useful when two parties appear to validate each other. |
 | `/shva:help` | This screen. | When you forget what's installed. |
 
 > **Two teaching siblings:** `worksheet-generator` makes the **participant** artifact (a fillable worksheet); `teaching-designer` makes the **facilitator** artifact (plan, script, interactive lesson). Use both for one session.
@@ -62,6 +63,10 @@ model: haiku
 /shva:meditate session today's Rehearsal design work
 /shva:meditate taste what connects my books, interfaces, and writing?
 /shva:meditate                                         # asks for mode and subject
+
+/shva:hidden-agendas-spotter TCS and Anthropic provide Claude to 50,000 employees
+/shva:hidden-agendas-spotter this photograph of a leader meditating alone
+/shva:hidden-agendas-spotter                           # asks for the claim or artifact
 
 /shva:shva-medium-writer AI expertise paradox
 /shva:shva-medium-writer Why India's AI talent builds for Americans

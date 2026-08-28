@@ -7,8 +7,8 @@
   "plugins": [
     {
       "name": "shva",
-      "description": "Personal command + skill pack. v0.9.0 adds /shva:meditate, Shiva's three-mode reflection and judgment ritual for artifacts, sessions, and taste. It combines the five R's with the five-question Aliveness Review, counterexample testing, explicit record authorization, and strict private-material boundaries. Existing skills cover vocabulary briefing, LinkedIn and Medium authoring, teaching artifacts, GenAI use-case analysis, MDP source finding, persona reflection, and academic paper review.",
-      "version": "0.9.0",
+      "description": "Personal command + skill pack. v0.9.1 adds /shva:hidden-agendas-spotter, Shiva's cross-domain method for seeing the apparatus, reciprocal credibility exchange, real audience, operative payoff, proof substitution, and recurring rule beneath presented reality. It keeps observed evidence, inference, plausible reading, and speculation separate before turning an earned insight into satire.",
+      "version": "0.9.1",
       "source": "./shva",
       "author": {
         "name": "Shiva Kakkar"

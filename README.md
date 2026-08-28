@@ -7,7 +7,7 @@
 
 | Plugin | Version | What it does |
 |---|---|---|
-| [`shva`](./shva) | 0.9.0 | Personal command and skill pack for cross-cutting work. v0.9.0 adds `/shva:meditate`: Shiva's three-mode reflection and judgment ritual for artifacts, sessions, and taste, with the five-question Aliveness Review, counterexample testing, explicit record boundaries, and no automatic wiki promotion. |
+| [`shva`](./shva) | 0.9.1 | Personal command and skill pack for cross-cutting work. v0.9.1 adds **Hidden Agendas Spotter** (`/shva:hidden-agendas-spotter`): a cross-domain method for seeing the production apparatus, reciprocal credibility trade, operative payoff, and costly reality beneath presented claims. |
 
 ## Why a separate marketplace
 
@@ -34,20 +34,20 @@ claude plugin marketplace update shva
 claude plugin update shva@shva --scope user
 ```
 
-This preserves the namespaced invocation `/shva:meditate`.
+This preserves namespaced invocations such as `/shva:meditate` and `/shva:hidden-agendas-spotter`.
 
 ## Codex, Cursor, and Claude Code skill parity
 
-Install only the `meditate` skill as a deterministic global copy in all three harnesses:
+Install `meditate` and `hidden-agendas-spotter` as deterministic global copies in all three harnesses:
 
 ```bash
 npx skills add https://github.com/Shivak11/shva-marketplace \
-  --skill meditate --global \
+  --skill meditate --skill hidden-agendas-spotter --global \
   --agent codex --agent cursor --agent claude-code \
   --yes --copy
 ```
 
-The standalone copies live under `~/.codex/skills/meditate`, `~/.cursor/skills/meditate`, and `~/.claude/skills/meditate`. Claude Code users who already install the full SHVA plugin should prefer the marketplace update above for the `/shva:meditate` namespace; the global copy is the explicit skill-only parity path.
+The standalone copies live in each harness's global skills directory. Claude Code users who already install the full SHVA plugin should prefer the marketplace update above for the `/shva:` namespace; the global copies are the explicit skill-only parity path.
 
 ## Adding a new personal command
 

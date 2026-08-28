@@ -1,0 +1,7 @@
+interface:
+  display_name: "Hidden Agendas Spotter"
+  short_description: "See the reality beneath presented reality"
+  default_prompt: "Use $hidden-agendas-spotter to analyse what this display is really accomplishing."
+
+policy:
+  allow_implicit_invocation: true
