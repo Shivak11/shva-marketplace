@@ -149,6 +149,17 @@ Themes plug into the **Three Signature Lenses** (defined in the next subsection)
 5. **Mental-Model Reframe** *(supporting)* — A thinking tool (Inversion, Second-Order Effects, Circle of Competence, Causal Reasoning, Double-Loop Learning) applied to an AI-era decision. Borrows from the canon Shiva already reads (Parrish, Pearl, Meadows).
 6. **Release / Built-in-Public** *(supporting)* — An open framework, tool, course, or essay Shiva built or shipped. Highest viral potential when authentic to his actual work (Rehearsal AI, "Mental Modeling with Generative AI" course, advisory frameworks).
 
+### Step 3.5: Route the Editorial Lane
+
+After the evidence-backed thesis exists, load `references/editorial-lanes-distribution.md`.
+
+- For a serious enterprise-AI or AI/work/education topic, create two treatments of the same thesis: an **attention candidate** and an **authorship candidate**. Preserve the same evidence, intended decision-maker, operational mechanism, caveats, and private-source boundary in both.
+- Score both candidates with the reference file's six-row Selection Gate. Recommend one for the slot and preserve the other as an explicit learning artifact.
+- Personal-taste posts are normally authorship-first. `State of Humans` is normally comic-first. Do not manufacture a second prose candidate when it adds no useful comparison.
+- Keep both candidates in one topic record. Never split them into `-viral`, `-taste`, `-v1`, or similar wiki pages.
+
+The attention lane may sharpen, compress, or reorder. It may not sensationalise, overstate certainty, substitute anxiety for stakes, or erase the Shiva-specific reframe.
+
 ### Three Signature Lenses (the post-generating engine)
 
 Every post should sit inside one of these three lenses. They are the recurring patterns in Shiva's captured thinking (Plaud + Voicenotes + Readwise scan, 2026-04-25). Rotate across lenses to avoid pattern fatigue.
@@ -450,6 +461,8 @@ If the user wants commentary or alternatives, they'll ask in the next turn — d
 
 Before producing the final output, invoke kostja94's `linkedin-posts` skill via the Skill tool to validate platform mechanics. Treat its output as a **mechanics-only check** — apply ONLY the dimensions listed under "USE", and explicitly REJECT anything under "DO NOT APPLY". The clash table below is binding.
 
+When Step 3.5 produced two candidates, run this mechanics gate on **both**, then apply the Selection Gate in `references/editorial-lanes-distribution.md`. The user-facing zero-wrapper copy is the recommended or explicitly approved candidate. Preserve the alternate, scores, recommendation, and prediction in the single wiki topic record; do not silently discard it.
+
 **How to invoke:** Call `Skill(skill="linkedin-posts")`. Read its output. Apply the filter rules below.
 
 **USE from `linkedin-posts`:**
@@ -498,6 +511,12 @@ Reach is partly a writing problem and partly a behavior problem. The first 60 mi
 - Replying only to high-status commenters — visible favoritism.
 - Editing the post within the first hour (resets some of the distribution signal).
 
+### Outcome learning, not vanity-score learning
+
+For posts in `linkedin-12-post-v1`, capture the qualified outcomes defined in `references/editorial-lanes-distribution.md`: inquiries and relevant invitations first; then profile/site movement and relevant followers; then substantive intended-audience comments, saves, and sends; impressions and reactions remain context. Compare the result with the pre-publication prediction at 24 hours, 7 days, and 30 days when the data exists.
+
+Do not derive a new voice rule, lane preference, visual rule, or timing rule from one post. Keep the four benchmark slots frozen until 12 posts have been both published and publication-verified, then review copy, topic, visual, timing, audience fit, and external events as separate explanations.
+
 ---
 
 ## Step 9: Wiki Save + Taste Capture (MANDATORY — after Step 7 output)
@@ -512,7 +531,7 @@ Every post becomes a dual artifact: the ship-ready text the user copies, *and* a
 /Users/shivakakkar/Python Projects/Obsidian Wiki/linkedin-posts/YYYY-MM-DD-slug.md
 ```
 
-- **One file per post.** No `-v1`/`-v2`/`-shipped` suffix variants — the personal-vault pattern of artifact-snapshots is *not* the wiki idiom. Evolution lives inside the file (`note:` field + history in Taste Notes section).
+- **One file per topic.** No `-v1`/`-v2`/`-viral`/`-taste`/`-shipped` suffix variants — the personal-vault pattern of artifact-snapshots is *not* the wiki idiom. When the dual-lane route fires, the attention candidate, authorship candidate, selection decision, approved post, visual, and outcomes all live in this one record.
 - **Slug**: first 4-6 meaningful words of the H1 or post opener, lowercased, hyphen-joined, no stopwords. e.g. `experience-as-liability`, `by-2028-you-wont-manage-5-people`.
 - **Attachments** (god-mode images, etc.) go to `linkedin-posts/attachments/YYYY-MM-DD-slug-<descriptor>.png` and are wikilinked from the post file as `![[attachments/...]]`.
 
@@ -526,6 +545,11 @@ category: linkedin-posts
 tags: [linkedin, content-system, <2-3 more from _meta/taxonomy.md>]   # ≤5 total; prefer canonical thinking tags (distribution, workflow-design, taste-system, etc.)
 date: YYYY-MM-DD                                                       # the post date — preserved from personal-vault format
 status: draft | scheduled | shipped                                    # preserved — drives downstream behavior
+portfolio_genre: executive | education | personal_taste | state_of_humans
+editorial_lane: attention | authorship | comic_first | pending
+selected_candidate: attention | authorship | comic | pending
+publication_state: researched | drafted | approved | saved | scheduled | published | publication_verified
+benchmark_cycle: linkedin-12-post-v1
 hook_archetype: Violation Stat | Industry Quote | Uncomfortable Question | Contrarian Truth | Specific Observation | Future Scenario
 lenses_applied:
   - <lens> (primary)
@@ -556,12 +580,16 @@ provenance:
 - `tags` must use the controlled vocabulary in `_meta/taxonomy.md`. Always include `linkedin` and `content-system`. Add `taste-system` when the post discusses taste/judgment, `workflow-design` for sequence-inversion posts, `distribution` for release posts, `agentic-ai-use-case` for agent-economy posts.
 - Use `>-` (folded scalar) for `title` and `summary` to stay parser-safe.
 
-### 9.3 Body shape — 5 sections
+### 9.3 Body shape — 6 sections
 
 Write in this order. Each section earns its place; skip none.
 
 ```markdown
 # [Title — same as frontmatter title]
+
+## Editorial Candidates and Selection
+
+When Step 3.5 produced two candidates, use the exact candidate, scoring, recommendation, prediction, and outcome-ledger structure in `references/editorial-lanes-distribution.md`. Preserve both clean bodies. For personal-taste and comic-first posts, record the lane decision and omit an empty alternate.
 
 ## Post (as published)
 
@@ -663,14 +691,15 @@ If the post failed the Hook Test or Cringe Test and is being discarded mid-flow 
 1. **Source**: Run MCP Source Hierarchy tiers 1-5 (Readwise → Voicenotes → Plaud → Gemini-files → LlamaCloud) before web. Web is support, not seed.
 2. **Gather**: Use MCPs for frameworks (rewrite in user voice)
 3. **Select**: Choose theme from 6-week rotation (avoid repetition)
+3.5. **Route editorial lane**: Load `references/editorial-lanes-distribution.md`; for serious enterprise and education topics, create attention + authorship candidates from one thesis, score both, recommend one, preserve both in one topic record
 4. **Structure**: Apply 4-layer structure (Violation → Credential → Insight → Hook); pick a hook archetype, avoid retired patterns
 5. **Verify (SUCCESs)**: Check all 6 elements present
 5.5. **Hook Test + Cringe Test**: Line-1 gate (5 questions) + year-from-now self-check
 6. **Polish**: Voice authenticity, structural variety, format anti-patterns, tone-dial calibration, vulnerability guardrail (if personal)
 7. **Output**: Post text only (no wrapper text)
-7.5. **Mechanics Gate**: Auto-invoke `linkedin-posts` for char/See-more/image/format validation. Apply clash table — voice/length/CTA prescriptions REJECTED; mechanics fixes APPLIED. Shiva wins every writing-style clash.
-8. **After publish**: First-hour reply discipline; 24-hour substantive commenting on others; no pods
-9. **Wiki Save + Taste Capture (MANDATORY)**: Write post + frontmatter + Taste Notes section to `Obsidian Wiki/linkedin-posts/YYYY-MM-DD-slug.md`. Append `log.md`, add to `index.md` under "LinkedIn Posts" section. If pattern recurs across ≥3 posts, promote into `synthesis/linkedin-roster-theme-system.md` "Taste Topics". Skip ONLY on explicit "don't save" or Step 5.5 kill.
+7.5. **Mechanics Gate**: Auto-invoke `linkedin-posts` for char/See-more/image/format validation on every surviving candidate. Apply clash table — voice/length/CTA prescriptions REJECTED; mechanics fixes APPLIED. Shiva wins every writing-style clash.
+8. **After publish**: First-hour reply discipline; 24-hour substantive commenting on others; no pods; capture qualified outcomes without overlearning from one post
+9. **Wiki Save + Taste Capture (MANDATORY)**: Write one topic record containing candidate ledger, selected copy, prediction, outcome, frontmatter, and Taste Notes to `Obsidian Wiki/linkedin-posts/YYYY-MM-DD-slug.md`. Append `log.md`, add to `index.md` under "LinkedIn Posts" section. If pattern recurs across ≥3 posts, promote into `synthesis/linkedin-roster-theme-system.md` "Taste Topics". Skip ONLY on explicit "don't save" or Step 5.5 kill.
 
 ---
 
@@ -683,6 +712,7 @@ If the post failed the Hook Test or Cringe Test and is being discarded mid-flow 
 **🔗 LOAD `references/god-mode-pipeline.md` for the full step-by-step playbook.** That file contains detailed instructions for G0-G7, the publish protocol invocation pattern, and the post-run learning capture routing. The body of SKILL.md keeps only the high-level shape below.
 
 **Reference files loaded progressively as god-mode steps fire:**
+- `references/editorial-lanes-distribution.md` — dual candidates, selection gate, genre visual route, distribution benchmark, and outcome ledger (G1, G2, G8, post-run)
 - `references/visual-philosophy-linkedin.md` — visual types, Lateral Thinking Principles, classification (G2, G3)
 - `references/seedream-prompt-rules.md` — prompt construction rules (G4)
 - `references/learnings-protocol.md` — JSONL self-evolution loop (G0, G6, post-run)
@@ -694,7 +724,7 @@ If the post failed the Hook Test or Cringe Test and is being discarded mid-flow 
 |---|---|---|---|
 | **G0** | Learnings checkpoint | `references/learnings-protocol.md` | Display NEW count + promotion candidates |
 | **G1** | Steps 1-7.5 (existing flow) | — | Post drafted + mechanics-gated |
-| **G2** | Visual Need Decision | `references/visual-philosophy-linkedin.md` "Visual Need Decision Gate" | yes/no + reason |
+| **G2** | Genre route + Visual Need Decision | `references/editorial-lanes-distribution.md`, then `references/visual-philosophy-linkedin.md` "Visual Need Decision Gate" | genre, yes/no + contribution reason |
 | **G3** | Visual Style Determination (only if G2 = yes) | `references/visual-philosophy-linkedin.md` (full file) | Visual style spec (TYPE / KEY MOMENT / SUBJECT / TREATMENT / PALETTE / COMPOSITION / PRINCIPLES APPLIED / PITCH) |
 | **G4** | SeedDream Prompt Construction (only if G2 = yes) | `references/seedream-prompt-rules.md` | Final two-part prompt (content narrative + style cluster) |
 | **G5** | Image Generation via fal.ai SeedDream (only if G2 = yes) | — | PNG saved to `linkedin-images/{date}-{slug}.png` |
@@ -762,6 +792,8 @@ After god mode finishes, if the user gives any feedback signal:
 - "regenerate but [reason]" → capture `lk_visual_*` based on reason
 - "this is great" / "ship it" → no capture needed (positive confirmation)
 
+Also update the single topic's candidate/outcome ledger when an alternate is preferred, a visual is rejected, or qualified post-publication evidence arrives. Treat the event as one observation. Promote a durable lane, timing, or visual rule only under the 12-post review rule in `references/editorial-lanes-distribution.md`.
+
 If the user explicitly invokes `/shva:shva-linkedin-post-writer learn` (separate command), walk through promotion candidates with their approval.
 
 ### What god mode is NOT
@@ -778,7 +810,7 @@ If the user explicitly invokes `/shva:shva-linkedin-post-writer learn` (separate
 ```
 G0  Learnings checkpoint     → 📚 N NEW, M PROMOTED, K candidates
 G1  Run Steps 1-7.5          → Post drafted + mechanics-gated
-G2  Visual need decision     → yes/no + reason
+G2  Genre + visual decision → genre route + yes/no + contribution reason
 G3  Visual style spec        → TYPE/KEY MOMENT/SUBJECT/TREATMENT/PALETTE/PITCH
 G4  SeedDream prompt         → Two-part: content + style cluster + Chinese keywords
 G5  Image generation         → fal.ai → Gemini fallback → text-only last resort

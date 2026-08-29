@@ -4,6 +4,14 @@
 > Commands in this plugin start with `/shva:` — that's the `shva` namespace tag.
 > (Yes, the missing "i" is on purpose. Easier to remember, impossible to collide.)
 
+## v0.9.2 — LinkedIn Dual-Lane Editorial System
+
+The LinkedIn writer now separates the quality of a thesis from its packaging. Serious enterprise-AI and AI/work/education topics produce two evidence-identical candidates: an **attention candidate** optimised for rapid relevance and an **authorship candidate** closest to Shiva's durable taste. Both pass the same evidence, voice, Hook, Cringe, SUCCESs, and mechanics gates; one is recommended, while both remain in one wiki topic record.
+
+Each record now preserves the candidate scores, pre-publication prediction, approved selection, qualified outcomes, and what the comparison taught. The system gives priority to inquiries, relevant invitations, profile/site movement, and intended-audience engagement; impressions remain context. Lane, visual, and timing rules change only after a 12-post publication-verified benchmark.
+
+The four portfolio genres now have different visual jobs and benchmark slots: personal systems thought on Monday 18:00 IST, executive enterprise AI on Wednesday 16:00, AI/work/education on Thursday 16:30, and monochrome `State of Humans` on Friday 15:30. These are approval slots, never unattended publishing authority.
+
 ## v0.9.1 — Hidden Agendas Spotter
 
 **`/shva:hidden-agendas-spotter` sees the reality beneath presented reality.** Use it on a claim, photograph, partnership, metric, policy, ritual, product launch, or everyday performance.

@@ -7,7 +7,7 @@
 
 | Plugin | Version | What it does |
 |---|---|---|
-| [`shva`](./shva) | 0.9.1 | Personal command and skill pack for cross-cutting work. v0.9.1 adds **Hidden Agendas Spotter** (`/shva:hidden-agendas-spotter`): a cross-domain method for seeing the production apparatus, reciprocal credibility trade, operative payoff, and costly reality beneath presented claims. |
+| [`shva`](./shva) | 0.9.2 | Personal command and skill pack for cross-cutting work. v0.9.2 upgrades LinkedIn authoring with dual attention/authorship candidates, a prediction-to-outcome taste ledger, genre-specific visual routes, and a four-slot benchmark schedule. |
 
 ## Why a separate marketplace
 
