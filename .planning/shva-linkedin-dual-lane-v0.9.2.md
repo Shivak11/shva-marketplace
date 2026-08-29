@@ -67,4 +67,3 @@ The two candidates must share one evidence-backed thesis. The attention candidat
 - The canonical skill explicitly routes to the reference and does not duplicate its full content.
 - Automation read-back shows the intended generation cadence and proposed publication slots while retaining draft-only behavior.
 - Wiki files exist, QMD update/embed complete, and the compiled title is retrievable.
-
