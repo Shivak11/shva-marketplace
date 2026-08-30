@@ -253,9 +253,9 @@ Then specify:
 
 If fal.ai unavailable, fall back to Gemini Pro via `nano-banana:generate` skill. WARNING: Gemini Pro landscape outputs ~16:9 (1376×768), not 4:3 or 1:1. Will need post-crop. Quality and color rendering will differ — accept that the fallback image is "good enough" not "design-perfect."
 
-**Last-resort path: skip image, ship post text-only**
+**Last-resort path for ordinary prose posts: skip image, ship post text-only**
 
-If both engines fail, ship the post without an image. Log the failure to learnings JSONL with domain `lk_seedream_render`. Better text-only than a broken image.
+If both engines fail on an ordinary prose post, ship the post without an image and log the failure to learnings JSONL with domain `lk_seedream_render`. For `State of Humans`, this fallback is forbidden: the comic is the primary artifact, so stop before output or delivery and repair production under the dedicated comic reference.
 
 ---
 
@@ -323,5 +323,5 @@ ENGINE
 ─────────────
 Primary: fal-ai-media skill → SeedDream 4.5
 Fallback: nano-banana:generate → Gemini Pro
-Last resort: ship text-only, log to learnings
+Last resort: ordinary prose may ship text-only and log to learnings; `State of Humans` stops
 ```

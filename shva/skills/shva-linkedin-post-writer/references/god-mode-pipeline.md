@@ -9,6 +9,7 @@
 > - `seedream-prompt-rules.md` — prompt construction rules (G4)
 > - `learnings-protocol.md` — JSONL self-evolution loop (G0, G6, post-run)
 > - `linkedin-publish-rules.md` — six-step publish protocol (G7)
+> - `state-of-humans-editorial-comic-system.md` — mandatory branch for `State of Humans` scripting, rendering, metadata, and visual QA
 
 ---
 
@@ -34,9 +35,9 @@
 |---|---|---|---|
 | **G0** | Learnings checkpoint | `learnings-protocol.md` | NEW count + promotion candidates surfaced |
 | **G1** | Steps 1-7.5 (existing flow) | — | Post drafted + mechanics-gated |
-| **G2** | Visual Need Decision | `visual-philosophy-linkedin.md` (decision gate) | yes/no + reason |
-| **G3** | Visual Style Determination | `visual-philosophy-linkedin.md` (full file) | Visual style spec |
-| **G4** | SeedDream Prompt Construction | `seedream-prompt-rules.md` | Two-part prompt |
+| **G2** | Visual Need Decision | Dedicated comic reference for `State of Humans`; otherwise `visual-philosophy-linkedin.md` | required comic or yes/no + reason |
+| **G3** | Visual Style Determination | Dedicated comic reference for `State of Humans`; otherwise `visual-philosophy-linkedin.md` | continuity-locked comic brief or visual style spec |
+| **G4** | Prompt / Production Brief | Dedicated comic reference for `State of Humans`; otherwise `seedream-prompt-rules.md` | comic production brief or two-part prompt |
 | **G5** | Image Generation | — | PNG saved to `linkedin-images/{date}-{slug}.png` |
 | **G6** | Visual Audit + Learnings Capture | `learnings-protocol.md` | Audit report + JSONL captures |
 | **G7** | Final Output + Publish | `linkedin-publish-rules.md` | Post live on LinkedIn + post-publish verified |
@@ -62,7 +63,7 @@ The skill evolves over time. Surfacing existing learnings at the start lets recu
 
 ## G1: Run Existing Flow (Steps 1-7.5)
 
-The existing skill workflow runs unchanged. God mode adds visual generation and publish verification on top of it — it does not modify the writing pipeline.
+The existing skill workflow runs unchanged for ordinary posts. For `State of Humans`, the dedicated reference deliberately replaces the prose-length, generic visual, no-text, no-robot, and text-only fallback rules where it says so.
 
 Execute exactly as written in SKILL.md:
 - Step 1: Search for recent announcement (or use the user-provided topic / voicenote idea)
@@ -88,7 +89,9 @@ Apply the heuristic:
 
 In god mode: apply heuristic SILENTLY. No `AskUserQuestion`. Log decision + one-line reason for the learnings loop.
 
-If decision = NO → skip to G6 (audit/learnings on post-only) and then G7.
+For `State of Humans`, decision = NO is invalid: the comic is the post. Stop and repair the visual premise or production artifact.
+
+For other genres, if decision = NO → skip to G6 (audit/learnings on post-only) and then G7.
 If decision = YES → continue to G3.
 
 ---
@@ -173,7 +176,7 @@ In this user's environment, fal.ai requires interactive OAuth (interrupts auto m
 
 If the primary engine fails, capture `lk_engine_failure` learning entry (severity HIGH).
 
-**Last-resort path:** If both engines fail, ship the post text-only. Capture `lk_engine_failure`. Better text-only than broken image.
+**Last-resort path:** If both engines fail, capture `lk_engine_failure`. For ordinary posts, text-only remains valid. For `State of Humans`, stop before output or delivery; never separate its principle caption from the comic that supplies the complete context.
 
 ---
 
@@ -230,16 +233,16 @@ Display in this order:
 
 ### Part 7b: Publish Protocol (only if user requests publishing)
 
-If the user asks to publish to LinkedIn (e.g., "post it now"), follow the SIX-STEP protocol from `linkedin-publish-rules.md`. Do NOT use direct `linkedin_post`. The protocol:
+If the user asks to save, schedule, or publish on LinkedIn, follow the owner-bound Cloudflare protocol from `linkedin-publish-rules.md`. Never use the metadata-incapable app shim or a legacy/local write server. Do NOT use direct `linkedin_post`. The protocol:
 
-1. **ASCII Sanitize** — em-dashes → hyphens, drop diacritics, simplify hashtags. Validate no char > U+007F.
-2. **Draft Save** — `linkedin_drafts_save(text, images, content_type="image")`
-3. **Draft Readback** — `linkedin_drafts_get(id)` and diff vs intended.
-4. **Publish** — `linkedin_drafts_publish(draft_id)` + confirm `POST IT`.
-5. **Post-Publish Verify** — `linkedin_posts_history(limit=1)` and diff returned text vs intended. (Load-bearing step — drafts store full text correctly even when LinkedIn truncates at publish.)
-6. **Auto-Retry on Truncation** — `linkedin_delete(urn)` + `DELETE IT`, then return to Step 1 with stricter sanitization. Max 2 retries.
+1. **Status + duplicate gate** — require healthy database and connected owner; check a stable tag.
+2. **Draft Save** — use only `linkedin-cloudflare.linkedin_drafts_save`; for images send exact bytes/URL plus `mime_type`, `filename`, and authored `alt_text`; confirm the staged save with `CONFIRM`.
+3. **Draft Readback** — `linkedin_drafts_get(id)` and diff exact text, content type, visibility, image hash, MIME type, filename metadata, byte size, and alt text.
+4. **Schedule or publish, never both** — for a future slot call `linkedin_schedule_add` and confirm `CONFIRM`; for an immediate post call `linkedin_drafts_publish` and confirm `POST IT`.
+5. **Receipt readback** — verify pending Schedule ID/Draft ID/UTC/fingerprint, or treat `linkedin_posts_history` only as a publication receipt.
+6. **Public verification / recovery** — after publication, use public readback for exact-body proof. If a legacy truncation occurs, use the approved delete-and-ASCII-retry recovery in the publishing reference; never mutate approved Unicode pre-emptively on the current cloud path.
 
-The image is hosted via `catbox.moe` upload (one-line curl) for the public URL passed to LinkedIn.
+Prefer managed image bytes through the cloud MCP. A public image URL is allowed only when independently verified and explicitly chosen; `catbox.moe` is not the default path.
 
 ---
 
@@ -287,14 +290,14 @@ Attachment: $VAULT/linkedin-posts/attachments/YYYY-MM-DD-slug-<descriptor>.png
 
 ### Step G8d: Copy the image (if G2 = yes)
 
-In god-mode, the image lives at `linkedin-images/{date}-{slug}.png` inside the linkedin-mcp-server repo. Copy it to the wiki attachments folder:
+In god-mode, copy the exact approved production master or independently inspected publish rendition from its recorded source path into the wiki attachments folder. Do not assume a legacy `linkedin-mcp-server` checkout or a PNG transport format:
 
 ```bash
-cp "linkedin-images/{date}-{slug}.png" \
-   "$VAULT/linkedin-posts/attachments/{date}-{slug}-<descriptor>.png"
+cp "<verified-approved-artifact-path>" \
+   "$VAULT/linkedin-posts/attachments/{date}-{slug}-<descriptor>.<ext>"
 ```
 
-Keep the original in `linkedin-images/` — the linkedin-mcp-server repo continues to be the source-of-truth for the image used by the LinkedIn publish protocol. The wiki copy is for cross-referencing inside Obsidian.
+Keep the original at its recorded source location. The cloud draft read-back, not a repository convention, proves which bytes are attached to the LinkedIn artifact; the wiki copy preserves provenance and retrieval.
 
 ### Step G8e: Append log.md, update index.md
 
@@ -361,6 +364,6 @@ If the user explicitly invokes `/shva:shva-linkedin-post-writer learn` (separate
 - ❌ A replacement for the basic skill — the basic flow (Steps 1-8) still works without god mode for fast post-only drafts.
 - ❌ A free pass on quality — every audit check still HARD-blocks if it fails.
 - ❌ A way to bypass Shiva's voice rules — Step 7.5 Governing Rule applies to visual style too (kostja's "professional B2B" cannot soften the image).
-- ❌ A guarantee of an image — if the post genuinely doesn't need one (Constraint Migration with pure numerical-lead violation), god mode SKIPS the image and ships text-only.
+- ❌ A guarantee of an image for ordinary prose posts — if the post genuinely does not need one, god mode may ship text-only. `State of Humans` is the hard exception: the approved comic is the primary artifact and must remain attached to its principle caption.
 - ❌ A direct-publish bypass — even in god mode, the six-step publish protocol is mandatory. No exceptions.
 - ❌ A wiki-save bypass — G8 is mandatory. A post that runs god-mode and doesn't land in the wiki leaves no audit trail for the next post's voice check.

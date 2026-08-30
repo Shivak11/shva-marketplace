@@ -387,6 +387,7 @@ If any answer is shaky, kill the personal frame and rewrite as observation/data 
 - Shorter than 200 words: May lack depth
 - Longer than 350 words: Reduces completion rate
 - Exception: Week 3 (Release) posts can be longer if announcing framework
+- **`State of Humans` exception:** its selected comic must carry the causal case independently, and the caption normally contains one portable principle plus `State of Humans · NN` and precise hashtags. The dedicated comic reference governs this branch; do not expand it to 200 words or reject it for being short.
 
 **Spacing & Readability**:
 - Use line breaks between paragraphs (double line breaks in output)
@@ -481,7 +482,7 @@ When Step 3.5 produced two candidates, run this mechanics gate on **both**, then
 **How to invoke:** Call `Skill(skill="linkedin-posts")`. Read its output. Apply the filter rules below.
 
 **USE from `linkedin-posts`:**
-- **Char count of full post** — verify within ~1,200-2,100 chars (Shiva's 200-350 word band). Release-theme posts may exceed this if announcing a framework.
+- **Char count of full post** — verify within ~1,200-2,100 chars (Shiva's 200-350 word band). Release-theme posts may exceed this if announcing a framework. `State of Humans` principle-only captions are governed by the dedicated comic reference and are intentionally shorter.
 - **First-2-lines char count vs 235-char "See more" cutoff** — does the Violation+Credential opener land in the visible portion before "See more"? If not, tighten line 1 (do NOT fall back to 140-char rule).
 - **Image dimensions** if the post includes an image: 1200×627 (1.91:1) for link previews, 1200×1200 for single square, vertical preferred, ≤10MB JPG/PNG.
 - **Post-type alternatives** — only as a suggestion: if this is a Release-theme post announcing a framework, consider whether a 5-slide document carousel or LinkedIn Article would outperform a feed post. Decision stays with the writer.
@@ -493,7 +494,7 @@ When Step 3.5 produced two candidates, run this mechanics gate on **both**, then
 |---|---|
 | "B2B tone: Professional and constructive" | Shiva's voice is deliberately contrarian/provocative. Override: voice rules in this skill win. |
 | "Place key message in first 140 chars" | Shiva uses Violation+Credential in first 2 lines (often >140 chars). Use the 235-char "See more" cutoff instead. |
-| "Optimal: 1,300-1,600 chars; avoid >2,000" | Shiva's 200-350 word band governs. Release exception allows >2,000. |
+| "Optimal: 1,300-1,600 chars; avoid >2,000" | Shiva's 200-350 word band governs ordinary posts. Release posts may exceed it; `State of Humans` principle captions are intentionally shorter. |
 | "Match CTA to form" | Shiva uses 6 specific closing styles, not generic CTAs. |
 | Kostja's Output Format spec ("first line + full post with char count + hashtags + image specs + form note") | Shiva's strict zero-wrapper output format is non-negotiable. Kostja's spec is for INTERNAL mechanics reference, NOT the user-facing output. |
 
@@ -639,7 +640,7 @@ If no image — omit this section entirely.
 - **Principles applied**: list ≥3 of the 8
 - **One-sentence pitch**: from G3 VD6 pitch test
 - **Audit findings**: aspect ratio ✓, no-text ✓, no-face ✓, no-white-bg ✓, hand-glitch ✓, cream-border ✓ (or note what failed and was regenerated)
-- **Engine**: SeedDream 4.5 / Gemini Nano Banana 2 / text-only-fallback + elapsed time
+- **Engine**: SeedDream 4.5 / Gemini Nano Banana 2 / text-only fallback for ordinary posts only + elapsed time. `State of Humans` fails closed when its comic fails.
 - **Image**: `![[attachments/YYYY-MM-DD-slug-<descriptor>.png]]`
 
 ## Connections
@@ -767,38 +768,23 @@ The body of SKILL.md keeps only the high-level shape (the table above) plus the 
 2. **NEVER override Shiva's voice** to accommodate visual style. Step 7.5's Governing Rule still applies — Shiva wins every writing-style clash, including any clash with the visual.
 3. **STILL run mandatory mechanical checks** (aspect ratio, audit, prompt length) — these are mechanical, not voice-related.
 4. **Capture learnings on every HIGH-severity finding** — this is the loop's lifeblood. No quiet failures.
-5. **Image is supportive, not the headline.** If god mode produces a perfect post but a glitched image, ship the post text-only and log the failure. Do NOT hold up the post for a perfect image.
+5. **Image is normally supportive, with one hard exception.** For ordinary posts, a glitched optional image may fall back to text-only. For `State of Humans`, the image is the primary editorial artifact: never emit, save, schedule, or publish the principle-only caption without an approved comic. Stop, record the visual failure, and revise the image.
 6. **Output the post FIRST** (zero-wrapper, first letter is first character) — image block follows after a separator.
 7. **Verify with `sips`** after every image generation. Always.
-8. **🚨 PUBLISH PROTOCOL: Six-step ASCII-sanitize → draft → publish → verify → auto-retry.**
-   
-   Validated 2026-04-25 across 3 publish attempts. **Direct `linkedin_post` is BANNED for any post over 200 chars.** The draft-first protocol alone is INSUFFICIENT — drafts store full text correctly even when LinkedIn's publish step silently truncates non-ASCII content.
-   
-   **Load `references/linkedin-publish-rules.md` for the full HARD constraints.** The mandatory cycle:
-   
+8. **🚨 DELIVERY PROTOCOL: owner-bound cloud draft → exact readback → schedule or publish → receipt → public verification.**
+
+   **Direct `linkedin_post` is banned. Use only the metadata-capable `linkedin-cloudflare` MCP; never fall back to an app shim, legacy local server, or Render.** Load `references/linkedin-publish-rules.md` for the full constraints.
+
    ```
-   Step 1  ASCII SANITIZE  — em-dash → hyphen, drop diacritics (ī ā ē ū ō),
-                            replace smart quotes with straight, simplify hashtags
-                            (#tryrehearsal NOT #tryrehearsal.ai). Validate with
-                            python3 ord()>127 scan. NEVER publish with non-ASCII.
-   
-   Step 2  DRAFT SAVE      — linkedin_drafts_save(text, images, content_type="image")
-   
-   Step 3  DRAFT READBACK  — linkedin_drafts_get(id) — diff vs intended.
-                            (This catches MCP-storage issues, not LinkedIn-publish issues.)
-   
-   Step 4  PUBLISH         — linkedin_drafts_publish(draft_id) + confirm POST IT.
-   
-   Step 5  POST-PUBLISH    — linkedin_posts_history(limit=1) — fetch the just-
-       VERIFY                published post and diff returned text vs intended.
-                            (THIS IS THE LOAD-BEARING STEP. Truncation is detected here.)
-   
-   Step 6  AUTO-RETRY      — On Step-5 truncation: linkedin_delete(urn) + DELETE IT,
-                            stricter ASCII sanitization, return to Step 1.
-                            Max 2 retries before alerting user.
+   Step 1  STATUS + DUPLICATE — healthy owner connection; stable internal tag
+   Step 2  DRAFT SAVE         — exact text; image MIME, filename, alt text; CONFIRM
+   Step 3  DRAFT READBACK     — diff full text and every image metadata field
+   Step 4  SCHEDULE OR PUBLISH— future: schedule + CONFIRM; now: publish + POST IT
+   Step 5  RECEIPT READBACK   — schedule IDs/fingerprint or publication receipt
+   Step 6  PUBLIC VERIFY      — exact public body/media proof after delivery
    ```
-   
-   **Sanskrit / non-English anchors are OK only as pure-ASCII transliterations (vivek, vivinakti, gurukul, dharma).** Drop diacritics. Translate `dhīra`/`preya`/`shreya` and similar inline. The linguistic killer move survives translation — keep 1-2 Sanskrit anchors max.
+
+   The April 2026 ASCII conversion rule is now a recovery fallback after a proven truncation, not permission to alter approved Unicode copy pre-emptively on the current cloud path.
 
 ### Post-Run Self-Learning
 
@@ -817,7 +803,7 @@ If the user explicitly invokes `/shva:shva-linkedin-post-writer learn` (separate
 - ❌ A replacement for the basic skill — the basic flow (Steps 1-8) still works without god mode for fast post-only drafts
 - ❌ A free pass on quality — every audit check still HARD-blocks if it fails
 - ❌ A way to bypass Shiva's voice rules — Step 7.5 Governing Rule applies to visual style too (kostja's "professional B2B" cannot soften the image)
-- ❌ A guarantee of an image — if the post genuinely doesn't need one (Constraint Migration with pure numerical-lead violation), god mode SKIPS the image and ships text-only
+- ❌ A guarantee of an image for ordinary prose posts — if the post genuinely does not need one, god mode may ship text-only. `State of Humans` is the exception: its approved comic is mandatory.
 
 ---
 
@@ -829,7 +815,7 @@ G1  Run Steps 1-7.5          → Post drafted + mechanics-gated
 G2  Genre + visual decision → genre route + yes/no + contribution reason
 G3  Visual style spec        → TYPE/KEY MOMENT/SUBJECT/TREATMENT/PALETTE/PITCH
 G4  SeedDream prompt         → Two-part: content + style cluster + Chinese keywords
-G5  Image generation         → fal.ai → Gemini fallback → text-only last resort
+G5  Image generation         → fal.ai → Gemini fallback → ordinary posts may fall back to text-only; `State of Humans` stops
 G6  Audit + learnings        → Aspect/text/face/bg/hands checks + JSONL capture
 G7  Final output + publish   → Post (zero-wrapper) + image block + (optional) 6-step LinkedIn publish protocol
 G8  Wiki save + taste        → linkedin-posts/YYYY-MM-DD-slug.md + log.md + index.md ; attachments mirrored ; ≥3-recurrence patterns promoted into synthesis/linkedin-roster-theme-system.md

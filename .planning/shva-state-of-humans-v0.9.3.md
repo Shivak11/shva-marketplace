@@ -59,7 +59,12 @@ and preserve exact LinkedIn delivery receipts in the wiki.
 ## Verification
 
 - `python3 /Users/shivakakkar/.codex/skills/.system/skill-creator/scripts/quick_validate.py shva/skills/shva-linkedin-post-writer`
-- `python3 /Users/shivakakkar/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py shva`
+- Run the official skill validator. Parse the repository's existing Claude-style
+  `.claude-plugin` manifests directly. The Codex-native plugin validator is an
+  explicit N/A for v0.9.3 because this established marketplace does not carry a
+  `.codex-plugin/plugin.json`; do not introduce a second packaging contract in an
+  editorial-system release. Prove Codex compatibility through the later installed
+  cache read-back after approved release instead.
 - Parse all changed JSON metadata and verify every public version string is 0.9.3.
 - Inspect `git diff --check`, the full diff, and complete staged status before each
   commit. Commit verified units immediately.
@@ -78,3 +83,21 @@ The v0.9.3 skill release is committed, validated, merged, pushed, and installed;
 the wiki records are retrievable with exact delivery receipts; and the three W37
 schedules remain pending at their approved morning times without duplicate drafts
 or schedules.
+
+## Adversarial repair addendum
+
+Fresh verification found that three older generic rules could outrank the new
+comic system. v0.9.3 therefore also repairs these before release:
+
+- the 200–350 word target explicitly exempts the principle-only `State of Humans`
+  caption;
+- the generic text-only visual fallback is forbidden for comic-first episodes,
+  because the image is the primary editorial artifact;
+- God Mode and the publishing reference bind image delivery to the owner-bound
+  `linkedin-cloudflare` route and require read-back of alt text, filename metadata,
+  MIME type, bytes and hash before scheduling;
+- the old ASCII-only rule is retained as legacy failure evidence and a recovery
+  fallback, not as permission to mutate exact approved Unicode copy in the current
+  cloud path;
+- wiki filename, alt-text, weekday-review and cloud-capability language is
+  reconciled to one current contract.

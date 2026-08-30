@@ -1,10 +1,19 @@
-# LinkedIn Publishing Rules — Hard Constraints (validated 2026-04-25)
+# LinkedIn Delivery Rules — Owner-Bound Cloud Path (updated 2026-08-30)
 
 > **What this covers:** The LinkedIn API's actual ingest behavior via this MCP path, validated through 3 publish attempts on the same post (2 truncations, 1 clean). These are HARD CONSTRAINTS — not preferences.
 >
-> **When to load:** During god-mode Step G7 (Final Output) — BEFORE saving the LinkedIn draft, run the post text through the ASCII sanitizer described here.
+> **When to load:** During god-mode Step G7, before saving a LinkedIn draft, schedule, or immediate publication.
 >
-> **Status of these rules:** PROMOTED — recurrence ≥ 2 on truncation evidence.
+> **Status of these rules:** The 2026-04-25 truncation is retained as legacy failure evidence. The current authoritative route is the metadata-capable, owner-bound `linkedin-cloudflare` MCP verified on 2026-08-30. Exact approved text is preserved by default; ASCII sanitisation is now a recovery fallback, not a pre-emptive rewrite.
+
+## Current Provider Boundary
+
+- Use only the owner-bound `linkedin-cloudflare` MCP for every write.
+- Never fall back to `codex_apps`/app-shim, local, Render, or legacy LinkedIn write tools. The app shim lacks `alt_text` and `filename` fields.
+- Require `linkedin_status` to report a healthy database and LinkedIn connected as Shiva Kakkar.
+- Use a stable internal tag and `linkedin_drafts_list` before saving to prevent duplicates.
+- For images, send and read back authored `alt_text`, canonical MCP-side `filename`, allowed `mime_type`, byte size, and image hash. LinkedIn receives alt text; the filename remains MCP provenance and is not a ranking claim.
+- Draft saved, scheduled, published, and publication-verified are separate states.
 
 ---
 
@@ -18,9 +27,9 @@
 
 ---
 
-## 🔴 HARD RULE 1: Pure ASCII text only
+## Legacy Recovery Rule: Pure ASCII After A Proven Truncation
 
-LinkedIn posts via this MCP MUST be 7-bit ASCII. Convert before publishing:
+The April 2026 legacy path truncated certain non-ASCII sequences. The current cloud path has since preserved approved Unicode punctuation through exact draft read-back. Do not mutate approved text pre-emptively. Run the conversion below only after a real publication mismatch or when deliberately using the historical recovery path.
 
 | Original | Convert to | Reason |
 |---|---|---|
@@ -32,7 +41,7 @@ LinkedIn posts via this MCP MUST be 7-bit ASCII. Convert before publishing:
 | Ellipsis `…` (U+2026) | Three dots `...` | Risk of truncation |
 | Non-breaking space (U+00A0) | Regular space | Risk of truncation |
 
-**Validation script (run before every LinkedIn publish):**
+**Legacy recovery validation script (run only after a proven public-body mismatch or when deliberately using the historical recovery path):**
 
 ```bash
 # Detect any non-ASCII byte in the post text
@@ -47,11 +56,11 @@ print('✅ Pure ASCII')
 "
 ```
 
-If the script flags any character, REPLACE it before publishing. Do not attempt to publish with non-ASCII content.
+If the script flags any character, replace it before the explicitly approved recovery re-publication. Do not use this result to alter already approved copy on the current owner-bound cloud path.
 
 ---
 
-## 🔴 HARD RULE 2: Sanskrit / non-English transliterations are OK only if pure ASCII
+## Legacy Recovery Detail: Sanskrit / Non-English Transliteration
 
 You CAN keep Sanskrit conceptual terms — they earn the post's voice — but they must be transliterated without diacritics:
 
@@ -81,45 +90,42 @@ If you want to mention the URL: put `tryrehearsal.ai` in the post body or a comm
 
 ---
 
-## 🔴 HARD RULE 4: Mandatory publish protocol — six steps
+## Current Mandatory Delivery Protocol
 
-Direct `linkedin_post` is BANNED for any post over 200 chars. The full mandatory cycle:
+Direct `linkedin_post` is banned. The full current cycle is:
 
 ```
-Step 1  ASCII Sanitize
-        Run the validation script. Fix any non-ASCII char before proceeding.
-        Replace em-dashes with hyphens, drop diacritics, simplify hashtags.
+Step 1  STATUS + DUPLICATE GATE
+        Require healthy database and connected owner. Search one stable tag.
 
-Step 2  Draft Save  (linkedin_drafts_save)
-        Save the sanitized text + image as a draft.
+Step 2  DRAFT SAVE + CONFIRM
+        Call linkedin-cloudflare linkedin_drafts_save with exact approved text,
+        visibility and content type. For each image send data or verified URL,
+        mime_type, filename and authored alt_text. Confirm with CONFIRM.
 
-Step 3  Draft Readback Verify  (linkedin_drafts_get)
-        Read the saved draft. Diff returned text vs intended text.
-        If any character mismatch, fix and re-save.
+Step 3  FULL DRAFT READBACK
+        Read the saved draft. Diff text, visibility, content type, internal tags,
+        image hash, MIME type, filename metadata, bytes and authored alt text.
 
-Step 4  Publish Draft  (linkedin_drafts_publish + confirm POST IT)
-        Promote the draft to published.
-        Cloudflare MCP confirmation is a separate call: when the preview
-        returns an Action ID, call linkedin_confirm with that
-        pending_action_id and confirmation="POST IT". Do not rerun
-        linkedin_drafts_publish or linkedin_post; that creates a new preview.
+Step 4A SCHEDULE (future time)
+        Convert approved Asia/Kolkata time to UTC ISO 8601 ending in Z. Call
+        linkedin_schedule_add and confirm with CONFIRM. Do not publish the draft.
 
-Step 5  Post-Publish History Verify  (linkedin_posts_history limit=1)
-        Fetch the just-published post from history. Diff returned text
-        against the intended text — character-for-character.
+Step 4B PUBLISH (now)
+        Call linkedin_drafts_publish and confirm with POST IT. Do not schedule it.
 
-Step 6  On Truncation: Auto-delete + Retry
-        If Step 5 reveals truncation:
-        - Call linkedin_delete on the truncated URN
-        - Confirm DELETE IT
-        - Return to Step 1 with stricter ASCII sanitization
-        - Maximum 2 retry attempts before alerting user
+Step 5  RECEIPT READBACK
+        For schedules, verify Schedule ID, Draft ID, UTC time, artifact fingerprint
+        and pending status. For publication, history is a receipt only.
+
+Step 6  PUBLIC VERIFY / RECOVER
+        After the due time or immediate publication, use public LinkedIn readback
+        for exact body/media proof. If truncation is observed, delete only with
+        explicit DELETE IT confirmation, ASCII-sanitise as recovery, and retry at
+        most twice.
 ```
 
-**Why all six steps are mandatory:**
-- Steps 1-3 catch issues before publish (saves the user from seeing a broken post).
-- Steps 4-5 catch the LinkedIn-side truncation (which Steps 2-3 cannot detect, because drafts store full text correctly even when publish truncates — validated 2026-04-25).
-- Step 6 is the recovery loop — never leave a truncated post live for the user to clean up.
+**Why all six steps are mandatory:** the route separates identity, exact artifact preservation, consequential action, and public proof. A healthy draft cannot prove a schedule; a pending schedule cannot prove publication; history cannot prove the exact public body.
 
 ---
 
@@ -137,7 +143,7 @@ Validated 2026-04-25: removed "beautiful women" from the Yama-Nachiketa scriptur
 
 ---
 
-## 🟢 ENABLEMENT: What works
+## 🟢 LEGACY ENABLEMENT EVIDENCE: What worked on the 2026-04-25 path
 
 **Validated to publish cleanly at 1,548 chars with image attached:**
 - Pure ASCII text
@@ -149,11 +155,11 @@ Validated 2026-04-25: removed "beautiful women" from the Yama-Nachiketa scriptur
 - Two-line hook → segue → main paragraphs
 - Straight quotes `"..."` for dialogue
 
-This is the validated post template — start from this shape and adapt content.
+This is historical recovery evidence, not the current default template. On the owner-bound cloud path, preserve the exact approved artifact, prefer managed image bytes, and require metadata plus public read-back.
 
 ---
 
-## Reference: the validated working template
+## Legacy Reference: the 2026-04-25 working template
 
 ```
 [HOOK - one short line]
@@ -175,4 +181,4 @@ This is the validated post template — start from this shape and adapt content.
 #Hashtag1 #Hashtag2 #Hashtag3 #Hashtag4 #Hashtag5 #tryrehearsal
 ```
 
-Total target: 1,400-1,700 chars (well clear of the 3,000-char documented ceiling and the ~1,000-char Sanskrit-truncation tripwire).
+This template is historical evidence, not a current universal length or ASCII requirement. Current genre-specific length, caption, and metadata rules win.
