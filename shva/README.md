@@ -4,13 +4,21 @@
 > Commands in this plugin start with `/shva:` — that's the `shva` namespace tag.
 > (Yes, the missing "i" is on purpose. Easier to remember, impossible to collide.)
 
+## v0.9.3 — State of Humans Editorial Comic System
+
+`State of Humans` is now a first-class comic-first mode inside the canonical LinkedIn writer. It begins with hidden-agenda analysis—what is said, which costly action is avoided, which constraint people actually meet, and where blame is finally placed—then turns that causal contradiction into a self-contained editorial comic.
+
+The recurring visual language is locked: monochrome newspaper linework on warm-white paper, globally neutral humans, the same silent GPT witness with neutral dot eyes in every panel, and dark red used only to trace the causal failure state. A four-panel episode normally moves through mandate → constraint → compliant attempt → official verdict. The joke must land for someone who encounters the image first; the caption contributes one portable principle rather than retelling the panels.
+
+The LinkedIn portfolio now defaults to Shiva's preferred morning band: personal/taste on Monday 10:30 IST, executive enterprise AI on Tuesday 10:30, `State of Humans` on Wednesday 11:00, and AI/work/education on Friday 10:30. These remain approval-gated benchmark slots, and an explicit scheduling instruction always wins.
+
 ## v0.9.2 — LinkedIn Dual-Lane Editorial System
 
 The LinkedIn writer now separates the quality of a thesis from its packaging. Serious enterprise-AI and AI/work/education topics produce two evidence-identical candidates: an **attention candidate** optimised for rapid relevance and an **authorship candidate** closest to Shiva's durable taste. Both pass the same evidence, voice, Hook, Cringe, SUCCESs, and mechanics gates; one is recommended, while both remain in one wiki topic record.
 
 Each record now preserves the candidate scores, pre-publication prediction, approved selection, qualified outcomes, and what the comparison taught. The system gives priority to inquiries, relevant invitations, profile/site movement, and intended-audience engagement; impressions remain context. Lane, visual, and timing rules change only after a 12-post publication-verified benchmark.
 
-The four portfolio genres now have different visual jobs and benchmark slots: personal systems thought on Monday 18:00 IST, executive enterprise AI on Wednesday 16:00, AI/work/education on Thursday 16:30, and monochrome `State of Humans` on Friday 15:30. These are approval slots, never unattended publishing authority.
+The four portfolio genres received different visual jobs and an initial afternoon benchmark. v0.9.3 supersedes those timing defaults with Shiva's explicit morning preference while preserving the genre and visual distinctions.
 
 ## v0.9.1 — Hidden Agendas Spotter
 

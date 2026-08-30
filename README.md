@@ -7,7 +7,7 @@
 
 | Plugin | Version | What it does |
 |---|---|---|
-| [`shva`](./shva) | 0.9.2 | Personal command and skill pack for cross-cutting work. v0.9.2 upgrades LinkedIn authoring with dual attention/authorship candidates, a prediction-to-outcome taste ledger, genre-specific visual routes, and a four-slot benchmark schedule. |
+| [`shva`](./shva) | 0.9.3 | Personal command and skill pack for cross-cutting work. v0.9.3 adds a production-grade `State of Humans` editorial-comic system, stable series identity, comic-first metadata, and morning portfolio distribution defaults while preserving the dual-lane serious-post workflow. |
 
 ## Why a separate marketplace
 

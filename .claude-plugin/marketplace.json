@@ -7,8 +7,8 @@
   "plugins": [
     {
       "name": "shva",
-      "description": "Personal command + skill pack. v0.9.2 adds a dual-lane LinkedIn editorial system: one evidence-backed thesis becomes attention and authorship candidates, both are preserved in a prediction-to-outcome ledger, and four genres receive distinct visual and distribution rules.",
-      "version": "0.9.2",
+      "description": "Personal command + skill pack. v0.9.3 adds the State of Humans editorial-comic system: hidden-agenda analysis, a causal four-beat joke structure, stable cast and visual invariants, comic-first publishing metadata, and morning portfolio distribution rules.",
+      "version": "0.9.3",
       "source": "./shva",
       "author": {
         "name": "Shiva Kakkar"

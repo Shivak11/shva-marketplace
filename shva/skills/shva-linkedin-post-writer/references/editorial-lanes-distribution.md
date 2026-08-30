@@ -192,6 +192,9 @@ Reject the attachment when it merely summarises the post, paginates prose, repea
 
 ### `State of Humans`
 
+Load `state-of-humans-editorial-comic-system.md` before scripting. It is the
+controlling reference for this genre.
+
 **Prefer:** the established monochrome editorial-comic system, stable recurring cast, sparse panels, reality-based dark humour, and standalone comprehension. The post caption adds a memorable principle; it does not recap the joke.
 
 **Reject:** colourful cartoon styling that weakens seriousness, inconsistent characters, unexplained visual events, staccato dialogue, a joke dependent on reading the caption first, or a branded lockup louder than the comic.
@@ -204,17 +207,23 @@ Use these as proposed local benchmark slots in `Asia/Kolkata`:
 
 | Day and time | Portfolio genre | Editorial job |
 |---|---|---|
-| Monday 18:00 | Personal taste / wider systems thinking | Build durable authorship and widen Shiva's intellectual territory |
-| Wednesday 16:00 | Executive enterprise AI | Attract senior enterprise, GCC, transformation, HR/L&D, and advisory attention |
-| Thursday 16:30 | AI, work, and education | Own the education-work-AI intersection with practical judgment and apprenticeship arguments |
-| Friday 15:30 | `State of Humans` editorial comic | Grow recognition, shareability, and cultural reach without diluting authority |
+| Monday 10:30 | Personal taste / wider systems thinking | Build durable authorship and widen Shiva's intellectual territory |
+| Tuesday 10:30 | Executive enterprise AI | Attract senior enterprise, GCC, transformation, HR/L&D, and advisory attention |
+| Wednesday 11:00 | `State of Humans` editorial comic | Grow recognition, shareability, and cultural reach without diluting authority |
+| Friday 10:30 | AI, work, and education | Own the education-work-AI intersection with practical judgment and apprenticeship arguments |
 
-This is a controlled editorial benchmark, not a claim about a universal LinkedIn algorithm or the "best time to post." Keep the slots fixed for the 12-post review unless an explicit event makes a different time materially more relevant. Record any exception.
+These morning slots implement Shiva's explicit preference that regular posts land
+between 10:00 and 11:59. They are a controlled editorial benchmark, not a claim
+about a universal LinkedIn algorithm or the "best time to post." Keep the slots
+fixed for the 12-post review unless Shiva explicitly chooses another time or a
+time-sensitive event makes a different slot materially more relevant. A current,
+exact user instruction always overrides these defaults; record the exception and
+its reason in the topic ledger.
 
 ## Research Rationale and Limits
 
 - LinkedIn's next-generation feed architecture combines semantic relevance, member/content/network signals, recent behavioural sequences, and both active and passive feedback; its separate dwell-time work explains why a reader's pause can matter even without a reaction. This supports relevance, readability, and portfolio consistency, while ruling out deterministic "one trick" claims: [Engineering the next generation of LinkedIn's Feed](https://www.linkedin.com/blog/engineering/feed/engineering-the-next-generation-of-linkedins-feed) and [Leveraging dwell time to improve member experiences](https://www.linkedin.com/blog/engineering/feed/leveraging-dwell-time-to-improve-member-experiences-on-the-linkedin-feed).
-- Buffer's 2026 analysis of 4.8 million LinkedIn posts found the strongest aggregate windows had shifted toward weekday late afternoons and evenings, with Wednesday 16:00 and Friday 15:00-16:00 among the leading slots and Wednesday-Friday generally stronger than Monday-Tuesday. This informed the Wednesday, Thursday, and Friday premium slots; Monday 18:00 is deliberately the lower-stakes authorship slot. The study is cross-account observational evidence, not a guarantee for Shiva's audience: [The Best Time to Post on LinkedIn in 2026](https://buffer.com/resources/best-time-to-post-on-linkedin/).
+- Buffer's 2026 analysis of 4.8 million LinkedIn posts found strong aggregate weekday late-afternoon and evening windows. That cross-account result remains useful context, but it does not outweigh Shiva's explicit 10:00-11:59 preference or account-specific learning. The morning schedule is therefore a deliberate owner decision to test with Shiva's own qualified-outcome ledger, not a claim that the aggregate study is wrong: [The Best Time to Post on LinkedIn in 2026](https://buffer.com/resources/best-time-to-post-on-linkedin/).
 - LinkedIn's own post analytics expose impressions, members reached, saves, sends, profile viewers, followers gained, link visits, and audience demographics. This supports the qualified-outcome ledger, while LinkedIn explicitly notes that reach numbers are estimates: [Post analytics for your content](https://www.linkedin.com/help/linkedin/answer/a516971/post-analytics-for-your-content).
 - LinkedIn and Edelman's 2024 research reports that senior decision-makers value credible research, novel insight, and an early reason to continue reading; it also connects high-quality thought leadership with later consideration. This supports evidence-led hooks and executive utility, not sensationalism or guaranteed conversion: [Reach Beyond The Ready](https://www.linkedin.com/business/marketing/blog/research-and-insights/b2b-thought-leadership-research-impact-linkedin-edelman).
 - LinkedIn's 2025 synthesis says decision-makers use thought leadership to assess capability, and highlights topical timeliness and actionability. This supports the attention candidate and serious portfolio rhythm, but does not establish a deterministic feed-ranking formula: [Why B2B Thought Leadership Matters](https://www.linkedin.com/business/marketing/blog/content-marketing/the-importance-of-b2b-thought-leadership-content-and-how-to-get-it-right).

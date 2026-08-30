@@ -153,6 +153,21 @@ Themes plug into the **Three Signature Lenses** (defined in the next subsection)
 
 After the evidence-backed thesis exists, load `references/editorial-lanes-distribution.md`.
 
+**`State of Humans` hard branch — before scripting.** If the request is for
+`State of Humans`, an editorial comic, a comic-first treatment, or reality-based
+institutional satire, immediately load
+`references/state-of-humans-editorial-comic-system.md` **before** writing panel
+dialogue, a closing principle, an image prompt, a caption, or alt text. Run its
+statement-under-the-statement analysis and causal-story gate first. The comic
+must work for a reader who encounters the image before the LinkedIn caption.
+
+The dedicated comic reference governs the recurring cast, silent GPT witness,
+embedded panel text, palette, masthead, caption, alt text, feed-size inspection,
+and transport-safe publish rendition. Where it conflicts with the generic
+single-image rules in `references/visual-philosophy-linkedin.md` or
+`references/seedream-prompt-rules.md` — notably their no-robot and no-text
+defaults — the dedicated `State of Humans` reference wins for this genre only.
+
 - For a serious enterprise-AI or AI/work/education topic, create two treatments of the same thesis: an **attention candidate** and an **authorship candidate**. Preserve the same evidence, intended decision-maker, operational mechanism, caveats, and private-source boundary in both.
 - Score both candidates with the reference file's six-row Selection Gate. Recommend one for the slot and preserve the other as an explicit learning artifact.
 - Personal-taste posts are normally authorship-first. `State of Humans` is normally comic-first. Do not manufacture a second prose candidate when it adds no useful comparison.
@@ -691,7 +706,7 @@ If the post failed the Hook Test or Cringe Test and is being discarded mid-flow 
 1. **Source**: Run MCP Source Hierarchy tiers 1-5 (Readwise → Voicenotes → Plaud → Gemini-files → LlamaCloud) before web. Web is support, not seed.
 2. **Gather**: Use MCPs for frameworks (rewrite in user voice)
 3. **Select**: Choose theme from 6-week rotation (avoid repetition)
-3.5. **Route editorial lane**: Load `references/editorial-lanes-distribution.md`; for serious enterprise and education topics, create attention + authorship candidates from one thesis, score both, recommend one, preserve both in one topic record
+3.5. **Route editorial lane**: Load `references/editorial-lanes-distribution.md`; for `State of Humans` or editorial-comic work, load `references/state-of-humans-editorial-comic-system.md` before scripting; for serious enterprise and education topics, create attention + authorship candidates from one thesis, score both, recommend one, preserve both in one topic record
 4. **Structure**: Apply 4-layer structure (Violation → Credential → Insight → Hook); pick a hook archetype, avoid retired patterns
 5. **Verify (SUCCESs)**: Check all 6 elements present
 5.5. **Hook Test + Cringe Test**: Line-1 gate (5 questions) + year-from-now self-check
@@ -713,6 +728,7 @@ If the post failed the Hook Test or Cringe Test and is being discarded mid-flow 
 
 **Reference files loaded progressively as god-mode steps fire:**
 - `references/editorial-lanes-distribution.md` — dual candidates, selection gate, genre visual route, distribution benchmark, and outcome ledger (G1, G2, G8, post-run)
+- `references/state-of-humans-editorial-comic-system.md` — mandatory for every `State of Humans` or editorial-comic route; load before scripting, captioning, or image prompting (G1, G2, G3, G6, G7, G8)
 - `references/visual-philosophy-linkedin.md` — visual types, Lateral Thinking Principles, classification (G2, G3)
 - `references/seedream-prompt-rules.md` — prompt construction rules (G4)
 - `references/learnings-protocol.md` — JSONL self-evolution loop (G0, G6, post-run)
@@ -724,11 +740,11 @@ If the post failed the Hook Test or Cringe Test and is being discarded mid-flow 
 |---|---|---|---|
 | **G0** | Learnings checkpoint | `references/learnings-protocol.md` | Display NEW count + promotion candidates |
 | **G1** | Steps 1-7.5 (existing flow) | — | Post drafted + mechanics-gated |
-| **G2** | Genre route + Visual Need Decision | `references/editorial-lanes-distribution.md`, then `references/visual-philosophy-linkedin.md` "Visual Need Decision Gate" | genre, yes/no + contribution reason |
-| **G3** | Visual Style Determination (only if G2 = yes) | `references/visual-philosophy-linkedin.md` (full file) | Visual style spec (TYPE / KEY MOMENT / SUBJECT / TREATMENT / PALETTE / COMPOSITION / PRINCIPLES APPLIED / PITCH) |
-| **G4** | SeedDream Prompt Construction (only if G2 = yes) | `references/seedream-prompt-rules.md` | Final two-part prompt (content narrative + style cluster) |
+| **G2** | Genre route + Visual Need Decision | `references/editorial-lanes-distribution.md`; for `State of Humans`, load `references/state-of-humans-editorial-comic-system.md` before scripting; otherwise use `references/visual-philosophy-linkedin.md` "Visual Need Decision Gate" | genre, yes/no + contribution reason |
+| **G3** | Visual Style Determination (only if G2 = yes) | Dedicated `State of Humans` reference for comic-first work; otherwise `references/visual-philosophy-linkedin.md` (full file) | Comic production brief or general Visual Style Spec |
+| **G4** | Prompt / production-brief construction (only if G2 = yes) | Dedicated `State of Humans` reference for comic-first work; otherwise `references/seedream-prompt-rules.md` | Continuity-locked comic brief or final two-part SeedDream prompt |
 | **G5** | Image Generation via fal.ai SeedDream (only if G2 = yes) | — | PNG saved to `linkedin-images/{date}-{slug}.png` |
-| **G6** | Visual Audit + Learnings Capture | `references/learnings-protocol.md` | Audit report + JSONL entries for any HIGH findings |
+| **G6** | Visual Audit + Learnings Capture | Dedicated `State of Humans` continuity/feed-size checks when comic-first; `references/learnings-protocol.md` for capture | Audit report + JSONL entries for any HIGH findings |
 | **G7** | Final Output + Publish (if requested) | `references/linkedin-publish-rules.md` | Post text + image block + (optional) live LinkedIn post |
 | **G8** | Wiki Save + Taste Capture | Step 9 of basic skill (above) | Wiki page at `Obsidian Wiki/linkedin-posts/...` + `log.md` entry + image attachment copied |
 
