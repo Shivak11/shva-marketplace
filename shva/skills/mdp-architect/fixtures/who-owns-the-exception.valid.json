@@ -13,6 +13,12 @@
     "caseReturnCount": 4,
     "semanticBlocks": [
       {
+        "id": "disturbance-no-owner",
+        "type": "disturbance",
+        "text": "A recommendation crosses the policy threshold, the employee case does not fit the rule, and the workflow names no person who may authorize a departure.",
+        "sourceClass": "illustrative"
+      },
+      {
         "id": "case-return-to-work",
         "type": "case",
         "text": "A return-to-work recommendation flags an unusual employee case, but the workflow names no override owner or appeal route.",
@@ -25,15 +31,33 @@
         "sourceClass": "teaching-synthesis"
       },
       {
-        "id": "lateral-air-traffic",
+        "id": "lateral-port-drill",
         "type": "lateral-example",
-        "text": "Air-traffic systems distinguish ordinary separation rules from named escalation authority when normal coordination breaks.",
-        "sourceClass": "still-to-confirm"
+        "text": "In a synthetic port drill, the ordinary berth-allocation rule works until a damaged vessel blocks the channel and an exception owner must be named.",
+        "sourceClass": "illustrative"
       },
       {
         "id": "mechanism-exception-path",
         "type": "mechanism",
         "text": "Signal to recommendation to exception to authorized action to appeal and feedback.",
+        "sourceClass": "teaching-synthesis"
+      },
+      {
+        "id": "commitment-first-map",
+        "type": "commitment",
+        "text": "Participants name the exception trigger, override owner, evidence requirement, and appeal route before AI responds.",
+        "sourceClass": "teaching-synthesis"
+      },
+      {
+        "id": "ai-challenge-map",
+        "type": "ai-challenge",
+        "text": "AI questions ambiguous triggers, missing evidence, and absent appeal rights without choosing the decision.",
+        "sourceClass": "teaching-synthesis"
+      },
+      {
+        "id": "revision-after-challenge",
+        "type": "revision",
+        "text": "Participants revise one line of the authority map and record why the change is defensible.",
         "sourceClass": "teaching-synthesis"
       },
       {
@@ -49,14 +73,110 @@
         "sourceClass": "teaching-synthesis"
       }
     ],
+    "sourceLedger": [
+      {
+        "claimId": "disturbance-no-owner",
+        "classification": "illustrative",
+        "origin": "Synthetic exception scenario created for schema testing",
+        "checkedOn": "2026-09-02",
+        "confidence": "high",
+        "surfaces": ["book", "teaching", "slides"],
+        "caveat": "Not a report from a named organization."
+      },
+      {
+        "claimId": "case-return-to-work",
+        "classification": "illustrative",
+        "origin": "Composite workforce workflow created for schema testing",
+        "checkedOn": "2026-09-02",
+        "confidence": "high",
+        "surfaces": ["book", "teaching", "slides"],
+        "caveat": "Actors and events are fictional."
+      },
+      {
+        "claimId": "claim-exception",
+        "classification": "teaching-synthesis",
+        "origin": "MDP Architect synthesis of authority and exception design",
+        "checkedOn": "2026-09-02",
+        "confidence": "medium",
+        "surfaces": ["book", "teaching", "slides"],
+        "caveat": "A design proposition, not an empirical universal."
+      },
+      {
+        "claimId": "lateral-port-drill",
+        "classification": "illustrative",
+        "origin": "Synthetic port drill created for schema testing",
+        "checkedOn": "2026-09-02",
+        "confidence": "high",
+        "surfaces": ["book", "teaching", "slides"],
+        "caveat": "Not a factual port incident."
+      },
+      {
+        "claimId": "mechanism-exception-path",
+        "classification": "teaching-synthesis",
+        "origin": "MDP Architect session mechanism",
+        "checkedOn": "2026-09-02",
+        "confidence": "medium",
+        "surfaces": ["book", "teaching", "slides"],
+        "caveat": "The sequence is a teaching model and must be adapted to the actual workflow."
+      },
+      {
+        "claimId": "commitment-first-map",
+        "classification": "teaching-synthesis",
+        "origin": "Commitment-before-reveal teaching method",
+        "checkedOn": "2026-09-02",
+        "confidence": "medium",
+        "surfaces": ["book", "teaching", "slides"],
+        "caveat": "Learning effectiveness remains to be tested with a live cohort."
+      },
+      {
+        "claimId": "ai-challenge-map",
+        "classification": "teaching-synthesis",
+        "origin": "Bounded AI challenger design",
+        "checkedOn": "2026-09-02",
+        "confidence": "medium",
+        "surfaces": ["book", "teaching", "slides"],
+        "caveat": "The AI role does not grant decision authority."
+      },
+      {
+        "claimId": "revision-after-challenge",
+        "classification": "teaching-synthesis",
+        "origin": "Commitment and revision learning sequence",
+        "checkedOn": "2026-09-02",
+        "confidence": "medium",
+        "surfaces": ["book", "teaching", "slides"],
+        "caveat": "Revision quality requires facilitator review."
+      },
+      {
+        "claimId": "exercise-authority-map",
+        "classification": "teaching-synthesis",
+        "origin": "MDP Architect workbook design",
+        "checkedOn": "2026-09-02",
+        "confidence": "medium",
+        "surfaces": ["book", "teaching", "slides"],
+        "caveat": "A participant artifact, not an approved company policy."
+      },
+      {
+        "claimId": "transition-rule-placement",
+        "classification": "teaching-synthesis",
+        "origin": "DOUE cross-session architecture",
+        "checkedOn": "2026-09-02",
+        "confidence": "medium",
+        "surfaces": ["book", "teaching", "slides"],
+        "caveat": "The next-session question is a curriculum design choice."
+      }
+    ],
     "surfaces": {
       "book": {
         "centralQuestion": "Who may override an AI-supported recommendation when the case does not fit the rule?",
         "semanticBlockIds": [
+          "disturbance-no-owner",
           "case-return-to-work",
           "claim-exception",
-          "lateral-air-traffic",
+          "lateral-port-drill",
           "mechanism-exception-path",
+          "commitment-first-map",
+          "ai-challenge-map",
+          "revision-after-challenge",
           "exercise-authority-map",
           "transition-rule-placement"
         ],
@@ -74,62 +194,111 @@
       "teaching": {
         "centralQuestion": "Who may override an AI-supported recommendation when the case does not fit the rule?",
         "semanticBlockIds": [
+          "disturbance-no-owner",
           "case-return-to-work",
           "claim-exception",
-          "lateral-air-traffic",
+          "lateral-port-drill",
           "mechanism-exception-path",
+          "commitment-first-map",
+          "ai-challenge-map",
+          "revision-after-challenge",
           "exercise-authority-map",
           "transition-rule-placement"
         ],
         "coreSegments": [
-          { "id": "commit", "minutes": 8 },
-          { "id": "case", "minutes": 12 },
-          { "id": "mechanism", "minutes": 16 },
-          { "id": "authority-boundary", "minutes": 11 },
-          { "id": "build-map", "minutes": 17 },
-          { "id": "peer-challenge", "minutes": 13 },
-          { "id": "filled-edition", "minutes": 7 },
-          { "id": "handoff", "minutes": 6 }
+          {
+            "id": "opening-case",
+            "minutes": 8,
+            "semanticBlockIds": ["disturbance-no-owner", "case-return-to-work"]
+          },
+          {
+            "id": "first-reading",
+            "minutes": 12,
+            "semanticBlockIds": ["claim-exception", "lateral-port-drill"]
+          },
+          {
+            "id": "mechanism",
+            "minutes": 16,
+            "semanticBlockIds": ["mechanism-exception-path"]
+          },
+          {
+            "id": "participant-commitment",
+            "minutes": 11,
+            "semanticBlockIds": ["commitment-first-map", "exercise-authority-map"]
+          },
+          {
+            "id": "ai-challenge",
+            "minutes": 17,
+            "semanticBlockIds": ["ai-challenge-map"]
+          },
+          {
+            "id": "human-revision",
+            "minutes": 13,
+            "semanticBlockIds": ["revision-after-challenge"]
+          },
+          {
+            "id": "filled-edition",
+            "minutes": 7,
+            "semanticBlockIds": ["exercise-authority-map"]
+          },
+          {
+            "id": "handoff",
+            "minutes": 6,
+            "semanticBlockIds": ["transition-rule-placement"]
+          }
         ],
         "depthReserves": [
           {
             "id": "write-trigger-test",
             "minutes": 10,
             "semanticBlockIds": ["case-return-to-work", "claim-exception"],
-            "rejoin": "Return when every pair has one observable exception trigger."
+            "trigger": "The room reaches the first map early or treats every exception as discretionary.",
+            "addedMove": "Pairs write one observable exception trigger and one disconfirming condition.",
+            "rejoin": "Return to the case when every pair has one observable exception trigger.",
+            "artifactState": "The Exception Authority Map has a testable trigger."
           },
           {
             "id": "red-team-appeal",
             "minutes": 10,
             "semanticBlockIds": ["mechanism-exception-path", "exercise-authority-map"],
-            "rejoin": "Return at the completed appeal path before the filled-edition reveal."
+            "trigger": "Most maps name an approver but no route for challenge.",
+            "addedMove": "Pairs test who may contest the evidence and who can pause the action.",
+            "rejoin": "Return at the completed appeal path before the filled-edition reveal.",
+            "artifactState": "The map names an appeal owner and pause condition."
           },
           {
             "id": "compare-authority-designs",
             "minutes": 10,
             "semanticBlockIds": ["exercise-authority-map", "transition-rule-placement"],
-            "rejoin": "Return with one rule-placement question for the next session."
+            "trigger": "The filled-edition comparison ends with at least ten minutes available.",
+            "addedMove": "Groups compare central, local, and split authority arrangements using the same exception.",
+            "rejoin": "Return with one rule-placement question for the next session.",
+            "artifactState": "The map carries one unresolved rule-placement question."
           }
         ]
       },
       "slides": {
         "centralQuestion": "Who may override an AI-supported recommendation when the case does not fit the rule?",
         "semanticBlockIds": [
+          "disturbance-no-owner",
           "case-return-to-work",
           "claim-exception",
-          "lateral-air-traffic",
+          "lateral-port-drill",
           "mechanism-exception-path",
+          "commitment-first-map",
+          "ai-challenge-map",
+          "revision-after-challenge",
           "exercise-authority-map",
           "transition-rule-placement"
         ],
         "beats": [
-          { "id": "opening-case", "semanticBlockIds": ["case-return-to-work"] },
-          { "id": "room-commitment", "semanticBlockIds": ["case-return-to-work"] },
+          { "id": "opening-case", "semanticBlockIds": ["disturbance-no-owner", "case-return-to-work"] },
+          { "id": "room-commitment", "semanticBlockIds": ["commitment-first-map"] },
           { "id": "exception-claim", "semanticBlockIds": ["claim-exception"] },
-          { "id": "lateral", "semanticBlockIds": ["lateral-air-traffic"] },
+          { "id": "lateral", "semanticBlockIds": ["lateral-port-drill"] },
           { "id": "path", "semanticBlockIds": ["mechanism-exception-path"] },
-          { "id": "workbook", "semanticBlockIds": ["exercise-authority-map"] },
-          { "id": "reveal", "semanticBlockIds": ["exercise-authority-map"] },
+          { "id": "workbook", "semanticBlockIds": ["exercise-authority-map", "ai-challenge-map"] },
+          { "id": "reveal", "semanticBlockIds": ["exercise-authority-map", "revision-after-challenge"] },
           { "id": "next-question", "semanticBlockIds": ["transition-rule-placement"] }
         ]
       }
@@ -139,11 +308,19 @@
         "id": "exercise-authority-map",
         "name": "Exception Authority Map",
         "commitBeforeAI": true,
+        "commitmentBlockId": "commitment-first-map",
+        "aiChallengeBlockId": "ai-challenge-map",
+        "revisionBlockId": "revision-after-challenge",
         "usesIdentifiableData": false,
+        "aiRoleType": "challenge",
         "aiRole": "Challenge the map by questioning ambiguous triggers, missing evidence, and absent appeal rights.",
+        "humanDecisionOwner": "The named organizational role accountable for the affected people decision",
         "filledEdition": {
           "present": true,
-          "revealedByControl": true
+          "revealedByControl": true,
+          "startsClosed": true,
+          "controlLabel": "Reveal a filled edition",
+          "content": "The completed map names a capability-risk trigger, the HR policy owner as boundary setter, the business leader as local recommender, the CHRO as exception authorizer, a written explanation duty, a seven-day appeal route, and a thirty-day review condition."
         }
       }
     ]

@@ -16,7 +16,7 @@ Copy `fixtures/who-owns-the-exception.valid.json` as the starting schema. The va
 | `claim` | Plain language claim, source classification, citation or note, and the surfaces that use it. |
 | `mechanism` | One earned framework or inline diagram with exact labels and an explanation tied to the case. |
 | `commitment` | What participants map, choose, rank, or write before AI appears. |
-| `ai_challenge` | A bounded prompt or model challenge that tests an interpretation, threshold, evidence boundary, or alternative. It never certifies a people decision. |
+| `ai-challenge` | A bounded prompt or model challenge that tests an interpretation, threshold, evidence boundary, or alternative. It never certifies a people decision. |
 | `revision` | How the participant changes the carried artifact after the challenge. |
 | `exercise` | Instructions, constraints, output, debrief question, and a complete filled edition behind a reveal control. |
 | `transition` | The unresolved question and artifact state passed to the next session. |
@@ -33,6 +33,8 @@ Use this order unless the brief gives a reason to depart from it:
 6. Revision: show what changed, what did not, and who still authorizes action.
 7. Workbook: let the participant apply the same mechanism to their own decision.
 8. Transition: open the next session's problem without a closing sermon.
+
+Encode that sequence, do not merely describe it. Each teaching core segment and slide beat carries ordered `semanticBlockIds`. Each exercise names its `commitmentBlockId`, `aiChallengeBlockId`, and `revisionBlockId`. Book, Teaching, and Slides must all place those three blocks in that order. The validator rejects a surface that moves the AI challenge ahead of the participant commitment.
 
 ## Case and emphasis controls
 
@@ -55,4 +57,4 @@ Use this order unless the brief gives a reason to depart from it:
 
 ## Content model completion check
 
-The model is ready only when every visible claim, term, case detail, diagram label, exercise step, and transition has an ID and source classification. An item that exists only in a surface is drift until it is added to the model or removed.
+The model is ready only when every visible claim, term, case detail, diagram label, exercise step, and transition has an ID and source classification. Each block also needs a matching `sourceLedger` entry with origin, checked date, confidence, surfaces, and caveat. The ledger's `surfaces` array must exactly name the visible surfaces that reference the block; use an empty array for a `still-to-confirm` block that remains internal. A `source-backed` entry includes its live URL. A `still-to-confirm` item can remain in the model for research, but no visible surface may reference it. An item that exists only in a surface is drift until it is added to the model or removed.

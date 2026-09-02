@@ -28,6 +28,8 @@ This is an orchestrator. It composes SHVA's narrower skills without swallowing t
 
 Use MDP Architect when programme architecture or cross-surface consistency is the real job.
 
+Tie-break for one session: use MDP Architect when the request needs two or more canonical surfaces, such as Book Chapter plus Teaching Script plus Slides. Use `teaching-designer` when the request is only a plan, script, or light keynote, and `worksheet-generator` when it is only a participant sheet.
+
 When the skill loads, capture its announced base directory as `SKILL_DIR`. Shell commands must use that absolute path because the runtime working directory is the programme workspace, not the skill folder.
 
 ## First decision: choose the mode
@@ -46,6 +48,8 @@ If the request already supplies audience, duration, source material, and output 
 ### 1. Bind to the canonical workspace
 
 Find and read the programme README, source ledger, current design contract, and latest rendered artifact. In Shiva's teaching workspace, `design.md` and `skills/shiva-teaching-artifact/SKILL.md` outrank bundled SHVA styling. Preserve the official client brief, session names, dates, durations, and faculty ownership unless Shiva changes them.
+
+For a greenfield brief with no programme folder, create the minimal programme README and source ledger in the canonical teaching workspace before drafting. If the destination itself is genuinely unclear, ask for that one choice. Record the brief, audience, official timetable, known sources, assumptions, open questions, and artifact paths. A prior render is then not required; the first render becomes the baseline.
 
 Read `references/01-programme-architecture.md` before changing the programme spine.
 
@@ -78,6 +82,8 @@ node "$SKILL_DIR/scripts/validate-session-model.mjs" <session-model.json>
 ```
 
 Do not draft Book, Teaching, and Slides independently. If the model changes, propagate the change to all surfaces before polishing any one of them.
+
+The validator must prove sequence as well as membership: every exercise names its commitment, AI-challenge, and revision blocks, and every visible surface preserves that order. A source-ledger entry must also name exactly the visible surfaces that use its block.
 
 ### 5. Build the requested surfaces
 
