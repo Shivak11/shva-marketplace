@@ -7,8 +7,8 @@
   "plugins": [
     {
       "name": "shva",
-      "description": "Personal command + skill pack. v0.9.3 adds the State of Humans editorial-comic system: hidden-agenda analysis, a causal four-beat joke structure, stable cast and visual invariants, comic-first publishing metadata, and morning portfolio distribution rules.",
-      "version": "0.9.3",
+      "description": "Personal command + skill pack. v0.9.4 adds two reading skills: book-taste-curator, which scores prospective books against a codified taste profile, and search-books, which answers from the owned book corpus over the shivas-book-search MCP with book-level citations.",
+      "version": "0.9.4",
       "source": "./shva",
       "author": {
         "name": "Shiva Kakkar"

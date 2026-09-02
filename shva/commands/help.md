@@ -26,8 +26,12 @@ model: haiku
 | `/shva:persona-profile-from-text [whose-text]` | Builds an evidence-anchored profile of a person from their own text, every line quoting the source. Two modes: mirror (reflect a Rehearsal user's recordings back, for engagement) and voice-harvest (read a target leader's voice and concerns, for outreach). Frameworks are a reasoning lens, never printed as scores. Surprises are offered as questions, never verdicts. | **When you want to understand who someone is from what they wrote.** Rehearsal mirror, or B2B voice-harvest. |
 | `/shva:meditate [artifact\|session\|taste] [subject]` | Runs Shiva's reflection and judgment ritual. Uses the five R's plus the five-question Aliveness Review, tests the emerging rule against counterexamples, and ends with a named insight, next experiment, and explicit record/no-record verdict. It never promotes private material or writes to the wiki automatically. | **After meaningful work, when an artifact feels lifeless, or when you want to understand a recurring preference without flattening different surfaces.** |
 | `/shva:hidden-agendas-spotter [claim-or-artifact]` | **Hidden Agendas Spotter.** Reads the reality beneath a claim, image, partnership, metric, ritual, or behaviour. Reconstructs the apparatus, maps what actors certify for each other, finds the real audience and payoff, compares visible proof with costly reality, tests alternatives, and labels confidence before optional satirical compression. | **Before accepting the official explanation or writing a truth-bomb cartoon.** Especially useful when two parties appear to validate each other. |
+| `/shva:search-books [question]` | Searches the books Shiva actually owns via the `shivas-book-search` MCP. Routes the topic to the right store live, searches the named book, and answers with book-level citations instead of training memory. Reports an absent topic as absent rather than filling the gap. | **When you want what a book you own actually says.** Pulling a passage for a session, checking a claim against the source, or asking whether you already own something on a topic. |
+| `/shva:book-taste-curator [topic-or-title]` | Judges prospective books against the codified taste profile: framework density, practitioner credentials, diagrams, and a hard ban on keynote-circuit writing. Four modes: Discovery (tiered list), Verdict (one book), Extraction (prompt vocabulary), Rebuttal (updates the library after a reaction). | **Before spending a month on a book.** Deciding what to read, whether a hyped title is worth it, or mining a finished book for prompt moves. |
 | `/shva:help` | This screen. | When you forget what's installed. |
 
+> **Two reading siblings (v0.9.4):** `search-books` reads the shelf he **owns** and answers with citations; `book-taste-curator` judges the shelf he **does not own yet** and decides what is worth a month. Retrieve with the first, evaluate and mine with the second.
+>
 > **Two teaching siblings:** `worksheet-generator` makes the **participant** artifact (a fillable worksheet); `teaching-designer` makes the **facilitator** artifact (plan, script, interactive lesson). Use both for one session.
 >
 > **Three workflow skills (v0.8.0), each promoted from a matured wiki method:** `genai-use-case-finder` fills a GenAI use-case portfolio for a real org (analysis, not a lesson); `mdp-source-finder` gathers the live source pack for a session and feeds `teaching-designer`; `persona-profile-from-text` mirrors a person from their own writing (Rehearsal engagement, or B2B voice-harvest).
@@ -67,6 +71,14 @@ model: haiku
 /shva:hidden-agendas-spotter TCS and Anthropic provide Claude to 50,000 employees
 /shva:hidden-agendas-spotter this photograph of a leader meditating alone
 /shva:hidden-agendas-spotter                           # asks for the claim or artifact
+
+/shva:search-books what does Team Topologies say about cognitive load?
+/shva:search-books which of my books covers weak signal detection?
+/shva:search-books                                     # asks you what to look for
+
+/shva:book-taste-curator books on AI and org design
+/shva:book-taste-curator should I read The Skill Code?
+/shva:book-taste-curator                               # asks you the topic or title
 
 /shva:shva-medium-writer AI expertise paradox
 /shva:shva-medium-writer Why India's AI talent builds for Americans

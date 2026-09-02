@@ -1,7 +1,7 @@
 {
   "name": "shva",
-  "version": "0.9.3",
-  "description": "Personal command and skill pack for Shiva. v0.9.3 adds a production-grade State of Humans editorial-comic system with hidden-agenda analysis, causal four-beat satire, locked recurring characters, comic-first metadata, and morning distribution defaults while preserving the dual-lane serious-post system.",
+  "version": "0.9.4",
+  "description": "Personal command and skill pack for Shiva. v0.9.4 adds a reading pair: book-taste-curator for evaluating, discovering, and mining books against a codified taste profile, and search-books for retrieving answers from the owned book corpus via the shivas-book-search MCP server, with live store routing and book-level citation discipline.",
   "author": {
     "name": "Shiva Kakkar"
   },
@@ -52,7 +52,17 @@
     "critical-thinking",
     "satire",
     "cartoons",
-    "reciprocal-signaling"
+    "reciprocal-signaling",
+    "books",
+    "book-search",
+    "reading",
+    "taste-profile",
+    "book-taste",
+    "gemini-file-search",
+    "library-search",
+    "owned-corpus",
+    "citations",
+    "book-recommendations"
   ],
   "commands": [
     "./commands/help.md",
