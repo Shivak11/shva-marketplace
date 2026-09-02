@@ -19,6 +19,7 @@ model: haiku
 | `/shva:shva-medium-writer <topic>` | Drafts a 1500-2000 word Medium-grade essay in Shiva's voice. Uses wiki + 6-tier MCP source hierarchy. Outputs to `src/data/blog/<slug>.md` with Astro frontmatter, FOMO question title, ≥3 tier-1 institutional co-citations, and the v1.0 bio footer. | **Before opening a PR on shivakakkar.com.** Anywhere you'd write a long-form post. |
 | `/shva:shva-medium-poster <url-or-slug>` | Publishes a deployed shivakakkar.com post to Medium under "Built at Rehearsal" via Chrome automation. Trims " \| Dr. Shiva Kakkar" title suffix, deletes embedded images + empty-paragraph gaps, sets up to 5 tags, submits for editorial review (default). | **After the post is live on shivakakkar.com.** Once Vercel deploy is propagated. |
 | `/shva:shva-linkedin-post-writer` | Write LinkedIn posts in Shiva's systems-thinker voice. Serious enterprise and education topics use evidence-identical attention + authorship candidates. `State of Humans` uses a separate comic-first system: hidden-agenda analysis, causal satire, a locked recurring cast, self-contained image comprehension, and a one-principle caption. | **For any LinkedIn post request.** Voicenote-to-post, news reaction, content system runs, weekly authority batches, or a `State of Humans` episode. |
+| `/shva:mdp-architect [brief-or-artifact]` | Builds or audits a coherent MDP or executive programme. Owns the session-by-session spine and keeps Book Chapter, first-person Teaching Script, Slide Content, workbook, realistic filled edition, sources, pacing, and interactive HTML consistent through one canonical session model. | **When two or more teaching surfaces must work as one programme.** New MDPs, multi-session builds, deep chapter development, or an existing course that feels thin, busy, generic, or under-timed. |
 | `/shva:worksheet-generator [topic]` | Turns a topic plus rough ideas into an AI-resistant, self-contained teaching worksheet (HTML first, then a ReportLab PDF) in Shiva's voice. Asks intake questions, researches in parallel across the wiki + LlamaCloud + Readwise + YouTube + book-search + Mobbin, builds a carried-forward arc with one worked example, applies the hard formatting rules, and ships clean print pages. | **When you need a hands-on workshop or session sheet.** A decision, tension, workflow, or skill traced to its end. |
 | `/shva:teaching-designer [topic]` | The facilitator-side sibling. Turns a teaching brief into a light, discussion-led executive keynote: a session plan, a spoken script, and an aesthetic interactive HTML doc (lesson plan plus click-to-expand script). Same parallel research, contrarian story-driven voice, evidence cards with citations, and before/after Mermaid diagrams. | **When you need what you teach FROM, not what participants fill in.** Session plans, teaching scripts, course outlines, executive keynotes (XLRI/MDP). |
 | `/shva:genai-use-case-finder [function-or-process]` | Fills a prioritized GenAI use-case portfolio for a REAL org. Runs the four-move method: MAP both lenses (point vs system), GATE every candidate on the five-question tell, SCORE on value by feasibility with risk as a veto and verifiability as the autonomy axis, SEQUENCE into named quadrants. Outputs the filled matrix plus a signed one-page worksheet, with an optional HTML 2x2. | **When a CXO asks "where do we actually use GenAI, and which first?"** An analysis for a real org, not a lesson. If you want to TEACH the method, use teaching-designer instead. |
@@ -32,7 +33,7 @@ model: haiku
 
 > **Two reading siblings (v0.9.4):** `search-books` reads the shelf he **owns** and answers with citations; `book-taste-curator` judges the shelf he **does not own yet** and decides what is worth a month. Retrieve with the first, evaluate and mine with the second.
 >
-> **Two teaching siblings:** `worksheet-generator` makes the **participant** artifact (a fillable worksheet); `teaching-designer` makes the **facilitator** artifact (plan, script, interactive lesson). Use both for one session.
+> **The teaching family:** `mdp-architect` owns programme architecture and consistency across surfaces. `mdp-source-finder` gathers raw material. `teaching-designer` makes a standalone facilitator artifact. `worksheet-generator` makes a standalone participant artifact. Use the narrower skill directly when it covers the whole request.
 >
 > **Three workflow skills (v0.8.0), each promoted from a matured wiki method:** `genai-use-case-finder` fills a GenAI use-case portfolio for a real org (analysis, not a lesson); `mdp-source-finder` gathers the live source pack for a session and feeds `teaching-designer`; `persona-profile-from-text` mirrors a person from their own writing (Rehearsal engagement, or B2B voice-harvest).
 
@@ -48,6 +49,10 @@ model: haiku
 
 /shva:worksheet-generator GenAI change management for HR leaders
 /shva:worksheet-generator                              # asks you what you want to teach
+
+/shva:mdp-architect build a five-session CHRO programme from this brief
+/shva:mdp-architect refine this MDP and develop Chapter One in HTML
+/shva:mdp-architect audit this course for thinness, pacing, and mode drift
 
 /shva:teaching-designer the AI expertise paradox for senior managers
 /shva:teaching-designer                                # asks you what you're teaching

@@ -4,6 +4,22 @@
 > Commands in this plugin start with `/shva:` — that's the `shva` namespace tag.
 > (Yes, the missing "i" is on purpose. Easier to remember, impossible to collide.)
 
+## v0.10.0 — `/shva:mdp-architect`
+
+**An end-to-end architect for management-development and executive-education programmes.** Give it a new brief or an existing programme that feels thin, busy, generic, or under-timed. It establishes the session-by-session spine, then keeps the Book Chapter, first-person Teaching Script, Slide Content, chapter-end workbook, realistic filled edition, evidence ledger, and interactive HTML consistent.
+
+The skill works from one canonical content model per session. A case, claim, diagram label, exercise, or transition is defined once and referenced by every surface. Book mode stays sustained and readable. Teaching mode adds dialogue, room moves, recovery moves, and timing. Slides compress the same argument without importing a new theory or example.
+
+For every scheduled 90-minute session, it prepares a protected 90-minute core plus at least 30 minutes of integrated depth reserves with explicit rejoin points. The published timetable remains faithful to the client brief. Participants commit before AI is used, and every exercise has a realistic filled edition behind a reveal control.
+
+It is additive. `mdp-source-finder` still gathers raw material, `teaching-designer` still builds a standalone session or keynote, and `worksheet-generator` still builds a standalone participant sheet. MDP Architect owns the programme spine and cross-surface consistency when those parts must work together.
+
+```
+/shva:mdp-architect build a five-session CHRO programme from this brief
+/shva:mdp-architect refine this MDP and develop Chapter One in HTML
+/shva:mdp-architect audit this course for thinness, pacing, and mode drift
+```
+
 ## v0.9.3 — State of Humans Editorial Comic System
 
 `State of Humans` is now a first-class comic-first mode inside the canonical LinkedIn writer. It begins with hidden-agenda analysis—what is said, which costly action is avoided, which constraint people actually meet, and where blame is finally placed—then turns that causal contradiction into a self-contained editorial comic.
@@ -173,11 +189,11 @@ claude plugin marketplace update shva
 claude plugin update shva@shva --scope user
 ```
 
-To install `meditate` and `hidden-agendas-spotter` as global skill copies for Codex, Cursor, and Claude Code:
+To install `mdp-architect`, `meditate`, and `hidden-agendas-spotter` as global skill copies for Codex, Cursor, and Claude Code:
 
 ```bash
 npx skills add https://github.com/Shivak11/shva-marketplace \
-  --skill meditate --skill hidden-agendas-spotter --global \
+  --skill mdp-architect --skill meditate --skill hidden-agendas-spotter --global \
   --agent codex --agent cursor --agent claude-code \
   --yes --copy
 ```

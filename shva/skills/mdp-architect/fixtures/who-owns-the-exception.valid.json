@@ -1,0 +1,151 @@
+{
+  "programme": {
+    "title": "Designing Organizations for Uncertain Environments",
+    "officialSessionMinutes": 90,
+    "preparedRunwayMinutes": 120
+  },
+  "session": {
+    "title": "Who Owns the Exception?",
+    "audience": "Senior HR and organization-design leaders",
+    "centralQuestion": "Who may override an AI-supported recommendation when the case does not fit the rule?",
+    "carriedArtifact": "Exception Authority Map",
+    "nextQuestion": "Which rules should remain fixed, which should be local, and which should be revised?",
+    "caseReturnCount": 4,
+    "semanticBlocks": [
+      {
+        "id": "case-return-to-work",
+        "type": "case",
+        "text": "A return-to-work recommendation flags an unusual employee case, but the workflow names no override owner or appeal route.",
+        "sourceClass": "illustrative"
+      },
+      {
+        "id": "claim-exception",
+        "type": "claim",
+        "text": "An exception exposes who actually has authority when evidence and policy point in different directions.",
+        "sourceClass": "teaching-synthesis"
+      },
+      {
+        "id": "lateral-air-traffic",
+        "type": "lateral-example",
+        "text": "Air-traffic systems distinguish ordinary separation rules from named escalation authority when normal coordination breaks.",
+        "sourceClass": "still-to-confirm"
+      },
+      {
+        "id": "mechanism-exception-path",
+        "type": "mechanism",
+        "text": "Signal to recommendation to exception to authorized action to appeal and feedback.",
+        "sourceClass": "teaching-synthesis"
+      },
+      {
+        "id": "exercise-authority-map",
+        "type": "exercise",
+        "text": "Map the rule, exception trigger, override owner, required evidence, explanation duty, and appeal path.",
+        "sourceClass": "teaching-synthesis"
+      },
+      {
+        "id": "transition-rule-placement",
+        "type": "transition",
+        "text": "The next session asks where each rule should live and who may revise it.",
+        "sourceClass": "teaching-synthesis"
+      }
+    ],
+    "surfaces": {
+      "book": {
+        "centralQuestion": "Who may override an AI-supported recommendation when the case does not fit the rule?",
+        "semanticBlockIds": [
+          "case-return-to-work",
+          "claim-exception",
+          "lateral-air-traffic",
+          "mechanism-exception-path",
+          "exercise-authority-map",
+          "transition-rule-placement"
+        ],
+        "headings": [
+          "The Case the Rule Did Not Expect",
+          "An Exception Is an Authority Test",
+          "Designing the Right to Override"
+        ],
+        "narrativeWords": 2870,
+        "workbookWords": 480,
+        "bodyCalloutCards": 0,
+        "pullLines": 1,
+        "diagramIds": ["mechanism-exception-path"]
+      },
+      "teaching": {
+        "centralQuestion": "Who may override an AI-supported recommendation when the case does not fit the rule?",
+        "semanticBlockIds": [
+          "case-return-to-work",
+          "claim-exception",
+          "lateral-air-traffic",
+          "mechanism-exception-path",
+          "exercise-authority-map",
+          "transition-rule-placement"
+        ],
+        "coreSegments": [
+          { "id": "commit", "minutes": 8 },
+          { "id": "case", "minutes": 12 },
+          { "id": "mechanism", "minutes": 16 },
+          { "id": "authority-boundary", "minutes": 11 },
+          { "id": "build-map", "minutes": 17 },
+          { "id": "peer-challenge", "minutes": 13 },
+          { "id": "filled-edition", "minutes": 7 },
+          { "id": "handoff", "minutes": 6 }
+        ],
+        "depthReserves": [
+          {
+            "id": "write-trigger-test",
+            "minutes": 10,
+            "semanticBlockIds": ["case-return-to-work", "claim-exception"],
+            "rejoin": "Return when every pair has one observable exception trigger."
+          },
+          {
+            "id": "red-team-appeal",
+            "minutes": 10,
+            "semanticBlockIds": ["mechanism-exception-path", "exercise-authority-map"],
+            "rejoin": "Return at the completed appeal path before the filled-edition reveal."
+          },
+          {
+            "id": "compare-authority-designs",
+            "minutes": 10,
+            "semanticBlockIds": ["exercise-authority-map", "transition-rule-placement"],
+            "rejoin": "Return with one rule-placement question for the next session."
+          }
+        ]
+      },
+      "slides": {
+        "centralQuestion": "Who may override an AI-supported recommendation when the case does not fit the rule?",
+        "semanticBlockIds": [
+          "case-return-to-work",
+          "claim-exception",
+          "lateral-air-traffic",
+          "mechanism-exception-path",
+          "exercise-authority-map",
+          "transition-rule-placement"
+        ],
+        "beats": [
+          { "id": "opening-case", "semanticBlockIds": ["case-return-to-work"] },
+          { "id": "room-commitment", "semanticBlockIds": ["case-return-to-work"] },
+          { "id": "exception-claim", "semanticBlockIds": ["claim-exception"] },
+          { "id": "lateral", "semanticBlockIds": ["lateral-air-traffic"] },
+          { "id": "path", "semanticBlockIds": ["mechanism-exception-path"] },
+          { "id": "workbook", "semanticBlockIds": ["exercise-authority-map"] },
+          { "id": "reveal", "semanticBlockIds": ["exercise-authority-map"] },
+          { "id": "next-question", "semanticBlockIds": ["transition-rule-placement"] }
+        ]
+      }
+    },
+    "exercises": [
+      {
+        "id": "exercise-authority-map",
+        "name": "Exception Authority Map",
+        "commitBeforeAI": true,
+        "usesIdentifiableData": false,
+        "aiRole": "Challenge the map by questioning ambiguous triggers, missing evidence, and absent appeal rights.",
+        "filledEdition": {
+          "present": true,
+          "revealedByControl": true
+        }
+      }
+    ]
+  }
+}

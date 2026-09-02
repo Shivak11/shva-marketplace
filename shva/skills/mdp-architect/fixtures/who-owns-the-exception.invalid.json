@@ -1,0 +1,60 @@
+{
+  "programme": {
+    "title": "Thin Course",
+    "officialSessionMinutes": 90,
+    "preparedRunwayMinutes": 90
+  },
+  "session": {
+    "title": "AI and HR",
+    "centralQuestion": "Who owns the exception?",
+    "carriedArtifact": "",
+    "nextQuestion": "",
+    "caseReturnCount": 1,
+    "semanticBlocks": [
+      {
+        "id": "generic-ai",
+        "type": "claim",
+        "text": "AI creates insights.",
+        "sourceClass": "assumed"
+      }
+    ],
+    "surfaces": {
+      "book": {
+        "centralQuestion": "Why use AI?",
+        "semanticBlockIds": ["generic-ai"],
+        "headings": ["One", "Two", "Three", "Four"],
+        "narrativeWords": 900,
+        "workbookWords": 100,
+        "bodyCalloutCards": 8,
+        "pullLines": 6,
+        "diagramIds": []
+      },
+      "teaching": {
+        "centralQuestion": "Who owns the exception?",
+        "semanticBlockIds": ["generic-ai"],
+        "coreSegments": [{ "id": "lecture", "minutes": 90 }],
+        "depthReserves": []
+      },
+      "slides": {
+        "centralQuestion": "How should HR transform?",
+        "semanticBlockIds": ["new-slide-theory"],
+        "beats": [
+          { "id": "one", "semanticBlockIds": ["new-slide-theory"] }
+        ]
+      }
+    },
+    "exercises": [
+      {
+        "id": "reflect",
+        "name": "Reflect",
+        "commitBeforeAI": false,
+        "usesIdentifiableData": true,
+        "aiRole": "Decide and certify the final recommendation.",
+        "filledEdition": {
+          "present": false,
+          "revealedByControl": false
+        }
+      }
+    ]
+  }
+}

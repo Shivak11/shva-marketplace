@@ -7,8 +7,8 @@
   "plugins": [
     {
       "name": "shva",
-      "description": "Personal command + skill pack. v0.9.4 adds two reading skills: book-taste-curator, which scores prospective books against a codified taste profile, and search-books, which answers from the owned book corpus over the shivas-book-search MCP with book-level citations.",
-      "version": "0.9.4",
+      "description": "Personal command + skill pack. v0.10.0 adds MDP Architect, an end-to-end executive-programme orchestrator that keeps programme architecture, book chapters, teaching scripts, slides, exercises, sources, pacing, and rendered HTML consistent.",
+      "version": "0.10.0",
       "source": "./shva",
       "author": {
         "name": "Shiva Kakkar"

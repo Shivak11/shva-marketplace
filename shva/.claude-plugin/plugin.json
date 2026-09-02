@@ -1,7 +1,7 @@
 {
   "name": "shva",
-  "version": "0.9.4",
-  "description": "Personal command and skill pack for Shiva. v0.9.4 adds a reading pair: book-taste-curator for evaluating, discovering, and mining books against a codified taste profile, and search-books for retrieving answers from the owned book corpus via the shivas-book-search MCP server, with live store routing and book-level citation discipline.",
+  "version": "0.10.0",
+  "description": "Personal command and skill pack for Shiva. v0.10.0 adds MDP Architect, an end-to-end executive-programme orchestrator that keeps programme architecture, book chapters, teaching scripts, slides, exercises, sources, pacing, and rendered HTML consistent.",
   "author": {
     "name": "Shiva Kakkar"
   },
@@ -41,6 +41,13 @@
     "use-case-portfolio",
     "prioritization",
     "mdp-sources",
+    "mdp-architect",
+    "programme-architecture",
+    "book-chapter",
+    "teaching-script",
+    "slide-content",
+    "facilitation-runway",
+    "answer-key",
     "raindrop",
     "persona-profile",
     "mirror",

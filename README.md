@@ -7,7 +7,7 @@
 
 | Plugin | Version | What it does |
 |---|---|---|
-| [`shva`](./shva) | 0.9.3 | Personal command and skill pack for cross-cutting work. v0.9.3 adds a production-grade `State of Humans` editorial-comic system, stable series identity, comic-first metadata, and morning portfolio distribution defaults while preserving the dual-lane serious-post workflow. |
+| [`shva`](./shva) | 0.10.0 | Personal command and skill pack for cross-cutting work. v0.10.0 adds `mdp-architect`, which builds and audits coherent executive programmes across programme architecture, book chapters, teaching scripts, slides, exercises, sources, pacing, and interactive HTML. |
 
 ## Why a separate marketplace
 
@@ -38,11 +38,11 @@ This preserves namespaced invocations such as `/shva:meditate` and `/shva:hidden
 
 ## Codex, Cursor, and Claude Code skill parity
 
-Install `meditate` and `hidden-agendas-spotter` as deterministic global copies in all three harnesses:
+Install `mdp-architect`, `meditate`, and `hidden-agendas-spotter` as deterministic global copies in all three harnesses:
 
 ```bash
 npx skills add https://github.com/Shivak11/shva-marketplace \
-  --skill meditate --skill hidden-agendas-spotter --global \
+  --skill mdp-architect --skill meditate --skill hidden-agendas-spotter --global \
   --agent codex --agent cursor --agent claude-code \
   --yes --copy
 ```
