@@ -24,6 +24,44 @@ Static. Edit by hand or via Rebuttal mode. Never re-recommend anything here. Las
 
 - (add here)
 
+## Owned and queryable (do not recommend; retrieve instead)
+
+Uploaded to the four `shivas-book-search` stores and searchable in full text. Ownership is not endorsement and not proof of reading: several of these were acquired for a project. Do not recommend any of them as if new. When one is relevant, hand off to the search-books skill and retrieve from it. Snapshot 2026-09-02, 24 titles. Confirm with a live `list_stores` call before relying on this list.
+
+Org structure and design
+- Building AI-Powered Products
+- Peripheral Vision
+- Power and Prediction
+- Reengineering the Corporation (the BPR manifesto carve-out)
+- Reshuffle
+- Team Topologies
+- The Second Machine Age
+- The Secrets of AI Value Creation
+- Thinking in Systems: A Primer
+
+Mental modelling
+- Lateral Thinking
+- Poor Charlie's Almanack
+- The Goal
+- The Great Mental Models
+- The Thinker's Toolkit
+- Thinkertoys
+- Thinking in Time
+- Zero to One
+
+Marketing, branding and writing
+- Difference
+- Made to Stick
+- Make It Stick
+
+AI reskilling
+- A World Without Work
+- Average Is Over
+- Futureproof
+- The Skill Code
+
+Standing contradiction: Thinking in Systems is listed under "Ruled out" below and is nevertheless owned in two of the four stores. The ruling-out stands for recommendation purposes. The ownership stands for retrieval purposes. Do not quietly resolve this in either direction; it is recorded in the wiki's Book Taste map as an open question.
+
 ## Ruled out (do not resurface)
 
 - Between You and AI, Iorio: keynote-speaker risk
