@@ -7,7 +7,7 @@
 
 | Plugin | Version | What it does |
 |---|---|---|
-| [`shva`](./shva) | 0.10.0 | Personal command and skill pack for cross-cutting work. v0.10.0 adds `mdp-architect`, which builds and audits coherent executive programmes across programme architecture, book chapters, teaching scripts, slides, exercises, sources, pacing, and interactive HTML. |
+| [`shva`](./shva) | 0.11.0 | Personal command and skill pack for cross-cutting work. v0.11.0 adds the Book Foundation Gate to `mdp-architect`: a choice-led interview and approved record settle a book's argument, reader, identity, title system, front matter, voice, and cover direction before production. |
 
 ## Why a separate marketplace
 

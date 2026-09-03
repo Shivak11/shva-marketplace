@@ -7,8 +7,8 @@
   "plugins": [
     {
       "name": "shva",
-      "description": "Personal command + skill pack. v0.10.0 adds MDP Architect, an end-to-end executive-programme orchestrator that keeps programme architecture, book chapters, teaching scripts, slides, exercises, sources, pacing, and rendered HTML consistent.",
-      "version": "0.10.0",
+      "description": "Personal command + skill pack. v0.11.0 adds the Book Foundation Gate to MDP Architect: a choice-led interview and approved record settle a book's argument, reader, identity, title system, front matter, voice, and cover direction before production.",
+      "version": "0.11.0",
       "source": "./shva",
       "author": {
         "name": "Shiva Kakkar"

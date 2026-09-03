@@ -4,6 +4,12 @@
 > Commands in this plugin start with `/shva:` — that's the `shva` namespace tag.
 > (Yes, the missing "i" is on purpose. Easier to remember, impossible to collide.)
 
+## v0.11.0: Book Foundation Gate
+
+`/shva:mdp-architect` now begins a greenfield book or substantial book-shaped programme with a short, choice-led Book Foundation Interview in chat. Before HTML, cover art, front matter, or a canonical chapter model is created, the author explicitly approves a Book Foundation Record that settles the reader, argument, boundary, evidence base, title systems, opening logic, author material, voice contract, and visual direction.
+
+The record presents at least two materially different title and cover systems. It never assumes a biography, profile link, acknowledgement, client, endorsement, or a previous book's visual grammar. A local correction may reuse a recent record only when the premise, reader, and identity are unchanged. This is an editorial approval, not an installation or publication action.
+
 ## v0.10.0 — `/shva:mdp-architect`
 
 **An end-to-end architect for management-development and executive-education programmes.** Give it a new brief or an existing programme that feels thin, busy, generic, or under-timed. It establishes the session-by-session spine, then keeps the Book Chapter, first-person Teaching Script, Slide Content, chapter-end workbook, realistic filled edition, evidence ledger, and interactive HTML consistent.

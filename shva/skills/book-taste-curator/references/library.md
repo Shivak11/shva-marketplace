@@ -1,14 +1,16 @@
 # Library
 
-Static. Edit by hand or via Rebuttal mode. Never re-recommend anything here. Last updated: 2026-09-02.
+Static. Edit by hand or via Rebuttal mode. Never re-recommend anything here. Last updated: 2026-09-03.
 
 ## Read and loved (use as taste anchors)
 
 - Human + Machine, Daugherty and Wilson: frameworks plus examples
 - Chip War, Miller: narrative case with geopolitical and strategic depth
+- Reshuffle: current anchor for a sustained organisational argument
 - Framers, Cukier, Mayer-Schönberger, de Véricourt: mental models
 - The Thinker's Toolkit, Jones: structured analytical techniques
 - The Great Mental Models, Parrish: modular reference
+- The Book of Clarity, Chopra: current anchor for precise, connected explanation
 - The Art of the Long View, Schwartz: scenario planning
 - Don't Make Me Think, Krug: short, illustrated, practical
 - Laws of UX, Yablonski: psychology-backed numbered principles
@@ -19,6 +21,8 @@ Static. Edit by hand or via Rebuttal mode. Never re-recommend anything here. Las
 - Writing Tools, Clark: modular numbered writing moves, owned, mined for prompt vocabulary
 - Steve Jobs, Isaacson: biography, accepted only for structural lessons
 - Breaking Through, Karikó: identity mirror
+
+Use this shelf for structural traits, never for prose imitation. A book can be a taste anchor even when it is also owned and queryable below.
 
 ## Currently reading or in the stack
 
