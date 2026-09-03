@@ -26,6 +26,7 @@ Write connected prose that can be read without a facilitator.
 - Use one inline diagram only after the reader has experienced the tension and can describe the mechanism it resolves. Omit it when prose explains the relationship more clearly.
 - Any editorial reconstruction must preserve chronology and causality, identify itself as an original representation, and avoid implying access to private source material. If the visual budget is full, replace the weaker visual rather than add another.
 - Use no body callout card system, repeated margin labels, repeated working rules, or facilitation tags.
+- When sourced dialogue carries the scene's turn, give each speaker a separate paragraph and allow one consequential silence or physical response its own beat. Put the explanatory meaning after the exchange; do not compress multiple speakers, reaction, and analysis into a case-note paragraph or invent stage direction.
 - Keep emphasis scarce. Use no more than two memorable lines.
 - Do not use stacked punchlines, slogan chains, clipped motivational fragments, generic AI claims, era-snark, a research-paper summary voice, or a closing sermon.
 - End with a practical workbook and a question that opens the next chapter.
