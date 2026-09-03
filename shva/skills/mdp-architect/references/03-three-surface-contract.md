@@ -75,7 +75,7 @@ Use two distinct reveal moments when the exercise depends on changed information
 
 Provide a realistic completed version of the same artifact. Its fields and order match the blank version exactly. It answers every instruction with named actors, a live alternative, evidence that could discriminate, a bounded right, executable action, and a review or reversal condition; an irrelevant field carries an explicit not-applicable reason. Put fact, inference, and illustration boundaries where the answer uses them. The filled edition is a comparison surface, not the correct answer.
 
-Use a scored or stateful game only when each choice moves from one named visible state to another, the state delta and consequence explain why, and the resulting state changes which choice is available next. The replay contract states what resets, what evidence remains visible, and what becomes different on the next run. Points, when used, represent consequential quality rather than compliance or trivia. If most learning sits in explanatory text after a click, use a workbook.
+Use a scored or stateful game only when the initial choices map exactly once to the exercise's distinct decision options, each choice moves from one named visible state to another, the state delta and consequence explain why, and the resulting state changes which choice is available next. The replay contract returns to the initial decision state, states what evidence remains visible, and explains what becomes different on the next run. Points, when used, represent consequential quality rather than compliance or trivia. If most learning sits in explanatory text after a click, use a workbook.
 
 ## Semantic parity check
 

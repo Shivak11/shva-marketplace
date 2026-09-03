@@ -302,6 +302,70 @@ try {
   [bookOrder[commitmentIndex], bookOrder[challengeIndex]] = [bookOrder[challengeIndex], bookOrder[commitmentIndex]];
   expectFailure("AI before commitment", sessionValidator, writeMutation("ai-before-commitment", aiFirst), "book must preserve commitment -> consequence reveal -> consequence revision -> AI challenge -> revision");
 
+  const addUnboundLifecycleBlock = ({ type, id, text, insertBeforeId, teachingSegmentId, slideBeatId }) => {
+    const mutation = clone(validSession);
+    const sourceBlock = mutation.session.semanticBlocks.find((block) => block.type === type);
+    mutation.session.semanticBlocks.push({ ...clone(sourceBlock), id, text });
+    const sourceLedgerEntry = mutation.session.sourceLedger.find((entry) => entry.claimId === sourceBlock.id);
+    mutation.session.sourceLedger.push({
+      ...clone(sourceLedgerEntry),
+      claimId: id,
+      origin: `Adversarial contract fixture for an unbound ${type} block`,
+    });
+    for (const surfaceName of ["book", "teaching", "slides"]) {
+      const ids = mutation.session.surfaces[surfaceName].semanticBlockIds;
+      ids.splice(ids.indexOf(insertBeforeId), 0, id);
+    }
+    mutation.session.surfaces.teaching.coreSegments.find((segment) => segment.id === teachingSegmentId).semanticBlockIds.push(id);
+    mutation.session.surfaces.slides.beats.find((beat) => beat.id === slideBeatId).semanticBlockIds.push(id);
+    return mutation;
+  };
+
+  const unboundCommitment = addUnboundLifecycleBlock({
+    type: "commitment",
+    id: "unbound-commitment",
+    text: "A second participant commitment appears before the canonical exercise without belonging to any exercise record.",
+    insertBeforeId: "commitment-first-map",
+    teachingSegmentId: "mechanism",
+    slideBeatId: "path",
+  });
+  expectFailure(
+    "unbound commitment block",
+    sessionValidator,
+    writeMutation("unbound-commitment", unboundCommitment),
+    "commitment semantic block 'unbound-commitment' must belong to exactly one exercise",
+  );
+
+  const unboundAiChallenge = addUnboundLifecycleBlock({
+    type: "ai-challenge",
+    id: "unbound-ai-challenge",
+    text: "An AI challenge appears before the participant's commitment without belonging to any exercise record.",
+    insertBeforeId: "commitment-first-map",
+    teachingSegmentId: "mechanism",
+    slideBeatId: "path",
+  });
+  expectFailure(
+    "unbound AI challenge before commitment",
+    sessionValidator,
+    writeMutation("unbound-ai-challenge", unboundAiChallenge),
+    "ai-challenge semantic block 'unbound-ai-challenge' must belong to exactly one exercise",
+  );
+
+  const unboundRevision = addUnboundLifecycleBlock({
+    type: "revision",
+    id: "unbound-revision",
+    text: "A second final revision appears without belonging to any exercise record or named decision sequence.",
+    insertBeforeId: "transition-rule-placement",
+    teachingSegmentId: "human-revision",
+    slideBeatId: "final-revision",
+  });
+  expectFailure(
+    "unbound final revision block",
+    sessionValidator,
+    writeMutation("unbound-revision", unboundRevision),
+    "revision semantic block 'unbound-revision' must belong to exactly one exercise",
+  );
+
   const termBeforeProblem = clone(validSession);
   const termOrder = termBeforeProblem.session.surfaces.book.semanticBlockIds;
   const problem = termOrder.splice(termOrder.indexOf("case-return-to-work"), 1)[0];
@@ -355,6 +419,15 @@ try {
     semanticBlockIds: [...oneBlobSchedule.session.surfaces.teaching.semanticBlockIds],
   }];
   expectFailure("one-blob schedule", sessionValidator, writeMutation("one-blob-schedule", oneBlobSchedule), "needs at least 6 distinct facilitation segments");
+
+  const selfDeclaredOneBlobSchedule = clone(oneBlobSchedule);
+  selfDeclaredOneBlobSchedule.programme.planningProfile.minimumCoreSegments = 1;
+  expectFailure(
+    "one-blob schedule hidden by planning profile",
+    sessionValidator,
+    writeMutation("self-declared-one-blob-schedule", selfDeclaredOneBlobSchedule),
+    "needs at least 3 segments for a 90-minute session regardless of the selected planning profile",
+  );
 
   const emptySourceFacts = clone(validSession);
   emptySourceFacts.session.semanticBlocks.find((block) => block.id === "claim-exception").sourceClass = "source-backed";
@@ -522,6 +595,15 @@ try {
     sessionValidator,
     writeMutation("disconnected-game", disconnectedGame),
     "next choice 'pause-after-omission' must begin at destination state 'paused'",
+  );
+
+  const replaySkipsInitialFork = clone(statefulGame);
+  replaySkipsInitialFork.session.exercises[0].game.replay.resetsToStateId = "paused";
+  expectFailure(
+    "game replay skips initial decision fork",
+    sessionValidator,
+    writeMutation("replay-skips-initial-fork", replaySkipsInitialFork),
+    "game replay must reset to initialStateId",
   );
 
   const sixtyMinuteProfile = clone(validSession);

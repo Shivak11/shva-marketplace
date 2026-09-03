@@ -453,8 +453,13 @@ for (const [index, visual] of (book.visuals ?? []).entries()) {
 
 const coreMinutes = sumMinutes(teaching.coreSegments);
 const reserveMinutes = sumMinutes(teaching.depthReserves);
+const durationAwareMinimumCoreSegments = Math.max(2, Math.ceil(Number(programme.officialSessionMinutes) / 30));
 requireValue(coreMinutes === Number(programme.officialSessionMinutes), `teaching core totals ${coreMinutes}, expected ${programme.officialSessionMinutes}`);
 requireValue(coreMinutes + reserveMinutes === Number(programme.preparedRunwayMinutes), `core plus reserves total ${coreMinutes + reserveMinutes}, expected ${programme.preparedRunwayMinutes}`);
+requireValue(
+  Array.isArray(teaching.coreSegments) && teaching.coreSegments.length >= durationAwareMinimumCoreSegments,
+  `teaching.coreSegments needs at least ${durationAwareMinimumCoreSegments} segments for a ${programme.officialSessionMinutes}-minute session regardless of the selected planning profile`,
+);
 requireValue(
   Array.isArray(teaching.coreSegments) && teaching.coreSegments.length >= Number(planningProfile.minimumCoreSegments),
   `teaching.coreSegments needs at least ${planningProfile.minimumCoreSegments} distinct facilitation segments under the selected planning profile`,
@@ -525,6 +530,9 @@ const exercises = Array.isArray(session.exercises) ? session.exercises : [];
 requireValue(exercises.length > 0, "at least one exercise is required");
 const exerciseIds = exercises.map((exercise) => exercise?.id).filter(Boolean);
 requireValue(duplicateValues(exerciseIds).length === 0, "exercise record ids must be unique");
+const claimedCommitmentBlockIds = [];
+const claimedAiChallengeBlockIds = [];
+const claimedRevisionBlockIds = [];
 const claimedConsequenceRevealBlockIds = [];
 const claimedConsequenceRevisionBlockIds = [];
 const exerciseBlockIds = new Set(
@@ -602,6 +610,9 @@ for (const [index, exercise] of exercises.entries()) {
     `exercises[${index}].decisionFork options must be materially distinct`,
   );
   requireValue(exercise?.commitBeforeAI === true, `exercises[${index}] must commit before AI`);
+  claimedCommitmentBlockIds.push(exercise?.commitmentBlockId);
+  claimedAiChallengeBlockIds.push(exercise?.aiChallengeBlockId);
+  claimedRevisionBlockIds.push(exercise?.revisionBlockId);
   requireValue(blockTypeById.get(exercise?.commitmentBlockId) === "commitment", `exercises[${index}].commitmentBlockId must reference a commitment semantic block`);
   requireValue(blockTypeById.get(exercise?.aiChallengeBlockId) === "ai-challenge", `exercises[${index}].aiChallengeBlockId must reference an ai-challenge semantic block`);
   requireValue(blockTypeById.get(exercise?.revisionBlockId) === "revision", `exercises[${index}].revisionBlockId must reference a revision semantic block`);
@@ -873,12 +884,27 @@ for (const [index, exercise] of exercises.entries()) {
       hasReachableFork,
       `exercises[${index}] game needs a reachable state with at least two choices leading to different states`,
     );
-    requireValue(stateIds.includes(game?.replay?.resetsToStateId), `exercises[${index}] game replay must reset to a known state`);
+    requireValue(
+      game?.replay?.resetsToStateId === game.initialStateId,
+      `exercises[${index}] game replay must reset to initialStateId`,
+    );
     requireValue(nonEmptyArray(game?.replay?.preserves), `exercises[${index}] game replay must state what learner evidence is preserved`);
     requireValue(isSubstantive(game?.replay?.changes, 28, 4), `exercises[${index}] game replay must state what changes on replay`);
   }
 }
 
+for (const [blockType, claimedBlockIds] of [
+  ["commitment", claimedCommitmentBlockIds],
+  ["ai-challenge", claimedAiChallengeBlockIds],
+  ["revision", claimedRevisionBlockIds],
+]) {
+  for (const block of semanticBlocks.filter((item) => item.type === blockType)) {
+    requireValue(
+      claimedBlockIds.filter((blockId) => blockId === block.id).length === 1,
+      `${blockType} semantic block '${block.id}' must belong to exactly one exercise`,
+    );
+  }
+}
 for (const block of semanticBlocks.filter((item) => item.type === "consequence-reveal")) {
   requireValue(
     claimedConsequenceRevealBlockIds.filter((blockId) => blockId === block.id).length === 1,

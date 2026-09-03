@@ -138,7 +138,7 @@ It is one defensible answer, not the answer key. A field that does not apply say
 
 ## 7. Game feel without interface theatre
 
-Use a scored or stateful game only when the learner's choice produces a visible consequence that changes what can be chosen next. Record named states and, for every choice, its origin state, destination state, visible delta, consequence, and next available choices. Record a replay rule that says what resets, what evidence remains, and what becomes different. The meaningful loop is commitment → consequence → explanation → revision → transfer.
+Use a scored or stateful game only when the learner's choice produces a visible consequence that changes what can be chosen next. Record named states and, for every choice, its canonical decision option, origin state, destination state, visible delta, consequence, and next available choices. Initial choices cover the full decision fork exactly once. Record a replay rule that returns to the initial state, says what evidence remains, and states what becomes different. The meaningful loop is commitment → consequence → explanation → revision → transfer.
 
 Scores may represent the quality or cost of consequences. They must not reward guessing the teacher's vocabulary. Buttons, badges, confetti, progress bars, and card stacks do not create play by themselves. Two booleans claiming that “choice changes state” do not create a state model. If the decision state does not change, retain the simpler workbook.
 
