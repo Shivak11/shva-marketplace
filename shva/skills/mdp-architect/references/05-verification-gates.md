@@ -59,6 +59,9 @@ Run these gates from disk. An agent report, clean source diff, or successful bui
 - Check readable type, overflow, clipped diagrams, table wrapping, contrast, touch target spacing, horizontal scroll, and visual dominance of callouts.
 - Check the Book surface still reads as prose after styles load. If it scans like a deck with speaker notes, reduce headings and boxes before shipping.
 - Read the Book surface straight through at body-text size. Confirm that paragraphs carry cause and consequence, terms appear after the problem they solve, diagrams arrive after the full mechanism is understandable, and emphasis is scarce.
+- Confirm every specialist or region-specific noun needed to follow the scene is defined naturally on first use, including vocabulary that feels ordinary only inside one profession.
+- Confirm case caveats remain traceable in notes without repeatedly breaking narrative immersion, and that every move from story to abstraction has an explicit hinge in the preceding prose.
+- For each editorial reconstruction, compare composition and caption with the source chronology. Reject false simultaneity, implied access to private material, or a third visual added without replacing one of the first two.
 - Run a blind taste read: it should name at least three intended traits, remain legible to a novice, and not be mistaken for keynote, influencer, memo, research-paper, or generic AI prose.
 
 ## 7. Forward test and delivery gate

@@ -18,9 +18,13 @@ Write connected prose that can be read without a facilitator.
 - Use no more than three internal headings.
 - Begin with the organizational disturbance, not a definition, agenda, or explanation of how the modes work.
 - Let a technical term, framework, or diagram arrive only after the reader has met the problem it resolves. Move through a connected causal sequence rather than labels such as "Interpretation" or "The framework" used as a shortcut.
+- Define specialist everyday nouns at first contact when a general reader may not know them. Translate regional or professional shorthand into globally legible language; never assume organisational seniority brings domain vocabulary.
 - Sustain one case. Use one to three bounded lateral examples only when each performs a different conceptual job and returns clearly to the human or organisational question.
 - Use a verified case when visible details carry the argument. Mark a composite or illustrative scene where a reader could mistake it for reporting. Do not add fake clock-time, memo language, or invented specificity to simulate reality.
+- Keep source qualification in quiet notes unless uncertainty changes the conclusion. Do not repeatedly interrupt a reported scene to announce that it comes from a recollection, interview, or later account.
+- Move from case to concept through a visible hinge already present in the prose: an object, consequence, unresolved question, or changed action. A new heading does not supply a missing transition.
 - Use one inline diagram only after the reader has experienced the tension and can describe the mechanism it resolves. Omit it when prose explains the relationship more clearly.
+- Any editorial reconstruction must preserve chronology and causality, identify itself as an original representation, and avoid implying access to private source material. If the visual budget is full, replace the weaker visual rather than add another.
 - Use no body callout card system, repeated margin labels, repeated working rules, or facilitation tags.
 - Keep emphasis scarce. Use no more than two memorable lines.
 - Do not use stacked punchlines, slogan chains, clipped motivational fragments, generic AI claims, era-snark, a research-paper summary voice, or a closing sermon.
