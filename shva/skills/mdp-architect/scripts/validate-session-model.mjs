@@ -174,12 +174,12 @@ const caseBlocks = semanticBlocks.filter((block) => block.type === "case");
 const lateralBlocks = semanticBlocks.filter((block) => block.type === "lateral-example");
 const mechanismBlocks = semanticBlocks.filter((block) => block.type === "mechanism");
 requireValue(caseBlocks.length === 1, "exactly one sustained case semantic block is required");
-requireValue(lateralBlocks.length <= 1, "at most one lateral example semantic block is allowed");
+requireValue(lateralBlocks.length <= 3, "at most three lateral example semantic blocks are allowed");
 requireValue(mechanismBlocks.length === 1, "exactly one mechanism semantic block is required");
-requireValue(Number(session.caseReturnCount) >= 3, "session.caseReturnCount must be at least 3");
+requireValue(Number(session.caseReturnCount) >= 2, "session.caseReturnCount must be at least 2 for a sustained case");
 
 requireValue(Array.isArray(book.headings) && book.headings.length >= 1 && book.headings.length <= 3, "book.headings must contain 1 to 3 headings");
-requireValue(Number(book.narrativeWords) >= 2500 && Number(book.narrativeWords) <= 3200, "book.narrativeWords must be between 2500 and 3200");
+requireValue(Number(book.narrativeWords) >= 3800 && Number(book.narrativeWords) <= 5200, "book.narrativeWords must be between 3800 and 5200 for a 90-minute core with a 120-minute prepared runway");
 requireValue(Number(book.workbookWords) >= 400 && Number(book.workbookWords) <= 600, "book.workbookWords must be between 400 and 600");
 requireValue(Number(book.bodyCalloutCards) === 0, "book.bodyCalloutCards must be 0");
 requireValue(Number(book.pullLines) <= 2, "book.pullLines must be 2 or fewer");

@@ -31,7 +31,7 @@ Do not use the table as a catalogue. A reader should see why Session 4 could not
 
 ## Session design rules
 
-Each session must contain one sustained case. Give the case a concrete organizational decision, actors, constraint, incomplete evidence, and consequence. Return to it at least three times: at the disturbance, after the mechanism, and when the participant revises the artifact. Permit one short lateral example only when it clarifies a move the main case cannot show.
+Each session must contain one sustained case. Give the case a concrete organizational decision, actors, constraint, incomplete evidence, and consequence. Return to it at decisive moments rather than through a mechanical callback quota. Permit one to three bounded lateral examples when each clarifies a different move the main case cannot show. Every example must return to the organisational question it was chosen to explain.
 
 Build a protected 90 minute core. Allocate the remaining 30 minutes as named depth reserves that deepen the existing case, mechanism, or artifact. Every reserve needs a rejoin point that restates the question and identifies the artifact state participants should have before the next core move.
 

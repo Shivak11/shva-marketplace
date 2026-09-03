@@ -14,11 +14,11 @@ For a greenfield book or substantial book-shaped programme, do not draft these s
 
 Write connected prose that can be read without a facilitator.
 
-- Use 2,500 to 3,200 narrative words, plus a 400 to 600 word chapter end workbook unless the brief sets a different length.
+- For a 90-minute core with a 120-minute prepared runway, use 3,800 to 5,200 narrative words plus a substantive chapter-end workbook unless the brief sets a different depth. Calibrate shorter sessions proportionally; do not mistake a word target for proof of teaching duration.
 - Use no more than three internal headings.
 - Begin with the organizational disturbance, not a definition, agenda, or explanation of how the modes work.
 - Let a technical term, framework, or diagram arrive only after the reader has met the problem it resolves. Move through a connected causal sequence rather than labels such as "Interpretation" or "The framework" used as a shortcut.
-- Sustain one case. Use at most one brief lateral example.
+- Sustain one case. Use one to three bounded lateral examples only when each performs a different conceptual job and returns clearly to the human or organisational question.
 - Use a verified case when visible details carry the argument. Mark a composite or illustrative scene where a reader could mistake it for reporting. Do not add fake clock-time, memo language, or invented specificity to simulate reality.
 - Use one inline diagram only after the reader has experienced the tension and can describe the mechanism it resolves. Omit it when prose explains the relationship more clearly.
 - Use no body callout card system, repeated margin labels, repeated working rules, or facilitation tags.

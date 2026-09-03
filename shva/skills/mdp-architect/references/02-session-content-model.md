@@ -39,7 +39,7 @@ Encode that sequence, do not merely describe it. Each teaching core segment and 
 ## Case and emphasis controls
 
 - Keep one sustained case in the foreground. A second full case is a redesign request, not an illustration.
-- Use at most one short lateral example. It must return the reader to the sustained case within the same section.
+- Use one to three bounded lateral examples only when each has a distinct conceptual job. Each must return the reader to the human or organisational question it explains; it need not force an artificial callback to the sustained case.
 - Give the session at most two memorable lines. Each line must do conceptual work and must not be repeated as a label, card, and slide title.
 - Use bold labels, pull lines, cards, and diagrams sparingly. If every beat is emphasized, none is.
 - Do not introduce a mechanism before a reader can name the failure it corrects.

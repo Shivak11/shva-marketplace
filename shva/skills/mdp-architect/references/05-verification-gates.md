@@ -17,7 +17,7 @@ Run these gates from disk. An agent report, clean source diff, or successful bui
 - Confirm the programme plan table appears after the cover and before Chapter 1.
 - Confirm each session has a central question, sustained case, carried artifact, commitment, mechanism, workbook, and handoff.
 - Confirm no session merely repeats the preceding session with new labels.
-- Confirm one main case and no more than one short lateral example per session.
+- Confirm one main case and no more than three bounded lateral examples per session. Each lateral example must carry a distinct mechanism, teach a sourced unfamiliar fact when factual, and circle back to the organisational question.
 - Confirm a Book chapter opens from a problem, verified situation, sourced material, or clearly marked illustration. Reject a generic thesis stack, fake clock-time, memo frame, or invented reporting detail.
 
 ## 2. Timing gate

@@ -85,7 +85,7 @@ Do not make sessions a list of topics. Make each one change what the participant
 
 ### 5. Create one canonical session model
 
-Before drafting three modes, write a compact JSON content model using the contract in `references/02-session-content-model.md`. Start from `fixtures/who-owns-the-exception.valid.json` and replace its content. Store the central question, claims, case, lateral example, mechanism, diagram labels, exercises, sources, transition, and surface references once.
+Before drafting three modes, write a compact JSON content model using the contract in `references/02-session-content-model.md`. Start from `fixtures/who-owns-the-exception.valid.json` and replace its content. Store the central question, claims, case, any bounded lateral examples, mechanism, diagram labels, exercises, sources, transition, and surface references once.
 
 Run:
 
@@ -132,8 +132,8 @@ Keep source, plugin/package, installation, runtime invocation, and rendered-jour
 ## Hard rules
 
 - Start from a real organizational disturbance or consequential decision, not a framework definition.
-- Use one central question, one sustained case, at most one short lateral example, one earned mechanism, and one named participant artifact per chapter.
-- Treat analogies as explanatory instruments. The lateral example must teach an unfamiliar fact and reveal the mechanism more clearly than a generic manager story would.
+- Use one central question, one sustained case, one earned mechanism, and one named participant artifact per chapter. Permit one to three bounded lateral examples when each performs a different conceptual job; do not turn the chapter into an anecdote parade.
+- Treat analogies as explanatory instruments. Each lateral example must teach an unfamiliar fact, reveal a specific mechanism more clearly than a generic manager story would, and circle back to the human or organisational problem without being forced into a false equivalence.
 - Keep Book Chapter prose direct. Let a problem appear before the term, framework, or diagram that resolves it. Do not use an outline phrase as a prose transition, a fake clock-time or memo frame, decorative metaphor density, generic motivation, AI doom, closing sermon, or a card on every idea.
 - Use verified cases when visible prose relies on their facts. Mark a composite as illustrative and do not manufacture precise details to make it feel real. Do not stack punchlines, slogan chains, or clipped motivational fragments.
 - A diagram is an explanation, not a speed bump. Place it after the reader can describe the full mechanism in words, and use it only when a picture clarifies what prose cannot.
