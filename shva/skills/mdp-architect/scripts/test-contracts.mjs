@@ -406,6 +406,18 @@ try {
   };
   expectPass("stateful consequential game", sessionValidator, writeMutation("stateful-game", statefulGame));
 
+  const invisibleStateGame = clone(statefulGame);
+  const repeatedVisibleConsequence = invisibleStateGame.session.exercises[0].game.states[0].visibleConsequence;
+  for (const state of invisibleStateGame.session.exercises[0].game.states) {
+    state.visibleConsequence = repeatedVisibleConsequence;
+  }
+  expectFailure(
+    "different state ids with no visible difference",
+    sessionValidator,
+    writeMutation("invisible-state-game", invisibleStateGame),
+    "game state visible consequences must be distinct",
+  );
+
   const forcedLinearGame = clone(statefulGame);
   forcedLinearGame.session.exercises[0].game.choices = forcedLinearGame.session.exercises[0].game.choices.filter((choice) => choice.id !== "authorise-without-pause");
   expectFailure(

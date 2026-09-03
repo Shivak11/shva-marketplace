@@ -21,6 +21,7 @@ try {
 const errors = [];
 const isNonEmpty = (value) => typeof value === "string" && value.trim().length > 0;
 const wordCount = (value) => isNonEmpty(value) ? value.trim().split(/\s+/).length : 0;
+const normaliseText = (value) => String(value ?? "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 const isSubstantive = (value, minimumCharacters = 24, minimumWords = 4) =>
   isNonEmpty(value) && value.trim().length >= minimumCharacters && wordCount(value) >= minimumWords;
 const isPositiveInteger = (value) => Number.isInteger(Number(value)) && Number(value) > 0;
@@ -769,6 +770,10 @@ for (const [index, exercise] of exercises.entries()) {
       requireValue(isNonEmpty(state?.id), `exercises[${index}].game.states[${stateIndex}].id is required`);
       requireValue(isSubstantive(state?.visibleConsequence, 28, 4), `exercises[${index}].game.states[${stateIndex}].visibleConsequence must be substantive`);
     }
+    requireValue(
+      duplicateValues((game.states ?? []).map((state) => normaliseText(state?.visibleConsequence))).length === 0,
+      `exercises[${index}] game state visible consequences must be distinct`,
+    );
     requireValue(nonEmptyArray(game.choices) && game.choices.length >= 2, `exercises[${index}] game.choices needs at least two consequential choices`);
     const choiceIds = (game.choices ?? []).map((choice) => choice?.id).filter(Boolean);
     const choiceById = new Map((game.choices ?? []).map((choice) => [choice?.id, choice]));
