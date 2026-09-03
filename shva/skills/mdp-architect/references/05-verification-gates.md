@@ -2,6 +2,15 @@
 
 Run these gates from disk. An agent report, clean source diff, or successful build alone is not proof.
 
+## 0. Book Foundation Gate
+
+- Classify whether the request is a greenfield book, a substantial book-shaped reframe, or a local correction.
+- For a greenfield book or substantial reframe, confirm an explicitly approved Book Foundation Record exists before HTML, cover art, front matter, a canonical chapter model, or production files are created.
+- If reusing a record for a local correction, confirm that the premise, reader, and identity are unchanged and name the record that supplies those decisions.
+- Confirm the record settles the reader, argument, boundaries, evidence base, opening mode, section logic, carried question or artifact, author material, front matter, voice contract, and source status.
+- Confirm the author saw at least two materially different title and cover systems, with composition, palette roles, typography mood, diagram grammar, prohibited motifs, and difference from recent work. Colour-only variations fail.
+- Confirm that names, client claims, acknowledgements, endorsements, affiliations, and author experience are either verified or omitted. Never infer them from a programme brief.
+
 ## 1. Scope and composition gate
 
 - Confirm the work belongs to MDP Architect rather than a sibling skill.
@@ -9,6 +18,7 @@ Run these gates from disk. An agent report, clean source diff, or successful bui
 - Confirm each session has a central question, sustained case, carried artifact, commitment, mechanism, workbook, and handoff.
 - Confirm no session merely repeats the preceding session with new labels.
 - Confirm one main case and no more than one short lateral example per session.
+- Confirm a Book chapter opens from a problem, verified situation, sourced material, or clearly marked illustration. Reject a generic thesis stack, fake clock-time, memo frame, or invented reporting detail.
 
 ## 2. Timing gate
 
@@ -32,6 +42,7 @@ Run these gates from disk. An agent report, clean source diff, or successful bui
 - Recheck current or material facts with a live primary source during this run.
 - Confirm teaching synthesis and illustrative material are not represented as external evidence.
 - Confirm raw recording IDs, prompt logic, provenance ledgers, and facilitator scaffolding are absent from Book and Slide surfaces.
+- Confirm a visible case's source status supports both its material facts and the causal inference made beside it. A composite must not masquerade as reporting.
 
 ## 5. HTML behavior gate
 
@@ -47,10 +58,12 @@ Run these gates from disk. An agent report, clean source diff, or successful bui
 - Inspect cover, programme plan table, a Book section, the inline diagram, a Teaching reserve, a Slide mode, the workbook, the filled edition reveal, and the final transition.
 - Check readable type, overflow, clipped diagrams, table wrapping, contrast, touch target spacing, horizontal scroll, and visual dominance of callouts.
 - Check the Book surface still reads as prose after styles load. If it scans like a deck with speaker notes, reduce headings and boxes before shipping.
+- Read the Book surface straight through at body-text size. Confirm that paragraphs carry cause and consequence, terms appear after the problem they solve, diagrams arrive after the full mechanism is understandable, and emphasis is scarce.
+- Run a blind taste read: it should name at least three intended traits, remain legible to a novice, and not be mistaken for keynote, influencer, memo, research-paper, or generic AI prose.
 
 ## 7. Forward test and delivery gate
 
-- Run a different 90 minute session through the method, such as an exception ownership session. Grade it against the same gates before calling the skill reusable.
+- Forward-test a fresh book-shaped request in an isolated directory. Before explicit approval, the only deliverable may be a Book Foundation Record; no HTML or production artifact may appear. After approval, grade a different 90 minute session against the same gates before calling the skill reusable.
 - Inspect the complete Git diff and staging set. Verify files on disk, not only agent claims.
 - Keep source, package, installation, runtime invocation, and rendered journey evidence separate in the report.
 - Deliver HTML by default. Do not generate a PDF unless the user explicitly requests one.

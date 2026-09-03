@@ -1,5 +1,11 @@
 # Research Routing
 
+## Establish foundation evidence before production
+
+During a required Book Foundation Interview, identify what supports the proposed premise, opening, author material, and reference shelf. Label each item as confirmed, author-supplied, proposed, or open. A profile claim, acknowledgement, client name, endorsement, institutional affiliation, or historical scene remains out of visible prose until the author has confirmed it or a source supports it.
+
+The interview can use a small evidence note. Do not treat it as permission to create an HTML artifact before the Book Foundation Record is approved.
+
 ## Route research before composition
 
 Do not draft a session from remembered theory or a generic search result. Build a compact source ledger before freezing the canonical content model.
@@ -32,6 +38,8 @@ For a current claim, check it in the current run. For a stable scholarly concept
 
 Use Readwise, book search, and publisher or author pages to learn structure and locate original sources. Do not imitate a living author's voice, copy passages, reproduce a protected diagram, or let a book title become a substitute for a mechanism. Translate an observed structural move into a new case, new language, and a concrete participant decision.
 
+When one example carries a chapter's mechanism, verify both the example's material facts and the causal claim the chapter draws from them. An unfamiliar example is useful only when it makes the mechanism easier to see. Do not accumulate novelty, anecdotes, or citations as decoration.
+
 ## Source quality decisions
 
 - Prefer a primary source over a summary when a fact affects the participant's decision.
@@ -39,6 +47,7 @@ Use Readwise, book search, and publisher or author pages to learn structure and 
 - Treat an illustrative case as a teaching device, not evidence.
 - State uncertainty when the evidence does not support a precise number, causal claim, or universal rule.
 - Remove a decorative citation that does not support the sentence beside it.
+- Do not use an attractive quotation, viral post, or company story as an opening merely because it is quotable. Confirm its source, context, and relevance to the chapter's question.
 
 ## Research completion check
 

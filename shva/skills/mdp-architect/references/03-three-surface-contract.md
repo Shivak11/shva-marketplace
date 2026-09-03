@@ -6,6 +6,10 @@ Book Chapter, Teaching Script, and Slide Content are different compressions of o
 
 Use the canonical IDs from `02-session-content-model.md` in all three surfaces. A surface may omit detail. It may not introduce new meaning.
 
+## Foundation prerequisite
+
+For a greenfield book or substantial book-shaped programme, do not draft these surfaces until a Book Foundation Record is explicitly approved. The approved record supplies the title system, opening logic, author material, voice contract, and visual direction. A surface may not silently replace those decisions with a prior book's conventions.
+
 ## Book Chapter
 
 Write connected prose that can be read without a facilitator.
@@ -13,10 +17,13 @@ Write connected prose that can be read without a facilitator.
 - Use 2,500 to 3,200 narrative words, plus a 400 to 600 word chapter end workbook unless the brief sets a different length.
 - Use no more than three internal headings.
 - Begin with the organizational disturbance, not a definition, agenda, or explanation of how the modes work.
+- Let a technical term, framework, or diagram arrive only after the reader has met the problem it resolves. Move through a connected causal sequence rather than labels such as "Interpretation" or "The framework" used as a shortcut.
 - Sustain one case. Use at most one brief lateral example.
-- Use one inline diagram only after the reader has experienced the tension it resolves.
+- Use a verified case when visible details carry the argument. Mark a composite or illustrative scene where a reader could mistake it for reporting. Do not add fake clock-time, memo language, or invented specificity to simulate reality.
+- Use one inline diagram only after the reader has experienced the tension and can describe the mechanism it resolves. Omit it when prose explains the relationship more clearly.
 - Use no body callout card system, repeated margin labels, repeated working rules, or facilitation tags.
 - Keep emphasis scarce. Use no more than two memorable lines.
+- Do not use stacked punchlines, slogan chains, clipped motivational fragments, generic AI claims, era-snark, a research-paper summary voice, or a closing sermon.
 - End with a practical workbook and a question that opens the next chapter.
 
 The Book surface contains no timing, speaker instruction, recovery move, source ledger, prompt logic, or tool policy. Put citations in a quiet source note only when the factual claim needs one.
@@ -25,7 +32,7 @@ The Book surface contains no timing, speaker instruction, recovery move, source 
 
 Preserve the Book sequence and shared language. Add only delivery information:
 
-- first person spoken lines in Shiva's direct style
+- first person spoken lines in the named facilitator's direct voice
 - minute ranges and the 90 minute core timing ledger
 - room move, likely participant response, and recovery move
 - commitment instruction before the AI challenge
