@@ -12,9 +12,9 @@ Do not draft a session from remembered theory or a generic search result. Build 
 
 Use this order:
 
-1. Read the current programme folder: brief, README, source ledger, prior artifacts, and user supplied documents.
-2. Retrieve current Shiva context and search the wiki for prior frames, cases, terminology, and active programme decisions.
-3. Search Readwise and Shiva's book corpus for structural moves, not prose to copy. Mine operations, examples, and diagram logic. Write original language.
+1. Read the current programme folder: brief, README, source ledger, approved Book Foundation Record, prior artifacts, and user supplied documents.
+2. Retrieve the author's current context and search the relevant wiki or taste profile for prior frames, cases, terminology, and active decisions. In Shiva's environment, use the Context Hub and compiled taste pages before older memory.
+3. Search the author's owned reading corpus for structural moves, not prose to copy. Mine operations, examples, and diagram logic. Write original language.
 4. Verify material or current factual claims through live primary sources. Use official documentation, original research, filings, or authoritative institutional sources before commentary.
 5. Use `mdp-source-finder` when the task needs a raw source pack by session beat. Use targeted web research only to fill a clear gap.
 
@@ -30,7 +30,7 @@ Use this order:
 
 ## Maintain a source ledger
 
-For each material item record: `claim_id`, exact claim, classification, source or origin, publication or access date, confidence, surfaces used, and caveat. Keep the ledger and raw source metadata out of Book and Slide surfaces unless the user requests an appendix.
+For each material item record: `claim_id`, exact claim, classification, source or origin, source type, publication or access date, confidence, surfaces used, exact supported facts, teaching inference, and factual boundary. Keep the ledger and raw source metadata out of Book and Slide surfaces unless the user requests an appendix.
 
 For a current claim, check it in the current run. For a stable scholarly concept, record the source once and distinguish the source's finding from the teaching interpretation.
 
@@ -38,7 +38,20 @@ For a current claim, check it in the current run. For a stable scholarly concept
 
 Use Readwise, book search, and publisher or author pages to learn structure and locate original sources. Do not imitate a living author's voice, copy passages, reproduce a protected diagram, or let a book title become a substitute for a mechanism. Translate an observed structural move into a new case, new language, and a concrete participant decision.
 
-When one example carries a chapter's mechanism, verify both the example's material facts and the causal claim the chapter draws from them. An unfamiliar example is useful only when it makes the mechanism easier to see. Do not accumulate novelty, anecdotes, or citations as decoration.
+When one example carries a chapter's mechanism, verify both the example's material facts and the causal claim the chapter draws from them. An unfamiliar example is useful only when it makes the mechanism easier to see. State where the analogy stops and write the return to the human or organisational problem before keeping it. Do not accumulate novelty, anecdotes, or citations as decoration.
+
+## Compare evidence paths without collapsing them
+
+Two cases can expose the same organisational vulnerability through different mechanisms. Name both levels:
+
+1. the common problem that matters for the decision;
+2. the different way each record became incomplete, misleading, or unfit for the proposed action.
+
+The Chapter One benchmark is useful because it keeps these levels apart. Ford's green review charts omitted an unresolved launch problem that executives did not yet feel safe surfacing. In the gentian-violet study, the clinical imaging process added a visible trace beside an unchanged lesion, and that trace was associated with a different model output. Both records had been shaped before analysis began. One excluded a relevant signal; the other acquired a process trace. The comparison does not establish that every omission is cultural, that every trace entered model training, or that faster AI analysis can recover evidence absent from its inputs.
+
+Use this as a source-boundary benchmark, not a compulsory future anecdote. A new comparison passes only when it states the common decision problem, the non-equivalent mechanisms, and the practical consequence of that difference.
+
+Benchmark sources: Alan Mulally's direct retrospective account of the Business Plan Review at `https://www.lean.org/the-lean-post/articles/people-first-leadership-a-conversation-between-jim-morgan-and-alan-mulally/`; Winkler and colleagues' lesion-image study at `https://pmc.ncbi.nlm.nih.gov/articles/PMC6694463/`. The first is recollection rather than meeting transcript. The second reports an association between the surgical marking and predictions; it does not establish a universal causal pathway.
 
 ## Source quality decisions
 
@@ -48,6 +61,8 @@ When one example carries a chapter's mechanism, verify both the example's materi
 - State uncertainty when the evidence does not support a precise number, causal claim, or universal rule.
 - Remove a decorative citation that does not support the sentence beside it.
 - Do not use an attractive quotation, viral post, or company story as an opening merely because it is quotable. Confirm its source, context, and relevance to the chapter's question.
+- For dialogue, record whether wording is verbatim, lightly normalised, paraphrased, or reconstructed. Never invent a silence, reaction, motive, or private assignment and present it as reported fact.
+- For an editorial visual reconstruction, record the source chronology, what the source actually depicts or describes, and what the new composition changes. A caption must identify it as original representation and may not imply private access.
 
 ## Research completion check
 

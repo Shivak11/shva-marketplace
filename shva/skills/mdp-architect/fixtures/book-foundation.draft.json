@@ -1,0 +1,34 @@
+{
+  "status": "draft",
+  "projectAndScope": "A proposed public book",
+  "proposition": {
+    "bookReader": "",
+    "participantAudience": "Current executive cohort",
+    "assumedKnowledgeBySurface": "",
+    "recognisedProblem": "AI produces more analysis than the organisation can use",
+    "promisedChange": "",
+    "centralArgument": "",
+    "boundary": "",
+    "evidenceBase": "Unresolved"
+  },
+  "architecture": {},
+  "titleSystems": [],
+  "selectedTitleSystem": "",
+  "authorAndFrontMatter": {
+    "selectedOrder": [],
+    "authorNoteFacts": [],
+    "acknowledgements": [],
+    "approvedLinks": []
+  },
+  "voiceContract": {},
+  "visualIdentity": {
+    "directions": [],
+    "selectedDirection": ""
+  },
+  "exerciseDirection": {},
+  "openItems": {
+    "blocking": ["Book reader", "argument", "title", "voice", "visual direction"],
+    "deferred": []
+  },
+  "approval": {}
+}

@@ -6,7 +6,7 @@ Use this reference to turn a brief into a linked executive programme. Use MDP Ar
 
 ## Build the spine before any chapter
 
-1. Read the current teaching workspace rules, the programme README, its source ledger, and the latest rendered artifact.
+1. Read the current teaching workspace rules, the programme README, its source ledger, the approved Book Foundation Record when the programme is book-shaped, and the latest rendered artifact.
 2. Write one programme question. It must describe the capability the room will build, not the topic it will hear about.
 3. Name the carried participant artifact. It must gain one usable layer in each session.
 4. Sequence sessions as a decision journey: disturbance, map, mechanism, test, redesign, commitment. Do not sequence by a list of fashionable concepts.
@@ -15,7 +15,7 @@ Use this reference to turn a brief into a linked executive programme. Use MDP Ar
 
 ## Required programme plan table
 
-Place the programme plan table immediately after the cover in a participant HTML artifact. Each row must contain:
+Place the programme plan table immediately after the cover in a programme-review HTML artifact. In a public-book artifact, use the placement approved in the Book Foundation Record: it may appear in the interactive shell, as a reader-facing roadmap, or remain out of the Book reading flow. Do not expose an internal timetable merely because the source began as a course. Each row must contain:
 
 | Field | Requirement |
 | --- | --- |
@@ -32,6 +32,8 @@ Do not use the table as a catalogue. A reader should see why Session 4 could not
 ## Session design rules
 
 Each session must contain one sustained case. Give the case a concrete organizational decision, actors, constraint, incomplete evidence, and consequence. Return to it at decisive moments rather than through a mechanical callback quota. Permit one to three bounded lateral examples when each clarifies a different move the main case cannot show. Every example must return to the organisational question it was chosen to explain.
+
+Audit the case portfolio across the full programme. Vary domain, geography, actor, decision scale, and evidence form when that variety helps the argument; do not make every chapter another manager meeting or another HR exception. Diversity is diagnostic rather than a quota: a repeated case is justified when continuity produces more learning than novelty, and a new case is justified only when it performs work the existing case cannot.
 
 Build a protected 90 minute core. Allocate the remaining 30 minutes as named depth reserves that deepen the existing case, mechanism, or artifact. Every reserve needs a rejoin point that restates the question and identifies the artifact state participants should have before the next core move.
 

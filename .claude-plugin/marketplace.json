@@ -7,8 +7,8 @@
   "plugins": [
     {
       "name": "shva",
-      "description": "Personal command + skill pack. v0.11.0 adds the Book Foundation Gate to MDP Architect: a choice-led interview and approved record settle a book's argument, reader, identity, title system, front matter, voice, and cover direction before production.",
-      "version": "0.11.0",
+      "description": "Personal command + skill pack. v0.12.0 makes MDP Architect protect narrative causality and exercise integrity: concepts are earned, evidence mechanisms stay distinct, answer reveals are input-gated, and filled editions match the learner's artifact field for field.",
+      "version": "0.12.0",
       "source": "./shva",
       "author": {
         "name": "Shiva Kakkar"

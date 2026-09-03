@@ -1,18 +1,18 @@
 ---
 name: mdp-architect
 description: >-
-  Use when Dr. Shiva Kakkar wants to create or substantially refine an MDP,
-  executive-education programme, faculty-development programme, or multi-session
-  workshop and needs the programme spine, book-like session chapters, first-person
-  teaching scripts, slide content, exercises, source ledger, and interactive HTML
-  to remain internally consistent. Also use to audit an existing programme for
-  thin chapters, cognitive overload, weak pacing, mode drift, decorative cases,
-  generic AI use, or exercises without realistic revealable filled editions.
-  Triggers include "MDP", "session-by-session plan", "write the chapter", "teaching
-  script and slides", "make this two hours", "refine this course", and "programme
-  architecture" when two or more teaching surfaces must work as one system. Do not
-  use for a standalone source pack, keynote, or worksheet when the sibling skill
-  already covers the whole request.
+  Use when an author or faculty builder wants to create or substantially refine an
+  MDP, executive-education programme, faculty-development programme, multi-session
+  workshop, or book-shaped teaching programme and needs the programme spine, book
+  chapters, teaching scripts, slide content, exercises, source ledger, and
+  interactive HTML to remain one coherent system. Also use to audit thin chapters,
+  abrupt or generic-AI prose, cognitive overload, weak pacing, mode drift,
+  decorative cases, unearned frameworks, or disconnected exercises and answer
+  keys. Triggers include "MDP", "session-by-session plan", "write the chapter",
+  "teaching script and slides", "make this two hours", "refine this course", and
+  "programme architecture" when two or more teaching surfaces must work together.
+  Do not use for a standalone source pack, keynote, or worksheet when a sibling
+  skill already covers the whole request.
 ---
 
 # MDP Architect
@@ -45,7 +45,7 @@ If the request already supplies audience, duration, source material, and output 
 
 ## Book Foundation Gate
 
-For a greenfield book, a substantial book-shaped programme, or a book-like chapter whose premise, reader, identity, title, or front matter is not already approved, run the Book Foundation Interview before production. Read `references/00-book-foundation-interview.md` and complete its short, choice-led rounds in chat. The author must explicitly approve the resulting Book Foundation Record before any HTML, cover, front matter, canonical chapter model, or production file is created.
+For a greenfield book, a substantial book-shaped programme, or a book-like chapter whose premise, reader, identity, title, or front matter is not already approved, run the Book Foundation Interview before production. Read `references/00-book-foundation-interview.md` and complete its short, choice-led rounds in chat. The author must explicitly approve the resulting Book Foundation Record before any HTML, cover, front matter, canonical chapter model, or production file is created. An explicitly authorised exploratory prototype may defer non-blocking title or visual choices, but it remains labelled as exploratory and cannot establish book doctrine.
 
 For a small correction, a recent approved record may be reused only if the premise, reader, and identity are unchanged. Name that record and why it still applies. Do not make a taste-sensitive choice silently in HTML: offer two or three concrete candidates with a recommendation and trade-off. This is an editorial approval, not a Super-outer critical-action approval.
 
@@ -55,7 +55,7 @@ For a small correction, a recent approved record may be reused only if the premi
 
 Classify the request against the Book Foundation Gate before creating an artifact. When it applies, conduct the interview, return the compact record, and wait for explicit approval. Exploratory research and candidate-making may happen before approval; production may not.
 
-Keep the generic skill neutral: never assume an author biography, title, profile link, acknowledgement, recent cover, or reference shelf. Load an author-specific taste profile only when the author has supplied one or the work is explicitly in that author's environment.
+Keep the generic skill neutral: never assume an author biography, title, profile link, acknowledgement, recent cover, or reference shelf. Before asking about taste, retrieve an existing author profile or wiki when one is available. Load author-specific defaults only when the author supplied them or the work is explicitly in that author's environment; keep those defaults out of the reusable method.
 
 ### 2. Bind to the canonical workspace
 
@@ -67,7 +67,7 @@ Read `references/01-programme-architecture.md` before changing the programme spi
 
 ### 3. Retrieve before inventing
 
-Search Shiva's wiki and current programme files first. Then use Readwise and the owned book corpus for structural inspiration. Use live web research for current examples and factual verification. Prefer primary sources and serious practitioner-intellectual work. Keep a source ledger that separates observation, sourced fact, teaching synthesis, illustration, and unresolved claims.
+Search the author's wiki and current programme files first. In Shiva's environment, then use Readwise and the owned book corpus for structural inspiration. Use live web research for current examples and factual verification. Prefer primary sources and serious practitioner-intellectual work. Keep a source ledger that separates observation, sourced fact, teaching synthesis, illustration, reconstruction, counterfactual, and unresolved claims.
 
 Read `references/04-research-routing.md` before research. If a dedicated source pack is needed, invoke or follow `mdp-source-finder` without letting source collection replace programme design.
 
@@ -85,7 +85,7 @@ Do not make sessions a list of topics. Make each one change what the participant
 
 ### 5. Create one canonical session model
 
-Before drafting three modes, write a compact JSON content model using the contract in `references/02-session-content-model.md`. Start from `fixtures/who-owns-the-exception.valid.json` and replace its content. Store the central question, claims, case, any bounded lateral examples, mechanism, diagram labels, exercises, sources, transition, and surface references once.
+Before drafting three modes, write a compact JSON content model using the contract in `references/02-session-content-model.md`. Start from `fixtures/who-owns-the-exception.valid.json` and replace its content. Store the Book reader separately from the participant audience. Store the central question, case and purposeful return points, terms that need introduction, claims, bounded lateral examples, evidence-path comparisons, mechanism, narrative hinges, visuals, exercise journey, sources, transition, and surface references once.
 
 Run:
 
@@ -93,27 +93,21 @@ Run:
 node "$SKILL_DIR/scripts/validate-session-model.mjs" <session-model.json>
 ```
 
-Do not draft Book, Teaching, and Slides independently. If the model changes, propagate the change to all surfaces before polishing any one of them.
+Do not draft Book, Teaching, and Slides independently. If the model changes, propagate the change to all surfaces before polishing any one of them. Semantic parity means shared meaning, not identical density: a surface may omit a block only when the model declares that omission; it may never invent one.
 
-The validator must prove sequence as well as membership: every exercise names its commitment, AI-challenge, and revision blocks, and every visible surface preserves that order. A source-ledger entry must also name exactly the visible surfaces that use its block.
+The validator must prove sequence as well as membership: every exercise names its commitment, AI-challenge, and revision blocks, and every visible surface preserves that order. It must also prove that a term is earned before definition, zero to two substantive visuals are permitted, the exercise is connected to the chapter's culminating problem, reveal requires participant input, and the filled edition answers the same fields in the same order. A source-ledger entry names exactly the visible surfaces that use its block.
 
 ### 6. Build the requested surfaces
 
-For a Chapter build, use this visible order:
+For a programme-review HTML, place the cover and session-by-session MDP plan in the shell before the session surfaces. For a public-book HTML, render the approved book object—cover, title material, contents, selected author material, optional prologue, parts, chapters, notes, and exercises—in the order chosen in the Book Foundation Record. Do not make a trade-book reader pass through an internal programme table unless the approved architecture gives it a reader-facing job.
 
-1. Cover.
-2. Session-by-session MDP plan table.
-3. Book Chapter.
-4. Teaching Script.
-5. Slide Content.
-
-Book mode is continuous reading. Teaching mode contains the scaffolding. Slide mode is compression. Follow `references/03-three-surface-contract.md`.
+Book mode is continuous reading for the approved Book reader. Teaching mode contains the scaffolding for the participant audience. Slide mode is compression. Follow `references/03-three-surface-contract.md` and run the three-hinge pass in `references/06-chapter-craft-and-exercise-journey.md` before rendering.
 
 For a book-shaped build, derive the title system, opening logic, author material, and visual identity from the approved Book Foundation Record. Do not restore a previous book's title treatment, visual grammar, or cover palette by habit.
 
 For a 90-minute scheduled session, prepare a protected 90-minute core plus 30 minutes of integrated depth reserves. Every reserve deepens an existing case, mechanism, or participant artifact and states where to rejoin. Do not show 120 minutes as the official timetable duration unless the brief says so.
 
-Every exercise must make the participant commit before AI is used and must include a realistic filled edition behind an intentional reveal control. AI may challenge a map, threshold, interpretation, evidence boundary, or exception. It may not certify a people decision or become the decision-maker.
+Every exercise must arise from the chapter's final unresolved problem, make the participant commit before AI is used, and include a realistic filled edition behind an intentional reveal control. The reveal remains unavailable until the required participant fields contain an answer. A common transfer case may replace the sustained case only when it lowers setup cost, tests the same mechanism, and is explicitly bridged back to the chapter and the learner's context. AI may challenge a map, threshold, interpretation, evidence boundary, or exception. It may not write the initial answer, certify a people decision, authorise action, or become the decision-maker.
 
 ### 7. Verify from the artifact
 
@@ -122,8 +116,9 @@ Run the gates in `references/05-verification-gates.md`. At minimum:
 - validate the session model;
 - verify the core and reserve timing sums;
 - compare shared claims, cases, examples, diagrams, and exercises across all modes;
+- audit the scene-to-concept, concept-to-framework, and chapter-to-exercise hinges;
 - inspect the live HTML at desktop and mobile widths;
-- test tabs, reveal controls, focus order, overflow, diagrams, and browser errors;
+- test tabs, participant-input gates, reveal controls, focus transfer and restoration, overflow, visuals, and browser errors;
 - confirm Book mode has sustained prose and scarce headings rather than card-like fragments;
 - confirm every factual claim stays within its source boundary.
 
@@ -133,10 +128,15 @@ Keep source, plugin/package, installation, runtime invocation, and rendered-jour
 
 - Start from a real organizational disturbance or consequential decision, not a framework definition.
 - Use one central question, one sustained case, one earned mechanism, and one named participant artifact per chapter. Permit one to three bounded lateral examples when each performs a different conceptual job; do not turn the chapter into an anecdote parade.
-- Treat analogies as explanatory instruments. Each lateral example must teach an unfamiliar fact, reveal a specific mechanism more clearly than a generic manager story would, and circle back to the human or organisational problem without being forced into a false equivalence.
-- Keep Book Chapter prose direct. Let a problem appear before the term, framework, or diagram that resolves it. Do not use an outline phrase as a prose transition, a fake clock-time or memo frame, decorative metaphor density, generic motivation, AI doom, closing sermon, or a card on every idea.
+- Treat analogies as explanatory instruments. Each factual lateral example should teach an unfamiliar verified fact, reveal a specific mechanism more clearly than a generic manager story would, state where the analogy ends, and circle back to the human or organisational problem without false equivalence.
+- Keep Book Chapter prose direct, connected, and novice-readable. Let a problem appear before the term, framework, or visual that resolves it. Do not use an outline phrase as a prose transition, fake clock-time or memo frame, fourth-wall narration, repeated antithesis, literature-review procession, decorative metaphor density, condescending theory commentary, generic motivation, AI doom, closing sermon, or a card on every idea.
+- Introduce a specialist term through need: the reader meets the problem, receives a plain definition and nearby distinction, then sees the term change the case. Explain professional nouns at first contact.
+- State comparison logic precisely. When two records produce similar risk, name the common organisational problem and the different mechanisms that produced each record; never collapse omission, process trace, measurement change, and model error into one generic data-quality claim.
 - Use verified cases when visible prose relies on their facts. Mark a composite as illustrative and do not manufacture precise details to make it feel real. Do not stack punchlines, slogan chains, or clipped motivational fragments.
-- A diagram is an explanation, not a speed bump. Place it after the reader can describe the full mechanism in words, and use it only when a picture clarifies what prose cannot.
+- A framework needs no branded name unless the name makes a genuinely original, reusable distinction clearer. Build the whole relation in prose before naming or drawing it.
+- A substantive visual is an explanation, not a speed bump. Use zero to two across the chapter body and workbook, excluding cover art and ordinary controls. Place it after the reader can describe the relation in words, count every editorial illustration, diagram, data graphic, and exercise map, and keep it only when the picture replaces weaker prose.
+- Book prose may use sparse semantic italics for an earned term or question. Do not turn italics into a second callout system; Teaching and Slides follow their own no-italics design contract.
+- End Book prose in an unresolved consequence that the exercise or next chapter can take up. Do not announce that the next chapter is beginning or append a detached new topic as a transition.
 - Keep facilitator notes, timing, dialogue, contingencies, and source caveats out of Book and Slide surfaces.
 - Slide Content may remove detail but may not introduce a new claim, example, framework, or exercise.
 - Keep private or identifiable participant and employee data out of external AI tools by default.
@@ -151,6 +151,7 @@ Keep source, plugin/package, installation, runtime invocation, and rendered-jour
 - `references/03-three-surface-contract.md`: Book Chapter, Teaching Script, Slide Content, exercise, and HTML interaction contracts.
 - `references/04-research-routing.md`: wiki, programme files, Readwise, owned books, web verification, and source classifications.
 - `references/05-verification-gates.md`: deterministic checks, rendered QA, and acceptance rubric.
+- `references/06-chapter-craft-and-exercise-journey.md`: three narrative hinges, prose anti-patterns, evidence-path comparisons, framework naming, and the chapter-end exercise journey.
 
 ## After a successful build
 

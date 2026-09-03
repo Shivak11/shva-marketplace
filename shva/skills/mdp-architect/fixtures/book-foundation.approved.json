@@ -1,0 +1,99 @@
+{
+  "status": "approved",
+  "projectAndScope": "A public book grown through a five-session executive programme",
+  "proposition": {
+    "bookReader": "A general reader responsible for decisions that AI can inform but not own",
+    "participantAudience": "Mixed-function senior managers attending the programme",
+    "assumedKnowledgeBySurface": "The Book assumes no organisation-design vocabulary; Teaching may build on participant experience of consequential decisions",
+    "recognisedProblem": "The organisation can generate analysis faster than it can turn evidence into an accountable action",
+    "promisedChange": "Readers learn to inspect the path from a noticed change to an action that can be questioned and revised",
+    "centralArgument": "Faster analysis improves decisions only when evidence, judgment, authority, action, and feedback are designed together",
+    "boundary": "The book does not claim that one universal workflow fits every consequential decision",
+    "evidenceBase": "Verified organisational cases, primary research, clearly labelled composites, and author synthesis"
+  },
+  "architecture": {
+    "carriedQuestionOrArtifact": "A decision-path record revised across the book",
+    "sectionLogic": "Notice, interpret, judge, commit, act, and learn",
+    "chapterPromises": "Each chapter resolves one break in the path and hands the next chapter a harder design question",
+    "openingMode": "A verified scene followed by enough context for a novice to enter it",
+    "programmeTablePlacement": "Interactive programme shell only; omitted from the public Book reading flow"
+  },
+  "titleSystems": [
+    {
+      "name": "Decision Path",
+      "title": "The Decision Path",
+      "subtitle": "How Organisations Turn AI Analysis into Accountable Action",
+      "promise": "A direct category title for the practical route the reader learns to inspect",
+      "tradeOff": "Clearer than provocative; relies on the subtitle for the AI context",
+      "coverConnection": "A broken route becoming a continuous but revisable line"
+    },
+    {
+      "name": "What the Dashboard Cannot Decide",
+      "title": "What the Dashboard Cannot Decide",
+      "subtitle": "Judgment, Authority, and Action in the Age of AI",
+      "promise": "Begins from a familiar object and exposes the organisational work left unresolved",
+      "tradeOff": "More distinctive but narrower if the book later moves beyond dashboard-mediated decisions",
+      "coverConnection": "A precise display whose edge opens into several human routes"
+    }
+  ],
+  "selectedTitleSystem": "Decision Path",
+  "authorAndFrontMatter": {
+    "selectedOrder": ["cover", "title page", "contents", "author note", "prologue", "parts", "chapters", "notes"],
+    "authorNoteJob": "Explain the author's vantage and why this decision problem deserves a book now",
+    "authorNoteFacts": [],
+    "acknowledgements": [],
+    "approvedLinks": [],
+    "sourceBoundary": "No biography, thanks, endorsement, client, or link is inferred from the programme brief"
+  },
+  "voiceContract": {
+    "positiveMechanics": ["connected causal paragraphs", "verified unfamiliar examples", "frameworks earned after the problem"],
+    "antiRegister": ["motivational revelation", "punchline ladders", "research-paper procession", "generic AI prose"],
+    "paragraphMovement": "Each paragraph changes the explanation and gives the next paragraph a live consequence",
+    "exampleStandard": "One sustained case and bounded lateral examples with distinct jobs, verified facts, boundaries, and human returns",
+    "densityAndHumour": "Substantive and direct, with humour only when it exposes a system more cleanly",
+    "vocabularyPolicy": "Introduce specialist terms through a problem, plain definition, nearby distinction, and consequential reuse",
+    "emphasisPolicy": "Book prose may use sparse semantic italics; display emphasis remains rare"
+  },
+  "visualIdentity": {
+    "directions": [
+      {
+        "name": "Revisable Route",
+        "premiseConnection": "Shows a decision moving while retaining visible branches and reversals",
+        "composition": "One route crosses the cover, branches once, and reconnects beneath the title",
+        "paletteRoles": "Warm paper ground, dark ink structure, one signal colour for a changed state",
+        "typographyMood": "Editorial serif with restrained technical annotations",
+        "figureGrammar": "Plain causal paths and state changes, never decorative cards",
+        "prohibitedMotifs": "Robots, glowing brains, circuit faces, generic dashboards",
+        "differenceFromRecentWork": "Route-led geometry rather than a centred emblem or mineral texture"
+      },
+      {
+        "name": "Incomplete Record",
+        "premiseConnection": "Makes the missing and acquired parts of a record visible",
+        "composition": "A ledger-like field with one absent line and one intrusive trace",
+        "paletteRoles": "Pale neutral field, near-black type, two restrained evidence marks with different jobs",
+        "typographyMood": "Modern book typography with archival restraint",
+        "figureGrammar": "Evidence marks, omissions, and annotations tied to source status",
+        "prohibitedMotifs": "Neon AI gradients, corporate stock photography, repeated colour-coded panels",
+        "differenceFromRecentWork": "Evidence-object cover rather than a route or illustrated scene"
+      }
+    ],
+    "selectedDirection": "Revisable Route"
+  },
+  "exerciseDirection": {
+    "format": "Progressive workbook",
+    "caseMode": "A common bounded case followed by learner-owned transfer",
+    "observableArtifact": "A decision-path record with comparable fields",
+    "commitmentRule": "The reader answers the required fields before AI or a worked edition appears",
+    "revealRule": "A consequential fact or comparison becomes available only after commitment",
+    "workedComparisonJob": "Show one defensible completed artifact field for field, not prescribe the correct answer"
+  },
+  "openItems": {
+    "blocking": [],
+    "deferred": ["Final jacket copy may be written after the full manuscript exists"]
+  },
+  "approval": {
+    "approvedBy": "Example author",
+    "approvedOn": "2026-09-03",
+    "evidence": "Explicit approval recorded in the project conversation"
+  }
+}

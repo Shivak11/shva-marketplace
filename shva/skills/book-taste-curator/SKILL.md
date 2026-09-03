@@ -1,11 +1,20 @@
 ---
 name: book-taste-curator
-description: Evaluate, discover, and mine non-fiction books against Dr. Shiva Kakkar's codified taste profile (framework-dense, practitioner-credentialed, diagram-heavy; hard ban on Sinek-adjacent keynote books). This skill should be used when the user asks for book recommendations on a topic, asks whether a specific book is worth reading, asks to extract "magic words", prompt vocabulary, or transferable mental models from a book, or reports that he loved or hated a book and wants his taste profile updated. Triggers include "books on", "should I read", "worth reading", "recommend a book", "mine this book", "extract prompts from", "I loved/hated [book]".
+description: >-
+  Evaluate, discover, and mine non-fiction books against Dr. Shiva Kakkar's
+  codified taste profile: structurally rigorous, mechanism-led, example-rich
+  when examples teach, and hostile to Sinek-adjacent keynote writing. Use when
+  the user asks for book recommendations, asks whether a specific book is
+  worth reading, wants to extract prompt vocabulary or transferable mental
+  models, or reports that he loved or hated a book and wants his taste profile
+  updated. Triggers include "books on", "should I read", "worth reading",
+  "recommend a book", "mine this book", "extract prompts from", and "I
+  loved/hated [book]".
 ---
 
 # Book Taste Curator
 
-Reading is product R&D for this user, not leisure. Every book is judged on one question: does it hand over a framework that can be taught in an MDP, turned into a Rehearsal feature, or layered into a prompt? One deep book per month. A wrong recommendation costs a month.
+For recommendations and extraction, reading is often product, teaching, or writing R&D for this user. That is not the whole reading life: a book may also change a stance or create an atmosphere without yielding a reusable component. Ask which relationship is wanted before assuming every worthwhile book must become a framework. One deep book per month means a wrong recommendation still costs a month.
 
 ## Load order
 
@@ -66,7 +75,7 @@ Use the Extraction template in `references/output-templates.md`.
 
 - Lead with the reframe, not the list.
 - Directness without softening. Say "skip" and why.
-- No italics. Font weight only.
+- No italics in curator outputs. This is not a ban on sparse semantic italics in authored Book prose.
 - No closing sermons, no "what changed" summary, no pre-announcements of length or process.
 - No "insights", "game-changing", "paradigm-shifting", "must-read" in any prose. If a source uses them, that is evidence against the book.
 - Assume the reader is a PhD-level OB researcher who teaches this material. Never explain what a framework is; explain what it lets him teach.

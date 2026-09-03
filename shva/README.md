@@ -4,6 +4,14 @@
 > Commands in this plugin start with `/shva:` — that's the `shva` namespace tag.
 > (Yes, the missing "i" is on purpose. Easier to remember, impossible to collide.)
 
+## v0.12.0: Narrative And Exercise Integrity
+
+`/shva:mdp-architect` now protects three handoffs that semantic parity alone could not: scene to concept, concept to framework, and chapter to exercise. The canonical model separates a public Book reader from the teaching cohort, records where specialist terms are earned, distinguishes common evidence problems from different mechanisms, permits zero to two useful visuals instead of requiring a diagram, and lets Slides compress declared detail without inventing new meaning.
+
+The exercise contract is now field-level. A chapter-end activity must arise from the chapter's culminating problem, name its case and mechanism, request one visible decision at a time, keep AI after the first commitment, and prevent the filled edition from opening until required participant fields contain input. The filled edition uses the same fields in the same order and must contain actors, a live alternative, discriminating evidence, bounded authority, executable action, a challenge route, and a review or reversal condition.
+
+The package includes production-readiness validation for the Book Foundation Record and focused mutation tests for visual count, surface compression, causal order, evidence-mechanism distinction, exercise connectedness, answer-field parity, and reveal gating.
+
 ## v0.11.0: Book Foundation Gate
 
 `/shva:mdp-architect` now begins a greenfield book or substantial book-shaped programme with a short, choice-led Book Foundation Interview in chat. Before HTML, cover art, front matter, or a canonical chapter model is created, the author explicitly approves a Book Foundation Record that settles the reader, argument, boundary, evidence base, title systems, opening logic, author material, voice contract, and visual direction.

@@ -81,7 +81,7 @@ Format bans
 Green flags (recommend confidently)
 - Framework-based mental models clearly articulated
 - Concrete examples from named, real companies
-- Diagrams and illustrations present
+- Diagrams or illustrations that clarify a relation prose would handle less well; quantity alone is not a positive signal
 - Modular chapter structure usable as reference
 - Author is academic, practitioner, or researcher with domain credentials
 - Compares its framework to other frameworks
@@ -148,5 +148,7 @@ Academic foundation without a book. When the grounding is scattered papers (soci
 Hard-to-vary. A framework worth a month should explain many cases with few moving parts. If it can be reshaped to fit any outcome, it is not a framework.
 
 Book translation. A favourite book supplies a testable editorial move, not a borrowed sound. State the move in plain operational terms, apply it to a new subject and example, then test whether the resulting chapter still has its own argument, language, and visual identity.
+
+Authorship boundary. This taste profile is evidence for a Book Foundation Interview, not a universal chapter template. For Shiva-authored books, the durable signals are connected causal paragraphs, a sustained case, unfamiliar verified examples with distinct jobs, novice-readable definitions, sparse emphasis, and a chapter-end exercise that completes the argument. A preferred book's diagram density, title grammar, sentence rhythm, or visual palette does not transfer automatically. Sparse semantic italics may emphasise an earned term or question in Book prose; the curator's no-italics output rule does not govern the book.
 
 Remedial risk. If the user already teaches the topic, say "this may feel remedial" up front and list only what is new. Recommend skipping if it is packaging of known concepts (Co-Intelligence for an IIM-level AI teacher).

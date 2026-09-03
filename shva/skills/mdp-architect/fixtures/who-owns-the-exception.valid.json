@@ -2,167 +2,269 @@
   "programme": {
     "title": "Designing Organizations for Uncertain Environments",
     "officialSessionMinutes": 90,
-    "preparedRunwayMinutes": 120
+    "preparedRunwayMinutes": 120,
+    "slideBeatRange": {
+      "minimum": 6,
+      "maximum": 10
+    }
   },
   "session": {
     "title": "Who Owns the Exception?",
-    "audience": "Senior HR and organization-design leaders",
+    "bookReader": "A general reader interested in how organisations make consequential decisions with AI",
+    "participantAudience": "Senior HR and organization-design leaders",
+    "assumedKnowledge": {
+      "book": "No prior knowledge of organisation design, HR policy, or AI decision systems",
+      "teaching": "Familiarity with organisational decisions; specialist terms are introduced in the session"
+    },
     "centralQuestion": "Who may override an AI-supported recommendation when the case does not fit the rule?",
     "carriedArtifact": "Exception Authority Map",
     "nextQuestion": "Which rules should remain fixed, which should be local, and which should be revised?",
-    "caseReturnCount": 4,
     "semanticBlocks": [
       {
         "id": "disturbance-no-owner",
         "type": "disturbance",
         "text": "A recommendation crosses the policy threshold, the employee case does not fit the rule, and the workflow names no person who may authorize a departure.",
-        "sourceClass": "illustrative"
+        "sourceClass": "illustrative",
+        "requiredAcrossSurfaces": true
       },
       {
         "id": "case-return-to-work",
         "type": "case",
         "text": "A return-to-work recommendation flags an unusual employee case, but the workflow names no override owner or appeal route.",
-        "sourceClass": "illustrative"
+        "sourceClass": "illustrative",
+        "requiredAcrossSurfaces": true,
+        "decision": "Whether to follow, pause, or override the recommendation in this case",
+        "actors": ["affected employee", "line manager", "policy owner", "exception authorizer"],
+        "stakes": "A wrong move can deny a defensible exception or make policy arbitrary",
+        "constraint": "The ordinary rule does not fit and the workflow names no override route",
+        "incompleteEvidence": "The recommendation does not contain all local context or the employee's correction",
+        "evidenceBoundary": "The case is an illustrative composite, not a reported organisation",
+        "returnPoints": [
+          {
+            "afterBlockId": "claim-exception",
+            "purpose": "Re-read the case as an authority problem rather than a model-accuracy problem",
+            "newCausalWork": "Shows why evidence can be adequate while the right to depart remains undefined"
+          },
+          {
+            "afterBlockId": "mechanism-exception-path",
+            "purpose": "Trace how the recommendation reaches an authorised and appealable action",
+            "newCausalWork": "Makes the missing override owner and challenge route operationally visible"
+          }
+        ]
       },
       {
         "id": "claim-exception",
         "type": "claim",
         "text": "An exception exposes who actually has authority when evidence and policy point in different directions.",
-        "sourceClass": "teaching-synthesis"
+        "sourceClass": "teaching-synthesis",
+        "requiredAcrossSurfaces": true
       },
       {
         "id": "lateral-port-drill",
         "type": "lateral-example",
         "text": "In a synthetic port drill, the ordinary berth-allocation rule works until a damaged vessel blocks the channel and an exception owner must be named.",
-        "sourceClass": "illustrative"
+        "sourceClass": "illustrative",
+        "requiredAcrossSurfaces": false,
+        "conceptualJob": "Show that an exception exposes authority even outside employment decisions",
+        "mechanism": "A blocked channel makes the ordinary allocation rule unusable until an exception owner acts",
+        "boundary": "The port drill has no employment-rights or personal-fairness consequence",
+        "returnToHumanProblem": "The comparison returns to the need to name who may depart from a rule and who can challenge that departure"
       },
       {
         "id": "mechanism-exception-path",
         "type": "mechanism",
         "text": "Signal to recommendation to exception to authorized action to appeal and feedback.",
-        "sourceClass": "teaching-synthesis"
+        "sourceClass": "teaching-synthesis",
+        "requiredAcrossSurfaces": true,
+        "labelStrategy": "descriptive"
       },
       {
         "id": "commitment-first-map",
         "type": "commitment",
         "text": "Participants name the exception trigger, override owner, evidence requirement, and appeal route before AI responds.",
-        "sourceClass": "teaching-synthesis"
+        "sourceClass": "teaching-synthesis",
+        "requiredAcrossSurfaces": true
       },
       {
         "id": "ai-challenge-map",
         "type": "ai-challenge",
         "text": "AI questions ambiguous triggers, missing evidence, and absent appeal rights without choosing the decision.",
-        "sourceClass": "teaching-synthesis"
+        "sourceClass": "teaching-synthesis",
+        "requiredAcrossSurfaces": true
       },
       {
         "id": "revision-after-challenge",
         "type": "revision",
         "text": "Participants revise one line of the authority map and record why the change is defensible.",
-        "sourceClass": "teaching-synthesis"
+        "sourceClass": "teaching-synthesis",
+        "requiredAcrossSurfaces": true
       },
       {
         "id": "exercise-authority-map",
         "type": "exercise",
         "text": "Map the rule, exception trigger, override owner, required evidence, explanation duty, and appeal path.",
-        "sourceClass": "teaching-synthesis"
+        "sourceClass": "teaching-synthesis",
+        "requiredAcrossSurfaces": true
       },
       {
         "id": "transition-rule-placement",
         "type": "transition",
         "text": "The next session asks where each rule should live and who may revise it.",
-        "sourceClass": "teaching-synthesis"
+        "sourceClass": "teaching-synthesis",
+        "requiredAcrossSurfaces": true,
+        "derivedFromBlockIds": ["mechanism-exception-path", "revision-after-challenge"],
+        "unresolvedBecause": "The session can define who may override without yet deciding where every rule should live",
+        "artifactState": "The Exception Authority Map contains one unresolved rule-placement question"
       }
     ],
+    "narrativeHinges": {
+      "sceneToConcept": {
+        "fromBlockId": "case-return-to-work",
+        "toBlockId": "claim-exception",
+        "bridge": "The case cannot move because a recommendation exists but no legitimate right to depart from it has been assigned"
+      },
+      "conceptToFramework": {
+        "fromBlockId": "claim-exception",
+        "toBlockId": "mechanism-exception-path",
+        "bridge": "Once the authority gap is visible, the full path from signal to appeal can be traced"
+      },
+      "chapterToExercise": {
+        "fromBlockId": "mechanism-exception-path",
+        "toBlockId": "exercise-authority-map",
+        "bridge": "The reader must now decide how the missing right, evidence, action, and challenge route would be written"
+      }
+    },
+    "terms": [
+      {
+        "term": "exception authority",
+        "problemBlockId": "case-return-to-work",
+        "definitionBlockId": "claim-exception",
+        "plainDefinition": "the bounded right to depart from an ordinary rule when a case meets stated conditions",
+        "nearestDistinction": "not the same as permission to ignore the rule whenever a manager disagrees",
+        "reuseBlockId": "mechanism-exception-path"
+      }
+    ],
+    "evidenceComparisons": [],
     "sourceLedger": [
       {
         "claimId": "disturbance-no-owner",
         "classification": "illustrative",
         "origin": "Synthetic exception scenario created for schema testing",
+        "sourceType": "synthetic teaching case",
         "checkedOn": "2026-09-02",
         "confidence": "high",
         "surfaces": ["book", "teaching", "slides"],
-        "caveat": "Not a report from a named organization."
+        "supportedFacts": [],
+        "teachingInference": "A recommendation cannot become an accountable exception without a named authority path.",
+        "factualBoundary": "Not a report from a named organization."
       },
       {
         "claimId": "case-return-to-work",
         "classification": "illustrative",
         "origin": "Composite workforce workflow created for schema testing",
+        "sourceType": "composite teaching case",
         "checkedOn": "2026-09-02",
         "confidence": "high",
         "surfaces": ["book", "teaching", "slides"],
-        "caveat": "Actors and events are fictional."
+        "supportedFacts": [],
+        "teachingInference": "The unresolved work is the design of a bounded exception path.",
+        "factualBoundary": "Actors and events are fictional."
       },
       {
         "claimId": "claim-exception",
         "classification": "teaching-synthesis",
         "origin": "MDP Architect synthesis of authority and exception design",
+        "sourceType": "author synthesis",
         "checkedOn": "2026-09-02",
         "confidence": "medium",
         "surfaces": ["book", "teaching", "slides"],
-        "caveat": "A design proposition, not an empirical universal."
+        "supportedFacts": [],
+        "teachingInference": "An exception makes otherwise tacit authority visible.",
+        "factualBoundary": "A design proposition, not an empirical universal."
       },
       {
         "claimId": "lateral-port-drill",
         "classification": "illustrative",
         "origin": "Synthetic port drill created for schema testing",
+        "sourceType": "synthetic lateral example",
         "checkedOn": "2026-09-02",
         "confidence": "high",
         "surfaces": ["book", "teaching", "slides"],
-        "caveat": "Not a factual port incident."
+        "supportedFacts": [],
+        "teachingInference": "Rule failure exposes the missing exception owner in multiple domains.",
+        "factualBoundary": "Not a factual port incident."
       },
       {
         "claimId": "mechanism-exception-path",
         "classification": "teaching-synthesis",
         "origin": "MDP Architect session mechanism",
+        "sourceType": "author synthesis",
         "checkedOn": "2026-09-02",
         "confidence": "medium",
         "surfaces": ["book", "teaching", "slides"],
-        "caveat": "The sequence is a teaching model and must be adapted to the actual workflow."
+        "supportedFacts": [],
+        "teachingInference": "A defensible exception moves through evidence, bounded authority, action, challenge, and feedback.",
+        "factualBoundary": "The sequence is a teaching model and must be adapted to the actual workflow."
       },
       {
         "claimId": "commitment-first-map",
         "classification": "teaching-synthesis",
         "origin": "Commitment-before-reveal teaching method",
+        "sourceType": "learning-design synthesis",
         "checkedOn": "2026-09-02",
         "confidence": "medium",
         "surfaces": ["book", "teaching", "slides"],
-        "caveat": "Learning effectiveness remains to be tested with a live cohort."
+        "supportedFacts": [],
+        "teachingInference": "A visible first commitment makes later comparison diagnostic.",
+        "factualBoundary": "Learning effectiveness remains to be tested with a live cohort."
       },
       {
         "claimId": "ai-challenge-map",
         "classification": "teaching-synthesis",
         "origin": "Bounded AI challenger design",
+        "sourceType": "learning-design synthesis",
         "checkedOn": "2026-09-02",
         "confidence": "medium",
         "surfaces": ["book", "teaching", "slides"],
-        "caveat": "The AI role does not grant decision authority."
+        "supportedFacts": [],
+        "teachingInference": "AI can interrogate the committed map without owning the exception decision.",
+        "factualBoundary": "The AI role does not grant decision authority."
       },
       {
         "claimId": "revision-after-challenge",
         "classification": "teaching-synthesis",
         "origin": "Commitment and revision learning sequence",
+        "sourceType": "learning-design synthesis",
         "checkedOn": "2026-09-02",
         "confidence": "medium",
         "surfaces": ["book", "teaching", "slides"],
-        "caveat": "Revision quality requires facilitator review."
+        "supportedFacts": [],
+        "teachingInference": "The learner must state why the committed artifact changed or remained intact.",
+        "factualBoundary": "Revision quality requires facilitator review."
       },
       {
         "claimId": "exercise-authority-map",
         "classification": "teaching-synthesis",
         "origin": "MDP Architect workbook design",
+        "sourceType": "learning-design synthesis",
         "checkedOn": "2026-09-02",
         "confidence": "medium",
         "surfaces": ["book", "teaching", "slides"],
-        "caveat": "A participant artifact, not an approved company policy."
+        "supportedFacts": [],
+        "teachingInference": "The exercise makes authority, evidence, action, and appeal comparable.",
+        "factualBoundary": "A participant artifact, not an approved company policy."
       },
       {
         "claimId": "transition-rule-placement",
         "classification": "teaching-synthesis",
         "origin": "DOUE cross-session architecture",
+        "sourceType": "curriculum synthesis",
         "checkedOn": "2026-09-02",
         "confidence": "medium",
         "surfaces": ["book", "teaching", "slides"],
-        "caveat": "The next-session question is a curriculum design choice."
+        "supportedFacts": [],
+        "teachingInference": "A completed exception path leaves open where its rule should live.",
+        "factualBoundary": "The next-session question is a curriculum design choice."
       }
     ],
     "surfaces": {
@@ -189,7 +291,18 @@
         "workbookWords": 480,
         "bodyCalloutCards": 0,
         "pullLines": 1,
-        "diagramIds": ["mechanism-exception-path"]
+        "visuals": [
+          {
+            "id": "exception-path-diagram",
+            "kind": "causal diagram",
+            "semanticBlockId": "mechanism-exception-path",
+            "visualJob": "Show where evidence, authority, action, appeal, and feedback connect",
+            "proseRemoved": "A repeated sentence-by-sentence recitation of the path",
+            "appearsAfterBlockId": "claim-exception",
+            "reusedInBlockId": "exercise-authority-map",
+            "sourceStatus": "teaching-synthesis"
+          }
+        ]
       },
       "teaching": {
         "centralQuestion": "Who may override an AI-supported recommendation when the case does not fit the rule?",
@@ -307,20 +420,107 @@
       {
         "id": "exercise-authority-map",
         "name": "Exception Authority Map",
+        "caseMode": "sustained-case",
+        "exerciseCaseBlockId": "case-return-to-work",
+        "mechanismBlockId": "mechanism-exception-path",
+        "chapterConnection": "The chapter exposes a recommendation that cannot move legitimately because the exception path is missing; the exercise asks the learner to write that path.",
+        "decisionFork": "Follow the ordinary rule, pause the recommendation, or authorise a bounded exception.",
         "commitBeforeAI": true,
         "commitmentBlockId": "commitment-first-map",
         "aiChallengeBlockId": "ai-challenge-map",
         "revisionBlockId": "revision-after-challenge",
         "usesIdentifiableData": false,
+        "steps": [
+          {
+            "id": "commit",
+            "prompt": "Choose follow, pause, or bounded exception and state the consequence you accept.",
+            "output": "A traceable first commitment"
+          },
+          {
+            "id": "test",
+            "prompt": "Name the live alternative and the evidence that could discriminate between the two accounts.",
+            "output": "An evidence test rather than a request for more information"
+          },
+          {
+            "id": "bound",
+            "prompt": "Name who may authorise the departure, who must be consulted, and who may challenge it.",
+            "output": "A bounded authority and challenge route"
+          },
+          {
+            "id": "act",
+            "prompt": "Write the actor, action, and timing that make the commitment executable.",
+            "output": "An operational instruction"
+          },
+          {
+            "id": "revise",
+            "prompt": "After the AI challenge, revise or retain the map and state the observation that would change it later.",
+            "output": "A reasoned revision and review condition"
+          }
+        ],
+        "participantFields": [
+          { "id": "first-commitment", "label": "First commitment and accepted consequence" },
+          { "id": "live-alternative", "label": "Live alternative" },
+          { "id": "evidence-test", "label": "Evidence that could discriminate" },
+          { "id": "authority-boundary", "label": "Authority, consultation, and challenge" },
+          { "id": "executable-action", "label": "Actor, action, and timing" },
+          { "id": "revision-condition", "label": "Observation, owner, and review date" }
+        ],
+        "revealGate": {
+          "requiresParticipantInput": true,
+          "requiredFieldIds": [
+            "first-commitment",
+            "live-alternative",
+            "evidence-test",
+            "authority-boundary",
+            "executable-action",
+            "revision-condition"
+          ]
+        },
         "aiRoleType": "challenge",
         "aiRole": "Challenge the map by questioning ambiguous triggers, missing evidence, and absent appeal rights.",
         "humanDecisionOwner": "The named organizational role accountable for the affected people decision",
+        "transferPrompt": "Apply the same six fields to one rule-bound decision in your own organisation using synthetic or redacted facts.",
+        "debriefQuestion": "Which part of the path changed after challenge, and which right must still remain human-owned?",
         "filledEdition": {
           "present": true,
           "revealedByControl": true,
           "startsClosed": true,
           "controlLabel": "Reveal a filled edition",
-          "content": "The completed map names a capability-risk trigger, the HR policy owner as boundary setter, the business leader as local recommender, the CHRO as exception authorizer, a written explanation duty, a seven-day appeal route, and a thirty-day review condition."
+          "fields": [
+            {
+              "id": "first-commitment",
+              "answer": "Pause automatic application of the ordinary rule for this case and open a seven-day bounded exception review; accept slower closure in exchange for a contestable decision."
+            },
+            {
+              "id": "live-alternative",
+              "answer": "The recommendation may be correct and the case may simply be inconvenient; the competing account is that material local context is absent from the record."
+            },
+            {
+              "id": "evidence-test",
+              "answer": "Compare the source evidence used by the recommendation with the employee's correction and two genuinely comparable prior cases; identify which omitted fact would change eligibility."
+            },
+            {
+              "id": "authority-boundary",
+              "answer": "The policy owner defines the exception boundary, the line manager supplies local evidence, the CHRO's delegate authorises a time-bound departure, and the employee may challenge an omitted or incorrect fact within seven days."
+            },
+            {
+              "id": "executable-action",
+              "answer": "The case owner pauses the automated recommendation today, records the reason, obtains the named evidence within five working days, and sends the authorised outcome with an explanation on day seven."
+            },
+            {
+              "id": "revision-condition",
+              "answer": "The policy owner reviews all exceptions after thirty days; two comparable upheld challenges or an error rate above five per cent triggers revision of the ordinary rule."
+            }
+          ],
+          "completeness": {
+            "actors": "Employee, line manager, case owner, policy owner, and CHRO delegate are named.",
+            "liveAlternative": "The recommendation may be correct versus material local context may be missing.",
+            "evidenceDiscriminator": "Source evidence, employee correction, and comparable prior cases can separate the accounts.",
+            "authorityBoundary": "A time-bound exception is authorised by the CHRO delegate within a policy-owner boundary and remains challengeable.",
+            "executableAction": "The case owner pauses today, gathers evidence within five days, and communicates an explained outcome on day seven.",
+            "revisionCondition": "Thirty-day review with two upheld challenges or error above five per cent as the rule-change trigger.",
+            "appealOrChallengeRoute": "The employee can challenge an omitted or incorrect fact within seven days."
+          }
         }
       }
     ]

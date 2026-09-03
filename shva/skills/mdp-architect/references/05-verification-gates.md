@@ -10,15 +10,18 @@ Run these gates from disk. An agent report, clean source diff, or successful bui
 - Confirm the record settles the reader, argument, boundaries, evidence base, opening mode, section logic, carried question or artifact, author material, front matter, voice contract, and source status.
 - Confirm the author saw at least two materially different title and cover systems, with composition, palette roles, typography mood, diagram grammar, prohibited motifs, and difference from recent work. Colour-only variations fail.
 - Confirm that names, client claims, acknowledgements, endorsements, affiliations, and author experience are either verified or omitted. Never infer them from a programme brief.
+- Run `node "$SKILL_DIR/scripts/validate-book-foundation.mjs" <approved-record.json>` before production. A draft record may exist, but production readiness requires approved status, no blocking fields, and explicit approval evidence.
 
 ## 1. Scope and composition gate
 
 - Confirm the work belongs to MDP Architect rather than a sibling skill.
-- Confirm the programme plan table appears after the cover and before Chapter 1.
+- Confirm the programme plan table appears after the cover in a programme-review shell. For a public Book, confirm its placement matches the approved Book Foundation Record and does not displace selected front matter.
 - Confirm each session has a central question, sustained case, carried artifact, commitment, mechanism, workbook, and handoff.
 - Confirm no session merely repeats the preceding session with new labels.
 - Confirm one main case and no more than three bounded lateral examples per session. Each lateral example must carry a distinct mechanism, teach a sourced unfamiliar fact when factual, and circle back to the organisational question.
 - Confirm a Book chapter opens from a problem, verified situation, sourced material, or clearly marked illustration. Reject a generic thesis stack, fake clock-time, memo frame, or invented reporting detail.
+- Confirm the Book reader and teaching participant audience are distinct fields. Reject cohort-only address or unexplained functional vocabulary in a Book intended for a general reader.
+- Audit case diversity across sessions. Repetition may serve continuity, but a programme made entirely from generic manager meetings needs an explicit reason.
 
 ## 2. Timing gate
 
@@ -30,32 +33,37 @@ Run these gates from disk. An agent report, clean source diff, or successful bui
 
 ## 3. Content model and parity gate
 
-- Run the supplied deterministic MDP contract validator against both its passing and failing fixtures. The passing fixture must pass. The failing fixture must fail for the expected invariant.
-- Verify every Book, Teaching, and Slide item maps to a canonical ID.
-- Reject a surface that adds a claim, case, diagram label, exercise step, or transition absent from the canonical model.
+- Run `node "$SKILL_DIR/scripts/test-contracts.mjs"`. It must prove the approved foundation and valid session fixtures pass and each focused mutation fails for its named invariant.
+- Verify every Book, Teaching, and Slide item maps to a canonical ID. Blocks marked `requiredAcrossSurfaces` appear everywhere; declared optional blocks may be omitted.
+- Reject a surface that adds a claim, case, visual label, exercise step, or transition absent from the canonical model.
 - Confirm the participant commitment occurs before the AI challenge in all surfaces.
-- Confirm the filled edition begins hidden and the control reveals the same artifact the participant created.
+- Confirm all three Causal Hinge Ledger entries point forward in the rendered order and contain a real bridge.
+- Confirm each specialist term appears after the problem that earns it, is plainly defined and distinguished, and is used again in consequence.
+- Confirm every evidence-path comparison states its common problem, different mechanisms, and decision consequence.
+- Confirm the exercise binds to its case and mechanism, the filled edition matches every participant field in order, and the reveal requires actual participant input.
 
 ## 4. Source integrity gate
 
-- Inspect the source ledger for a classification and origin on every material claim.
+- Inspect the source ledger for classification, origin, source type, exact supported facts, teaching inference, and factual boundary on every material claim.
 - Recheck current or material facts with a live primary source during this run.
 - Confirm teaching synthesis and illustrative material are not represented as external evidence.
 - Confirm raw recording IDs, prompt logic, provenance ledgers, and facilitator scaffolding are absent from Book and Slide surfaces.
 - Confirm a visible case's source status supports both its material facts and the causal inference made beside it. A composite must not masquerade as reporting.
+- For dialogue, confirm verbatim, normalised, paraphrased, and reconstructed wording are not conflated. A source recollection does not become a meeting transcript.
+- For paired cases, confirm a shared outcome is not used to erase different evidence mechanisms. In particular, omission, process trace, measurement change, and model error remain separate.
 
 ## 5. HTML behavior gate
 
 - Parse edited JSON and YAML files.
 - Load the HTML from disk in a browser and check for console errors.
 - Toggle Book Chapter, Teaching Script, and Slide Content. Confirm the active mode is visible, keyboard reachable, and returns the same session meaning.
-- Open and close the filled edition with keyboard input. Confirm it begins closed and preserves the participant instructions.
+- Confirm the filled-edition control begins unavailable or hidden until required participant fields contain input. Complete those fields, open and close the filled edition with keyboard input, confirm focus moves to the reveal heading and returns to the control, and confirm the participant instructions and answers remain intact.
 - Verify links, headings, diagrams, and controls work without a network dependency when the artifact is meant to be local.
 
 ## 6. Render gate
 
 - Render and inspect a desktop viewport and a mobile viewport. Use at least 1440 by 1000 and 390 by 844 unless the client specifies another device.
-- Inspect cover, programme plan table, a Book section, the inline diagram, a Teaching reserve, a Slide mode, the workbook, the filled edition reveal, and the final transition.
+- Inspect cover, programme plan table where approved, a Book section, every substantive visual, a Teaching reserve, a Slide mode, the workbook, the filled-edition reveal, and the final transition.
 - Check readable type, overflow, clipped diagrams, table wrapping, contrast, touch target spacing, horizontal scroll, and visual dominance of callouts.
 - Check the Book surface still reads as prose after styles load. If it scans like a deck with speaker notes, reduce headings and boxes before shipping.
 - Read the Book surface straight through at body-text size. Confirm that paragraphs carry cause and consequence, terms appear after the problem they solve, diagrams arrive after the full mechanism is understandable, and emphasis is scarce.
@@ -63,10 +71,16 @@ Run these gates from disk. An agent report, clean source diff, or successful bui
 - Confirm case caveats remain traceable in notes without repeatedly breaking narrative immersion, and that every move from story to abstraction has an explicit hinge in the preceding prose.
 - For each editorial reconstruction, compare composition and caption with the source chronology. Reject false simultaneity, implied access to private material, or a third visual added without replacing one of the first two.
 - Run a blind taste read: it should name at least three intended traits, remain legible to a novice, and not be mistaken for keynote, influencer, memo, research-paper, or generic AI prose.
+- Count substantive visuals from the DOM: editorial illustrations, diagrams, data graphics, and workbook maps all count; cover art and ordinary controls do not. Accept zero, one, or two and reject a third.
+- Search the experienced Book prose for repeated outline transitions, meta narration, antithesis scaffolding, memorable-line duplication, and literature-review procession. A string scan is a prompt for a human read, not proof by itself.
+- Read the final two Book paragraphs directly into the first exercise instruction. Reject a conceptual reset, unexplained new case, or activity that merely rehearses a midpoint framework.
+- Compare the blank exercise and filled edition row by row at desktop and mobile widths. Reject missing answers, generic placeholders, dense answer walls, duplicated stages, or an answer several screens away from the field it explains.
 
 ## 7. Forward test and delivery gate
 
-- Forward-test a fresh book-shaped request in an isolated directory. Before explicit approval, the only deliverable may be a Book Foundation Record; no HTML or production artifact may appear. After approval, grade a different 90 minute session against the same gates before calling the skill reusable.
+- Forward-test a fresh book-shaped request in an isolated directory. Before explicit approval, the only deliverable may be a Book Foundation Record; no HTML or production artifact may appear. After approval, grade a different 90-minute, non-HR session against the same gates before calling the skill reusable.
+- For a substantial build, use separate read-only reviewer lanes for source boundary, narrative/taste, visual opportunity and geometry, exercise journey, and cross-surface parity. The orchestrator reconciles findings and verifies files from disk. Reviewer agreement is not a substitute for the experienced-artifact checks.
+- Derive word count, heading count, repeated emphasis, visual count, and initial DOM state from the actual artifact. Do not accept self-declared model numbers as rendered proof.
 - Inspect the complete Git diff and staging set. Verify files on disk, not only agent claims.
 - Keep source, package, installation, runtime invocation, and rendered journey evidence separate in the report.
 - Deliver HTML by default. Do not generate a PDF unless the user explicitly requests one.
