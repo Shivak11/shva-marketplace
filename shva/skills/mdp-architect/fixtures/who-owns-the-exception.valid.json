@@ -113,7 +113,7 @@
       {
         "id": "ai-challenge-map",
         "type": "ai-challenge",
-        "text": "AI questions ambiguous triggers, missing evidence, and absent appeal rights without choosing the decision.",
+        "renderFromExerciseContract": true,
         "sourceClass": "teaching-synthesis",
         "requiredAcrossSurfaces": true
       },
@@ -663,7 +663,13 @@
           "mayDecide": false,
           "mayAuthorise": false
         },
-        "humanDecisionOwner": "The named organizational role accountable for the affected people decision",
+        "humanDecisionOwner": {
+          "actorId": "exception-decision-owner",
+          "actorType": "human-role",
+          "automationEligible": false,
+          "mustBeNamedBeforeUse": true,
+          "accountableFor": "final-decision"
+        },
         "transferPrompt": "Apply the same six fields to one rule-bound decision in your own organisation using synthetic or redacted facts.",
         "debriefQuestion": "Which part of the path changed after challenge, and which right must still remain human-owned?",
         "filledEdition": {

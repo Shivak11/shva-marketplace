@@ -135,7 +135,29 @@ requireValue(duplicateValues(blockIds).length === 0, "semantic block ids must be
 for (const [index, block] of semanticBlocks.entries()) {
   requireValue(isNonEmpty(block?.id), `semanticBlocks[${index}].id is required`);
   requireValue(allowedBlockTypes.has(block?.type), `semanticBlocks[${index}].type must be a supported canonical type`);
-  requireValue(isNonEmpty(block?.text), `semanticBlocks[${index}].text is required`);
+  if (block?.type === "ai-challenge") {
+    const allowedAiChallengeBlockKeys = new Set([
+      "id",
+      "type",
+      "sourceClass",
+      "requiredAcrossSurfaces",
+      "renderFromExerciseContract",
+    ]);
+    requireValue(
+      block?.renderFromExerciseContract === true,
+      `semanticBlocks[${index}] ai-challenge must render from its owning exercise contract`,
+    );
+    requireValue(
+      !Object.prototype.hasOwnProperty.call(block ?? {}, "text"),
+      `semanticBlocks[${index}] ai-challenge must not contain free-text visible content`,
+    );
+    requireValue(
+      Object.keys(block ?? {}).every((key) => allowedAiChallengeBlockKeys.has(key)),
+      `semanticBlocks[${index}] ai-challenge contains an unsupported shadow field`,
+    );
+  } else {
+    requireValue(isNonEmpty(block?.text), `semanticBlocks[${index}].text is required`);
+  }
   requireValue(typeof block?.requiredAcrossSurfaces === "boolean", `semanticBlocks[${index}].requiredAcrossSurfaces must be boolean`);
   requireValue(
     allowedSourceClasses.has(block?.sourceClass),
@@ -826,13 +848,48 @@ for (const [index, exercise] of exercises.entries()) {
       `exercises[${index}].aiAllowedMoves[${moveIndex}] must be an approved bounded move`,
     );
   }
-  for (const authorityField of ["mayApprove", "mayDeny", "mayCertify", "mayDecide", "mayAuthorise"]) {
+  const authorityFields = ["mayApprove", "mayDeny", "mayCertify", "mayDecide", "mayAuthorise"];
+  requireValue(
+    sameValuesInOrder(Object.keys(exercise?.aiAuthorityBoundary ?? {}).sort(), [...authorityFields].sort()),
+    `exercises[${index}].aiAuthorityBoundary must contain only the five declared authority flags`,
+  );
+  for (const authorityField of authorityFields) {
     requireValue(
       exercise?.aiAuthorityBoundary?.[authorityField] === false,
       `exercises[${index}].aiAuthorityBoundary.${authorityField} must be false`,
     );
   }
-  requireValue(isNonEmpty(exercise?.humanDecisionOwner), `exercises[${index}].humanDecisionOwner is required`);
+  const humanDecisionOwnerFields = [
+    "actorId",
+    "actorType",
+    "automationEligible",
+    "mustBeNamedBeforeUse",
+    "accountableFor",
+  ];
+  requireValue(
+    sameValuesInOrder(Object.keys(exercise?.humanDecisionOwner ?? {}).sort(), [...humanDecisionOwnerFields].sort()),
+    `exercises[${index}].humanDecisionOwner must contain only the declared human-owner fields`,
+  );
+  requireValue(
+    /^[a-z][a-z0-9-]{2,63}$/.test(exercise?.humanDecisionOwner?.actorId ?? ""),
+    `exercises[${index}].humanDecisionOwner.actorId must be a stable role id`,
+  );
+  requireValue(
+    exercise?.humanDecisionOwner?.actorType === "human-role",
+    `exercises[${index}].humanDecisionOwner.actorType must be human-role`,
+  );
+  requireValue(
+    exercise?.humanDecisionOwner?.automationEligible === false,
+    `exercises[${index}].humanDecisionOwner.automationEligible must be false`,
+  );
+  requireValue(
+    exercise?.humanDecisionOwner?.mustBeNamedBeforeUse === true,
+    `exercises[${index}].humanDecisionOwner.mustBeNamedBeforeUse must be true`,
+  );
+  requireValue(
+    exercise?.humanDecisionOwner?.accountableFor === "final-decision",
+    `exercises[${index}].humanDecisionOwner.accountableFor must be final-decision`,
+  );
   requireValue(isNonEmpty(exercise?.transferPrompt), `exercises[${index}].transferPrompt is required`);
   requireValue(isNonEmpty(exercise?.debriefQuestion), `exercises[${index}].debriefQuestion is required`);
   if (exercise?.game) {

@@ -122,7 +122,8 @@ Every exercise binds to the chapter rather than merely sitting after it. Record:
 - `steps`, each with a stable ID, prompt, observable output, and the participant fields it writes; every participant field must be written by at least one step;
 - `participantFields`, in display order;
 - commitment, AI-challenge, and revision block IDs, with every typed lifecycle block owned by exactly one exercise;
-- `aiRoleType`, one or more allow-listed `aiAllowedMoves`, and an `aiAuthorityBoundary` that explicitly denies approval, denial, certification, decision, and authorisation authority; do not retain a parallel free-text `aiRole` field;
+- `aiRoleType`, one or more allow-listed `aiAllowedMoves`, and a closed-key `aiAuthorityBoundary` that explicitly denies approval, denial, certification, decision, and authorisation authority; the owning `ai-challenge` block renders from this contract and carries no parallel free-text or shadow field;
+- `humanDecisionOwner`: a stable actor ID whose type is `human-role`, whose automation eligibility is false, which must be named before use, and which remains accountable for the final decision; no additional authority keys are allowed;
 - `consequenceReveal.present`: whether changed information drives this exercise;
 - when present, `consequenceReveal`: its reveal and consequence-revision semantic block IDs, proper required-field subset, minimum attempt length, trigger and immediately following revision steps, revealed fact, provenance, and decision consequence; each typed reveal or consequence-revision block belongs to exactly one exercise;
 - when absent, `consequenceReveal.notUsedReason`: why the exercise does not need changed information rather than a manufactured twist;

@@ -507,6 +507,53 @@ try {
     "aiAuthorityBoundary.mayDecide must be false",
   );
 
+  const shadowAiAuthorityFields = clone(validSession);
+  shadowAiAuthorityFields.session.exercises[0].aiAuthorityBoundary.mayAuthorize = true;
+  shadowAiAuthorityFields.session.exercises[0].aiAuthorityBoundary.mayWriteInitialAnswer = true;
+  expectFailure(
+    "shadow AI authority fields",
+    sessionValidator,
+    writeMutation("shadow-ai-authority-fields", shadowAiAuthorityFields),
+    "aiAuthorityBoundary must contain only the five declared authority flags",
+  );
+
+  const aiSmuggledIntoHumanOwner = clone(validSession);
+  aiSmuggledIntoHumanOwner.session.exercises[0].humanDecisionOwner = "The AI system is the final human decision owner for this policy exception.";
+  expectFailure(
+    "AI smuggled into free-text human owner",
+    sessionValidator,
+    writeMutation("ai-as-human-owner", aiSmuggledIntoHumanOwner),
+    "humanDecisionOwner.actorType must be human-role",
+  );
+
+  const automatedDecisionOwner = clone(validSession);
+  automatedDecisionOwner.session.exercises[0].humanDecisionOwner.actorType = "ai-system";
+  automatedDecisionOwner.session.exercises[0].humanDecisionOwner.automationEligible = true;
+  expectFailure(
+    "automated actor declared as decision owner",
+    sessionValidator,
+    writeMutation("automated-decision-owner", automatedDecisionOwner),
+    "humanDecisionOwner.actorType must be human-role",
+  );
+
+  const shadowHumanOwnerAuthority = clone(validSession);
+  shadowHumanOwnerAuthority.session.exercises[0].humanDecisionOwner.delegateToAI = true;
+  expectFailure(
+    "shadow authority on human decision owner",
+    sessionValidator,
+    writeMutation("shadow-human-owner-authority", shadowHumanOwnerAuthority),
+    "humanDecisionOwner must contain only the declared human-owner fields",
+  );
+
+  const aiChallengeProseOverridesBoundary = clone(validSession);
+  aiChallengeProseOverridesBoundary.session.semanticBlocks.find((block) => block.type === "ai-challenge").text = "AI reviews the evidence, approves or denies the exception, authorises the action, and makes the final decision for the organisation.";
+  expectFailure(
+    "canonical AI-challenge prose overrides authority boundary",
+    sessionValidator,
+    writeMutation("ai-challenge-prose-authority", aiChallengeProseOverridesBoundary),
+    "ai-challenge must not contain free-text visible content",
+  );
+
   const duplicateDecisionOptions = clone(validSession);
   duplicateDecisionOptions.session.exercises[0].decisionFork.options[1].action = duplicateDecisionOptions.session.exercises[0].decisionFork.options[0].action;
   duplicateDecisionOptions.session.exercises[0].decisionFork.options[1].acceptedConsequence = duplicateDecisionOptions.session.exercises[0].decisionFork.options[0].acceptedConsequence;
