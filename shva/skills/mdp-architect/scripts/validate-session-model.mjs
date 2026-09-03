@@ -47,6 +47,9 @@ const session = model?.session ?? {};
 const semanticBlocks = Array.isArray(session.semanticBlocks) ? session.semanticBlocks : [];
 const blockIds = semanticBlocks.map((block) => block?.id).filter(Boolean);
 const blockIdSet = new Set(blockIds);
+const actorRegistry = Array.isArray(session.actorRegistry) ? session.actorRegistry : [];
+const actorIds = actorRegistry.map((actor) => actor?.id).filter(Boolean);
+const actorById = new Map(actorRegistry.map((actor) => [actor?.id, actor]));
 const allowedSourceClasses = new Set([
   "observed",
   "source-backed",
@@ -129,12 +132,42 @@ requireValue(isNonEmpty(session?.assumedKnowledge?.teaching), "session.assumedKn
 requireValue(isNonEmpty(session.centralQuestion), "session.centralQuestion is required");
 requireValue(isNonEmpty(session.carriedArtifact), "session.carriedArtifact is required");
 requireValue(isNonEmpty(session.nextQuestion), "session.nextQuestion is required");
+requireValue(actorRegistry.length > 0, "session.actorRegistry must contain at least one typed actor");
+requireValue(duplicateValues(actorIds).length === 0, "session.actorRegistry actor ids must be unique");
+const actorRegistryFields = [
+  "id",
+  "displayName",
+  "actorType",
+  "automationEligible",
+  "introducedInBlockId",
+];
+for (const [index, actor] of actorRegistry.entries()) {
+  requireValue(
+    sameValuesInOrder(Object.keys(actor ?? {}).sort(), [...actorRegistryFields].sort()),
+    `session.actorRegistry[${index}] must contain only the declared actor fields`,
+  );
+  requireValue(/^[a-z][a-z0-9-]{2,63}$/.test(actor?.id ?? ""), `session.actorRegistry[${index}].id must be a stable actor id`);
+  requireValue(isSubstantive(actor?.displayName, 4, 1), `session.actorRegistry[${index}].displayName must name the actor plainly`);
+  requireValue(["human-role", "ai-system"].includes(actor?.actorType), `session.actorRegistry[${index}].actorType must be human-role or ai-system`);
+  requireValue(typeof actor?.automationEligible === "boolean", `session.actorRegistry[${index}].automationEligible must be boolean`);
+  if (actor?.actorType === "human-role") {
+    requireValue(actor?.automationEligible === false, `session.actorRegistry[${index}] human-role cannot be automation eligible`);
+  }
+  requireValue(blockIdSet.has(actor?.introducedInBlockId), `session.actorRegistry[${index}].introducedInBlockId must reference a semantic block`);
+}
 requireValue(semanticBlocks.length > 0, "session.semanticBlocks must not be empty");
 requireValue(duplicateValues(blockIds).length === 0, "semantic block ids must be unique");
 
 for (const [index, block] of semanticBlocks.entries()) {
   requireValue(isNonEmpty(block?.id), `semanticBlocks[${index}].id is required`);
   requireValue(allowedBlockTypes.has(block?.type), `semanticBlocks[${index}].type must be a supported canonical type`);
+  if (Object.prototype.hasOwnProperty.call(block ?? {}, "actorIds")) {
+    requireValue(nonEmptyArray(block?.actorIds), `semanticBlocks[${index}].actorIds must not be empty when declared`);
+    requireValue(duplicateValues(block?.actorIds ?? []).length === 0, `semanticBlocks[${index}].actorIds must be unique`);
+    for (const actorId of block?.actorIds ?? []) {
+      requireValue(actorById.has(actorId), `semanticBlocks[${index}].actorIds references unknown actor '${actorId}'`);
+    }
+  }
   if (block?.type === "ai-challenge") {
     const allowedAiChallengeBlockKeys = new Set([
       "id",
@@ -162,6 +195,14 @@ for (const [index, block] of semanticBlocks.entries()) {
   requireValue(
     allowedSourceClasses.has(block?.sourceClass),
     `semanticBlocks[${index}].sourceClass must be one of ${[...allowedSourceClasses].join(", ")}`,
+  );
+}
+
+for (const [index, actor] of actorRegistry.entries()) {
+  const introductionBlock = semanticBlocks.find((block) => block.id === actor?.introducedInBlockId);
+  requireValue(
+    (introductionBlock?.actorIds ?? []).includes(actor?.id),
+    `session.actorRegistry[${index}] must be bound to introducedInBlockId through that block's actorIds`,
   );
 }
 
@@ -305,7 +346,7 @@ if (caseBlocks.length === 1) {
   for (const field of ["decision", "stakes", "constraint", "incompleteEvidence", "evidenceBoundary"]) {
     requireValue(isNonEmpty(sustainedCase?.[field]), `sustained case '${sustainedCase.id}' needs ${field}`);
   }
-  requireValue(nonEmptyArray(sustainedCase.actors), `sustained case '${sustainedCase.id}' needs actors`);
+  requireValue(nonEmptyArray(sustainedCase.actorIds), `sustained case '${sustainedCase.id}' needs actorIds`);
   requireValue(
     Array.isArray(sustainedCase.returnPoints) && sustainedCase.returnPoints.length >= 2,
     `sustained case '${sustainedCase.id}' needs at least two purposeful returnPoints`,
@@ -874,13 +915,41 @@ for (const [index, exercise] of exercises.entries()) {
     /^[a-z][a-z0-9-]{2,63}$/.test(exercise?.humanDecisionOwner?.actorId ?? ""),
     `exercises[${index}].humanDecisionOwner.actorId must be a stable role id`,
   );
+  const registeredDecisionOwner = actorById.get(exercise?.humanDecisionOwner?.actorId);
+  requireValue(
+    Boolean(registeredDecisionOwner),
+    `exercises[${index}].humanDecisionOwner.actorId must reference a declared actor`,
+  );
+  requireValue(
+    (exerciseCaseBlock?.actorIds ?? []).includes(exercise?.humanDecisionOwner?.actorId),
+    `exercises[${index}].humanDecisionOwner.actorId must reference an actor declared in the exercise case`,
+  );
+  requireValue(
+    registeredDecisionOwner?.introducedInBlockId === exercise?.exerciseCaseBlockId,
+    `exercises[${index}].humanDecisionOwner must be introduced in the exercise case before use`,
+  );
+  for (const [surfaceName, order] of Object.entries(sequenceOrders)) {
+    requireValue(
+      order.indexOf(exercise?.exerciseCaseBlockId) >= 0
+        && order.indexOf(exercise?.commitmentBlockId) > order.indexOf(exercise?.exerciseCaseBlockId),
+      `${surfaceName} must introduce the exercise case and its human decision owner before commitment`,
+    );
+  }
   requireValue(
     exercise?.humanDecisionOwner?.actorType === "human-role",
     `exercises[${index}].humanDecisionOwner.actorType must be human-role`,
   );
   requireValue(
+    registeredDecisionOwner?.actorType === "human-role",
+    `exercises[${index}].humanDecisionOwner must reference a registered human-role`,
+  );
+  requireValue(
     exercise?.humanDecisionOwner?.automationEligible === false,
     `exercises[${index}].humanDecisionOwner.automationEligible must be false`,
+  );
+  requireValue(
+    registeredDecisionOwner?.automationEligible === false,
+    `exercises[${index}].humanDecisionOwner registered actor cannot be automation eligible`,
   );
   requireValue(
     exercise?.humanDecisionOwner?.mustBeNamedBeforeUse === true,

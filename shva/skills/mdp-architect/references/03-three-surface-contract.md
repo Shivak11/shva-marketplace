@@ -88,7 +88,7 @@ Before release, compare every surface against the canonical model.
 | Claims | Every claim points to a canonical ID. |
 | Visual | Same ordered labels and causal meaning; omissions are declared, not improvised. |
 | Exercise | Same mechanism, decision fork, artifact fields, commitment, applicable consequence reveal and immediate human revision, filled-edition reveal, and debrief. |
-| AI | Same challenge derived from the owning exercise's allow-listed moves and closed authority boundary, after the first commitment and any consequence-led human revision; the final owner remains a declared non-automatable human role. |
+| AI and owner | Same challenge derived from the owning exercise's allow-listed moves and closed authority boundary, after the first commitment and any consequence-led human revision; the final owner resolves to a typed, non-automatable human actor introduced in the exercise case before commitment. |
 | Transition | Same unresolved consequence and carried artifact state, expressed without a meta coda in Book prose. |
 
 If a slide needs an additional idea, improve the canonical model and revise all surfaces. Do not patch the slide alone.

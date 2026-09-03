@@ -24,7 +24,7 @@ A source cohort can be function-specific while the Book addresses a general read
 | Block | Required content |
 | --- | --- |
 | `disturbance` | A concrete opening situation and the decision or consequence that makes it matter. |
-| `case` | One sustained case with actors, stakes, constraint, incomplete evidence, evidence boundary, decision, and purposeful return points. |
+| `case` | One sustained case with typed actor references, stakes, constraint, incomplete evidence, evidence boundary, decision, and purposeful return points. |
 | `claim` | Plain-language claim, source classification, and surfaces that use it. |
 | `lateral-example` | Optional bounded example with a distinct conceptual job, mechanism, factual status, boundary, and explicit return to the human or organisational question. |
 | `exercise-case` | Optional common transfer case used only by the exercise when it lowers setup cost and tests the same mechanism. |
@@ -70,7 +70,7 @@ If the audit finds no new specialist term, leave the array empty and state why i
 
 The sustained `case` block records:
 
-- `decision`, `actors`, `stakes`, `constraint`, and `incompleteEvidence`;
+- `decision`, typed `actorIds`, `stakes`, `constraint`, and `incompleteEvidence`;
 - `evidenceBoundary`, including what public sources do not establish;
 - `returnPoints`, each with `afterBlockId`, `purpose`, and `newCausalWork`.
 
@@ -123,7 +123,8 @@ Every exercise binds to the chapter rather than merely sitting after it. Record:
 - `participantFields`, in display order;
 - commitment, AI-challenge, and revision block IDs, with every typed lifecycle block owned by exactly one exercise;
 - `aiRoleType`, one or more allow-listed `aiAllowedMoves`, and a closed-key `aiAuthorityBoundary` that explicitly denies approval, denial, certification, decision, and authorisation authority; the owning `ai-challenge` block renders from this contract and carries no parallel free-text or shadow field;
-- `humanDecisionOwner`: a stable actor ID whose type is `human-role`, whose automation eligibility is false, which must be named before use, and which remains accountable for the final decision; no additional authority keys are allowed;
+- `actorRegistry`: one closed, typed record per consequential actor with stable ID, display name, actor type, automation eligibility, and the semantic block where the actor first appears; that block binds the ID through `actorIds`;
+- `humanDecisionOwner`: a stable actor ID that resolves to a non-automatable `human-role` in the exercise case, is introduced before commitment on every surface, and remains accountable for the final decision; repeated owner flags cannot substitute for that reference and no additional authority keys are allowed;
 - `consequenceReveal.present`: whether changed information drives this exercise;
 - when present, `consequenceReveal`: its reveal and consequence-revision semantic block IDs, proper required-field subset, minimum attempt length, trigger and immediately following revision steps, revealed fact, provenance, and decision consequence; each typed reveal or consequence-revision block belongs to exactly one exercise;
 - when absent, `consequenceReveal.notUsedReason`: why the exercise does not need changed information rather than a manufactured twist;

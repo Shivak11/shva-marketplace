@@ -31,7 +31,7 @@ Do not use the table as a catalogue. A reader should see why Session 4 could not
 
 ## Session design rules
 
-Each session must contain one sustained case. Give the case a concrete organizational decision, actors, constraint, incomplete evidence, and consequence. Return to it at decisive moments rather than through a mechanical callback quota. Permit one to three bounded lateral examples when each clarifies a different move the main case cannot show. Every example must return to the organisational question it was chosen to explain.
+Each session must contain one sustained case. Give the case a concrete organizational decision, typed actors from the session registry, constraint, incomplete evidence, and consequence. Bind every actor to the block where the role first appears so a later decision owner cannot materialise only when authority is assigned. Return to the case at decisive moments rather than through a mechanical callback quota. Permit one to three bounded lateral examples when each clarifies a different move the main case cannot show. Every example must return to the organisational question it was chosen to explain.
 
 Audit the case portfolio across the full programme. Vary domain, geography, actor, decision scale, and evidence form when that variety helps the argument; do not make every chapter another manager meeting or another HR exception. Diversity is diagnostic rather than a quota: a repeated case is justified when continuity produces more learning than novelty, and a new case is justified only when it performs work the existing case cannot.
 

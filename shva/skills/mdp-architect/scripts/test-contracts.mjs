@@ -545,6 +545,43 @@ try {
     "humanDecisionOwner must contain only the declared human-owner fields",
   );
 
+  const unregisteredHumanDecisionOwner = clone(validSession);
+  unregisteredHumanDecisionOwner.session.exercises[0].humanDecisionOwner.actorId = "ai-system";
+  expectFailure(
+    "unregistered actor id smuggled into human decision owner",
+    sessionValidator,
+    writeMutation("unregistered-human-decision-owner", unregisteredHumanDecisionOwner),
+    "humanDecisionOwner.actorId must reference a declared actor",
+  );
+
+  const registeredAiDecisionOwner = clone(validSession);
+  registeredAiDecisionOwner.session.actorRegistry.push({
+    id: "ai-system",
+    displayName: "AI decision system",
+    actorType: "ai-system",
+    automationEligible: true,
+    introducedInBlockId: "case-return-to-work",
+  });
+  registeredAiDecisionOwner.session.semanticBlocks.find((block) => block.id === "case-return-to-work").actorIds.push("ai-system");
+  registeredAiDecisionOwner.session.exercises[0].humanDecisionOwner.actorId = "ai-system";
+  expectFailure(
+    "registered AI actor smuggled into human decision owner",
+    sessionValidator,
+    writeMutation("registered-ai-decision-owner", registeredAiDecisionOwner),
+    "humanDecisionOwner must reference a registered human-role",
+  );
+
+  const humanOwnerIntroducedAfterCommitment = clone(validSession);
+  const lateOwnerBookOrder = humanOwnerIntroducedAfterCommitment.session.surfaces.book.semanticBlockIds;
+  lateOwnerBookOrder.splice(lateOwnerBookOrder.indexOf("case-return-to-work"), 1);
+  lateOwnerBookOrder.splice(lateOwnerBookOrder.indexOf("commitment-first-map") + 1, 0, "case-return-to-work");
+  expectFailure(
+    "human decision owner first introduced after commitment",
+    sessionValidator,
+    writeMutation("late-human-decision-owner", humanOwnerIntroducedAfterCommitment),
+    "book must introduce the exercise case and its human decision owner before commitment",
+  );
+
   const aiChallengeProseOverridesBoundary = clone(validSession);
   aiChallengeProseOverridesBoundary.session.semanticBlocks.find((block) => block.type === "ai-challenge").text = "AI reviews the evidence, approves or denies the exception, authorises the action, and makes the final decision for the organisation.";
   expectFailure(

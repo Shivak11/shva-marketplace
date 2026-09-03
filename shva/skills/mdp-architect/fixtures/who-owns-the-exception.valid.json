@@ -30,6 +30,36 @@
     "centralQuestion": "Who may override an AI-supported recommendation when the case does not fit the rule?",
     "carriedArtifact": "Exception Authority Map",
     "nextQuestion": "Which rules should remain fixed, which should be local, and which should be revised?",
+    "actorRegistry": [
+      {
+        "id": "affected-employee",
+        "displayName": "affected employee",
+        "actorType": "human-role",
+        "automationEligible": false,
+        "introducedInBlockId": "case-return-to-work"
+      },
+      {
+        "id": "line-manager",
+        "displayName": "line manager",
+        "actorType": "human-role",
+        "automationEligible": false,
+        "introducedInBlockId": "case-return-to-work"
+      },
+      {
+        "id": "policy-owner",
+        "displayName": "policy owner",
+        "actorType": "human-role",
+        "automationEligible": false,
+        "introducedInBlockId": "case-return-to-work"
+      },
+      {
+        "id": "chro-delegate",
+        "displayName": "CHRO delegate",
+        "actorType": "human-role",
+        "automationEligible": false,
+        "introducedInBlockId": "case-return-to-work"
+      }
+    ],
     "semanticBlocks": [
       {
         "id": "disturbance-no-owner",
@@ -41,11 +71,11 @@
       {
         "id": "case-return-to-work",
         "type": "case",
-        "text": "A return-to-work recommendation flags an unusual employee case, but the workflow names no override owner or appeal route.",
+        "text": "A return-to-work recommendation flags an unusual employee case. The affected employee, line manager, policy owner, and CHRO delegate all appear in the case, but the workflow assigns none of them the right to override it or hear an appeal.",
         "sourceClass": "illustrative",
         "requiredAcrossSurfaces": true,
         "decision": "Whether to follow, pause, or override the recommendation in this case",
-        "actors": ["affected employee", "line manager", "policy owner", "exception authorizer"],
+        "actorIds": ["affected-employee", "line-manager", "policy-owner", "chro-delegate"],
         "stakes": "A wrong move can deny a defensible exception or make policy arbitrary",
         "constraint": "The ordinary rule does not fit and the workflow names no override route",
         "incompleteEvidence": "The recommendation does not contain all local context or the employee's correction",
@@ -664,7 +694,7 @@
           "mayAuthorise": false
         },
         "humanDecisionOwner": {
-          "actorId": "exception-decision-owner",
+          "actorId": "chro-delegate",
           "actorType": "human-role",
           "automationEligible": false,
           "mustBeNamedBeforeUse": true,
