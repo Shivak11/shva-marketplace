@@ -118,11 +118,11 @@ Every exercise binds to the chapter rather than merely sitting after it. Record:
 - `exerciseCaseBlockId` and `mechanismBlockId`;
 - `chapterConnection.fromBlockId`, `unresolvedConsequence`, `firstParticipantAction`, and `mechanismUsed`;
 - `decisionFork.question` and two to four options, each with a stable ID, action, and accepted consequence;
-- `steps`, each with a stable ID, prompt, observable output, and the participant fields it writes;
+- `steps`, each with a stable ID, prompt, observable output, and the participant fields it writes; every participant field must be written by at least one step;
 - `participantFields`, in display order;
 - commitment, AI-challenge, and revision block IDs;
 - `consequenceReveal.present`: whether changed information drives this exercise;
-- when present, `consequenceReveal`: its reveal and consequence-revision semantic block IDs, proper required-field subset, minimum attempt length, trigger and immediately following revision steps, revealed fact, provenance, and decision consequence;
+- when present, `consequenceReveal`: its reveal and consequence-revision semantic block IDs, proper required-field subset, minimum attempt length, trigger and immediately following revision steps, revealed fact, provenance, and decision consequence; each typed reveal or consequence-revision block belongs to exactly one exercise;
 - when absent, `consequenceReveal.notUsedReason`: why the exercise does not need changed information rather than a manufactured twist;
 - `filledEditionReveal`: the later declared input gate, every participant field in display order, minimum attempt length, control label, initial closed state, field-binding attribute, and browser-proof requirement;
 - `filledEdition.fields`, using exactly the same field IDs and order;
@@ -131,7 +131,7 @@ Every exercise binds to the chapter rather than merely sitting after it. Record:
 
 When a field is genuinely irrelevant, the filled edition states why; it does not leave the field blank. The validator rejects short placeholder answers, but a human exercise read still judges realism and density.
 
-A game records at least two visible states, an initial state, at least two choices, and for every choice a `fromStateId`, `toStateId`, state delta, consequence, and next-choice IDs. Its replay rule says what resets, what learner evidence remains, and what changes on another run. A pair of booleans claiming that choice changes state is not a game contract. If the learning lives mainly in explanatory copy after a tap, use a workbook.
+A game records at least two visible states, an initial state, and for every choice a `fromStateId`, `toStateId`, state delta, consequence, and next-choice IDs. Every state is reachable; every named next choice begins from the state just reached and the list equals what is available there. At least one reachable state offers two consequential choices leading to different states, so the learner can choose a route rather than advance through a forced sequence. Its replay rule says what resets, what learner evidence remains, and what changes on another run. A pair of booleans claiming that choice changes state is not a game contract. If the learning lives mainly in explanatory copy after a tap, use a workbook.
 
 ## Required sequence
 

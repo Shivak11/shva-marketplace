@@ -522,6 +522,8 @@ requireValue(
 
 const exercises = Array.isArray(session.exercises) ? session.exercises : [];
 requireValue(exercises.length > 0, "at least one exercise is required");
+const claimedConsequenceRevealBlockIds = [];
+const claimedConsequenceRevisionBlockIds = [];
 const exerciseBlockIds = new Set(
   semanticBlocks.filter((block) => block.type === "exercise").map((block) => block.id),
 );
@@ -593,6 +595,8 @@ for (const [index, exercise] of exercises.entries()) {
   requireValue(typeof consequenceReveal.present === "boolean", `exercises[${index}].consequenceReveal.present must be boolean`);
   const hasConsequenceReveal = consequenceReveal.present === true;
   if (hasConsequenceReveal) {
+    claimedConsequenceRevealBlockIds.push(consequenceReveal.revealBlockId);
+    claimedConsequenceRevisionBlockIds.push(consequenceReveal.revisionBlockId);
     requireValue(
       blockTypeById.get(consequenceReveal.revealBlockId) === "consequence-reveal",
       `exercises[${index}] consequence reveal revealBlockId must reference a consequence-reveal semantic block`,
@@ -659,6 +663,15 @@ for (const [index, exercise] of exercises.entries()) {
     for (const fieldId of step?.requiredFieldIds ?? []) {
       requireValue(participantFieldIds.includes(fieldId), `exercises[${index}].steps[${stepIndex}] references unknown participant field '${fieldId}'`);
     }
+  }
+  const fieldsWrittenBySteps = new Set(
+    (exercise?.steps ?? []).flatMap((step) => step?.requiredFieldIds ?? []),
+  );
+  for (const fieldId of participantFieldIds) {
+    requireValue(
+      fieldsWrittenBySteps.has(fieldId),
+      `exercises[${index}] participant field '${fieldId}' must be written by at least one exercise step`,
+    );
   }
 
   if (hasConsequenceReveal) {
@@ -760,7 +773,6 @@ for (const [index, exercise] of exercises.entries()) {
     const choiceIds = (game.choices ?? []).map((choice) => choice?.id).filter(Boolean);
     const choiceById = new Map((game.choices ?? []).map((choice) => [choice?.id, choice]));
     requireValue(duplicateValues(choiceIds).length === 0, `exercises[${index}] game choice ids must be unique`);
-    let branchingChoices = 0;
     for (const [choiceIndex, choice] of (game.choices ?? []).entries()) {
       requireValue(isNonEmpty(choice?.id), `exercises[${index}].game.choices[${choiceIndex}].id is required`);
       requireValue(stateIds.includes(choice?.fromStateId), `exercises[${index}].game.choices[${choiceIndex}].fromStateId must reference a state`);
@@ -770,7 +782,6 @@ for (const [index, exercise] of exercises.entries()) {
       requireValue(isSubstantive(choice?.consequence, 32, 5), `exercises[${index}].game.choices[${choiceIndex}].consequence must be substantive`);
       requireValue(Array.isArray(choice?.nextChoiceIds), `exercises[${index}].game.choices[${choiceIndex}].nextChoiceIds must be an array`);
       requireValue(duplicateValues(choice?.nextChoiceIds ?? []).length === 0, `exercises[${index}].game.choices[${choiceIndex}].nextChoiceIds must be unique`);
-      if ((choice?.nextChoiceIds ?? []).length > 0) branchingChoices += 1;
       for (const nextChoiceId of choice?.nextChoiceIds ?? []) {
         requireValue(choiceIds.includes(nextChoiceId), `exercises[${index}].game.choices[${choiceIndex}] references unknown next choice '${nextChoiceId}'`);
         requireValue(
@@ -789,7 +800,6 @@ for (const [index, exercise] of exercises.entries()) {
         `exercises[${index}].game.choices[${choiceIndex}].nextChoiceIds must match the choices available from destination state '${choice?.toStateId}'`,
       );
     }
-    requireValue(branchingChoices > 0, `exercises[${index}] game needs at least one state-dependent next choice`);
     const reachableStates = new Set([game.initialStateId]);
     let changed = true;
     while (changed) {
@@ -809,10 +819,33 @@ for (const [index, exercise] of exercises.entries()) {
       (game.choices ?? []).every((choice) => reachableStates.has(choice?.fromStateId)),
       `exercises[${index}] game choices must all be reachable from initialStateId`,
     );
+    const hasReachableFork = (game.states ?? []).some((state) => {
+      if (!reachableStates.has(state?.id)) return false;
+      const outgoingChoices = (game.choices ?? []).filter((choice) => choice?.fromStateId === state.id);
+      return outgoingChoices.length >= 2
+        && new Set(outgoingChoices.map((choice) => choice?.toStateId)).size >= 2;
+    });
+    requireValue(
+      hasReachableFork,
+      `exercises[${index}] game needs a reachable state with at least two choices leading to different states`,
+    );
     requireValue(stateIds.includes(game?.replay?.resetsToStateId), `exercises[${index}] game replay must reset to a known state`);
     requireValue(nonEmptyArray(game?.replay?.preserves), `exercises[${index}] game replay must state what learner evidence is preserved`);
     requireValue(isSubstantive(game?.replay?.changes, 28, 4), `exercises[${index}] game replay must state what changes on replay`);
   }
+}
+
+for (const block of semanticBlocks.filter((item) => item.type === "consequence-reveal")) {
+  requireValue(
+    claimedConsequenceRevealBlockIds.filter((blockId) => blockId === block.id).length === 1,
+    `consequence-reveal semantic block '${block.id}' must belong to exactly one exercise with consequenceReveal.present true`,
+  );
+}
+for (const block of semanticBlocks.filter((item) => item.type === "consequence-revision")) {
+  requireValue(
+    claimedConsequenceRevisionBlockIds.filter((blockId) => blockId === block.id).length === 1,
+    `consequence-revision semantic block '${block.id}' must belong to exactly one exercise with consequenceReveal.present true`,
+  );
 }
 
 if (errors.length > 0) {

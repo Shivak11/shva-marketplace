@@ -10,7 +10,7 @@
 
 The exercise contract is now field-level. A chapter-end activity must arise from the chapter's culminating problem, name its case and mechanism, request one visible decision at a time, and keep AI after both the first commitment and any consequence-led human revision. An early consequence gate can require only fields writable at that point and never the whole form. The later filled edition uses the same fields in the same order and must contain actors, a live alternative, discriminating evidence, bounded authority, executable action, a challenge route, and a review or reversal condition.
 
-The package includes production-readiness validation for scope-specific Book Foundation approval and focused mutation tests for visual count, surface compression, causal order, evidence-mechanism distinction, exercise connectedness, answer-field parity, reveal gating, and traversable game states.
+The package includes production-readiness validation for scope-specific Book Foundation approval and focused mutation tests for visual count, surface compression, causal order, evidence-mechanism distinction, exercise connectedness, participant-field coverage, answer-field parity, reveal ownership and gating, and game graphs with at least one real choice.
 
 ## v0.11.0: Book Foundation Gate
 

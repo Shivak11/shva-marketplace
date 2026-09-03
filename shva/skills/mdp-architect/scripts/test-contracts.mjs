@@ -220,6 +220,18 @@ try {
   };
   expectPass("exercise without changed-information reveal", sessionValidator, writeMutation("no-changed-information", noChangedInformation));
 
+  const declaredAbsentRevealWithLiveBlocks = clone(validSession);
+  declaredAbsentRevealWithLiveBlocks.session.exercises[0].consequenceReveal = {
+    present: false,
+    notUsedReason: "The author says the exercise compares visible alternatives and therefore needs no changed information at all.",
+  };
+  expectFailure(
+    "absent reveal declaration retaining live reveal blocks",
+    sessionValidator,
+    writeMutation("absent-reveal-live-blocks", declaredAbsentRevealWithLiveBlocks),
+    "must belong to exactly one exercise with consequenceReveal.present true",
+  );
+
   const ungatedFilledReveal = clone(validSession);
   ungatedFilledReveal.session.exercises[0].filledEditionReveal.requiresParticipantInput = false;
   expectFailure("ungated filled-edition reveal", sessionValidator, writeMutation("ungated-filled-reveal", ungatedFilledReveal), "filled-edition reveal must require participant input");
@@ -227,6 +239,15 @@ try {
   const mismatchedFilledEdition = clone(validSession);
   mismatchedFilledEdition.session.exercises[0].filledEdition.fields.pop();
   expectFailure("mismatched filled edition", sessionValidator, writeMutation("mismatched-filled-edition", mismatchedFilledEdition), "filled-edition fields must match participant fields in order");
+
+  const orphanedParticipantField = clone(validSession);
+  orphanedParticipantField.session.exercises[0].steps.find((step) => step.id === "revise").requiredFieldIds = ["executable-action"];
+  expectFailure(
+    "participant field with no writing step",
+    sessionValidator,
+    writeMutation("orphaned-participant-field", orphanedParticipantField),
+    "participant field 'revision-condition' must be written by at least one exercise step",
+  );
 
   const disconnectedExercise = clone(validSession);
   disconnectedExercise.session.exercises[0].chapterConnection.unresolvedConsequence = "Connected.";
@@ -368,6 +389,14 @@ try {
         consequence: "Local context changes the outcome while precedent and challenge duties become explicit.",
         nextChoiceIds: [],
       },
+      {
+        id: "authorise-without-pause",
+        fromStateId: "automatic",
+        toStateId: "bounded",
+        stateDelta: "The ordinary recommendation is replaced immediately by a bounded exception.",
+        consequence: "The omitted correction affects the decision quickly, but the learner accepts less time for independent evidence testing.",
+        nextChoiceIds: [],
+      },
     ],
     replay: {
       resetsToStateId: "automatic",
@@ -376,6 +405,15 @@ try {
     },
   };
   expectPass("stateful consequential game", sessionValidator, writeMutation("stateful-game", statefulGame));
+
+  const forcedLinearGame = clone(statefulGame);
+  forcedLinearGame.session.exercises[0].game.choices = forcedLinearGame.session.exercises[0].game.choices.filter((choice) => choice.id !== "authorise-without-pause");
+  expectFailure(
+    "forced linear click-through presented as game",
+    sessionValidator,
+    writeMutation("forced-linear-game", forcedLinearGame),
+    "game needs a reachable state with at least two choices leading to different states",
+  );
 
   const disconnectedGame = clone(statefulGame);
   disconnectedGame.session.exercises[0].game.choices[0].nextChoiceIds = ["pause-after-omission"];
