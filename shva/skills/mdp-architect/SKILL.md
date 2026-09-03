@@ -45,7 +45,7 @@ If the request already supplies audience, duration, source material, and output 
 
 ## Book Foundation Gate
 
-For a greenfield book, a substantial book-shaped programme, or a book-like chapter whose premise, reader, identity, title, or front matter is not already approved, run the Book Foundation Interview before production. Read `references/00-book-foundation-interview.md` and complete its short, choice-led rounds in chat. The author must explicitly approve the resulting Book Foundation Record before any HTML, cover, front matter, canonical chapter model, or production file is created. An explicitly authorised exploratory prototype may defer non-blocking title or visual choices, but it remains labelled as exploratory and cannot establish book doctrine.
+For a greenfield book, a substantial book-shaped programme, or a book-like chapter whose premise, reader, identity, title, or front matter is not already approved, run the Book Foundation Interview before production. Read `references/00-book-foundation-interview.md` and complete its short, choice-led rounds in chat. The author must explicitly approve the resulting Book Foundation Record before production. Record the approval scope: `prose`, `front-matter`, `visual-production`, or `full`. A prose approval may deliberately defer title or visual choices for another author; it cannot authorise finished front matter, cover art, or book-identity styling. In Shiva's environment, the default gate is `full` unless Shiva explicitly narrows it to an exploratory prototype.
 
 For a small correction, a recent approved record may be reused only if the premise, reader, and identity are unchanged. Name that record and why it still applies. Do not make a taste-sensitive choice silently in HTML: offer two or three concrete candidates with a recommendation and trade-off. This is an editorial approval, not a Super-outer critical-action approval.
 
@@ -67,7 +67,7 @@ Read `references/01-programme-architecture.md` before changing the programme spi
 
 ### 3. Retrieve before inventing
 
-Search the author's wiki and current programme files first. In Shiva's environment, then use Readwise and the owned book corpus for structural inspiration. Use live web research for current examples and factual verification. Prefer primary sources and serious practitioner-intellectual work. Keep a source ledger that separates observation, sourced fact, teaching synthesis, illustration, reconstruction, counterfactual, and unresolved claims.
+Search the author's wiki and current programme files first. In Shiva's environment, then use Readwise and the owned book corpus for structural inspiration. Use live web research for current examples and factual verification. Prefer primary sources and serious practitioner-intellectual work. Keep a source ledger whose evidence class separates observation, sourced fact, teaching synthesis, illustration, and unresolved claims. Record presentation status separately when wording or a scene is direct, normalised, paraphrased, reconstructed, counterfactual, composite, or author synthesis. Reconstruction and counterfactual are not evidence classes and never inherit factual authority from fluent prose.
 
 Read `references/04-research-routing.md` before research. If a dedicated source pack is needed, invoke or follow `mdp-source-finder` without letting source collection replace programme design.
 
@@ -87,15 +87,16 @@ Do not make sessions a list of topics. Make each one change what the participant
 
 Before drafting three modes, write a compact JSON content model using the contract in `references/02-session-content-model.md`. Start from `fixtures/who-owns-the-exception.valid.json` and replace its content. Store the Book reader separately from the participant audience. Store the central question, case and purposeful return points, terms that need introduction, claims, bounded lateral examples, evidence-path comparisons, mechanism, narrative hinges, visuals, exercise journey, sources, transition, and surface references once.
 
-Run:
+Run the scope-appropriate foundation check and session check:
 
 ```bash
+node "$SKILL_DIR/scripts/validate-book-foundation.mjs" <book-foundation.json> full
 node "$SKILL_DIR/scripts/validate-session-model.mjs" <session-model.json>
 ```
 
 Do not draft Book, Teaching, and Slides independently. If the model changes, propagate the change to all surfaces before polishing any one of them. Semantic parity means shared meaning, not identical density: a surface may omit a block only when the model declares that omission; it may never invent one.
 
-The validator must prove sequence as well as membership: every exercise names its commitment, AI-challenge, and revision blocks, and every visible surface preserves that order. It must also prove that a term is earned before definition, zero to two substantive visuals are permitted, the exercise is connected to the chapter's culminating problem, reveal requires participant input, and the filled edition answers the same fields in the same order. A source-ledger entry names exactly the visible surfaces that use its block.
+The validator proves structural declarations and cross-references: core blocks survive in all three surfaces; commitment, AI challenge, and revision retain their order; hinge endpoints have the intended block types; term references point from problem to definition to reuse; the consequence and filled-edition reveals bind to named fields; and the filled edition uses the same fields in the same order. It rejects obvious bypasses such as negative minutes, one-blob schedules, placeholder answers, renamed duplicate foundation directions, and games with no state transitions. It does not prove that prose is causally connected, an example is true, a visual beats words, a field contains meaningful input in the DOM, or the Book is novice-readable. Those require source, narrative, browser, and rendered-artifact reviews.
 
 ### 6. Build the requested surfaces
 
@@ -105,9 +106,9 @@ Book mode is continuous reading for the approved Book reader. Teaching mode cont
 
 For a book-shaped build, derive the title system, opening logic, author material, and visual identity from the approved Book Foundation Record. Do not restore a previous book's title treatment, visual grammar, or cover palette by habit.
 
-For a 90-minute scheduled session, prepare a protected 90-minute core plus 30 minutes of integrated depth reserves. Every reserve deepens an existing case, mechanism, or participant artifact and states where to rejoin. Do not show 120 minutes as the official timetable duration unless the brief says so.
+Set the timing and editorial limits in `programme.planningProfile` from the approved brief and author profile. In Shiva's current teaching profile, a 90-minute scheduled session normally carries a protected 90-minute core plus 30 minutes of integrated depth reserves, a 3,800-5,200-word planning range, no more than three internal headings, no body callout-card system, and at most two pull lines. These are Shiva-profile defaults, not universal constants. Every segment needs a facilitator move, participant move, artifact state, and recovery move; every reserve needs a trigger, added move, participant move, artifact state, and rejoin. Do not show prepared runway as official timetable duration unless the brief says so.
 
-Every exercise must arise from the chapter's final unresolved problem, make the participant commit before AI is used, and include a realistic filled edition behind an intentional reveal control. The reveal remains unavailable until the required participant fields contain an answer. A common transfer case may replace the sustained case only when it lowers setup cost, tests the same mechanism, and is explicitly bridged back to the chapter and the learner's context. AI may challenge a map, threshold, interpretation, evidence boundary, or exception. It may not write the initial answer, certify a people decision, authorise action, or become the decision-maker.
+Every exercise must arise from the chapter's final unresolved problem and make the participant commit before AI is used. Keep two reveals distinct. The early consequence reveal unlocks after the minimum first commitment and introduces a fact, provenance issue, counter-signal, or consequence that makes revision necessary. The later filled-edition reveal unlocks only after every comparison field contains a meaningful attempt and shows one realistic completed edition field for field. A common transfer case may replace the sustained case only when it lowers setup cost, tests the same mechanism, and is explicitly bridged back to the chapter and the learner's context. AI may challenge a map, threshold, interpretation, evidence boundary, or exception. It may not write the initial answer, certify a consequential decision, authorise action, or become the decision-maker.
 
 ### 7. Verify from the artifact
 
@@ -140,7 +141,7 @@ Keep source, plugin/package, installation, runtime invocation, and rendered-jour
 - Keep facilitator notes, timing, dialogue, contingencies, and source caveats out of Book and Slide surfaces.
 - Slide Content may remove detail but may not introduce a new claim, example, framework, or exercise.
 - Keep private or identifiable participant and employee data out of external AI tools by default.
-- HTML is the review artifact unless Shiva asks for PDF.
+- In Shiva's teaching workspace, HTML is the review artifact unless Shiva asks for PDF. In another environment, follow the requested delivery format and its local artifact rules.
 - Do not expose process scaffolding or prompt logic in participant-facing views.
 
 ## References

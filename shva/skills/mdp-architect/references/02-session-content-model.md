@@ -6,6 +6,8 @@ Store the session once before writing Book Chapter, Teaching Script, or Slide Co
 
 Copy `fixtures/who-owns-the-exception.valid.json` as the starting contract. The validator reads JSON, and the fixture shows every required field and exact classification value. The fixture demonstrates the schema; it is not a content template and its case should be replaced.
 
+Set `programme.officialSessionMinutes`, `programme.preparedRunwayMinutes`, and `programme.planningProfile` from the approved brief and author profile. The planning profile carries the narrative-word range, maximum headings, pull lines, body callout cards, substantive visuals, and minimum facilitation segments. These limits are explicit configuration, not hidden assumptions in a supposedly neutral engine. Declared counts remain planning checks; the rendered artifact must be counted independently.
+
 ## Separate the readers
 
 The model must distinguish:
@@ -33,7 +35,7 @@ A source cohort can be function-specific while the Book addresses a general read
 | `exercise` | Starting material, ordered steps, decision boundary, output, comparison, transfer, and debrief. |
 | `transition` | The unresolved consequence and artifact state passed onward without a meta announcement. |
 
-Every block declares `requiredAcrossSurfaces`. Blocks marked true must appear in Book, Teaching, and Slides. Other blocks may appear only in the surfaces named by the source ledger. Surface omission is allowed; surface invention is not.
+Every block declares `requiredAcrossSurfaces`. The validator owns the rule for core block types: disturbance, sustained case, claim, mechanism, commitment, AI challenge, revision, exercise, and transition must be true and must appear in Book, Teaching, and Slides. Only supporting material such as a bounded lateral example may be declared optional. An `exercise-case` becomes required across surfaces when an exercise uses it. Surface omission is allowed for genuinely supporting material; surface invention is not.
 
 ## Causal Hinge Ledger
 
@@ -45,9 +47,9 @@ Store three hinges under `session.narrativeHinges`:
 | `conceptToFramework` | The prose relation the reader can already explain before a diagram or framework name appears. |
 | `chapterToExercise` | The chapter's culminating problem and the first participant action that answers, tests, or operationalises it. |
 
-Each hinge contains `fromBlockId`, `toBlockId`, and a non-empty `bridge`. The validator checks order; the straight-through editorial review checks whether the bridge is real rather than a label.
+Each hinge contains `fromBlockId`, `toBlockId`, a substantive `bridge`, the `unresolvedConsequence`, and the `nextMove` enabled by the destination block. The validator type-constrains the endpoints—disturbance or case to claim, case or claim to mechanism, and culminating claim, mechanism, or revision to exercise—and requires both endpoints in Book order. This prevents arbitrary IDs and one-word transitions from passing. The straight-through editorial review still decides whether the prose genuinely carries the causal relation.
 
-For every specialist term a general reader may not know, add an entry to `session.terms`:
+`session.terms` is always present. For every specialist term a general reader may not know, add an entry:
 
 ```json
 {
@@ -62,6 +64,8 @@ For every specialist term a general reader may not know, add an entry to `sessio
 
 The problem must appear before the definition, and the definition before consequential reuse, in every surface that uses all three blocks. Professional nouns such as a ship's master, bridge, draught, band, model label, or operating review belong in this register when the Book reader may not know them.
 
+If the audit finds no new specialist term, leave the array empty and state why in `session.termAudit.noNewTermsReason`. Omitting the register entirely is not a clean bill of health.
+
 ## Cases, examples, and comparisons
 
 The sustained `case` block records:
@@ -74,7 +78,7 @@ A return point must change what the reader can see in the case. A naked return c
 
 Every `lateral-example` records `conceptualJob`, `mechanism`, `boundary`, and `returnToHumanProblem`. If its `sourceClass` is `source-backed`, it also records the unfamiliar verified fact it earns and the source ledger identifies the exact supported facts.
 
-When a chapter compares evidence paths, store an item in `session.evidenceComparisons`:
+`session.evidenceComparisons` is always present. When a chapter compares evidence paths, store an item:
 
 ```json
 {
@@ -87,6 +91,8 @@ When a chapter compares evidence paths, store an item in `session.evidenceCompar
 ```
 
 This prevents a comparison from turning omission, measurement change, process trace, and model error into one vague “data quality” problem.
+
+If the chapter makes no evidence-path comparison, leave the array empty and state the reason in `session.comparisonAudit.noComparisonNeededReason`.
 
 ## Visual contract
 
@@ -102,7 +108,7 @@ Each visual records:
 - `reusedInBlockId`;
 - `sourceStatus` and, for a reconstruction, `chronologyNote`.
 
-The model never requires a diagram merely because a mechanism exists.
+`visualJob` must name the relation made easier to see, and `proseRemoved` must identify the prose the image genuinely replaces. “Looks good,” “none,” and equivalent declarations fail. The model never requires a diagram merely because a mechanism exists, and DOM inspection—not the declared array—proves the final count and geometry.
 
 ## Decision-Closure Contract
 
@@ -110,16 +116,20 @@ Every exercise binds to the chapter rather than merely sitting after it. Record:
 
 - `caseMode`: `sustained-case` or `transfer-case`;
 - `exerciseCaseBlockId` and `mechanismBlockId`;
-- `chapterConnection` and `decisionFork`;
-- `steps`, each with a stable ID, prompt, and observable output;
+- `chapterConnection.fromBlockId`, `unresolvedConsequence`, `firstParticipantAction`, and `mechanismUsed`;
+- `decisionFork.question` and two to four options, each with a stable ID, action, and accepted consequence;
+- `steps`, each with a stable ID, prompt, observable output, and the participant fields it writes;
 - `participantFields`, in display order;
 - commitment, AI-challenge, and revision block IDs;
-- `revealGate.requiresParticipantInput` and the required field IDs;
+- `consequenceReveal`: the early declared input gate, its required field subset, minimum attempt length, step position, revealed fact, provenance, decision consequence, and revision step;
+- `filledEditionReveal`: the later declared input gate, every participant field in display order, minimum attempt length, control label, initial closed state, field-binding attribute, and browser-proof requirement;
 - `filledEdition.fields`, using exactly the same field IDs and order;
 - `filledEdition.completeness`: actors, live alternative, evidence discriminator, authority boundary, executable action, revision condition, and appeal or challenge route;
 - `transferPrompt` and `debriefQuestion`.
 
-When a field is genuinely irrelevant, the filled edition states why; it does not leave the field blank. A game may add score and state transitions, but its choices must change visible state, each consequence must explain why, and a reveal must alter the next choice. If the learning lives mainly in explanatory copy after a tap, use a workbook.
+When a field is genuinely irrelevant, the filled edition states why; it does not leave the field blank. The validator rejects short placeholder answers, but a human exercise read still judges realism and density.
+
+A game records at least two visible states, an initial state, at least two choices, and for every choice a `fromStateId`, `toStateId`, state delta, consequence, and next-choice IDs. Its replay rule says what resets, what learner evidence remains, and what changes on another run. A pair of booleans claiming that choice changes state is not a game contract. If the learning lives mainly in explanatory copy after a tap, use a workbook.
 
 ## Required sequence
 
@@ -138,9 +148,9 @@ Encode the sequence. Each teaching core segment and slide beat carries ordered `
 
 ## Source ledger
 
-Every semantic block has one matching source-ledger entry with `origin`, `sourceType`, `checkedOn`, `confidence`, `surfaces`, `supportedFacts`, `teachingInference`, and `factualBoundary`. A `source-backed` entry includes its live URL. A `still-to-confirm` item may remain internal but cannot appear in a visible surface.
+Every semantic block has one matching source-ledger entry with `origin`, `sourceType`, `presentationStatus`, `checkedOn`, `confidence`, `surfaces`, `supportedFacts`, `teachingInference`, and `factualBoundary`. Evidence classification and presentation status are separate. The latter records direct, normalised, paraphrased, reconstructed, counterfactual, composite, or author-synthesis treatment. A `source-backed` entry includes a non-placeholder live URL, source title, locator, and at least one fact-level support statement. A reconstructed scene requires the same source coordinates. A counterfactual names the claim IDs it is built from. A `still-to-confirm` item may remain internal but cannot appear in a visible surface.
 
-The ledger's surfaces must exactly match visible use. A URL beside a paragraph does not support every clause in it; `supportedFacts` records the exact factual load the source carries.
+The ledger's surfaces must exactly match visible use. A URL beside a paragraph does not support every clause in it; `supportedFacts` records the exact factual load the source carries. The validator can reject an empty or placeholder mapping. A source-boundary reviewer must still open the source and compare those facts with the final prose.
 
 ## Completion check
 

@@ -20,8 +20,7 @@ The session-by-session plan belongs immediately after the cover only in a progra
 
 Write connected prose that can be read without a facilitator.
 
-- For a 90-minute core with a 120-minute prepared runway, use 3,800 to 5,200 narrative words plus a substantive chapter-end workbook unless the brief sets a different depth. Calibrate shorter sessions proportionally; do not mistake a word target for proof of teaching duration.
-- Use no more than three internal headings.
+- Follow the narrative range and hierarchy limits selected in `programme.planningProfile`. Shiva's current 90-minute-core profile uses 3,800 to 5,200 narrative words, no more than three internal headings, no body callout-card system, and at most two pull lines. These are author-profile defaults and planning warnings, not universal measures of depth or proof of teaching duration.
 - Begin with the organisational disturbance, not a definition, agenda, or explanation of how the modes work.
 - Complete the Causal Hinge Ledger before polishing. A scene hands a live object, consequence, or question to the first concept; prose establishes the full relation before a framework; the final argument hands a real decision to the exercise.
 - Let a technical term, framework, or visual arrive only after the reader has met the problem it resolves. Define the term in plain language, distinguish it from the nearest plausible meaning, and use it again where it changes the case. Move through a connected causal sequence rather than labels such as "Interpretation follows" or "The framework" used as transitions.
@@ -32,9 +31,9 @@ Write connected prose that can be read without a facilitator.
 - Move from case to concept through a visible hinge already present in the prose: an object, consequence, unresolved question, or changed action. A new heading does not supply a missing transition.
 - Use zero to two substantive visuals across the chapter body and workbook. Cover art and ordinary controls are excluded; editorial illustrations, diagrams, data graphics, and exercise maps all count. Place a visual only after the reader has experienced the tension and can describe the relation it resolves. Omit it when prose is clearer.
 - Any editorial reconstruction must preserve chronology and causality, identify itself as an original representation, and avoid implying access to private source material. If the visual budget is full, replace the weaker visual rather than rename a workbook image to evade the count.
-- Use no body callout card system, repeated margin labels, repeated working rules, or facilitation tags.
+- Under Shiva's current profile, use no body callout card system, repeated margin labels, repeated working rules, or facilitation tags. For another author, configure the hierarchy deliberately; do not inherit Shiva's caps invisibly.
 - When sourced dialogue carries the scene's turn, give each speaker a separate paragraph and allow one consequential silence or physical response its own beat. Put the explanatory meaning after the exchange; do not compress multiple speakers, reaction, and analysis into a case-note paragraph or invent stage direction.
-- Keep display emphasis scarce. Use no more than two memorable lines. Book prose may use semantic italics for an earned term or question; it must not become a repeated visual rhythm or a workaround for callout cards.
+- Keep display emphasis scarce. Under Shiva's current profile, use no more than two memorable lines. Book prose may use semantic italics for an earned term or question; it must not become a repeated visual rhythm or a workaround for callout cards.
 - Do not use stacked punchlines, slogan chains, clipped motivational fragments, generic AI claims, era-snark, repeated `not X but Y` scaffolding, a literature-review procession, a research-paper summary voice, or a closing sermon.
 - Do not invent a branded framework name merely because a sequence has several parts. Prefer a plain descriptive title unless the name adds a genuinely original, reusable distinction.
 - End by moving directly into the practical workbook or by leaving a causally unresolved consequence. Do not break the fourth wall with “we can now name,” “the final clause matters,” or “this is where the next chapter begins.”
@@ -46,17 +45,17 @@ The Book surface contains no timing, speaker instruction, recovery move, source 
 Preserve the Book's causal sequence and shared language for the participant audience. Add only delivery information:
 
 - first person spoken lines in the named facilitator's direct voice
-- minute ranges and the 90 minute core timing ledger
+- minute ranges and the official-duration core timing ledger
 - room move, likely participant response, and recovery move
 - commitment instruction before the AI challenge
-- 30 minutes of depth reserves with trigger and explicit rejoin
+- the configured prepared runway with trigger, participant move, artifact state, and explicit rejoin
 - AI use boundary and a safe synthetic or redacted input reminder
 
 Do not turn the script into a second chapter or add a new framework because it might be useful live.
 
 ## Slide Content
 
-Compress the same session into the slide-beat range selected for the programme; six to ten is Shiva's normal 90-minute-session default.
+Compress the same session into the slide-beat range selected for the programme. In Shiva's current author profile, six to ten is the normal range for a 90-minute session; another profile may choose differently.
 
 - One slide may carry one question, scene, claim, diagram stage, participant move, or transition.
 - Reuse exact case names, framework labels, and artifact names from the canonical model.
@@ -72,11 +71,11 @@ Choose the entry case deliberately. Use the sustained case when continuity reduc
 
 The workbook must state the starting material, numbered moves, expected output, decision boundary, and debrief question. Ask for one visible decision at a time. It may have an offline lane and an optional AI lane, but participants make the first judgment before AI.
 
-Commitment before reveal is enforced in the interface. The filled-edition control begins unavailable or hidden until required participant fields contain input. It then opens with keyboard activation, moves focus to the revealed heading, offers a clear return, restores focus when closed, and never alters the participant's original text.
+Use two distinct reveal moments when the exercise depends on changed information. The consequence reveal begins unavailable until the minimum first-commitment fields contain a meaningful attempt; it introduces a consequential fact, provenance issue, counter-signal, or outcome and sends the learner into a named revision step. The filled-edition reveal begins unavailable until every comparison field contains a meaningful attempt. It then opens with keyboard activation, moves focus to the revealed heading, offers a clear return, restores focus when closed, and never alters the participant's original text. The JSON records both gates; only browser proof establishes their actual behaviour.
 
 Provide a realistic completed version of the same artifact. Its fields and order match the blank version exactly. It answers every instruction with named actors, a live alternative, evidence that could discriminate, a bounded right, executable action, and a review or reversal condition; an irrelevant field carries an explicit not-applicable reason. Put fact, inference, and illustration boundaries where the answer uses them. The filled edition is a comparison surface, not the correct answer.
 
-Use a scored game only when a choice changes visible state, the consequence explains why, the reveal changes the next choice, and the final transfer uses the learner's changed model elsewhere. Points represent consequential quality, not compliance or trivia. If most learning sits in explanatory text after a click, use a workbook.
+Use a scored or stateful game only when each choice moves from one named visible state to another, the state delta and consequence explain why, and the resulting state changes which choice is available next. The replay contract states what resets, what evidence remains visible, and what becomes different on the next run. Points, when used, represent consequential quality rather than compliance or trivia. If most learning sits in explanatory text after a click, use a workbook.
 
 ## Semantic parity check
 
@@ -88,7 +87,7 @@ Before release, compare every surface against the canonical model.
 | Case | Same sustained actors, stakes, constraint, and resolution; any transfer case is declared in the canonical model. |
 | Claims | Every claim points to a canonical ID. |
 | Visual | Same ordered labels and causal meaning; omissions are declared, not improvised. |
-| Exercise | Same mechanism, decision fork, artifact fields, commitment, reveal, revision, and debrief. |
+| Exercise | Same mechanism, decision fork, artifact fields, commitment, consequence reveal, revision, filled-edition reveal, and debrief. |
 | AI | Same challenge and boundary, after commitment. |
 | Transition | Same unresolved consequence and carried artifact state, expressed without a meta coda in Book prose. |
 

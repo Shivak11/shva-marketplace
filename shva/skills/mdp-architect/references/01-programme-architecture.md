@@ -35,14 +35,14 @@ Each session must contain one sustained case. Give the case a concrete organizat
 
 Audit the case portfolio across the full programme. Vary domain, geography, actor, decision scale, and evidence form when that variety helps the argument; do not make every chapter another manager meeting or another HR exception. Diversity is diagnostic rather than a quota: a repeated case is justified when continuity produces more learning than novelty, and a new case is justified only when it performs work the existing case cannot.
 
-Build a protected 90 minute core. Allocate the remaining 30 minutes as named depth reserves that deepen the existing case, mechanism, or artifact. Every reserve needs a rejoin point that restates the question and identifies the artifact state participants should have before the next core move.
+Build the protected core to the official session duration. Add prepared runway according to the brief and author profile; do not hide that extra capacity inside the client timetable. In Shiva's current teaching profile, a 90-minute session normally carries 30 minutes of named depth reserves. Another author or programme may set a different runway deliberately. Every core segment names a facilitator move, participant move, artifact state, and recovery move. Every reserve deepens the existing case, mechanism, or artifact and names its trigger, participant move, and rejoin state.
 
 Use this timing ledger for every session:
 
 | Lane | Must show |
 | --- | --- |
-| Core, 90 minutes | Required moves, their timing, the participant output, and the next question. |
-| Depth reserve, 30 minutes | Trigger for use, added move, minutes, and an explicit rejoin line. |
+| Core, official duration | Required moves, their timing, facilitator move, participant move, artifact state, and recovery move. |
+| Prepared runway | Trigger for use, added move, participant move, minutes, artifact state, and an explicit rejoin line. |
 | Official timetable | Client committed start, end, and break details. Keep it separate from the capacity ledger. |
 
 ## Architecture completion check

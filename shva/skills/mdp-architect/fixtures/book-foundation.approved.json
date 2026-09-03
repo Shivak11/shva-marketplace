@@ -89,9 +89,16 @@
   },
   "openItems": {
     "blocking": [],
-    "deferred": ["Final jacket copy may be written after the full manuscript exists"]
+    "deferred": [
+      {
+        "field": "final jacket copy",
+        "blocksScopes": [],
+        "reason": "The final copy should be written against the completed manuscript rather than guessed from the first chapter"
+      }
+    ]
   },
   "approval": {
+    "scopes": ["full"],
     "approvedBy": "Example author",
     "approvedOn": "2026-09-03",
     "evidence": "Explicit approval recorded in the project conversation"

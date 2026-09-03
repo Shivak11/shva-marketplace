@@ -68,4 +68,3 @@ Agents remain read-only. The orchestrator owns every shared file and reconciles 
 5. Forward-test a fresh, non-HR, book-shaped session request. Confirm the foundation gate stops production when identity choices are unresolved, and confirm an approved-record exercise plan preserves all three hinges.
 6. Audit release-facing version text and the complete Git staging set.
 7. Commit and push verified source. Install/update the supported skill copy only after source validation; report source, package, installation, runtime discovery, wiki, and GitHub proof separately.
-

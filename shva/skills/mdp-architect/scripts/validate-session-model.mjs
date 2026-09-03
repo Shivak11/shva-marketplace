@@ -20,6 +20,10 @@ try {
 
 const errors = [];
 const isNonEmpty = (value) => typeof value === "string" && value.trim().length > 0;
+const wordCount = (value) => isNonEmpty(value) ? value.trim().split(/\s+/).length : 0;
+const isSubstantive = (value, minimumCharacters = 24, minimumWords = 4) =>
+  isNonEmpty(value) && value.trim().length >= minimumCharacters && wordCount(value) >= minimumWords;
+const isPositiveInteger = (value) => Number.isInteger(Number(value)) && Number(value) > 0;
 const sumMinutes = (items) =>
   Array.isArray(items)
     ? items.reduce((total, item) => total + (Number(item?.minutes) || 0), 0)
@@ -37,6 +41,7 @@ function requireValue(condition, message) {
 }
 
 const programme = model?.programme ?? {};
+const planningProfile = programme?.planningProfile ?? {};
 const session = model?.session ?? {};
 const semanticBlocks = Array.isArray(session.semanticBlocks) ? session.semanticBlocks : [];
 const blockIds = semanticBlocks.map((block) => block?.id).filter(Boolean);
@@ -47,6 +52,15 @@ const allowedSourceClasses = new Set([
   "teaching-synthesis",
   "illustrative",
   "still-to-confirm",
+]);
+const allowedPresentationStatuses = new Set([
+  "direct",
+  "normalised",
+  "paraphrased",
+  "reconstructed",
+  "counterfactual",
+  "composite",
+  "author-synthesis",
 ]);
 const requiredBlockTypes = [
   "disturbance",
@@ -63,8 +77,36 @@ const allowedBlockTypes = new Set([...requiredBlockTypes, "lateral-example", "ex
 const visibleSurfaceNames = ["book", "teaching", "slides"];
 
 requireValue(isNonEmpty(programme.title), "programme.title is required");
-requireValue(Number(programme.officialSessionMinutes) > 0, "programme.officialSessionMinutes must be positive");
-requireValue(Number(programme.preparedRunwayMinutes) > 0, "programme.preparedRunwayMinutes must be positive");
+requireValue(isPositiveInteger(programme.officialSessionMinutes), "programme.officialSessionMinutes must be a positive integer");
+requireValue(isPositiveInteger(programme.preparedRunwayMinutes), "programme.preparedRunwayMinutes must be a positive integer");
+requireValue(
+  Number(programme.preparedRunwayMinutes) >= Number(programme.officialSessionMinutes),
+  "programme.preparedRunwayMinutes must be at least officialSessionMinutes",
+);
+requireValue(isPositiveInteger(planningProfile.minimumCoreSegments), "programme.planningProfile.minimumCoreSegments must be a positive integer");
+requireValue(
+  Number.isInteger(Number(planningProfile.maximumBookHeadings)) && Number(planningProfile.maximumBookHeadings) >= 0,
+  "programme.planningProfile.maximumBookHeadings must be a non-negative integer",
+);
+requireValue(
+  Number.isInteger(Number(planningProfile.maximumPullLines)) && Number(planningProfile.maximumPullLines) >= 0,
+  "programme.planningProfile.maximumPullLines must be a non-negative integer",
+);
+requireValue(
+  Number.isInteger(Number(planningProfile.maximumBodyCalloutCards)) && Number(planningProfile.maximumBodyCalloutCards) >= 0,
+  "programme.planningProfile.maximumBodyCalloutCards must be a non-negative integer",
+);
+requireValue(
+  Number.isInteger(Number(planningProfile.maximumSubstantiveVisuals))
+    && Number(planningProfile.maximumSubstantiveVisuals) >= 0
+    && Number(planningProfile.maximumSubstantiveVisuals) <= 2,
+  "programme.planningProfile.maximumSubstantiveVisuals must be an integer from 0 to 2",
+);
+requireValue(
+  Number(planningProfile?.narrativeWordRange?.minimum) > 0
+    && Number(planningProfile?.narrativeWordRange?.maximum) >= Number(planningProfile?.narrativeWordRange?.minimum),
+  "programme.planningProfile.narrativeWordRange must have a positive minimum and maximum",
+);
 requireValue(isNonEmpty(session.title), "session.title is required");
 requireValue(isNonEmpty(session.bookReader), "session.bookReader is required");
 requireValue(isNonEmpty(session.participantAudience), "session.participantAudience is required");
@@ -93,6 +135,12 @@ for (const type of requiredBlockTypes) {
     `at least one '${type}' semantic block is required`,
   );
 }
+for (const block of semanticBlocks.filter((item) => requiredBlockTypes.includes(item.type))) {
+  requireValue(
+    block.requiredAcrossSurfaces === true,
+    `core semantic block '${block.id}' of type '${block.type}' must be requiredAcrossSurfaces`,
+  );
+}
 
 const sourceLedger = Array.isArray(session.sourceLedger) ? session.sourceLedger : [];
 const ledgerByClaimId = new Map(sourceLedger.map((entry) => [entry?.claimId, entry]));
@@ -117,8 +165,37 @@ for (const block of semanticBlocks) {
   requireValue(Array.isArray(entry.supportedFacts), `sourceLedger '${block.id}' supportedFacts must be an array`);
   requireValue(isNonEmpty(entry.teachingInference), `sourceLedger '${block.id}' needs a teachingInference`);
   requireValue(isNonEmpty(entry.factualBoundary), `sourceLedger '${block.id}' needs a factualBoundary`);
+  requireValue(
+    allowedPresentationStatuses.has(entry.presentationStatus),
+    `sourceLedger '${block.id}' needs a supported presentationStatus`,
+  );
   if (block.sourceClass === "source-backed") {
     requireValue(/^https?:\/\//.test(entry.url ?? ""), `source-backed ledger entry '${block.id}' needs an http(s) URL`);
+    requireValue(isNonEmpty(entry.sourceTitle), `source-backed ledger entry '${block.id}' needs a sourceTitle`);
+    requireValue(isNonEmpty(entry.locator), `source-backed ledger entry '${block.id}' needs a locator`);
+    requireValue(nonEmptyArray(entry.supportedFacts), `source-backed ledger entry '${block.id}' needs at least one supported fact`);
+    requireValue(
+      !(entry.url ?? "").match(/^https?:\/\/(?:www\.)?example\.(?:com|org|net)(?:\/|$)/i),
+      `source-backed ledger entry '${block.id}' cannot use a placeholder URL`,
+    );
+    for (const [factIndex, fact] of (entry.supportedFacts ?? []).entries()) {
+      requireValue(
+        isSubstantive(fact),
+        `source-backed ledger entry '${block.id}' supportedFacts[${factIndex}] must state a fact-level claim`,
+      );
+    }
+  }
+  if (entry.presentationStatus === "reconstructed") {
+    requireValue(/^https?:\/\//.test(entry.url ?? ""), `reconstructed ledger entry '${block.id}' needs an http(s) source URL`);
+    requireValue(isNonEmpty(entry.sourceTitle), `reconstructed ledger entry '${block.id}' needs a sourceTitle`);
+    requireValue(isNonEmpty(entry.locator), `reconstructed ledger entry '${block.id}' needs a locator`);
+    requireValue(nonEmptyArray(entry.supportedFacts), `reconstructed ledger entry '${block.id}' needs supportedFacts`);
+  }
+  if (entry.presentationStatus === "counterfactual") {
+    requireValue(nonEmptyArray(entry.basedOnClaimIds), `counterfactual ledger entry '${block.id}' needs basedOnClaimIds`);
+    for (const basedOnId of entry.basedOnClaimIds ?? []) {
+      requireValue(blockIdSet.has(basedOnId), `counterfactual ledger entry '${block.id}' references unknown claim '${basedOnId}'`);
+    }
   }
 }
 
@@ -222,11 +299,38 @@ if (mechanismBlocks.length === 1) {
 }
 
 const narrativeHinges = session.narrativeHinges ?? {};
+const hingeTypeRules = {
+  sceneToConcept: { from: new Set(["disturbance", "case"]), to: new Set(["claim"]) },
+  conceptToFramework: { from: new Set(["case", "claim"]), to: new Set(["mechanism"]) },
+  chapterToExercise: { from: new Set(["claim", "mechanism", "revision"]), to: new Set(["exercise"]) },
+};
+const blockTypeByIdForHinges = new Map(semanticBlocks.map((block) => [block.id, block.type]));
 for (const hingeName of ["sceneToConcept", "conceptToFramework", "chapterToExercise"]) {
   const hinge = narrativeHinges[hingeName] ?? {};
   requireValue(blockIdSet.has(hinge.fromBlockId), `narrativeHinges.${hingeName}.fromBlockId must reference a semantic block`);
   requireValue(blockIdSet.has(hinge.toBlockId), `narrativeHinges.${hingeName}.toBlockId must reference a semantic block`);
-  requireValue(isNonEmpty(hinge.bridge), `narrativeHinges.${hingeName}.bridge is required`);
+  requireValue(
+    hingeTypeRules[hingeName].from.has(blockTypeByIdForHinges.get(hinge.fromBlockId)),
+    `narrativeHinges.${hingeName}.fromBlockId has the wrong semantic type`,
+  );
+  requireValue(
+    hingeTypeRules[hingeName].to.has(blockTypeByIdForHinges.get(hinge.toBlockId)),
+    `narrativeHinges.${hingeName}.toBlockId has the wrong semantic type`,
+  );
+  requireValue(isSubstantive(hinge.bridge, 48, 8), `narrativeHinges.${hingeName}.bridge must state a substantive causal relation`);
+  requireValue(
+    isSubstantive(hinge.unresolvedConsequence, 36, 6),
+    `narrativeHinges.${hingeName}.unresolvedConsequence must state what remains live`,
+  );
+  requireValue(
+    isSubstantive(hinge.nextMove, 36, 6),
+    `narrativeHinges.${hingeName}.nextMove must state what the next block lets the reader do`,
+  );
+  requireValue(
+    (surfaceRefOrders.book ?? []).includes(hinge.fromBlockId)
+      && (surfaceRefOrders.book ?? []).includes(hinge.toBlockId),
+    `book must contain both endpoints of narrativeHinges.${hingeName}`,
+  );
   for (const [surfaceName, order] of Object.entries(surfaceRefOrders)) {
     if (!order.includes(hinge.fromBlockId) || !order.includes(hinge.toBlockId)) continue;
     requireValue(
@@ -236,6 +340,13 @@ for (const hingeName of ["sceneToConcept", "conceptToFramework", "chapterToExerc
   }
 }
 
+requireValue(Array.isArray(session.terms), "session.terms must be an array");
+if (Array.isArray(session.terms) && session.terms.length === 0) {
+  requireValue(
+    isSubstantive(session?.termAudit?.noNewTermsReason),
+    "session.termAudit.noNewTermsReason is required when no specialist terms are declared",
+  );
+}
 for (const [index, term] of (session.terms ?? []).entries()) {
   requireValue(isNonEmpty(term?.term), `terms[${index}].term is required`);
   requireValue(blockIdSet.has(term?.problemBlockId), `terms[${index}].problemBlockId must reference a semantic block`);
@@ -253,12 +364,20 @@ for (const [index, term] of (session.terms ?? []).entries()) {
   }
 }
 
+requireValue(Array.isArray(session.evidenceComparisons), "session.evidenceComparisons must be an array");
+if (Array.isArray(session.evidenceComparisons) && session.evidenceComparisons.length === 0) {
+  requireValue(
+    isSubstantive(session?.comparisonAudit?.noComparisonNeededReason),
+    "session.comparisonAudit.noComparisonNeededReason is required when no evidence comparison is declared",
+  );
+}
 for (const [index, comparison] of (session.evidenceComparisons ?? []).entries()) {
   requireValue(blockIdSet.has(comparison?.leftBlockId), `evidenceComparisons[${index}].leftBlockId must reference a semantic block`);
   requireValue(blockIdSet.has(comparison?.rightBlockId), `evidenceComparisons[${index}].rightBlockId must reference a semantic block`);
-  requireValue(isNonEmpty(comparison?.commonProblem), `evidenceComparisons[${index}].commonProblem is required`);
-  requireValue(isNonEmpty(comparison?.differentMechanisms), `evidenceComparisons[${index}].differentMechanisms is required`);
-  requireValue(isNonEmpty(comparison?.decisionConsequence), `evidenceComparisons[${index}].decisionConsequence is required`);
+  requireValue(comparison?.leftBlockId !== comparison?.rightBlockId, `evidenceComparisons[${index}] must compare two different blocks`);
+  requireValue(isSubstantive(comparison?.commonProblem), `evidenceComparisons[${index}].commonProblem must be substantive`);
+  requireValue(isSubstantive(comparison?.differentMechanisms), `evidenceComparisons[${index}].differentMechanisms must be substantive`);
+  requireValue(isSubstantive(comparison?.decisionConsequence), `evidenceComparisons[${index}].decisionConsequence must be substantive`);
 }
 
 const transitions = semanticBlocks.filter((block) => block.type === "transition");
@@ -275,22 +394,41 @@ for (const transition of transitions) {
   requireValue(isNonEmpty(transition.artifactState), `transition '${transition.id}' needs artifactState`);
 }
 
-requireValue(Array.isArray(book.headings) && book.headings.length <= 3, "book.headings must contain 0 to 3 headings");
-if (Number(programme.officialSessionMinutes) === 90 && Number(programme.preparedRunwayMinutes) >= 120) {
-  requireValue(Number(book.narrativeWords) >= 3800 && Number(book.narrativeWords) <= 5200, "book.narrativeWords must be between 3800 and 5200 for a 90-minute core with a 120-minute prepared runway");
-} else {
-  requireValue(Number(book.narrativeWords) > 0, "book.narrativeWords must be positive");
-}
+requireValue(
+  Array.isArray(book.headings) && book.headings.length <= Number(planningProfile.maximumBookHeadings),
+  `book.headings must contain no more than ${planningProfile.maximumBookHeadings} headings under the selected planning profile`,
+);
+requireValue(
+  Number(book.narrativeWords) >= Number(planningProfile?.narrativeWordRange?.minimum)
+    && Number(book.narrativeWords) <= Number(planningProfile?.narrativeWordRange?.maximum),
+  `book.narrativeWords must fall inside the selected planning profile range ${planningProfile?.narrativeWordRange?.minimum}-${planningProfile?.narrativeWordRange?.maximum}`,
+);
 requireValue(Number(book.workbookWords) > 0, "book.workbookWords must be positive");
-requireValue(Number(book.bodyCalloutCards) === 0, "book.bodyCalloutCards must be 0");
-requireValue(Number(book.pullLines) <= 2, "book.pullLines must be 2 or fewer");
-requireValue(Array.isArray(book.visuals) && book.visuals.length <= 2, "book.visuals must contain 0 to 2 substantive visuals");
+requireValue(
+  Number(book.bodyCalloutCards) <= Number(planningProfile.maximumBodyCalloutCards),
+  `book.bodyCalloutCards must be ${planningProfile.maximumBodyCalloutCards} or fewer under the selected planning profile`,
+);
+requireValue(
+  Number(book.pullLines) <= Number(planningProfile.maximumPullLines),
+  `book.pullLines must be ${planningProfile.maximumPullLines} or fewer under the selected planning profile`,
+);
+requireValue(
+  Array.isArray(book.visuals) && book.visuals.length <= Number(planningProfile.maximumSubstantiveVisuals),
+  `book.visuals must contain no more than ${planningProfile.maximumSubstantiveVisuals} substantive visuals under the selected planning profile`,
+);
+requireValue(
+  duplicateValues((book.visuals ?? []).map((visual) => visual?.id).filter(Boolean)).length === 0,
+  "book visual ids must be unique",
+);
 for (const [index, visual] of (book.visuals ?? []).entries()) {
   requireValue(isNonEmpty(visual?.id), `book.visuals[${index}].id is required`);
   requireValue(isNonEmpty(visual?.kind), `book.visuals[${index}].kind is required`);
   requireValue(blockIdSet.has(visual?.semanticBlockId), `book.visuals[${index}].semanticBlockId must reference a semantic block`);
-  requireValue(isNonEmpty(visual?.visualJob), `book.visuals[${index}].visualJob is required`);
-  requireValue(isNonEmpty(visual?.proseRemoved), `book.visuals[${index}].proseRemoved is required`);
+  requireValue(isSubstantive(visual?.visualJob, 32, 5), `book.visuals[${index}].visualJob must name the relation made easier to see`);
+  requireValue(
+    isSubstantive(visual?.proseRemoved, 32, 5) && !/^(?:none|nothing|n\/?a)\b/i.test(visual.proseRemoved.trim()),
+    `book.visuals[${index}].proseRemoved must name prose the visual genuinely replaces`,
+  );
   requireValue(blockIdSet.has(visual?.appearsAfterBlockId), `book.visuals[${index}].appearsAfterBlockId must reference a semantic block`);
   requireValue(blockIdSet.has(visual?.reusedInBlockId), `book.visuals[${index}].reusedInBlockId must reference a semantic block`);
   requireValue(isNonEmpty(visual?.sourceStatus), `book.visuals[${index}].sourceStatus is required`);
@@ -309,12 +447,22 @@ for (const [index, visual] of (book.visuals ?? []).entries()) {
 const coreMinutes = sumMinutes(teaching.coreSegments);
 const reserveMinutes = sumMinutes(teaching.depthReserves);
 requireValue(coreMinutes === Number(programme.officialSessionMinutes), `teaching core totals ${coreMinutes}, expected ${programme.officialSessionMinutes}`);
-requireValue(reserveMinutes >= 30, `teaching depth reserves total ${reserveMinutes}, expected at least 30`);
 requireValue(coreMinutes + reserveMinutes === Number(programme.preparedRunwayMinutes), `core plus reserves total ${coreMinutes + reserveMinutes}, expected ${programme.preparedRunwayMinutes}`);
-if (Number(programme.officialSessionMinutes) === 90) {
-  requireValue(Number(programme.preparedRunwayMinutes) >= 120, "a 90-minute session needs at least 120 prepared minutes");
-}
+requireValue(
+  Array.isArray(teaching.coreSegments) && teaching.coreSegments.length >= Number(planningProfile.minimumCoreSegments),
+  `teaching.coreSegments needs at least ${planningProfile.minimumCoreSegments} distinct facilitation segments under the selected planning profile`,
+);
+requireValue(
+  duplicateValues((teaching.coreSegments ?? []).map((segment) => segment?.id).filter(Boolean)).length === 0,
+  "teaching core segment ids must be unique",
+);
 for (const [index, segment] of (teaching.coreSegments ?? []).entries()) {
+  requireValue(isNonEmpty(segment?.id), `coreSegments[${index}].id is required`);
+  requireValue(isPositiveInteger(segment?.minutes), `coreSegments[${index}].minutes must be a positive integer`);
+  requireValue(isSubstantive(segment?.facilitatorMove), `coreSegments[${index}].facilitatorMove must be substantive`);
+  requireValue(isSubstantive(segment?.participantMove), `coreSegments[${index}].participantMove must be substantive`);
+  requireValue(isSubstantive(segment?.artifactState), `coreSegments[${index}].artifactState must be substantive`);
+  requireValue(isSubstantive(segment?.recoveryMove), `coreSegments[${index}].recoveryMove must be substantive`);
   requireValue(Array.isArray(segment?.semanticBlockIds) && segment.semanticBlockIds.length > 0, `coreSegments[${index}].semanticBlockIds must not be empty`);
   for (const id of segment?.semanticBlockIds ?? []) {
     requireValue(blockIdSet.has(id), `coreSegments[${index}] references unknown semantic block '${id}'`);
@@ -327,9 +475,16 @@ requireValue(
   JSON.stringify([...teachingCoreIds].sort()) === JSON.stringify([...(surfaceRefs.teaching ?? [])].sort()),
   "teaching.coreSegments must collectively use every teaching.semanticBlockIds item and no others",
 );
+requireValue(
+  duplicateValues((teaching.depthReserves ?? []).map((reserve) => reserve?.id).filter(Boolean)).length === 0,
+  "teaching depth reserve ids must be unique",
+);
 for (const [index, reserve] of (teaching.depthReserves ?? []).entries()) {
+  requireValue(isNonEmpty(reserve?.id), `depthReserves[${index}].id is required`);
+  requireValue(isPositiveInteger(reserve?.minutes), `depthReserves[${index}].minutes must be a positive integer`);
   requireValue(isNonEmpty(reserve?.trigger), `depthReserves[${index}].trigger is required`);
   requireValue(isNonEmpty(reserve?.addedMove), `depthReserves[${index}].addedMove is required`);
+  requireValue(isSubstantive(reserve?.participantMove), `depthReserves[${index}].participantMove must be substantive`);
   requireValue(isNonEmpty(reserve?.rejoin), `depthReserves[${index}].rejoin is required`);
   requireValue(isNonEmpty(reserve?.artifactState), `depthReserves[${index}].artifactState is required`);
   requireValue(Array.isArray(reserve?.semanticBlockIds) && reserve.semanticBlockIds.length > 0, `depthReserves[${index}].semanticBlockIds must not be empty`);
@@ -380,9 +535,50 @@ for (const [index, exercise] of exercises.entries()) {
     blockTypeById.get(exercise?.exerciseCaseBlockId) === expectedCaseType,
     `exercises[${index}].exerciseCaseBlockId must reference a ${expectedCaseType} block`,
   );
+  const exerciseCaseBlock = semanticBlocks.find((block) => block.id === exercise?.exerciseCaseBlockId);
+  if (exerciseCaseBlock) {
+    requireValue(
+      exerciseCaseBlock.requiredAcrossSurfaces === true,
+      `exercises[${index}] case block '${exerciseCaseBlock.id}' must be requiredAcrossSurfaces`,
+    );
+  }
   requireValue(blockTypeById.get(exercise?.mechanismBlockId) === "mechanism", `exercises[${index}].mechanismBlockId must reference a mechanism block`);
-  requireValue(isNonEmpty(exercise?.chapterConnection), `exercises[${index}].chapterConnection is required`);
-  requireValue(isNonEmpty(exercise?.decisionFork), `exercises[${index}].decisionFork is required`);
+  const chapterConnection = exercise?.chapterConnection ?? {};
+  requireValue(
+    chapterConnection.fromBlockId === exercise?.mechanismBlockId,
+    `exercises[${index}].chapterConnection.fromBlockId must match mechanismBlockId`,
+  );
+  requireValue(
+    isSubstantive(chapterConnection.unresolvedConsequence, 48, 8),
+    `exercises[${index}].chapterConnection.unresolvedConsequence must state the live chapter problem`,
+  );
+  requireValue(
+    isSubstantive(chapterConnection.firstParticipantAction, 40, 7),
+    `exercises[${index}].chapterConnection.firstParticipantAction must state the first playable move`,
+  );
+  requireValue(
+    isSubstantive(chapterConnection.mechanismUsed, 40, 7),
+    `exercises[${index}].chapterConnection.mechanismUsed must state how the exercise uses the chapter mechanism`,
+  );
+  const chapterOrder = surfaceRefOrders.book ?? [];
+  requireValue(
+    chapterOrder.indexOf(chapterConnection.fromBlockId) >= 0
+      && chapterOrder.indexOf(exercise?.id) > chapterOrder.indexOf(chapterConnection.fromBlockId),
+    `exercises[${index}].chapterConnection must point forward from the chapter mechanism to the exercise`,
+  );
+  const decisionFork = exercise?.decisionFork ?? {};
+  requireValue(isSubstantive(decisionFork.question, 40, 7), `exercises[${index}].decisionFork.question must be substantive`);
+  requireValue(
+    Array.isArray(decisionFork.options) && decisionFork.options.length >= 2 && decisionFork.options.length <= 4,
+    `exercises[${index}].decisionFork.options must contain 2 to 4 live alternatives`,
+  );
+  const optionIds = (decisionFork.options ?? []).map((option) => option?.id).filter(Boolean);
+  requireValue(duplicateValues(optionIds).length === 0, `exercises[${index}].decisionFork option ids must be unique`);
+  for (const [optionIndex, option] of (decisionFork.options ?? []).entries()) {
+    requireValue(isNonEmpty(option?.id), `exercises[${index}].decisionFork.options[${optionIndex}].id is required`);
+    requireValue(isSubstantive(option?.action, 24, 4), `exercises[${index}].decisionFork.options[${optionIndex}].action must be substantive`);
+    requireValue(isSubstantive(option?.acceptedConsequence, 32, 5), `exercises[${index}].decisionFork.options[${optionIndex}].acceptedConsequence must be substantive`);
+  }
   requireValue(exercise?.commitBeforeAI === true, `exercises[${index}] must commit before AI`);
   requireValue(blockTypeById.get(exercise?.commitmentBlockId) === "commitment", `exercises[${index}].commitmentBlockId must reference a commitment semantic block`);
   requireValue(blockTypeById.get(exercise?.aiChallengeBlockId) === "ai-challenge", `exercises[${index}].aiChallengeBlockId must reference an ai-challenge semantic block`);
@@ -405,23 +601,57 @@ for (const [index, exercise] of exercises.entries()) {
     requireValue(isNonEmpty(step?.id), `exercises[${index}].steps[${stepIndex}].id is required`);
     requireValue(isNonEmpty(step?.prompt), `exercises[${index}].steps[${stepIndex}].prompt is required`);
     requireValue(isNonEmpty(step?.output), `exercises[${index}].steps[${stepIndex}].output is required`);
+    requireValue(nonEmptyArray(step?.requiredFieldIds), `exercises[${index}].steps[${stepIndex}].requiredFieldIds must not be empty`);
   }
   requireValue(nonEmptyArray(exercise?.participantFields), `exercises[${index}].participantFields must not be empty`);
   const participantFieldIds = (exercise?.participantFields ?? []).map((field) => field?.id).filter(Boolean);
   requireValue(duplicateValues(participantFieldIds).length === 0, `exercises[${index}].participant field ids must be unique`);
   for (const [fieldIndex, field] of (exercise?.participantFields ?? []).entries()) {
     requireValue(isNonEmpty(field?.id), `exercises[${index}].participantFields[${fieldIndex}].id is required`);
-    requireValue(isNonEmpty(field?.label), `exercises[${index}].participantFields[${fieldIndex}].label is required`);
+    requireValue(isSubstantive(field?.label, 12, 2), `exercises[${index}].participantFields[${fieldIndex}].label must be substantive`);
   }
-  requireValue(exercise?.revealGate?.requiresParticipantInput === true, `exercises[${index}] reveal gate must require participant input`);
+  for (const [stepIndex, step] of (exercise?.steps ?? []).entries()) {
+    for (const fieldId of step?.requiredFieldIds ?? []) {
+      requireValue(participantFieldIds.includes(fieldId), `exercises[${index}].steps[${stepIndex}] references unknown participant field '${fieldId}'`);
+    }
+  }
+
+  const consequenceReveal = exercise?.consequenceReveal ?? {};
+  requireValue(consequenceReveal.present === true, `exercises[${index}] needs a consequence reveal`);
+  requireValue(consequenceReveal.requiresParticipantInput === true, `exercises[${index}] consequence reveal must require participant input`);
+  requireValue(nonEmptyArray(consequenceReveal.requiredFieldIds), `exercises[${index}] consequence reveal needs requiredFieldIds`);
+  for (const fieldId of consequenceReveal.requiredFieldIds ?? []) {
+    requireValue(participantFieldIds.includes(fieldId), `exercises[${index}] consequence reveal references unknown participant field '${fieldId}'`);
+  }
   requireValue(
-    sameValuesInOrder(exercise?.revealGate?.requiredFieldIds, participantFieldIds),
-    `exercises[${index}] reveal gate must require every participant field in order`,
+    isPositiveInteger(consequenceReveal.minimumAttemptCharacters) && Number(consequenceReveal.minimumAttemptCharacters) >= 12,
+    `exercises[${index}] consequence reveal minimumAttemptCharacters must be at least 12`,
   );
+  requireValue(stepIds.includes(consequenceReveal.afterStepId), `exercises[${index}] consequence reveal afterStepId must reference a step`);
+  requireValue(stepIds.includes(consequenceReveal.revisionStepId), `exercises[${index}] consequence reveal revisionStepId must reference a step`);
+  requireValue(
+    stepIds.indexOf(consequenceReveal.afterStepId) < stepIds.indexOf(consequenceReveal.revisionStepId),
+    `exercises[${index}] consequence reveal must precede its revision step`,
+  );
+  requireValue(isSubstantive(consequenceReveal.revealedFact, 40, 7), `exercises[${index}] consequence reveal needs a substantive revealedFact`);
+  requireValue(isSubstantive(consequenceReveal.provenance, 32, 5), `exercises[${index}] consequence reveal needs provenance`);
+  requireValue(isSubstantive(consequenceReveal.decisionConsequence, 40, 7), `exercises[${index}] consequence reveal needs a decisionConsequence`);
+
+  const filledEditionReveal = exercise?.filledEditionReveal ?? {};
+  requireValue(filledEditionReveal.requiresParticipantInput === true, `exercises[${index}] filled-edition reveal must require participant input`);
+  requireValue(
+    sameValuesInOrder(filledEditionReveal.requiredFieldIds, participantFieldIds),
+    `exercises[${index}] filled-edition reveal must require every participant field in order`,
+  );
+  requireValue(
+    isPositiveInteger(filledEditionReveal.minimumAttemptCharacters) && Number(filledEditionReveal.minimumAttemptCharacters) >= 12,
+    `exercises[${index}] filled-edition reveal minimumAttemptCharacters must be at least 12`,
+  );
+  requireValue(filledEditionReveal.startsClosed === true, `exercises[${index}] filled-edition reveal must start closed`);
+  requireValue(isNonEmpty(filledEditionReveal.controlLabel), `exercises[${index}] filled-edition reveal needs a control label`);
+  requireValue(isNonEmpty(filledEditionReveal.fieldBindingAttribute), `exercises[${index}] filled-edition reveal needs a fieldBindingAttribute`);
+  requireValue(filledEditionReveal.browserProofRequired === true, `exercises[${index}] filled-edition reveal must declare browser proof required`);
   requireValue(exercise?.filledEdition?.present === true, `exercises[${index}] needs a filled edition`);
-  requireValue(exercise?.filledEdition?.revealedByControl === true, `exercises[${index}] filled edition must be behind a reveal control`);
-  requireValue(exercise?.filledEdition?.startsClosed === true, `exercises[${index}] filled edition must start closed`);
-  requireValue(isNonEmpty(exercise?.filledEdition?.controlLabel), `exercises[${index}] filled edition needs a control label`);
   const filledFields = exercise?.filledEdition?.fields ?? [];
   const filledFieldIds = filledFields.map((field) => field?.id).filter(Boolean);
   requireValue(
@@ -429,10 +659,16 @@ for (const [index, exercise] of exercises.entries()) {
     `exercises[${index}] filled-edition fields must match participant fields in order`,
   );
   for (const [fieldIndex, field] of filledFields.entries()) {
-    requireValue(isNonEmpty(field?.answer), `exercises[${index}].filledEdition.fields[${fieldIndex}].answer is required`);
+    requireValue(
+      isSubstantive(field?.answer, 48, 8),
+      `exercises[${index}].filledEdition.fields[${fieldIndex}].answer must be a realistic completed answer`,
+    );
   }
   for (const field of ["actors", "liveAlternative", "evidenceDiscriminator", "authorityBoundary", "executableAction", "revisionCondition", "appealOrChallengeRoute"]) {
-    requireValue(isNonEmpty(exercise?.filledEdition?.completeness?.[field]), `exercises[${index}] filled edition needs completeness.${field}`);
+    requireValue(
+      isSubstantive(exercise?.filledEdition?.completeness?.[field], 32, 5),
+      `exercises[${index}] filled edition needs a substantive completeness.${field}`,
+    );
   }
   requireValue(["challenge", "question", "stress-test"].includes(exercise?.aiRoleType), `exercises[${index}].aiRoleType must be challenge, question, or stress-test`);
   requireValue(isNonEmpty(exercise?.aiRole), `exercises[${index}].aiRole must explain the bounded AI move`);
@@ -440,9 +676,37 @@ for (const [index, exercise] of exercises.entries()) {
   requireValue(isNonEmpty(exercise?.transferPrompt), `exercises[${index}].transferPrompt is required`);
   requireValue(isNonEmpty(exercise?.debriefQuestion), `exercises[${index}].debriefQuestion is required`);
   if (exercise?.game) {
-    requireValue(exercise.game.choiceChangesState === true, `exercises[${index}] game choices must change visible state`);
-    requireValue(exercise.game.revealChangesNextChoice === true, `exercises[${index}] game reveal must change the next choice`);
-    requireValue(isNonEmpty(exercise.game.scoreMeaning), `exercises[${index}] game scoreMeaning is required`);
+    const game = exercise.game;
+    requireValue(isSubstantive(game.stateMeaning, 32, 5), `exercises[${index}] game.stateMeaning must explain what state represents`);
+    requireValue(nonEmptyArray(game.states) && game.states.length >= 2, `exercises[${index}] game.states needs at least two states`);
+    const stateIds = (game.states ?? []).map((state) => state?.id).filter(Boolean);
+    requireValue(duplicateValues(stateIds).length === 0, `exercises[${index}] game state ids must be unique`);
+    requireValue(stateIds.includes(game.initialStateId), `exercises[${index}] game.initialStateId must reference a state`);
+    for (const [stateIndex, state] of (game.states ?? []).entries()) {
+      requireValue(isNonEmpty(state?.id), `exercises[${index}].game.states[${stateIndex}].id is required`);
+      requireValue(isSubstantive(state?.visibleConsequence, 28, 4), `exercises[${index}].game.states[${stateIndex}].visibleConsequence must be substantive`);
+    }
+    requireValue(nonEmptyArray(game.choices) && game.choices.length >= 2, `exercises[${index}] game.choices needs at least two consequential choices`);
+    const choiceIds = (game.choices ?? []).map((choice) => choice?.id).filter(Boolean);
+    requireValue(duplicateValues(choiceIds).length === 0, `exercises[${index}] game choice ids must be unique`);
+    let branchingChoices = 0;
+    for (const [choiceIndex, choice] of (game.choices ?? []).entries()) {
+      requireValue(isNonEmpty(choice?.id), `exercises[${index}].game.choices[${choiceIndex}].id is required`);
+      requireValue(stateIds.includes(choice?.fromStateId), `exercises[${index}].game.choices[${choiceIndex}].fromStateId must reference a state`);
+      requireValue(stateIds.includes(choice?.toStateId), `exercises[${index}].game.choices[${choiceIndex}].toStateId must reference a state`);
+      requireValue(choice?.fromStateId !== choice?.toStateId, `exercises[${index}].game.choices[${choiceIndex}] must change state`);
+      requireValue(isSubstantive(choice?.stateDelta, 28, 4), `exercises[${index}].game.choices[${choiceIndex}].stateDelta must be substantive`);
+      requireValue(isSubstantive(choice?.consequence, 32, 5), `exercises[${index}].game.choices[${choiceIndex}].consequence must be substantive`);
+      requireValue(Array.isArray(choice?.nextChoiceIds), `exercises[${index}].game.choices[${choiceIndex}].nextChoiceIds must be an array`);
+      if ((choice?.nextChoiceIds ?? []).length > 0) branchingChoices += 1;
+      for (const nextChoiceId of choice?.nextChoiceIds ?? []) {
+        requireValue(choiceIds.includes(nextChoiceId), `exercises[${index}].game.choices[${choiceIndex}] references unknown next choice '${nextChoiceId}'`);
+      }
+    }
+    requireValue(branchingChoices > 0, `exercises[${index}] game needs at least one state-dependent next choice`);
+    requireValue(stateIds.includes(game?.replay?.resetsToStateId), `exercises[${index}] game replay must reset to a known state`);
+    requireValue(nonEmptyArray(game?.replay?.preserves), `exercises[${index}] game replay must state what learner evidence is preserved`);
+    requireValue(isSubstantive(game?.replay?.changes, 28, 4), `exercises[${index}] game replay must state what changes on replay`);
   }
 }
 

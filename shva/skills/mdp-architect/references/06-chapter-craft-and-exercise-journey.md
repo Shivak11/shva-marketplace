@@ -111,7 +111,12 @@ Do not repeat authorisation, action, and feedback under several labels. Every st
 
 ### Enforced commitment
 
-Copy that says “finish before revealing” is not a gate. The interface requires meaningful input in the named fields before enabling the reveal. Keep the participant's answer visible during comparison. Preserve keyboard access, focus movement, return, and mobile reading order.
+Copy that says “finish before revealing” is not a gate. Model two different gates when the exercise depends on new information:
+
+- The **consequence reveal** asks only for the minimum first commitment needed to make the new fact consequential. It records the required field subset, minimum attempt length, revealed fact, provenance, decision consequence, and the revision step it unlocks.
+- The **filled-edition reveal** waits until every field used for row-by-row comparison contains a meaningful attempt. It begins closed and keeps the learner's version visible beside the completed edition.
+
+Requiring every field before the first reveal turns a progressive exercise back into a dense form. Reusing one reveal for both jobs removes the moment in which the learner discovers why revision is necessary. The interface must reject empty, whitespace-only, default, and too-short attempts. Preserve keyboard access, focus movement, return, and mobile reading order. These behaviours are browser evidence; a JSON declaration is not proof that the DOM obeys them.
 
 AI enters only after the first commitment. Its prompt asks questions, surfaces an alternative, or stress-tests the evidence. It does not draft the initial answer, assign authority to itself, certify fairness, or decide for the participant.
 
@@ -133,9 +138,9 @@ It is one defensible answer, not the answer key. A field that does not apply say
 
 ## 7. Game feel without interface theatre
 
-Use a scored or stateful game only when the learner's choice produces a visible consequence that changes what can be chosen next. The meaningful loop is commitment → consequence → explanation → revision → transfer.
+Use a scored or stateful game only when the learner's choice produces a visible consequence that changes what can be chosen next. Record named states and, for every choice, its origin state, destination state, visible delta, consequence, and next available choices. Record a replay rule that says what resets, what evidence remains, and what becomes different. The meaningful loop is commitment → consequence → explanation → revision → transfer.
 
-Scores may represent the quality or cost of consequences. They must not reward guessing the teacher's vocabulary. Buttons, badges, confetti, progress bars, and card stacks do not create play by themselves. If the decision state does not change, retain the simpler workbook.
+Scores may represent the quality or cost of consequences. They must not reward guessing the teacher's vocabulary. Buttons, badges, confetti, progress bars, and card stacks do not create play by themselves. Two booleans claiming that “choice changes state” do not create a state model. If the decision state does not change, retain the simpler workbook.
 
 ## 8. Experienced-Artifact Proof
 

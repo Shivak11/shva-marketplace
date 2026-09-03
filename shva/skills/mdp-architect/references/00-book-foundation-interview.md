@@ -14,7 +14,7 @@ A local correction may reuse a recent approved record only when the premise, rea
 
 Before explicit approval, research and candidate-making are allowed. Do not create HTML, cover art, front matter, a canonical chapter model, or a production file. Do not use Super-outer approval syntax for this editorial decision. If the author explicitly asks for an exploratory prototype while non-blocking identity choices remain open, label it as such and record every deferred field; it may not establish the final voice, cover, front matter, or book identity.
 
-Premise, Book reader, reader change, argument, evidence boundary, and prose register always block substantial prose. A title, final cover, or palette may be deliberately deferred for another author, but it still blocks finished front matter and visual production. In Shiva's environment, unresolved taste-sensitive choices remain blocking unless Shiva explicitly authorises an exploratory prototype.
+Premise, Book reader, reader change, argument, evidence boundary, and prose register always block substantial prose. A title, final cover, or palette may be deliberately deferred for another author, but it still blocks finished front matter and visual production. Record the approved scope explicitly as `prose`, `front-matter`, `visual-production`, or `full`; do not let approval for one kind of work silently authorise another. In Shiva's environment, unresolved taste-sensitive choices remain blocking and `full` is the default target unless Shiva explicitly authorises a narrower exploratory prototype.
 
 ## 2. Run short, choice-led rounds
 
@@ -86,9 +86,20 @@ Colour alone does not make a direction distinct. Select a direction in chat befo
 
 ### Round 6: approval
 
-Return one compact Book Foundation Record. Mark each choice as confirmed, author-supplied, proposed, or open. End with this plain editorial question: **Approve this Book Foundation Record, or amend it?**
+Return one compact Book Foundation Record. Mark each choice as confirmed, author-supplied, proposed, or open. Name the requested approval scope and identify which open item blocks which scope. End with this plain editorial question: **Approve this Book Foundation Record for the named scope, or amend it?**
 
 Do not begin production until the author explicitly approves the record.
+
+Validate the exact next action, not an imaginary finished book:
+
+```bash
+node "$SKILL_DIR/scripts/validate-book-foundation.mjs" <record.json> prose
+node "$SKILL_DIR/scripts/validate-book-foundation.mjs" <record.json> front-matter
+node "$SKILL_DIR/scripts/validate-book-foundation.mjs" <record.json> visual-production
+node "$SKILL_DIR/scripts/validate-book-foundation.mjs" <record.json> full
+```
+
+A prose-only record may pass with title and visual identity deferred. The same record must fail a `full` request until those choices are selected.
 
 ## 4. Book Foundation Record template
 
@@ -97,6 +108,7 @@ Do not begin production until the author explicitly approves the record.
 
 Status: proposed | approved
 Project and scope:
+Approval scopes: prose | front-matter | visual-production | full
 
 ## Proposition
 
@@ -154,8 +166,9 @@ Project and scope:
 
 ## Open items and approval
 
-- Open items:
-- Author decision: approve | amend
+- Blocking item: field, reason, and scopes blocked.
+- Deferred item: field, reason, and scopes blocked, if any.
+- Author decision and evidence: approve named scope | amend
 ```
 
 ## 5. Handoff after approval

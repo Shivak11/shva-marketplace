@@ -28,9 +28,11 @@ Use this order:
 | Illustrative | Composite case, invented dialogue, or simplified example. | Mark as illustrative or composite where readers could mistake it for reporting. |
 | Still to confirm | Useful lead without adequate evidence. | Keep it out of visible factual prose until verified. |
 
+Classify how the material is presented separately from what evidence supports it. Use `direct`, `normalised`, `paraphrased`, `reconstructed`, `counterfactual`, `composite`, or `author-synthesis`. A reconstruction may be grounded in a source-backed chronology, but reconstruction is not itself a source class. A counterfactual names the claim IDs it changes and remains an analytical device, not a report of what happened.
+
 ## Maintain a source ledger
 
-For each material item record: `claim_id`, exact claim, classification, source or origin, source type, publication or access date, confidence, surfaces used, exact supported facts, teaching inference, and factual boundary. Keep the ledger and raw source metadata out of Book and Slide surfaces unless the user requests an appendix.
+For each material item record: `claim_id`, exact claim, evidence classification, presentation status, source or origin, source type, publication or access date, confidence, surfaces used, exact supported facts, teaching inference, and factual boundary. A source-backed or reconstructed item also records a non-placeholder URL, source title, and locator. A counterfactual records `basedOnClaimIds`. Keep the ledger and raw source metadata out of Book and Slide surfaces unless the user requests an appendix.
 
 For a current claim, check it in the current run. For a stable scholarly concept, record the source once and distinguish the source's finding from the teaching interpretation.
 

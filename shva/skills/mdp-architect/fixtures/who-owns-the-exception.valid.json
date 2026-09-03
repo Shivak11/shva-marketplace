@@ -3,6 +3,17 @@
     "title": "Designing Organizations for Uncertain Environments",
     "officialSessionMinutes": 90,
     "preparedRunwayMinutes": 120,
+    "planningProfile": {
+      "minimumCoreSegments": 6,
+      "narrativeWordRange": {
+        "minimum": 3800,
+        "maximum": 5200
+      },
+      "maximumBookHeadings": 3,
+      "maximumPullLines": 2,
+      "maximumBodyCalloutCards": 0,
+      "maximumSubstantiveVisuals": 2
+    },
     "slideBeatRange": {
       "minimum": 6,
       "maximum": 10
@@ -121,17 +132,23 @@
       "sceneToConcept": {
         "fromBlockId": "case-return-to-work",
         "toBlockId": "claim-exception",
-        "bridge": "The case cannot move because a recommendation exists but no legitimate right to depart from it has been assigned"
+        "bridge": "The case cannot move because a recommendation exists but no legitimate right to depart from it has been assigned",
+        "unresolvedConsequence": "More evidence cannot settle a decision whose exception authority remains unnamed",
+        "nextMove": "The next claim gives that missing organisational right a plain and usable name"
       },
       "conceptToFramework": {
         "fromBlockId": "claim-exception",
         "toBlockId": "mechanism-exception-path",
-        "bridge": "Once the authority gap is visible, the full path from signal to appeal can be traced"
+        "bridge": "Once the authority gap is visible, the full path from signal to appeal can be traced",
+        "unresolvedConsequence": "Naming the authority gap still does not show how a recommendation becomes an appealable action",
+        "nextMove": "The mechanism traces each handoff needed to turn the recommendation into accountable work"
       },
       "chapterToExercise": {
         "fromBlockId": "mechanism-exception-path",
         "toBlockId": "exercise-authority-map",
-        "bridge": "The reader must now decide how the missing right, evidence, action, and challenge route would be written"
+        "bridge": "The reader must now decide how the missing right, evidence, action, and challenge route would be written",
+        "unresolvedConsequence": "The path remains an explanation until somebody writes a bounded decision that another person can execute and challenge",
+        "nextMove": "The exercise asks the learner to make that decision before seeing its hidden consequence"
       }
     },
     "terms": [
@@ -145,12 +162,16 @@
       }
     ],
     "evidenceComparisons": [],
+    "comparisonAudit": {
+      "noComparisonNeededReason": "This schema fixture teaches one authority mechanism; the port drill transfers the mechanism without comparing two evidence paths"
+    },
     "sourceLedger": [
       {
         "claimId": "disturbance-no-owner",
         "classification": "illustrative",
         "origin": "Synthetic exception scenario created for schema testing",
         "sourceType": "synthetic teaching case",
+        "presentationStatus": "composite",
         "checkedOn": "2026-09-02",
         "confidence": "high",
         "surfaces": ["book", "teaching", "slides"],
@@ -163,6 +184,7 @@
         "classification": "illustrative",
         "origin": "Composite workforce workflow created for schema testing",
         "sourceType": "composite teaching case",
+        "presentationStatus": "composite",
         "checkedOn": "2026-09-02",
         "confidence": "high",
         "surfaces": ["book", "teaching", "slides"],
@@ -175,6 +197,7 @@
         "classification": "teaching-synthesis",
         "origin": "MDP Architect synthesis of authority and exception design",
         "sourceType": "author synthesis",
+        "presentationStatus": "author-synthesis",
         "checkedOn": "2026-09-02",
         "confidence": "medium",
         "surfaces": ["book", "teaching", "slides"],
@@ -187,6 +210,7 @@
         "classification": "illustrative",
         "origin": "Synthetic port drill created for schema testing",
         "sourceType": "synthetic lateral example",
+        "presentationStatus": "composite",
         "checkedOn": "2026-09-02",
         "confidence": "high",
         "surfaces": ["book", "teaching", "slides"],
@@ -199,6 +223,7 @@
         "classification": "teaching-synthesis",
         "origin": "MDP Architect session mechanism",
         "sourceType": "author synthesis",
+        "presentationStatus": "author-synthesis",
         "checkedOn": "2026-09-02",
         "confidence": "medium",
         "surfaces": ["book", "teaching", "slides"],
@@ -211,6 +236,7 @@
         "classification": "teaching-synthesis",
         "origin": "Commitment-before-reveal teaching method",
         "sourceType": "learning-design synthesis",
+        "presentationStatus": "author-synthesis",
         "checkedOn": "2026-09-02",
         "confidence": "medium",
         "surfaces": ["book", "teaching", "slides"],
@@ -223,6 +249,7 @@
         "classification": "teaching-synthesis",
         "origin": "Bounded AI challenger design",
         "sourceType": "learning-design synthesis",
+        "presentationStatus": "author-synthesis",
         "checkedOn": "2026-09-02",
         "confidence": "medium",
         "surfaces": ["book", "teaching", "slides"],
@@ -235,6 +262,7 @@
         "classification": "teaching-synthesis",
         "origin": "Commitment and revision learning sequence",
         "sourceType": "learning-design synthesis",
+        "presentationStatus": "author-synthesis",
         "checkedOn": "2026-09-02",
         "confidence": "medium",
         "surfaces": ["book", "teaching", "slides"],
@@ -247,6 +275,7 @@
         "classification": "teaching-synthesis",
         "origin": "MDP Architect workbook design",
         "sourceType": "learning-design synthesis",
+        "presentationStatus": "author-synthesis",
         "checkedOn": "2026-09-02",
         "confidence": "medium",
         "surfaces": ["book", "teaching", "slides"],
@@ -259,6 +288,7 @@
         "classification": "teaching-synthesis",
         "origin": "DOUE cross-session architecture",
         "sourceType": "curriculum synthesis",
+        "presentationStatus": "author-synthesis",
         "checkedOn": "2026-09-02",
         "confidence": "medium",
         "surfaces": ["book", "teaching", "slides"],
@@ -322,42 +352,74 @@
           {
             "id": "opening-case",
             "minutes": 8,
-            "semanticBlockIds": ["disturbance-no-owner", "case-return-to-work"]
+            "semanticBlockIds": ["disturbance-no-owner", "case-return-to-work"],
+            "facilitatorMove": "Read the exception case aloud and stop before naming the missing design element.",
+            "participantMove": "Choose whether to follow, pause, or override the recommendation and record one reason.",
+            "artifactState": "The map contains a visible first decision before any framework appears.",
+            "recoveryMove": "If the room debates model accuracy, return to the unnamed right to act."
           },
           {
             "id": "first-reading",
             "minutes": 12,
-            "semanticBlockIds": ["claim-exception", "lateral-port-drill"]
+            "semanticBlockIds": ["claim-exception", "lateral-port-drill"],
+            "facilitatorMove": "Contrast an inaccurate recommendation with an accurate recommendation that nobody may override.",
+            "participantMove": "Identify which difficulty belongs to evidence and which belongs to authority.",
+            "artifactState": "The map separates recommendation quality from the right to depart from policy.",
+            "recoveryMove": "If the distinction remains fuzzy, test it against the blocked-channel example."
           },
           {
             "id": "mechanism",
             "minutes": 16,
-            "semanticBlockIds": ["mechanism-exception-path"]
+            "semanticBlockIds": ["mechanism-exception-path"],
+            "facilitatorMove": "Build the exception path one handoff at a time from evidence to challenge.",
+            "participantMove": "Mark the first handoff in the case that lacks a named owner or rule.",
+            "artifactState": "The map shows a specific break rather than a generic governance concern.",
+            "recoveryMove": "If participants jump to solutions, ask which preceding handoff makes that solution legitimate."
           },
           {
             "id": "participant-commitment",
             "minutes": 11,
-            "semanticBlockIds": ["commitment-first-map", "exercise-authority-map"]
+            "semanticBlockIds": ["commitment-first-map", "exercise-authority-map"],
+            "facilitatorMove": "Open the workbook at one decision fork and keep the consequence hidden.",
+            "participantMove": "Write a first commitment and the consequence they knowingly accept.",
+            "artifactState": "Every learner has a traceable choice that can survive later comparison.",
+            "recoveryMove": "If choices stay abstract, require one actor, one action, and one accepted cost."
           },
           {
             "id": "ai-challenge",
             "minutes": 17,
-            "semanticBlockIds": ["ai-challenge-map"]
+            "semanticBlockIds": ["ai-challenge-map"],
+            "facilitatorMove": "Reveal the bounded challenge and model questions that test missing evidence and rights.",
+            "participantMove": "Use the challenge to locate one ambiguity without delegating the choice to AI.",
+            "artifactState": "The map records one challenged assumption beside the learner's original commitment.",
+            "recoveryMove": "If AI begins drafting the answer, reset it to questions and competing explanations."
           },
           {
             "id": "human-revision",
             "minutes": 13,
-            "semanticBlockIds": ["revision-after-challenge"]
+            "semanticBlockIds": ["revision-after-challenge"],
+            "facilitatorMove": "Ask which part of the original commitment changes and which remains human-owned.",
+            "participantMove": "Revise or retain one line and write the evidence for that decision.",
+            "artifactState": "The map preserves both the first commitment and the reasoned revision.",
+            "recoveryMove": "If everyone changes automatically, ask what evidence would justify keeping the first choice."
           },
           {
             "id": "filled-edition",
             "minutes": 7,
-            "semanticBlockIds": ["exercise-authority-map"]
+            "semanticBlockIds": ["exercise-authority-map"],
+            "facilitatorMove": "Reveal one completed edition only after all required fields contain meaningful attempts.",
+            "participantMove": "Compare the two artifacts field by field and mark one defensible difference.",
+            "artifactState": "The learner's version remains visible beside a realistic worked comparison.",
+            "recoveryMove": "If the worked edition becomes an answer key, surface two alternative defensible boundaries."
           },
           {
             "id": "handoff",
             "minutes": 6,
-            "semanticBlockIds": ["transition-rule-placement"]
+            "semanticBlockIds": ["transition-rule-placement"],
+            "facilitatorMove": "Close on the unresolved question of where the ordinary and exception rules should live.",
+            "participantMove": "Carry one unresolved rule-placement question forward on the completed map.",
+            "artifactState": "The map is usable now and still contains the next design decision.",
+            "recoveryMove": "If the room seeks closure, distinguish a usable artifact from a finished organisation design."
           }
         ],
         "depthReserves": [
@@ -367,6 +429,7 @@
             "semanticBlockIds": ["case-return-to-work", "claim-exception"],
             "trigger": "The room reaches the first map early or treats every exception as discretionary.",
             "addedMove": "Pairs write one observable exception trigger and one disconfirming condition.",
+            "participantMove": "Each pair tests whether another person could apply the trigger without private context.",
             "rejoin": "Return to the case when every pair has one observable exception trigger.",
             "artifactState": "The Exception Authority Map has a testable trigger."
           },
@@ -376,6 +439,7 @@
             "semanticBlockIds": ["mechanism-exception-path", "exercise-authority-map"],
             "trigger": "Most maps name an approver but no route for challenge.",
             "addedMove": "Pairs test who may contest the evidence and who can pause the action.",
+            "participantMove": "Each pair adds one challenge route and the condition that pauses execution.",
             "rejoin": "Return at the completed appeal path before the filled-edition reveal.",
             "artifactState": "The map names an appeal owner and pause condition."
           },
@@ -385,6 +449,7 @@
             "semanticBlockIds": ["exercise-authority-map", "transition-rule-placement"],
             "trigger": "The filled-edition comparison ends with at least ten minutes available.",
             "addedMove": "Groups compare central, local, and split authority arrangements using the same exception.",
+            "participantMove": "Each group selects one arrangement and names the consequence it accepts.",
             "rejoin": "Return with one rule-placement question for the next session.",
             "artifactState": "The map carries one unresolved rule-placement question."
           }
@@ -423,8 +488,32 @@
         "caseMode": "sustained-case",
         "exerciseCaseBlockId": "case-return-to-work",
         "mechanismBlockId": "mechanism-exception-path",
-        "chapterConnection": "The chapter exposes a recommendation that cannot move legitimately because the exception path is missing; the exercise asks the learner to write that path.",
-        "decisionFork": "Follow the ordinary rule, pause the recommendation, or authorise a bounded exception.",
+        "chapterConnection": {
+          "fromBlockId": "mechanism-exception-path",
+          "unresolvedConsequence": "The recommendation still cannot move legitimately because the chapter has exposed an exception path without assigning its concrete boundaries.",
+          "firstParticipantAction": "The learner must choose an immediate course of action and state the consequence that choice accepts.",
+          "mechanismUsed": "Each workbook field turns one handoff in the exception path into a named and challengeable commitment."
+        },
+        "decisionFork": {
+          "question": "What should happen now that the ordinary rule does not fit and no exception owner is named?",
+          "options": [
+            {
+              "id": "follow-rule",
+              "action": "Apply the ordinary recommendation without delay.",
+              "acceptedConsequence": "Consistency is protected while relevant local context may remain unheard."
+            },
+            {
+              "id": "pause-case",
+              "action": "Pause the recommendation while gathering discriminating evidence.",
+              "acceptedConsequence": "The decision slows while the organisation tests whether the case is materially different."
+            },
+            {
+              "id": "bounded-exception",
+              "action": "Authorise a time-bound exception with a review condition.",
+              "acceptedConsequence": "Local context can change the outcome while inconsistency and precedent must be managed."
+            }
+          ]
+        },
         "commitBeforeAI": true,
         "commitmentBlockId": "commitment-first-map",
         "aiChallengeBlockId": "ai-challenge-map",
@@ -434,27 +523,38 @@
           {
             "id": "commit",
             "prompt": "Choose follow, pause, or bounded exception and state the consequence you accept.",
-            "output": "A traceable first commitment"
+            "output": "A traceable first commitment",
+            "requiredFieldIds": ["first-commitment"]
+          },
+          {
+            "id": "revise-after-evidence",
+            "prompt": "After the hidden consequence appears, retain or revise the first choice and name the alternative now in view.",
+            "output": "A visible revision tied to the newly revealed consequence",
+            "requiredFieldIds": ["live-alternative"]
           },
           {
             "id": "test",
             "prompt": "Name the live alternative and the evidence that could discriminate between the two accounts.",
-            "output": "An evidence test rather than a request for more information"
+            "output": "An evidence test rather than a request for more information",
+            "requiredFieldIds": ["evidence-test"]
           },
           {
             "id": "bound",
             "prompt": "Name who may authorise the departure, who must be consulted, and who may challenge it.",
-            "output": "A bounded authority and challenge route"
+            "output": "A bounded authority and challenge route",
+            "requiredFieldIds": ["authority-boundary"]
           },
           {
             "id": "act",
             "prompt": "Write the actor, action, and timing that make the commitment executable.",
-            "output": "An operational instruction"
+            "output": "An operational instruction",
+            "requiredFieldIds": ["executable-action"]
           },
           {
             "id": "revise",
             "prompt": "After the AI challenge, revise or retain the map and state the observation that would change it later.",
-            "output": "A reasoned revision and review condition"
+            "output": "A reasoned revision and review condition",
+            "requiredFieldIds": ["revision-condition"]
           }
         ],
         "participantFields": [
@@ -465,7 +565,18 @@
           { "id": "executable-action", "label": "Actor, action, and timing" },
           { "id": "revision-condition", "label": "Observation, owner, and review date" }
         ],
-        "revealGate": {
+        "consequenceReveal": {
+          "present": true,
+          "requiresParticipantInput": true,
+          "requiredFieldIds": ["first-commitment"],
+          "minimumAttemptCharacters": 24,
+          "afterStepId": "commit",
+          "revisionStepId": "revise-after-evidence",
+          "revealedFact": "The source record omits an employee correction that would place the case outside the ordinary recommendation's stated boundary.",
+          "provenance": "Illustrative fact introduced by the synthetic case designer rather than a claim about a named organisation.",
+          "decisionConsequence": "The learner must now decide whether the omission changes the action or only changes the explanation required."
+        },
+        "filledEditionReveal": {
           "requiresParticipantInput": true,
           "requiredFieldIds": [
             "first-commitment",
@@ -474,7 +585,12 @@
             "authority-boundary",
             "executable-action",
             "revision-condition"
-          ]
+          ],
+          "minimumAttemptCharacters": 24,
+          "startsClosed": true,
+          "controlLabel": "Reveal a filled edition",
+          "fieldBindingAttribute": "data-participant-field-id",
+          "browserProofRequired": true
         },
         "aiRoleType": "challenge",
         "aiRole": "Challenge the map by questioning ambiguous triggers, missing evidence, and absent appeal rights.",
@@ -483,9 +599,6 @@
         "debriefQuestion": "Which part of the path changed after challenge, and which right must still remain human-owned?",
         "filledEdition": {
           "present": true,
-          "revealedByControl": true,
-          "startsClosed": true,
-          "controlLabel": "Reveal a filled edition",
           "fields": [
             {
               "id": "first-commitment",

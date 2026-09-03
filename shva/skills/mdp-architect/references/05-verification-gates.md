@@ -7,10 +7,10 @@ Run these gates from disk. An agent report, clean source diff, or successful bui
 - Classify whether the request is a greenfield book, a substantial book-shaped reframe, or a local correction.
 - For a greenfield book or substantial reframe, confirm an explicitly approved Book Foundation Record exists before HTML, cover art, front matter, a canonical chapter model, or production files are created.
 - If reusing a record for a local correction, confirm that the premise, reader, and identity are unchanged and name the record that supplies those decisions.
-- Confirm the record settles the reader, argument, boundaries, evidence base, opening mode, section logic, carried question or artifact, author material, front matter, voice contract, and source status.
-- Confirm the author saw at least two materially different title and cover systems, with composition, palette roles, typography mood, diagram grammar, prohibited motifs, and difference from recent work. Colour-only variations fail.
+- Confirm the record settles every field needed for the requested approval scope. Substantial prose always needs reader, argument, boundaries, evidence base, opening mode, section logic, carried question or artifact, voice contract, and source status. Finished front matter and visual production additionally need their selected identity fields.
+- For front-matter or full approval, confirm the author saw at least two materially different title systems. For visual-production or full approval, confirm at least two cover systems with composition, palette roles, typography mood, diagram grammar, prohibited motifs, and difference from recent work. Colour-only or name-only variations fail.
 - Confirm that names, client claims, acknowledgements, endorsements, affiliations, and author experience are either verified or omitted. Never infer them from a programme brief.
-- Run `node "$SKILL_DIR/scripts/validate-book-foundation.mjs" <approved-record.json>` before production. A draft record may exist, but production readiness requires approved status, no blocking fields, and explicit approval evidence.
+- Run `node "$SKILL_DIR/scripts/validate-book-foundation.mjs" <approved-record.json> <requested-scope>` before production. A draft record may exist, but the requested action needs approved status, explicit approval evidence, and no blocker that applies to its scope. Shiva's default target is `full` unless he explicitly narrows the prototype.
 
 ## 1. Scope and composition gate
 
@@ -25,9 +25,9 @@ Run these gates from disk. An agent report, clean source diff, or successful bui
 
 ## 2. Timing gate
 
-- Sum the required teaching moves to exactly 90 minutes of core session time.
-- Sum depth reserves to 30 minutes.
-- Verify every reserve states its trigger, added move, and rejoin line.
+- Sum the required teaching moves to exactly `programme.officialSessionMinutes`.
+- Sum depth reserves to the difference between `preparedRunwayMinutes` and the official duration. In Shiva's current 90-minute profile, that difference is normally 30 minutes; it is not a generic constant.
+- Reject non-positive, fractional, or one-blob timing plans. Verify every core segment states its facilitator move, participant move, artifact state, and recovery move. Verify every reserve states its trigger, added move, participant move, artifact state, and rejoin line.
 - Verify the rejoin line returns to the same case and artifact state.
 - Keep official client timetable calculations separate and unchanged unless the user asks for a timetable revision.
 
@@ -37,17 +37,17 @@ Run these gates from disk. An agent report, clean source diff, or successful bui
 - Verify every Book, Teaching, and Slide item maps to a canonical ID. Blocks marked `requiredAcrossSurfaces` appear everywhere; declared optional blocks may be omitted.
 - Reject a surface that adds a claim, case, visual label, exercise step, or transition absent from the canonical model.
 - Confirm the participant commitment occurs before the AI challenge in all surfaces.
-- Confirm all three Causal Hinge Ledger entries point forward in the rendered order and contain a real bridge.
+- Confirm all three Causal Hinge Ledger entries use the intended endpoint types, point forward in Book order, and declare a causal bridge, unresolved consequence, and next move. Then read the prose straight through; structure cannot prove that the bridge is real.
 - Confirm each specialist term appears after the problem that earns it, is plainly defined and distinguished, and is used again in consequence.
 - Confirm every evidence-path comparison states its common problem, different mechanisms, and decision consequence.
-- Confirm the exercise binds to its case and mechanism, the filled edition matches every participant field in order, and the reveal requires actual participant input.
+- Confirm the exercise binds to its case and mechanism through structured block references and a live decision fork. Confirm the consequence reveal requires the intended first-commitment field subset, occurs before its named revision step, and identifies the revealed fact, provenance, and decision consequence. Confirm the later filled-edition reveal matches every participant field in order.
 
 ## 4. Source integrity gate
 
-- Inspect the source ledger for classification, origin, source type, exact supported facts, teaching inference, and factual boundary on every material claim.
+- Inspect the source ledger for evidence classification, presentation status, origin, source type, source title and locator when sourced, exact supported facts, teaching inference, and factual boundary on every material claim.
 - Recheck current or material facts with a live primary source during this run.
 - Confirm teaching synthesis and illustrative material are not represented as external evidence.
-- Confirm raw recording IDs, prompt logic, provenance ledgers, and facilitator scaffolding are absent from Book and Slide surfaces.
+- Confirm raw recording IDs, prompt logic, provenance ledgers, and facilitator scaffolding are absent from Book and Slide surfaces. Treat reconstruction and counterfactual as presentation statuses rather than proof classes; verify the source claims beneath them.
 - Confirm a visible case's source status supports both its material facts and the causal inference made beside it. A composite must not masquerade as reporting.
 - For dialogue, confirm verbatim, normalised, paraphrased, and reconstructed wording are not conflated. A source recollection does not become a meeting transcript.
 - For paired cases, confirm a shared outcome is not used to erase different evidence mechanisms. In particular, omission, process trace, measurement change, and model error remain separate.
@@ -57,7 +57,7 @@ Run these gates from disk. An agent report, clean source diff, or successful bui
 - Parse edited JSON and YAML files.
 - Load the HTML from disk in a browser and check for console errors.
 - Toggle Book Chapter, Teaching Script, and Slide Content. Confirm the active mode is visible, keyboard reachable, and returns the same session meaning.
-- Confirm the filled-edition control begins unavailable or hidden until required participant fields contain input. Complete those fields, open and close the filled edition with keyboard input, confirm focus moves to the reveal heading and returns to the control, and confirm the participant instructions and answers remain intact.
+- Confirm both declared gates in the actual DOM. The consequence reveal must reject empty, whitespace-only, default, and too-short attempts; complete the named first-commitment fields, reveal the new information, and confirm the participant can revise while the first commitment remains visible. The filled-edition control must reject the same bypasses until every comparison field has a meaningful attempt. Open and close it with keyboard input, confirm focus moves to the reveal heading and returns to the control, and confirm the participant instructions and answers remain intact.
 - Verify links, headings, diagrams, and controls work without a network dependency when the artifact is meant to be local.
 
 ## 6. Render gate
@@ -74,13 +74,15 @@ Run these gates from disk. An agent report, clean source diff, or successful bui
 - Count substantive visuals from the DOM: editorial illustrations, diagrams, data graphics, and workbook maps all count; cover art and ordinary controls do not. Accept zero, one, or two and reject a third.
 - Search the experienced Book prose for repeated outline transitions, meta narration, antithesis scaffolding, memorable-line duplication, and literature-review procession. A string scan is a prompt for a human read, not proof by itself.
 - Read the final two Book paragraphs directly into the first exercise instruction. Reject a conceptual reset, unexplained new case, or activity that merely rehearses a midpoint framework.
+- Walk the exercise from first decision through consequence reveal, revision, AI challenge, executable action, filled-edition reveal, and transfer. Reject a reveal that changes no subsequent decision, or a form that demands every field before the first consequential fact appears.
 - Compare the blank exercise and filled edition row by row at desktop and mobile widths. Reject missing answers, generic placeholders, dense answer walls, duplicated stages, or an answer several screens away from the field it explains.
+- For any game, verify from interaction that a choice changes visible state and changes the next available choice. Replay once and confirm the configured evidence persists while the decision resets. Structured JSON rejects interface theatre; it does not prove the implementation obeys it.
 
 ## 7. Forward test and delivery gate
 
-- Forward-test a fresh book-shaped request in an isolated directory. Before explicit approval, the only deliverable may be a Book Foundation Record; no HTML or production artifact may appear. After approval, grade a different 90-minute, non-HR session against the same gates before calling the skill reusable.
+- Forward-test a fresh book-shaped request in an isolated directory. Before explicit approval, the only deliverable may be a Book Foundation Record; no HTML or production artifact may appear. After approval, grade a different non-HR session, with a different case and official duration or planning profile where practical, against the same gates before calling the skill reusable. The bundled non-HR model mutation proves schema portability only; it does not replace this editorial forward test.
 - For a substantial build, use separate read-only reviewer lanes for source boundary, narrative/taste, visual opportunity and geometry, exercise journey, and cross-surface parity. The orchestrator reconciles findings and verifies files from disk. Reviewer agreement is not a substitute for the experienced-artifact checks.
 - Derive word count, heading count, repeated emphasis, visual count, and initial DOM state from the actual artifact. Do not accept self-declared model numbers as rendered proof.
 - Inspect the complete Git diff and staging set. Verify files on disk, not only agent claims.
 - Keep source, package, installation, runtime invocation, and rendered journey evidence separate in the report.
-- Deliver HTML by default. Do not generate a PDF unless the user explicitly requests one.
+- In Shiva's teaching workspace, deliver HTML by default and do not generate a PDF unless Shiva requests one. Elsewhere, follow the requested delivery format and local rules.

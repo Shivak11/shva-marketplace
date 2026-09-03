@@ -27,8 +27,21 @@
   },
   "exerciseDirection": {},
   "openItems": {
-    "blocking": ["Book reader", "argument", "title", "voice", "visual direction"],
+    "blocking": [
+      {
+        "field": "book reader and argument",
+        "blocksScopes": ["prose", "full"],
+        "reason": "The manuscript cannot be framed until the intended reader and governing argument are chosen"
+      },
+      {
+        "field": "title and visual direction",
+        "blocksScopes": ["front-matter", "visual-production", "full"],
+        "reason": "The book identity has not yet been selected from materially different candidate systems"
+      }
+    ],
     "deferred": []
   },
-  "approval": {}
+  "approval": {
+    "scopes": []
+  }
 }

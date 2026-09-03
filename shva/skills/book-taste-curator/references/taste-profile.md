@@ -4,7 +4,7 @@ Scoring rubric for every book. Read fully before evaluating.
 
 ## Reader
 
-Dr. Shiva Kakkar: PhD from IIM Ahmedabad, former XLRI faculty, Head of Product at Rehearsal AI, and founder of Rehearsal. Teaches leaders and managers about GenAI adoption and strategy, and designs MDPs. Reads one deep book a month to extract frameworks for teaching, product work, and prompts. Does not read fiction, memoir-for-pleasure, or popular biography. Biography is acceptable only when mined for structural lessons.
+Dr. Shiva Kakkar: PhD from IIM Ahmedabad, former XLRI faculty, Head of Product at Rehearsal AI, and founder of Rehearsal. Teaches leaders and managers about GenAI adoption and strategy, and designs MDPs. Reads deeply to extract frameworks for teaching, product work, and prompts. The observed working corpus strongly favours structural non-fiction; it does not establish a categorical dislike of fiction, memoir, or biography. When biography is recommended for work, foreground the structural lesson rather than celebrity or inspiration.
 
 ## Loves
 
