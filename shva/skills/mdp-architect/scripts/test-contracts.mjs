@@ -571,6 +571,24 @@ try {
     "humanDecisionOwner must reference a registered human-role",
   );
 
+  const machineRelabelledAsHuman = clone(validSession);
+  const relabelledActor = machineRelabelledAsHuman.session.actorRegistry.find((actor) => actor.id === "chro-delegate");
+  relabelledActor.id = "ai-system";
+  relabelledActor.displayName = "AI decision system";
+  machineRelabelledAsHuman.session.semanticBlocks.find((block) => block.id === "case-return-to-work").actorIds = [
+    "affected-employee",
+    "line-manager",
+    "policy-owner",
+    "ai-system",
+  ];
+  machineRelabelledAsHuman.session.exercises[0].humanDecisionOwner.actorId = "ai-system";
+  expectFailure(
+    "machine identity relabelled as human role",
+    sessionValidator,
+    writeMutation("machine-relabelled-as-human", machineRelabelledAsHuman),
+    "human-role cannot use an explicit machine identity",
+  );
+
   const humanOwnerIntroducedAfterCommitment = clone(validSession);
   const lateOwnerBookOrder = humanOwnerIntroducedAfterCommitment.session.surfaces.book.semanticBlockIds;
   lateOwnerBookOrder.splice(lateOwnerBookOrder.indexOf("case-return-to-work"), 1);

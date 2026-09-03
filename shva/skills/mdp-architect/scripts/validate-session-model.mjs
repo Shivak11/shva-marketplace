@@ -73,6 +73,15 @@ const allowedAiMoves = new Set([
   "test-threshold",
   "identify-missing-escalation",
 ]);
+const explicitMachineIdentityPattern = /(?:^|[\s-])(?:ai|artificial[\s-]+intelligence|algorithm|automated|automation|autonomous|bot|classifier|engine|machine|model|predictor|recommender|system)(?:$|[\s-])/i;
+const explicitHumanRolePattern = /(?:^|[\s-])(?:adviser|advisor|analyst|architect|authoriser|authorizer|chair|chief|clinician|controller|coordinator|delegate|director|doctor|employee|engineer|executive|faculty|head|human|lawyer|lead|manager|nurse|officer|operator|owner|person|pilot|representative|researcher|reviewer|specialist|staff|supervisor|teacher|worker)(?:$|[\s-])/i;
+const isExplicitMachineIdentity = (actor) => {
+  const id = String(actor?.id ?? "").replace(/-/g, " ");
+  const displayName = String(actor?.displayName ?? "");
+  const containsMachineIdentity = explicitMachineIdentityPattern.test(id) || explicitMachineIdentityPattern.test(displayName);
+  const containsHumanRole = explicitHumanRolePattern.test(id) || explicitHumanRolePattern.test(displayName);
+  return containsMachineIdentity && !containsHumanRole;
+};
 const requiredBlockTypes = [
   "disturbance",
   "case",
@@ -152,6 +161,10 @@ for (const [index, actor] of actorRegistry.entries()) {
   requireValue(typeof actor?.automationEligible === "boolean", `session.actorRegistry[${index}].automationEligible must be boolean`);
   if (actor?.actorType === "human-role") {
     requireValue(actor?.automationEligible === false, `session.actorRegistry[${index}] human-role cannot be automation eligible`);
+    requireValue(
+      !isExplicitMachineIdentity(actor),
+      `session.actorRegistry[${index}] human-role cannot use an explicit machine identity`,
+    );
   }
   requireValue(blockIdSet.has(actor?.introducedInBlockId), `session.actorRegistry[${index}].introducedInBlockId must reference a semantic block`);
 }

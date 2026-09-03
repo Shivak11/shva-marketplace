@@ -112,6 +112,8 @@ Each visual records:
 
 ## Decision-Closure Contract
 
+At session level, record `session.actorRegistry`. Each consequential actor has one closed record containing `id`, `displayName`, `actorType`, `automationEligible`, and `introducedInBlockId`. The introduction block binds that ID through its `actorIds`. A `human-role` cannot be automation eligible or carry an explicit machine identity; names that remain semantically ambiguous still require human review.
+
 Every exercise binds to the chapter rather than merely sitting after it. Record:
 
 - one unique exercise-record ID for each canonical `exercise` semantic block, with no duplicate records and no unbound exercise blocks;
@@ -123,8 +125,7 @@ Every exercise binds to the chapter rather than merely sitting after it. Record:
 - `participantFields`, in display order;
 - commitment, AI-challenge, and revision block IDs, with every typed lifecycle block owned by exactly one exercise;
 - `aiRoleType`, one or more allow-listed `aiAllowedMoves`, and a closed-key `aiAuthorityBoundary` that explicitly denies approval, denial, certification, decision, and authorisation authority; the owning `ai-challenge` block renders from this contract and carries no parallel free-text or shadow field;
-- `actorRegistry`: one closed, typed record per consequential actor with stable ID, display name, actor type, automation eligibility, and the semantic block where the actor first appears; that block binds the ID through `actorIds`;
-- `humanDecisionOwner`: a stable actor ID that resolves to a non-automatable `human-role` in the exercise case, is introduced before commitment on every surface, and remains accountable for the final decision; repeated owner flags cannot substitute for that reference and no additional authority keys are allowed;
+- `humanDecisionOwner`: one closed object containing only `actorId`, `actorType: human-role`, `automationEligible: false`, `mustBeNamedBeforeUse: true`, and `accountableFor: final-decision`; `actorId` resolves through `session.actorRegistry` to a non-automatable human role in the exercise case, introduced before commitment on every surface; repeated owner flags cannot substitute for that reference;
 - `consequenceReveal.present`: whether changed information drives this exercise;
 - when present, `consequenceReveal`: its reveal and consequence-revision semantic block IDs, proper required-field subset, minimum attempt length, trigger and immediately following revision steps, revealed fact, provenance, and decision consequence; each typed reveal or consequence-revision block belongs to exactly one exercise;
 - when absent, `consequenceReveal.notUsedReason`: why the exercise does not need changed information rather than a manufactured twist;
