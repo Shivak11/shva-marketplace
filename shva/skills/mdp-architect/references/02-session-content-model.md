@@ -114,6 +114,7 @@ Each visual records:
 
 Every exercise binds to the chapter rather than merely sitting after it. Record:
 
+- one unique exercise-record ID for each canonical `exercise` semantic block, with no duplicate records and no unbound exercise blocks;
 - `caseMode`: `sustained-case` or `transfer-case`;
 - `exerciseCaseBlockId` and `mechanismBlockId`;
 - `chapterConnection.fromBlockId`, `unresolvedConsequence`, `firstParticipantAction`, and `mechanismUsed`;
@@ -131,7 +132,7 @@ Every exercise binds to the chapter rather than merely sitting after it. Record:
 
 When a field is genuinely irrelevant, the filled edition states why; it does not leave the field blank. The validator rejects short placeholder answers, but a human exercise read still judges realism and density.
 
-A game records at least two visible states with distinct visible consequences, an initial state, and for every choice a `fromStateId`, `toStateId`, state delta, consequence, and next-choice IDs. Every state is reachable; every named next choice begins from the state just reached and the list equals what is available there. At least one reachable state offers two consequential choices leading to different states, so the learner can choose a route rather than advance through a forced sequence. Its replay rule says what resets, what learner evidence remains, and what changes on another run. Different internal IDs with the same visible state do not constitute change. A pair of booleans claiming that choice changes state is not a game contract. If the learning lives mainly in explanatory copy after a tap, use a workbook.
+A game records at least two visible states with distinct visible consequences, an initial state, and for every choice a `decisionOptionId`, `fromStateId`, `toStateId`, state delta, consequence, and next-choice IDs. The choices available in the initial state map exactly once to every option in the exercise's decision fork. Choices that compete within the same state use different decision options and visibly different consequences; neither opaque IDs nor different destinations rescue duplicated learner-facing choices. Every state is reachable; every named next choice begins from the state just reached and the list equals what is available there. At least one reachable state offers two consequential choices leading to different states, so the learner can choose a route rather than advance through a forced sequence. Its replay rule says what resets, what learner evidence remains, and what changes on another run. Different internal IDs with the same visible state do not constitute change. A pair of booleans claiming that choice changes state is not a game contract. If the learning lives mainly in explanatory copy after a tap, use a workbook.
 
 ## Required sequence
 

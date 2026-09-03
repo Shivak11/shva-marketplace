@@ -523,10 +523,17 @@ requireValue(
 
 const exercises = Array.isArray(session.exercises) ? session.exercises : [];
 requireValue(exercises.length > 0, "at least one exercise is required");
+const exerciseIds = exercises.map((exercise) => exercise?.id).filter(Boolean);
+requireValue(duplicateValues(exerciseIds).length === 0, "exercise record ids must be unique");
 const claimedConsequenceRevealBlockIds = [];
 const claimedConsequenceRevisionBlockIds = [];
 const exerciseBlockIds = new Set(
   semanticBlocks.filter((block) => block.type === "exercise").map((block) => block.id),
+);
+requireValue(
+  exerciseBlockIds.size === exerciseIds.length
+    && [...exerciseBlockIds].every((exerciseBlockId) => exerciseIds.includes(exerciseBlockId)),
+  "each exercise semantic block must map to exactly one exercise record",
 );
 const blockById = new Map(semanticBlocks.map((block) => [block.id, block]));
 const blockTypeById = new Map(semanticBlocks.map((block) => [block.id, block.type]));
@@ -588,6 +595,12 @@ for (const [index, exercise] of exercises.entries()) {
     requireValue(isSubstantive(option?.action, 24, 4), `exercises[${index}].decisionFork.options[${optionIndex}].action must be substantive`);
     requireValue(isSubstantive(option?.acceptedConsequence, 32, 5), `exercises[${index}].decisionFork.options[${optionIndex}].acceptedConsequence must be substantive`);
   }
+  requireValue(
+    duplicateValues(
+      (decisionFork.options ?? []).map((option) => normaliseText(`${option?.action ?? ""} ${option?.acceptedConsequence ?? ""}`)),
+    ).length === 0,
+    `exercises[${index}].decisionFork options must be materially distinct`,
+  );
   requireValue(exercise?.commitBeforeAI === true, `exercises[${index}] must commit before AI`);
   requireValue(blockTypeById.get(exercise?.commitmentBlockId) === "commitment", `exercises[${index}].commitmentBlockId must reference a commitment semantic block`);
   requireValue(blockTypeById.get(exercise?.aiChallengeBlockId) === "ai-challenge", `exercises[${index}].aiChallengeBlockId must reference an ai-challenge semantic block`);
@@ -780,6 +793,10 @@ for (const [index, exercise] of exercises.entries()) {
     requireValue(duplicateValues(choiceIds).length === 0, `exercises[${index}] game choice ids must be unique`);
     for (const [choiceIndex, choice] of (game.choices ?? []).entries()) {
       requireValue(isNonEmpty(choice?.id), `exercises[${index}].game.choices[${choiceIndex}].id is required`);
+      requireValue(
+        optionIds.includes(choice?.decisionOptionId),
+        `exercises[${index}].game.choices[${choiceIndex}].decisionOptionId must reference a decisionFork option`,
+      );
       requireValue(stateIds.includes(choice?.fromStateId), `exercises[${index}].game.choices[${choiceIndex}].fromStateId must reference a state`);
       requireValue(stateIds.includes(choice?.toStateId), `exercises[${index}].game.choices[${choiceIndex}].toStateId must reference a state`);
       requireValue(choice?.fromStateId !== choice?.toStateId, `exercises[${index}].game.choices[${choiceIndex}] must change state`);
@@ -803,6 +820,28 @@ for (const [index, exercise] of exercises.entries()) {
       requireValue(
         JSON.stringify(declaredNextChoiceIds) === JSON.stringify(expectedNextChoiceIds),
         `exercises[${index}].game.choices[${choiceIndex}].nextChoiceIds must match the choices available from destination state '${choice?.toStateId}'`,
+      );
+    }
+    const initialDecisionOptionIds = (game.choices ?? [])
+      .filter((choice) => choice?.fromStateId === game.initialStateId)
+      .map((choice) => choice?.decisionOptionId)
+      .filter(Boolean)
+      .sort();
+    requireValue(
+      JSON.stringify(initialDecisionOptionIds) === JSON.stringify([...optionIds].sort()),
+      `exercises[${index}] initial game choices must map exactly once to every decisionFork option`,
+    );
+    for (const stateId of stateIds) {
+      const siblingChoices = (game.choices ?? []).filter((choice) => choice?.fromStateId === stateId);
+      requireValue(
+        duplicateValues(siblingChoices.map((choice) => choice?.decisionOptionId).filter(Boolean)).length === 0,
+        `exercises[${index}] choices from game state '${stateId}' must use different decisionFork options`,
+      );
+      requireValue(
+        duplicateValues(
+          siblingChoices.map((choice) => normaliseText(`${choice?.stateDelta ?? ""} ${choice?.consequence ?? ""}`)),
+        ).length === 0,
+        `exercises[${index}] choices from game state '${stateId}' must have visibly distinct consequences`,
       );
     }
     const reachableStates = new Set([game.initialStateId]);

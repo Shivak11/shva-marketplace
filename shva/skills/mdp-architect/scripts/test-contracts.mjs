@@ -122,6 +122,48 @@ try {
   expectPass("valid session model", sessionValidator, validSessionPath);
   expectFailure("broad invalid session model", sessionValidator, broadInvalidPath, "must commit before AI");
 
+  const duplicateExerciseRecord = clone(validSession);
+  duplicateExerciseRecord.session.exercises.push(clone(duplicateExerciseRecord.session.exercises[0]));
+  duplicateExerciseRecord.session.exercises[1].name = "Contradictory duplicate exercise record";
+  duplicateExerciseRecord.session.exercises[1].consequenceReveal = {
+    present: false,
+    notUsedReason: "This duplicate record claims that changed information is unnecessary for the same canonical exercise.",
+  };
+  expectFailure(
+    "duplicate exercise record id",
+    sessionValidator,
+    writeMutation("duplicate-exercise-record-id", duplicateExerciseRecord),
+    "exercise record ids must be unique",
+  );
+
+  const unboundExerciseBlock = clone(validSession);
+  const canonicalExerciseBlock = unboundExerciseBlock.session.semanticBlocks.find((block) => block.type === "exercise");
+  unboundExerciseBlock.session.semanticBlocks.push({
+    ...clone(canonicalExerciseBlock),
+    id: "exercise-without-record",
+    text: "A second visible workbook exercise appears in every surface but has no executable exercise record.",
+  });
+  const canonicalExerciseLedger = unboundExerciseBlock.session.sourceLedger.find((entry) => entry.claimId === canonicalExerciseBlock.id);
+  unboundExerciseBlock.session.sourceLedger.push({
+    ...clone(canonicalExerciseLedger),
+    claimId: "exercise-without-record",
+    origin: "Adversarial contract fixture for an unbound visible exercise",
+  });
+  for (const surfaceName of ["book", "teaching", "slides"]) {
+    unboundExerciseBlock.session.surfaces[surfaceName].semanticBlockIds.push("exercise-without-record");
+  }
+  unboundExerciseBlock.session.surfaces.teaching.coreSegments.at(-1).semanticBlockIds.push("exercise-without-record");
+  unboundExerciseBlock.session.surfaces.slides.beats.push({
+    id: "unbound-exercise",
+    semanticBlockIds: ["exercise-without-record"],
+  });
+  expectFailure(
+    "visible exercise block without exercise record",
+    sessionValidator,
+    writeMutation("visible-exercise-without-record", unboundExerciseBlock),
+    "each exercise semantic block must map to exactly one exercise record",
+  );
+
   const noVisual = clone(validSession);
   noVisual.session.surfaces.book.visuals = [];
   expectPass("zero-visual chapter", sessionValidator, writeMutation("zero-visual", noVisual));
@@ -346,6 +388,16 @@ try {
   placeholderDecisionFork.session.exercises[0].decisionFork.question = "Decide.";
   expectFailure("placeholder decision fork", sessionValidator, writeMutation("placeholder-decision-fork", placeholderDecisionFork), "decisionFork.question must be substantive");
 
+  const duplicateDecisionOptions = clone(validSession);
+  duplicateDecisionOptions.session.exercises[0].decisionFork.options[1].action = duplicateDecisionOptions.session.exercises[0].decisionFork.options[0].action;
+  duplicateDecisionOptions.session.exercises[0].decisionFork.options[1].acceptedConsequence = duplicateDecisionOptions.session.exercises[0].decisionFork.options[0].acceptedConsequence;
+  expectFailure(
+    "renamed duplicate decision option",
+    sessionValidator,
+    writeMutation("duplicate-decision-option", duplicateDecisionOptions),
+    "decisionFork options must be materially distinct",
+  );
+
   const placeholderVisual = clone(validSession);
   placeholderVisual.session.surfaces.book.visuals[0].visualJob = "Looks good";
   placeholderVisual.session.surfaces.book.visuals[0].proseRemoved = "None";
@@ -371,10 +423,12 @@ try {
       { id: "automatic", visibleConsequence: "The ordinary recommendation proceeds while the omitted correction remains outside the record." },
       { id: "paused", visibleConsequence: "Execution stops temporarily while named evidence is gathered and tested." },
       { id: "bounded", visibleConsequence: "A time-bound exception proceeds with an owner, explanation, and review trigger." },
+      { id: "ordinary-rule", visibleConsequence: "The ordinary recommendation proceeds and its accepted loss of local context remains visible." },
     ],
     choices: [
       {
         id: "pause-after-omission",
+        decisionOptionId: "pause-case",
         fromStateId: "automatic",
         toStateId: "paused",
         stateDelta: "The recommendation stops and an evidence deadline becomes visible.",
@@ -383,6 +437,7 @@ try {
       },
       {
         id: "authorise-bounded-exception",
+        decisionOptionId: "bounded-exception",
         fromStateId: "paused",
         toStateId: "bounded",
         stateDelta: "The paused case becomes a time-bound and reviewable exception.",
@@ -391,10 +446,20 @@ try {
       },
       {
         id: "authorise-without-pause",
+        decisionOptionId: "bounded-exception",
         fromStateId: "automatic",
         toStateId: "bounded",
         stateDelta: "The ordinary recommendation is replaced immediately by a bounded exception.",
         consequence: "The omitted correction affects the decision quickly, but the learner accepts less time for independent evidence testing.",
+        nextChoiceIds: [],
+      },
+      {
+        id: "apply-ordinary-rule",
+        decisionOptionId: "follow-rule",
+        fromStateId: "automatic",
+        toStateId: "ordinary-rule",
+        stateDelta: "The recommendation leaves the exception path and becomes an ordinary execution decision.",
+        consequence: "Consistency is preserved while the learner explicitly accepts that the omitted correction will not alter this decision.",
         nextChoiceIds: [],
       },
     ],
@@ -405,6 +470,27 @@ try {
     },
   };
   expectPass("stateful consequential game", sessionValidator, writeMutation("stateful-game", statefulGame));
+
+  const gameChoiceWithoutDecisionOption = clone(statefulGame);
+  delete gameChoiceWithoutDecisionOption.session.exercises[0].game.choices[0].decisionOptionId;
+  expectFailure(
+    "game choice disconnected from decision fork",
+    sessionValidator,
+    writeMutation("game-choice-without-decision-option", gameChoiceWithoutDecisionOption),
+    "decisionOptionId must reference a decisionFork option",
+  );
+
+  const indistinguishableGameChoices = clone(statefulGame);
+  const repeatedStateDelta = indistinguishableGameChoices.session.exercises[0].game.choices[0].stateDelta;
+  const repeatedChoiceConsequence = indistinguishableGameChoices.session.exercises[0].game.choices[0].consequence;
+  indistinguishableGameChoices.session.exercises[0].game.choices[2].stateDelta = repeatedStateDelta;
+  indistinguishableGameChoices.session.exercises[0].game.choices[2].consequence = repeatedChoiceConsequence;
+  expectFailure(
+    "different game routes with indistinguishable consequences",
+    sessionValidator,
+    writeMutation("indistinguishable-game-choices", indistinguishableGameChoices),
+    "choices from game state 'automatic' must have visibly distinct consequences",
+  );
 
   const invisibleStateGame = clone(statefulGame);
   const repeatedVisibleConsequence = invisibleStateGame.session.exercises[0].game.states[0].visibleConsequence;
@@ -419,7 +505,9 @@ try {
   );
 
   const forcedLinearGame = clone(statefulGame);
-  forcedLinearGame.session.exercises[0].game.choices = forcedLinearGame.session.exercises[0].game.choices.filter((choice) => choice.id !== "authorise-without-pause");
+  forcedLinearGame.session.exercises[0].game.choices = forcedLinearGame.session.exercises[0].game.choices.filter(
+    (choice) => !["authorise-without-pause", "apply-ordinary-rule"].includes(choice.id),
+  );
   expectFailure(
     "forced linear click-through presented as game",
     sessionValidator,
