@@ -121,7 +121,9 @@ Every exercise binds to the chapter rather than merely sitting after it. Record:
 - `steps`, each with a stable ID, prompt, observable output, and the participant fields it writes;
 - `participantFields`, in display order;
 - commitment, AI-challenge, and revision block IDs;
-- `consequenceReveal`: the early declared input gate, its required field subset, minimum attempt length, step position, revealed fact, provenance, decision consequence, and revision step;
+- `consequenceReveal.present`: whether changed information drives this exercise;
+- when present, `consequenceReveal`: its reveal and consequence-revision semantic block IDs, proper required-field subset, minimum attempt length, trigger and immediately following revision steps, revealed fact, provenance, and decision consequence;
+- when absent, `consequenceReveal.notUsedReason`: why the exercise does not need changed information rather than a manufactured twist;
 - `filledEditionReveal`: the later declared input gate, every participant field in display order, minimum attempt length, control label, initial closed state, field-binding attribute, and browser-proof requirement;
 - `filledEdition.fields`, using exactly the same field IDs and order;
 - `filledEdition.completeness`: actors, live alternative, evidence discriminator, authority boundary, executable action, revision condition, and appeal or challenge route;
@@ -139,12 +141,14 @@ Use this order unless the brief gives a reason to depart from it:
 2. First reading: make the plausible but incomplete explanation visible.
 3. Mechanism: earn the causal relation from the tension in the case.
 4. Participant commitment: ask the room to make a traceable move.
-5. AI challenge: use AI to test the committed move, not make it.
-6. Revision: show what changed, what did not, and who still authorises action.
-7. Filled-edition comparison: reveal the same artifact only after required input exists.
-8. Transfer and transition: apply the changed model elsewhere and leave a causally unresolved consequence.
+5. Consequence reveal, when changed information drives the exercise: disclose it after only the minimum writable field subset.
+6. Consequence-led revision: require the learner to retain or change the first move before AI enters.
+7. AI challenge: use AI to test the revised human judgment, not make it.
+8. Final revision: show what changed, what did not, and who still authorises action.
+9. Filled-edition comparison: reveal the same artifact only after all comparison fields contain meaningful attempts.
+10. Transfer and transition: apply the changed model elsewhere and leave a causally unresolved consequence.
 
-Encode the sequence. Each teaching core segment and slide beat carries ordered `semanticBlockIds`. Each exercise names its commitment, AI-challenge, and revision blocks. Every surface containing those blocks preserves their order.
+Encode the sequence. Each teaching core segment and slide beat carries ordered `semanticBlockIds`, and their first-use order must exactly match the parent Teaching or Slide surface order. Each exercise names its commitment, AI-challenge, and final-revision blocks. An exercise with a consequence reveal also names required-across-surfaces reveal and consequence-revision blocks; every surface preserves commitment → reveal → immediate human revision → AI challenge → final revision. Without changed information, every surface preserves commitment → AI challenge → revision and the model records why the early reveal is absent.
 
 ## Source ledger
 

@@ -47,6 +47,7 @@ try {
   const validSession = JSON.parse(fs.readFileSync(validSessionPath, "utf8"));
 
   expectPass("approved full book foundation", foundationValidator, approvedFoundation, ["full"]);
+  expectPass("approved book foundation defaults to full", foundationValidator, approvedFoundation);
   expectFailure("draft book foundation", foundationValidator, draftFoundation, "status must be approved before production");
 
   const proseOnlyFoundation = clone(approvedFoundationRecord);
@@ -63,6 +64,34 @@ try {
   const proseOnlyPath = writeMutation("prose-only-foundation", proseOnlyFoundation);
   expectPass("approved prose-only foundation", foundationValidator, proseOnlyPath, ["prose"]);
   expectFailure("prose-only foundation requested as full", foundationValidator, proseOnlyPath, "does not approve requested 'full' work", ["full"]);
+  expectFailure("prose-only foundation without explicit scope", foundationValidator, proseOnlyPath, "does not approve requested 'full' work");
+
+  const deferredProseBlocker = clone(approvedFoundationRecord);
+  deferredProseBlocker.openItems.deferred.push({
+    field: "opening scene",
+    blocksScopes: ["prose"],
+    reason: "The opening evidence is deliberately deferred, so prose production cannot yet begin",
+  });
+  expectFailure(
+    "scoped blocker inside deferred items",
+    foundationValidator,
+    writeMutation("deferred-prose-blocker", deferredProseBlocker),
+    "openItems contains an item that blocks requested 'prose' work",
+    ["prose"],
+  );
+
+  const fullOnlyBlocker = clone(approvedFoundationRecord);
+  fullOnlyBlocker.openItems.blocking.push({
+    field: "whole-book jacket assembly",
+    blocksScopes: ["full"],
+    reason: "The complete package cannot ship until final jacket assembly, while manuscript prose may continue",
+  });
+  expectPass(
+    "full-only blocker does not block explicit prose work",
+    foundationValidator,
+    writeMutation("full-only-blocker", fullOnlyBlocker),
+    ["prose"],
+  );
 
   const duplicateTitleFoundation = clone(approvedFoundationRecord);
   duplicateTitleFoundation.titleSystems[1] = {
@@ -109,6 +138,88 @@ try {
   ungatedConsequenceReveal.session.exercises[0].consequenceReveal.requiresParticipantInput = false;
   expectFailure("ungated consequence reveal", sessionValidator, writeMutation("ungated-consequence-reveal", ungatedConsequenceReveal), "consequence reveal must require participant input");
 
+  const allFieldsBeforeConsequence = clone(validSession);
+  allFieldsBeforeConsequence.session.exercises[0].consequenceReveal.requiredFieldIds = allFieldsBeforeConsequence.session.exercises[0].participantFields.map((field) => field.id);
+  expectFailure(
+    "first gate requiring every participant field",
+    sessionValidator,
+    writeMutation("all-fields-before-consequence", allFieldsBeforeConsequence),
+    "consequence reveal requiredFieldIds must be a proper subset of participant fields",
+  );
+
+  const unwritableConsequenceField = clone(validSession);
+  unwritableConsequenceField.session.exercises[0].consequenceReveal.requiredFieldIds = ["live-alternative"];
+  expectFailure(
+    "consequence gate requiring a later field",
+    sessionValidator,
+    writeMutation("unwritable-consequence-field", unwritableConsequenceField),
+    "consequence reveal may require only fields writable at or before afterStepId",
+  );
+
+  const delayedConsequenceRevision = clone(validSession);
+  delayedConsequenceRevision.session.exercises[0].consequenceReveal.revisionStepId = "test";
+  expectFailure(
+    "delayed consequence revision",
+    sessionValidator,
+    writeMutation("delayed-consequence-revision", delayedConsequenceRevision),
+    "consequence reveal revision step must immediately follow its trigger step",
+  );
+
+  const consequenceAfterAI = clone(validSession);
+  for (const surface of Object.values(consequenceAfterAI.session.surfaces)) {
+    const order = surface.semanticBlockIds;
+    const reveal = order.splice(order.indexOf("reveal-omitted-correction"), 1)[0];
+    const revision = order.splice(order.indexOf("revision-after-consequence"), 1)[0];
+    order.splice(order.indexOf("ai-challenge-map") + 1, 0, reveal, revision);
+  }
+  expectFailure(
+    "consequence reveal after AI",
+    sessionValidator,
+    writeMutation("consequence-after-ai", consequenceAfterAI),
+    "book must preserve commitment -> consequence reveal -> consequence revision -> AI challenge -> revision",
+  );
+
+  const teachingSequenceDrift = clone(validSession);
+  const teachingSegments = teachingSequenceDrift.session.surfaces.teaching.coreSegments;
+  const consequenceSegmentIndex = teachingSegments.findIndex((segment) => segment.id === "consequence-and-revision");
+  const aiSegmentIndex = teachingSegments.findIndex((segment) => segment.id === "ai-challenge");
+  [teachingSegments[consequenceSegmentIndex], teachingSegments[aiSegmentIndex]] = [teachingSegments[aiSegmentIndex], teachingSegments[consequenceSegmentIndex]];
+  expectFailure(
+    "teaching segments contradict declared reveal order",
+    sessionValidator,
+    writeMutation("teaching-sequence-drift", teachingSequenceDrift),
+    "teaching.coreSegments must preserve the order of teaching.semanticBlockIds",
+  );
+
+  const slideSequenceDrift = clone(validSession);
+  const slideBeats = slideSequenceDrift.session.surfaces.slides.beats;
+  const consequenceBeatIndex = slideBeats.findIndex((beat) => beat.id === "consequence");
+  const aiBeatIndex = slideBeats.findIndex((beat) => beat.id === "ai-challenge");
+  [slideBeats[consequenceBeatIndex], slideBeats[aiBeatIndex]] = [slideBeats[aiBeatIndex], slideBeats[consequenceBeatIndex]];
+  expectFailure(
+    "slide beats contradict declared reveal order",
+    sessionValidator,
+    writeMutation("slide-sequence-drift", slideSequenceDrift),
+    "slides.beats must preserve the order of slides.semanticBlockIds",
+  );
+
+  const noChangedInformation = clone(validSession);
+  const consequenceBlockIds = new Set(["reveal-omitted-correction", "revision-after-consequence"]);
+  noChangedInformation.session.semanticBlocks = noChangedInformation.session.semanticBlocks.filter((block) => !consequenceBlockIds.has(block.id));
+  noChangedInformation.session.sourceLedger = noChangedInformation.session.sourceLedger.filter((entry) => !consequenceBlockIds.has(entry.claimId));
+  for (const surface of Object.values(noChangedInformation.session.surfaces)) {
+    surface.semanticBlockIds = surface.semanticBlockIds.filter((id) => !consequenceBlockIds.has(id));
+  }
+  const removedConsequenceSegment = noChangedInformation.session.surfaces.teaching.coreSegments.find((segment) => segment.id === "consequence-and-revision");
+  noChangedInformation.session.surfaces.teaching.coreSegments.find((segment) => segment.id === "participant-commitment").minutes += removedConsequenceSegment.minutes;
+  noChangedInformation.session.surfaces.teaching.coreSegments = noChangedInformation.session.surfaces.teaching.coreSegments.filter((segment) => segment.id !== "consequence-and-revision");
+  noChangedInformation.session.surfaces.slides.beats = noChangedInformation.session.surfaces.slides.beats.filter((beat) => beat.id !== "consequence");
+  noChangedInformation.session.exercises[0].consequenceReveal = {
+    present: false,
+    notUsedReason: "The learning comes from comparing two already visible authority designs; no new fact or counter-signal changes the decision.",
+  };
+  expectPass("exercise without changed-information reveal", sessionValidator, writeMutation("no-changed-information", noChangedInformation));
+
   const ungatedFilledReveal = clone(validSession);
   ungatedFilledReveal.session.exercises[0].filledEditionReveal.requiresParticipantInput = false;
   expectFailure("ungated filled-edition reveal", sessionValidator, writeMutation("ungated-filled-reveal", ungatedFilledReveal), "filled-edition reveal must require participant input");
@@ -126,7 +237,7 @@ try {
   const commitmentIndex = bookOrder.indexOf("commitment-first-map");
   const challengeIndex = bookOrder.indexOf("ai-challenge-map");
   [bookOrder[commitmentIndex], bookOrder[challengeIndex]] = [bookOrder[challengeIndex], bookOrder[commitmentIndex]];
-  expectFailure("AI before commitment", sessionValidator, writeMutation("ai-before-commitment", aiFirst), "book must preserve commitment -> AI challenge -> revision");
+  expectFailure("AI before commitment", sessionValidator, writeMutation("ai-before-commitment", aiFirst), "book must preserve commitment -> consequence reveal -> consequence revision -> AI challenge -> revision");
 
   const termBeforeProblem = clone(validSession);
   const termOrder = termBeforeProblem.session.surfaces.book.semanticBlockIds;
@@ -266,12 +377,21 @@ try {
   };
   expectPass("stateful consequential game", sessionValidator, writeMutation("stateful-game", statefulGame));
 
+  const disconnectedGame = clone(statefulGame);
+  disconnectedGame.session.exercises[0].game.choices[0].nextChoiceIds = ["pause-after-omission"];
+  expectFailure(
+    "game next choice disconnected from reached state",
+    sessionValidator,
+    writeMutation("disconnected-game", disconnectedGame),
+    "next choice 'pause-after-omission' must begin at destination state 'paused'",
+  );
+
   const sixtyMinuteProfile = clone(validSession);
   sixtyMinuteProfile.programme.officialSessionMinutes = 60;
   sixtyMinuteProfile.programme.preparedRunwayMinutes = 75;
   sixtyMinuteProfile.programme.planningProfile.narrativeWordRange = { minimum: 2500, maximum: 3600 };
   sixtyMinuteProfile.session.surfaces.book.narrativeWords = 3100;
-  const sixtyMinuteCore = [5, 7, 10, 8, 10, 8, 6, 6];
+  const sixtyMinuteCore = [5, 7, 10, 6, 4, 10, 8, 5, 5];
   sixtyMinuteProfile.session.surfaces.teaching.coreSegments.forEach((segment, index) => {
     segment.minutes = sixtyMinuteCore[index];
   });

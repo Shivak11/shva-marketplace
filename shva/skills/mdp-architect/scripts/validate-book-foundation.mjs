@@ -4,7 +4,9 @@ import fs from "node:fs";
 import path from "node:path";
 
 const inputPath = process.argv[2];
-const requestedScope = process.argv[3] ?? "prose";
+// The safe default is the whole book foundation. Narrower production is allowed
+// only when the caller names that scope explicitly.
+const requestedScope = process.argv[3] ?? "full";
 
 if (!inputPath) {
   console.error("Usage: validate-book-foundation.mjs <book-foundation-record.json> [prose|front-matter|visual-production|full]");
@@ -120,18 +122,33 @@ requireValue(Array.isArray(openItems.deferred), "openItems.deferred must be an a
 for (const [index, item] of (openItems.blocking ?? []).entries()) {
   requireValue(isNonEmpty(item?.field), `openItems.blocking[${index}].field is required`);
   requireValue(nonEmptyArray(item?.blocksScopes), `openItems.blocking[${index}].blocksScopes must not be empty`);
+  requireValue(
+    (item?.blocksScopes ?? []).every((scope) => allowedScopes.has(scope)),
+    `openItems.blocking[${index}].blocksScopes contains an unsupported scope`,
+  );
   requireValue(isNonEmpty(item?.reason), `openItems.blocking[${index}].reason is required`);
 }
 for (const [index, item] of (openItems.deferred ?? []).entries()) {
   requireValue(isNonEmpty(item?.field), `openItems.deferred[${index}].field is required`);
   requireValue(Array.isArray(item?.blocksScopes), `openItems.deferred[${index}].blocksScopes must be an array`);
+  requireValue(
+    (item?.blocksScopes ?? []).every((scope) => allowedScopes.has(scope)),
+    `openItems.deferred[${index}].blocksScopes contains an unsupported scope`,
+  );
   requireValue(isNonEmpty(item?.reason), `openItems.deferred[${index}].reason is required`);
 }
-const requestedScopeIsBlocked = (openItems.blocking ?? []).some((item) =>
-  (item?.blocksScopes ?? []).includes("full")
-    || (item?.blocksScopes ?? []).includes(requestedScope)
-    || (requestedScope === "full" && (item?.blocksScopes ?? []).length > 0));
-requireValue(!requestedScopeIsBlocked, `openItems.blocking contains an item that blocks requested '${requestedScope}' work`);
+const itemBlocksRequestedScope = (item) => {
+  const blockedScopes = item?.blocksScopes ?? [];
+  // A full production request contains every narrower scope, so any scoped
+  // blocker applies. A blocker labelled only "full" does not prevent a caller
+  // from doing explicitly approved prose, front-matter, or visual work alone.
+  return requestedScope === "full"
+    ? blockedScopes.length > 0
+    : blockedScopes.includes(requestedScope);
+};
+const blockingItem = [...(openItems.blocking ?? []), ...(openItems.deferred ?? [])]
+  .find(itemBlocksRequestedScope);
+requireValue(!blockingItem, `openItems contains an item that blocks requested '${requestedScope}' work`);
 requireValue(isNonEmpty(approval.approvedBy), "approval.approvedBy is required");
 requireValue(/^\d{4}-\d{2}-\d{2}$/.test(approval.approvedOn ?? ""), "approval.approvedOn must be YYYY-MM-DD");
 requireValue(isNonEmpty(approval.evidence), "approval.evidence is required");

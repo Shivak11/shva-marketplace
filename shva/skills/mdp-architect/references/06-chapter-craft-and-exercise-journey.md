@@ -113,12 +113,12 @@ Do not repeat authorisation, action, and feedback under several labels. Every st
 
 Copy that says “finish before revealing” is not a gate. Model two different gates when the exercise depends on new information:
 
-- The **consequence reveal** asks only for the minimum first commitment needed to make the new fact consequential. It records the required field subset, minimum attempt length, revealed fact, provenance, decision consequence, and the revision step it unlocks.
+- The **consequence reveal** asks only for a proper subset of fields writable by the trigger step—the minimum first commitment needed to make the new fact consequential. It records required-across-surfaces reveal and human-revision blocks, minimum attempt length, revealed fact, provenance, decision consequence, and the immediately following revision step it unlocks.
 - The **filled-edition reveal** waits until every field used for row-by-row comparison contains a meaningful attempt. It begins closed and keeps the learner's version visible beside the completed edition.
 
 Requiring every field before the first reveal turns a progressive exercise back into a dense form. Reusing one reveal for both jobs removes the moment in which the learner discovers why revision is necessary. The interface must reject empty, whitespace-only, default, and too-short attempts. Preserve keyboard access, focus movement, return, and mobile reading order. These behaviours are browser evidence; a JSON declaration is not proof that the DOM obeys them.
 
-AI enters only after the first commitment. Its prompt asks questions, surfaces an alternative, or stress-tests the evidence. It does not draft the initial answer, assign authority to itself, certify fairness, or decide for the participant.
+AI enters only after the first commitment and, when changed information is revealed, after the learner has visibly revised or retained that commitment. Its prompt asks questions, surfaces an alternative, or stress-tests the evidence. It does not draft the initial answer, assign authority to itself, certify fairness, or decide for the participant.
 
 ## 6. Filled-edition parity
 

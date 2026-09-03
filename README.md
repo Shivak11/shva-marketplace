@@ -7,7 +7,7 @@
 
 | Plugin | Version | What it does |
 |---|---|---|
-| [`shva`](./shva) | 0.12.0 | Personal command and skill pack for cross-cutting work. v0.12.0 adds causal-hinge, evidence-path, visual-budget, and decision-closure contracts to `mdp-architect`, with focused tests for input-gated reveals and field-matched filled editions. |
+| [`shva`](./shva) | 0.12.0 | Personal command and skill pack for cross-cutting work. v0.12.0 adds causal-hinge, evidence-path, visual-budget, and decision-closure contracts to `mdp-architect`, with scope-safe foundation approval, staged reveal tests, traversable game states, and field-matched filled editions. |
 
 ## Why a separate marketplace
 

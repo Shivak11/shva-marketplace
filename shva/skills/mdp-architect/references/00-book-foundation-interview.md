@@ -1,6 +1,6 @@
 # Book Foundation Interview
 
-Run this interview before producing a new book or a substantial book-shaped programme. Its job is to settle the editorial decisions that HTML, a cover, a chapter model, or a slide deck cannot settle safely on their own.
+Run this interview before producing a new book or a substantial book-shaped programme. Its job is to settle the editorial decisions required by the next production scope; HTML, a cover, a chapter model, or a slide deck cannot settle those choices safely on their own.
 
 ## 1. Decide whether the gate applies
 
@@ -12,7 +12,7 @@ The interview is required when the work is any of the following:
 
 A local correction may reuse a recent approved record only when the premise, reader, and identity are unchanged. Name the record being reused and say why it still applies. If any one of those three changes, run a short foundation revision before production.
 
-Before explicit approval, research and candidate-making are allowed. Do not create HTML, cover art, front matter, a canonical chapter model, or a production file. Do not use Super-outer approval syntax for this editorial decision. If the author explicitly asks for an exploratory prototype while non-blocking identity choices remain open, label it as such and record every deferred field; it may not establish the final voice, cover, front matter, or book identity.
+Before explicit approval, research and candidate-making are allowed. Do not create an artifact in a scope that has not been approved. With the default `full` scope, this bars HTML, cover art, front matter, a canonical chapter model, and production files. An explicitly approved `prose` scope may produce the prose-bearing canonical model while keeping title, front-matter, cover, and visual-identity work blocked. Do not use Super-outer approval syntax for this editorial decision. If the author explicitly asks for an exploratory prototype while non-blocking identity choices remain open, label it as such and record every deferred field; it may not establish the final voice, cover, front matter, or book identity.
 
 Premise, Book reader, reader change, argument, evidence boundary, and prose register always block substantial prose. A title, final cover, or palette may be deliberately deferred for another author, but it still blocks finished front matter and visual production. Record the approved scope explicitly as `prose`, `front-matter`, `visual-production`, or `full`; do not let approval for one kind of work silently authorise another. In Shiva's environment, unresolved taste-sensitive choices remain blocking and `full` is the default target unless Shiva explicitly authorises a narrower exploratory prototype.
 
@@ -88,7 +88,7 @@ Colour alone does not make a direction distinct. Select a direction in chat befo
 
 Return one compact Book Foundation Record. Mark each choice as confirmed, author-supplied, proposed, or open. Name the requested approval scope and identify which open item blocks which scope. End with this plain editorial question: **Approve this Book Foundation Record for the named scope, or amend it?**
 
-Do not begin production until the author explicitly approves the record.
+Do not begin the requested production scope until the author explicitly approves that scope. When the command omits a scope, the validator deliberately checks `full`.
 
 Validate the exact next action, not an imaginary finished book:
 

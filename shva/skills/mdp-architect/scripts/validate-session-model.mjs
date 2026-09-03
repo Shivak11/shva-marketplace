@@ -73,7 +73,13 @@ const requiredBlockTypes = [
   "exercise",
   "transition",
 ];
-const allowedBlockTypes = new Set([...requiredBlockTypes, "lateral-example", "exercise-case"]);
+const allowedBlockTypes = new Set([
+  ...requiredBlockTypes,
+  "lateral-example",
+  "exercise-case",
+  "consequence-reveal",
+  "consequence-revision",
+]);
 const visibleSurfaceNames = ["book", "teaching", "slides"];
 
 requireValue(isNonEmpty(programme.title), "programme.title is required");
@@ -472,8 +478,8 @@ const teachingCoreIds = orderedUnique(
   (teaching.coreSegments ?? []).flatMap((segment) => segment?.semanticBlockIds ?? []),
 );
 requireValue(
-  JSON.stringify([...teachingCoreIds].sort()) === JSON.stringify([...(surfaceRefs.teaching ?? [])].sort()),
-  "teaching.coreSegments must collectively use every teaching.semanticBlockIds item and no others",
+  sameValuesInOrder(teachingCoreIds, surfaceRefOrders.teaching ?? []),
+  "teaching.coreSegments must preserve the order of teaching.semanticBlockIds and use every item exactly as first introduced",
 );
 requireValue(
   duplicateValues((teaching.depthReserves ?? []).map((reserve) => reserve?.id).filter(Boolean)).length === 0,
@@ -509,10 +515,9 @@ for (const [index, beat] of (slides.beats ?? []).entries()) {
 const slideBeatOrder = orderedUnique(
   (slides.beats ?? []).flatMap((beat) => beat?.semanticBlockIds ?? []),
 );
-const slideBeatIds = [...slideBeatOrder].sort();
 requireValue(
-  JSON.stringify(slideBeatIds) === JSON.stringify([...(surfaceRefs.slides ?? [])].sort()),
-  "slides.beats must collectively use every slides.semanticBlockIds item and no others",
+  sameValuesInOrder(slideBeatOrder, surfaceRefOrders.slides ?? []),
+  "slides.beats must preserve the order of slides.semanticBlockIds and use every item exactly as first introduced",
 );
 
 const exercises = Array.isArray(session.exercises) ? session.exercises : [];
@@ -520,6 +525,7 @@ requireValue(exercises.length > 0, "at least one exercise is required");
 const exerciseBlockIds = new Set(
   semanticBlocks.filter((block) => block.type === "exercise").map((block) => block.id),
 );
+const blockById = new Map(semanticBlocks.map((block) => [block.id, block]));
 const blockTypeById = new Map(semanticBlocks.map((block) => [block.id, block.type]));
 const sequenceOrders = {
   book: surfaceRefOrders.book ?? [],
@@ -583,15 +589,54 @@ for (const [index, exercise] of exercises.entries()) {
   requireValue(blockTypeById.get(exercise?.commitmentBlockId) === "commitment", `exercises[${index}].commitmentBlockId must reference a commitment semantic block`);
   requireValue(blockTypeById.get(exercise?.aiChallengeBlockId) === "ai-challenge", `exercises[${index}].aiChallengeBlockId must reference an ai-challenge semantic block`);
   requireValue(blockTypeById.get(exercise?.revisionBlockId) === "revision", `exercises[${index}].revisionBlockId must reference a revision semantic block`);
+  const consequenceReveal = exercise?.consequenceReveal ?? {};
+  requireValue(typeof consequenceReveal.present === "boolean", `exercises[${index}].consequenceReveal.present must be boolean`);
+  const hasConsequenceReveal = consequenceReveal.present === true;
+  if (hasConsequenceReveal) {
+    requireValue(
+      blockTypeById.get(consequenceReveal.revealBlockId) === "consequence-reveal",
+      `exercises[${index}] consequence reveal revealBlockId must reference a consequence-reveal semantic block`,
+    );
+    requireValue(
+      blockTypeById.get(consequenceReveal.revisionBlockId) === "consequence-revision",
+      `exercises[${index}] consequence reveal revisionBlockId must reference a consequence-revision semantic block`,
+    );
+    requireValue(
+      blockById.get(consequenceReveal.revealBlockId)?.requiredAcrossSurfaces === true,
+      `exercises[${index}] consequence reveal block must be requiredAcrossSurfaces`,
+    );
+    requireValue(
+      blockById.get(consequenceReveal.revisionBlockId)?.requiredAcrossSurfaces === true,
+      `exercises[${index}] consequence revision block must be requiredAcrossSurfaces`,
+    );
+  } else {
+    requireValue(
+      isSubstantive(consequenceReveal.notUsedReason, 40, 7),
+      `exercises[${index}] without a consequence reveal needs a substantive notUsedReason`,
+    );
+  }
   for (const [surfaceName, order] of Object.entries(sequenceOrders)) {
     const commitmentIndex = order.indexOf(exercise?.commitmentBlockId);
     const challengeIndex = order.indexOf(exercise?.aiChallengeBlockId);
     const revisionIndex = order.indexOf(exercise?.revisionBlockId);
-    requireValue(
-      commitmentIndex >= 0 && challengeIndex >= 0 && revisionIndex >= 0
-        && commitmentIndex < challengeIndex && challengeIndex < revisionIndex,
-      `${surfaceName} must preserve commitment -> AI challenge -> revision for exercises[${index}]`,
-    );
+    if (hasConsequenceReveal) {
+      const revealIndex = order.indexOf(consequenceReveal.revealBlockId);
+      const consequenceRevisionIndex = order.indexOf(consequenceReveal.revisionBlockId);
+      requireValue(
+        commitmentIndex >= 0 && revealIndex >= 0 && consequenceRevisionIndex >= 0 && challengeIndex >= 0 && revisionIndex >= 0
+          && commitmentIndex < revealIndex
+          && consequenceRevisionIndex === revealIndex + 1
+          && consequenceRevisionIndex < challengeIndex
+          && challengeIndex < revisionIndex,
+        `${surfaceName} must preserve commitment -> consequence reveal -> consequence revision -> AI challenge -> revision for exercises[${index}]`,
+      );
+    } else {
+      requireValue(
+        commitmentIndex >= 0 && challengeIndex >= 0 && revisionIndex >= 0
+          && commitmentIndex < challengeIndex && challengeIndex < revisionIndex,
+        `${surfaceName} must preserve commitment -> AI challenge -> revision for exercises[${index}]`,
+      );
+    }
   }
   requireValue(exercise?.usesIdentifiableData === false, `exercises[${index}] must default to no identifiable data`);
   requireValue(nonEmptyArray(exercise?.steps), `exercises[${index}].steps must not be empty`);
@@ -616,26 +661,51 @@ for (const [index, exercise] of exercises.entries()) {
     }
   }
 
-  const consequenceReveal = exercise?.consequenceReveal ?? {};
-  requireValue(consequenceReveal.present === true, `exercises[${index}] needs a consequence reveal`);
-  requireValue(consequenceReveal.requiresParticipantInput === true, `exercises[${index}] consequence reveal must require participant input`);
-  requireValue(nonEmptyArray(consequenceReveal.requiredFieldIds), `exercises[${index}] consequence reveal needs requiredFieldIds`);
-  for (const fieldId of consequenceReveal.requiredFieldIds ?? []) {
-    requireValue(participantFieldIds.includes(fieldId), `exercises[${index}] consequence reveal references unknown participant field '${fieldId}'`);
+  if (hasConsequenceReveal) {
+    const consequenceFieldIds = consequenceReveal.requiredFieldIds ?? [];
+    requireValue(consequenceReveal.requiresParticipantInput === true, `exercises[${index}] consequence reveal must require participant input`);
+    requireValue(nonEmptyArray(consequenceFieldIds), `exercises[${index}] consequence reveal needs requiredFieldIds`);
+    requireValue(
+      consequenceFieldIds.length < participantFieldIds.length,
+      `exercises[${index}] consequence reveal requiredFieldIds must be a proper subset of participant fields`,
+    );
+    requireValue(
+      duplicateValues(consequenceFieldIds).length === 0,
+      `exercises[${index}] consequence reveal requiredFieldIds must be unique`,
+    );
+    for (const fieldId of consequenceFieldIds) {
+      requireValue(participantFieldIds.includes(fieldId), `exercises[${index}] consequence reveal references unknown participant field '${fieldId}'`);
+    }
+    requireValue(
+      isPositiveInteger(consequenceReveal.minimumAttemptCharacters) && Number(consequenceReveal.minimumAttemptCharacters) >= 12,
+      `exercises[${index}] consequence reveal minimumAttemptCharacters must be at least 12`,
+    );
+    const afterStepIndex = stepIds.indexOf(consequenceReveal.afterStepId);
+    const consequenceRevisionStepIndex = stepIds.indexOf(consequenceReveal.revisionStepId);
+    requireValue(afterStepIndex >= 0, `exercises[${index}] consequence reveal afterStepId must reference a step`);
+    requireValue(consequenceRevisionStepIndex >= 0, `exercises[${index}] consequence reveal revisionStepId must reference a step`);
+    requireValue(
+      consequenceRevisionStepIndex === afterStepIndex + 1,
+      `exercises[${index}] consequence reveal revision step must immediately follow its trigger step`,
+    );
+    const writableBeforeReveal = new Set(
+      (exercise?.steps ?? [])
+        .slice(0, Math.max(0, afterStepIndex + 1))
+        .flatMap((step) => step?.requiredFieldIds ?? []),
+    );
+    requireValue(
+      consequenceFieldIds.every((fieldId) => writableBeforeReveal.has(fieldId)),
+      `exercises[${index}] consequence reveal may require only fields writable at or before afterStepId`,
+    );
+    const consequenceRevisionStep = exercise?.steps?.[consequenceRevisionStepIndex];
+    requireValue(
+      (consequenceRevisionStep?.requiredFieldIds ?? []).some((fieldId) => !consequenceFieldIds.includes(fieldId)),
+      `exercises[${index}] consequence revision step must write a field beyond the first commitment gate`,
+    );
+    requireValue(isSubstantive(consequenceReveal.revealedFact, 40, 7), `exercises[${index}] consequence reveal needs a substantive revealedFact`);
+    requireValue(isSubstantive(consequenceReveal.provenance, 32, 5), `exercises[${index}] consequence reveal needs provenance`);
+    requireValue(isSubstantive(consequenceReveal.decisionConsequence, 40, 7), `exercises[${index}] consequence reveal needs a decisionConsequence`);
   }
-  requireValue(
-    isPositiveInteger(consequenceReveal.minimumAttemptCharacters) && Number(consequenceReveal.minimumAttemptCharacters) >= 12,
-    `exercises[${index}] consequence reveal minimumAttemptCharacters must be at least 12`,
-  );
-  requireValue(stepIds.includes(consequenceReveal.afterStepId), `exercises[${index}] consequence reveal afterStepId must reference a step`);
-  requireValue(stepIds.includes(consequenceReveal.revisionStepId), `exercises[${index}] consequence reveal revisionStepId must reference a step`);
-  requireValue(
-    stepIds.indexOf(consequenceReveal.afterStepId) < stepIds.indexOf(consequenceReveal.revisionStepId),
-    `exercises[${index}] consequence reveal must precede its revision step`,
-  );
-  requireValue(isSubstantive(consequenceReveal.revealedFact, 40, 7), `exercises[${index}] consequence reveal needs a substantive revealedFact`);
-  requireValue(isSubstantive(consequenceReveal.provenance, 32, 5), `exercises[${index}] consequence reveal needs provenance`);
-  requireValue(isSubstantive(consequenceReveal.decisionConsequence, 40, 7), `exercises[${index}] consequence reveal needs a decisionConsequence`);
 
   const filledEditionReveal = exercise?.filledEditionReveal ?? {};
   requireValue(filledEditionReveal.requiresParticipantInput === true, `exercises[${index}] filled-edition reveal must require participant input`);
@@ -688,6 +758,7 @@ for (const [index, exercise] of exercises.entries()) {
     }
     requireValue(nonEmptyArray(game.choices) && game.choices.length >= 2, `exercises[${index}] game.choices needs at least two consequential choices`);
     const choiceIds = (game.choices ?? []).map((choice) => choice?.id).filter(Boolean);
+    const choiceById = new Map((game.choices ?? []).map((choice) => [choice?.id, choice]));
     requireValue(duplicateValues(choiceIds).length === 0, `exercises[${index}] game choice ids must be unique`);
     let branchingChoices = 0;
     for (const [choiceIndex, choice] of (game.choices ?? []).entries()) {
@@ -698,12 +769,46 @@ for (const [index, exercise] of exercises.entries()) {
       requireValue(isSubstantive(choice?.stateDelta, 28, 4), `exercises[${index}].game.choices[${choiceIndex}].stateDelta must be substantive`);
       requireValue(isSubstantive(choice?.consequence, 32, 5), `exercises[${index}].game.choices[${choiceIndex}].consequence must be substantive`);
       requireValue(Array.isArray(choice?.nextChoiceIds), `exercises[${index}].game.choices[${choiceIndex}].nextChoiceIds must be an array`);
+      requireValue(duplicateValues(choice?.nextChoiceIds ?? []).length === 0, `exercises[${index}].game.choices[${choiceIndex}].nextChoiceIds must be unique`);
       if ((choice?.nextChoiceIds ?? []).length > 0) branchingChoices += 1;
       for (const nextChoiceId of choice?.nextChoiceIds ?? []) {
         requireValue(choiceIds.includes(nextChoiceId), `exercises[${index}].game.choices[${choiceIndex}] references unknown next choice '${nextChoiceId}'`);
+        requireValue(
+          choiceById.get(nextChoiceId)?.fromStateId === choice?.toStateId,
+          `exercises[${index}].game.choices[${choiceIndex}] next choice '${nextChoiceId}' must begin at destination state '${choice?.toStateId}'`,
+        );
       }
+      const expectedNextChoiceIds = (game.choices ?? [])
+        .filter((candidate) => candidate?.fromStateId === choice?.toStateId)
+        .map((candidate) => candidate?.id)
+        .filter(Boolean)
+        .sort();
+      const declaredNextChoiceIds = [...(choice?.nextChoiceIds ?? [])].sort();
+      requireValue(
+        JSON.stringify(declaredNextChoiceIds) === JSON.stringify(expectedNextChoiceIds),
+        `exercises[${index}].game.choices[${choiceIndex}].nextChoiceIds must match the choices available from destination state '${choice?.toStateId}'`,
+      );
     }
     requireValue(branchingChoices > 0, `exercises[${index}] game needs at least one state-dependent next choice`);
+    const reachableStates = new Set([game.initialStateId]);
+    let changed = true;
+    while (changed) {
+      changed = false;
+      for (const choice of game.choices ?? []) {
+        if (reachableStates.has(choice?.fromStateId) && !reachableStates.has(choice?.toStateId)) {
+          reachableStates.add(choice.toStateId);
+          changed = true;
+        }
+      }
+    }
+    requireValue(
+      (game.states ?? []).every((state) => reachableStates.has(state?.id)),
+      `exercises[${index}] game states must all be reachable from initialStateId`,
+    );
+    requireValue(
+      (game.choices ?? []).every((choice) => reachableStates.has(choice?.fromStateId)),
+      `exercises[${index}] game choices must all be reachable from initialStateId`,
+    );
     requireValue(stateIds.includes(game?.replay?.resetsToStateId), `exercises[${index}] game replay must reset to a known state`);
     requireValue(nonEmptyArray(game?.replay?.preserves), `exercises[${index}] game replay must state what learner evidence is preserved`);
     requireValue(isSubstantive(game?.replay?.changes, 28, 4), `exercises[${index}] game replay must state what changes on replay`);

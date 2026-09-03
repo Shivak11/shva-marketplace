@@ -5,7 +5,7 @@ Run these gates from disk. An agent report, clean source diff, or successful bui
 ## 0. Book Foundation Gate
 
 - Classify whether the request is a greenfield book, a substantial book-shaped reframe, or a local correction.
-- For a greenfield book or substantial reframe, confirm an explicitly approved Book Foundation Record exists before HTML, cover art, front matter, a canonical chapter model, or production files are created.
+- For a greenfield book or substantial reframe, confirm an explicitly approved Book Foundation Record covers the exact next production scope. Under the default `full` scope, this precedes HTML, cover art, front matter, a canonical chapter model, or production files; explicit prose approval may precede a prose-bearing model while leaving identity work blocked.
 - If reusing a record for a local correction, confirm that the premise, reader, and identity are unchanged and name the record that supplies those decisions.
 - Confirm the record settles every field needed for the requested approval scope. Substantial prose always needs reader, argument, boundaries, evidence base, opening mode, section logic, carried question or artifact, voice contract, and source status. Finished front matter and visual production additionally need their selected identity fields.
 - For front-matter or full approval, confirm the author saw at least two materially different title systems. For visual-production or full approval, confirm at least two cover systems with composition, palette roles, typography mood, diagram grammar, prohibited motifs, and difference from recent work. Colour-only or name-only variations fail.
@@ -36,11 +36,11 @@ Run these gates from disk. An agent report, clean source diff, or successful bui
 - Run `node "$SKILL_DIR/scripts/test-contracts.mjs"`. It must prove the approved foundation and valid session fixtures pass and each focused mutation fails for its named invariant.
 - Verify every Book, Teaching, and Slide item maps to a canonical ID. Blocks marked `requiredAcrossSurfaces` appear everywhere; declared optional blocks may be omitted.
 - Reject a surface that adds a claim, case, visual label, exercise step, or transition absent from the canonical model.
-- Confirm the participant commitment occurs before the AI challenge in all surfaces.
+- Confirm the participant commitment occurs before the AI challenge in all surfaces. When changed information drives the exercise, confirm every surface also preserves consequence reveal → immediate human revision → AI challenge. Teaching core segments and slide beats must preserve the same first-use order rather than merely declaring it in a parent array.
 - Confirm all three Causal Hinge Ledger entries use the intended endpoint types, point forward in Book order, and declare a causal bridge, unresolved consequence, and next move. Then read the prose straight through; structure cannot prove that the bridge is real.
 - Confirm each specialist term appears after the problem that earns it, is plainly defined and distinguished, and is used again in consequence.
 - Confirm every evidence-path comparison states its common problem, different mechanisms, and decision consequence.
-- Confirm the exercise binds to its case and mechanism through structured block references and a live decision fork. Confirm the consequence reveal requires the intended first-commitment field subset, occurs before its named revision step, and identifies the revealed fact, provenance, and decision consequence. Confirm the later filled-edition reveal matches every participant field in order.
+- Confirm the exercise binds to its case and mechanism through structured block references and a live decision fork. When a consequence reveal is present, confirm it requires a proper subset of fields writable by its trigger step, uses named required-across-surfaces reveal and revision blocks, immediately enters the named human revision step, and identifies the revealed fact, provenance, and decision consequence. When it is absent, judge the recorded rationale. Confirm the later filled-edition reveal remains present and matches every participant field in order.
 
 ## 4. Source integrity gate
 
@@ -57,7 +57,7 @@ Run these gates from disk. An agent report, clean source diff, or successful bui
 - Parse edited JSON and YAML files.
 - Load the HTML from disk in a browser and check for console errors.
 - Toggle Book Chapter, Teaching Script, and Slide Content. Confirm the active mode is visible, keyboard reachable, and returns the same session meaning.
-- Confirm both declared gates in the actual DOM. The consequence reveal must reject empty, whitespace-only, default, and too-short attempts; complete the named first-commitment fields, reveal the new information, and confirm the participant can revise while the first commitment remains visible. The filled-edition control must reject the same bypasses until every comparison field has a meaningful attempt. Open and close it with keyboard input, confirm focus moves to the reveal heading and returns to the control, and confirm the participant instructions and answers remain intact.
+- Confirm every declared gate in the actual DOM. When present, the consequence reveal must reject empty, whitespace-only, default, and too-short attempts; it must not demand the whole form; complete the named writable first-commitment fields, reveal the new information, and confirm the participant can revise while the first commitment remains visible and before AI appears. The filled-edition control must reject the same bypasses until every comparison field has a meaningful attempt. Open and close it with keyboard input, confirm focus moves to the reveal heading and returns to the control, and confirm the participant instructions and answers remain intact.
 - Verify links, headings, diagrams, and controls work without a network dependency when the artifact is meant to be local.
 
 ## 6. Render gate
@@ -74,9 +74,9 @@ Run these gates from disk. An agent report, clean source diff, or successful bui
 - Count substantive visuals from the DOM: editorial illustrations, diagrams, data graphics, and workbook maps all count; cover art and ordinary controls do not. Accept zero, one, or two and reject a third.
 - Search the experienced Book prose for repeated outline transitions, meta narration, antithesis scaffolding, memorable-line duplication, and literature-review procession. A string scan is a prompt for a human read, not proof by itself.
 - Read the final two Book paragraphs directly into the first exercise instruction. Reject a conceptual reset, unexplained new case, or activity that merely rehearses a midpoint framework.
-- Walk the exercise from first decision through consequence reveal, revision, AI challenge, executable action, filled-edition reveal, and transfer. Reject a reveal that changes no subsequent decision, or a form that demands every field before the first consequential fact appears.
+- Walk the exercise from first decision through any consequence reveal, immediate human revision, AI challenge, executable action, filled-edition reveal, and transfer. Reject a reveal that changes no subsequent decision, a form that demands every field before the first consequential fact appears, or an AI challenge that arrives before the learner has responded to changed information.
 - Compare the blank exercise and filled edition row by row at desktop and mobile widths. Reject missing answers, generic placeholders, dense answer walls, duplicated stages, or an answer several screens away from the field it explains.
-- For any game, verify from interaction that a choice changes visible state and changes the next available choice. Replay once and confirm the configured evidence persists while the decision resets. Structured JSON rejects interface theatre; it does not prove the implementation obeys it.
+- For any game, verify from interaction that a choice changes visible state and that every next choice actually begins from the state just reached. Confirm the declared next choices equal the choices available from that destination state and that every state is reachable from the initial state. Replay once and confirm the configured evidence persists while the decision resets. Structured JSON rejects interface theatre; it does not prove the implementation obeys it.
 
 ## 7. Forward test and delivery gate
 

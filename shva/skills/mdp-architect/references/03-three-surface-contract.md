@@ -71,7 +71,7 @@ Choose the entry case deliberately. Use the sustained case when continuity reduc
 
 The workbook must state the starting material, numbered moves, expected output, decision boundary, and debrief question. Ask for one visible decision at a time. It may have an offline lane and an optional AI lane, but participants make the first judgment before AI.
 
-Use two distinct reveal moments when the exercise depends on changed information. The consequence reveal begins unavailable until the minimum first-commitment fields contain a meaningful attempt; it introduces a consequential fact, provenance issue, counter-signal, or outcome and sends the learner into a named revision step. The filled-edition reveal begins unavailable until every comparison field contains a meaningful attempt. It then opens with keyboard activation, moves focus to the revealed heading, offers a clear return, restores focus when closed, and never alters the participant's original text. The JSON records both gates; only browser proof establishes their actual behaviour.
+Use two distinct reveal moments when the exercise depends on changed information. The consequence reveal begins unavailable until a proper subset of first-commitment fields—each writable before the gate—contains a meaningful attempt. It introduces a consequential fact, provenance issue, counter-signal, or outcome and sends the learner immediately into a named human revision step. Book, Teaching, and Slides all preserve that revision before the AI challenge. The filled-edition reveal begins unavailable until every comparison field contains a meaningful attempt. It then opens with keyboard activation, moves focus to the revealed heading, offers a clear return, restores focus when closed, and never alters the participant's original text. If no changed information is needed, record the reason and retain the later filled-edition gate. The JSON records the applicable gates; only browser proof establishes their actual behaviour.
 
 Provide a realistic completed version of the same artifact. Its fields and order match the blank version exactly. It answers every instruction with named actors, a live alternative, evidence that could discriminate, a bounded right, executable action, and a review or reversal condition; an irrelevant field carries an explicit not-applicable reason. Put fact, inference, and illustration boundaries where the answer uses them. The filled edition is a comparison surface, not the correct answer.
 
@@ -87,8 +87,8 @@ Before release, compare every surface against the canonical model.
 | Case | Same sustained actors, stakes, constraint, and resolution; any transfer case is declared in the canonical model. |
 | Claims | Every claim points to a canonical ID. |
 | Visual | Same ordered labels and causal meaning; omissions are declared, not improvised. |
-| Exercise | Same mechanism, decision fork, artifact fields, commitment, consequence reveal, revision, filled-edition reveal, and debrief. |
-| AI | Same challenge and boundary, after commitment. |
+| Exercise | Same mechanism, decision fork, artifact fields, commitment, applicable consequence reveal and immediate human revision, filled-edition reveal, and debrief. |
+| AI | Same challenge and boundary, after the first commitment and any consequence-led human revision. |
 | Transition | Same unresolved consequence and carried artifact state, expressed without a meta coda in Book prose. |
 
 If a slide needs an additional idea, improve the canonical model and revise all surfaces. Do not patch the slide alone.

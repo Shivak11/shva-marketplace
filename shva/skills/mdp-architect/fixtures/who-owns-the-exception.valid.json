@@ -97,6 +97,20 @@
         "requiredAcrossSurfaces": true
       },
       {
+        "id": "reveal-omitted-correction",
+        "type": "consequence-reveal",
+        "text": "A previously hidden employee correction appears and places the case outside the ordinary recommendation's stated boundary.",
+        "sourceClass": "illustrative",
+        "requiredAcrossSurfaces": true
+      },
+      {
+        "id": "revision-after-consequence",
+        "type": "consequence-revision",
+        "text": "Participants retain or revise the first commitment and name the alternative made visible by the correction.",
+        "sourceClass": "teaching-synthesis",
+        "requiredAcrossSurfaces": true
+      },
+      {
         "id": "ai-challenge-map",
         "type": "ai-challenge",
         "text": "AI questions ambiguous triggers, missing evidence, and absent appeal rights without choosing the decision.",
@@ -245,6 +259,32 @@
         "factualBoundary": "Learning effectiveness remains to be tested with a live cohort."
       },
       {
+        "claimId": "reveal-omitted-correction",
+        "classification": "illustrative",
+        "origin": "Synthetic exception scenario created for schema testing",
+        "sourceType": "synthetic consequence reveal",
+        "presentationStatus": "composite",
+        "checkedOn": "2026-09-04",
+        "confidence": "high",
+        "surfaces": ["book", "teaching", "slides"],
+        "supportedFacts": [],
+        "teachingInference": "Changed information becomes pedagogically useful when it arrives after a visible first choice.",
+        "factualBoundary": "The correction and its timing are invented for this illustrative exercise."
+      },
+      {
+        "claimId": "revision-after-consequence",
+        "classification": "teaching-synthesis",
+        "origin": "Commitment, consequence, and revision learning sequence",
+        "sourceType": "learning-design synthesis",
+        "presentationStatus": "author-synthesis",
+        "checkedOn": "2026-09-04",
+        "confidence": "medium",
+        "surfaces": ["book", "teaching", "slides"],
+        "supportedFacts": [],
+        "teachingInference": "The learner must inspect the first commitment before any AI challenge is introduced.",
+        "factualBoundary": "Revision quality requires facilitator or reader judgment."
+      },
+      {
         "claimId": "ai-challenge-map",
         "classification": "teaching-synthesis",
         "origin": "Bounded AI challenger design",
@@ -307,9 +347,11 @@
           "lateral-port-drill",
           "mechanism-exception-path",
           "commitment-first-map",
+          "exercise-authority-map",
+          "reveal-omitted-correction",
+          "revision-after-consequence",
           "ai-challenge-map",
           "revision-after-challenge",
-          "exercise-authority-map",
           "transition-rule-placement"
         ],
         "headings": [
@@ -343,9 +385,11 @@
           "lateral-port-drill",
           "mechanism-exception-path",
           "commitment-first-map",
+          "exercise-authority-map",
+          "reveal-omitted-correction",
+          "revision-after-consequence",
           "ai-challenge-map",
           "revision-after-challenge",
-          "exercise-authority-map",
           "transition-rule-placement"
         ],
         "coreSegments": [
@@ -378,12 +422,21 @@
           },
           {
             "id": "participant-commitment",
-            "minutes": 11,
+            "minutes": 6,
             "semanticBlockIds": ["commitment-first-map", "exercise-authority-map"],
             "facilitatorMove": "Open the workbook at one decision fork and keep the consequence hidden.",
             "participantMove": "Write a first commitment and the consequence they knowingly accept.",
             "artifactState": "Every learner has a traceable choice that can survive later comparison.",
             "recoveryMove": "If choices stay abstract, require one actor, one action, and one accepted cost."
+          },
+          {
+            "id": "consequence-and-revision",
+            "minutes": 5,
+            "semanticBlockIds": ["reveal-omitted-correction", "revision-after-consequence"],
+            "facilitatorMove": "Reveal the omitted correction, keep the first choice visible, and ask what the new fact changes.",
+            "participantMove": "Retain or revise the first commitment before seeing any AI-generated challenge.",
+            "artifactState": "The map preserves the first choice beside a consequence-led human revision.",
+            "recoveryMove": "If the room merely acknowledges the fact, require a changed action or a reasoned decision to hold course."
           },
           {
             "id": "ai-challenge",
@@ -464,19 +517,22 @@
           "lateral-port-drill",
           "mechanism-exception-path",
           "commitment-first-map",
+          "exercise-authority-map",
+          "reveal-omitted-correction",
+          "revision-after-consequence",
           "ai-challenge-map",
           "revision-after-challenge",
-          "exercise-authority-map",
           "transition-rule-placement"
         ],
         "beats": [
           { "id": "opening-case", "semanticBlockIds": ["disturbance-no-owner", "case-return-to-work"] },
-          { "id": "room-commitment", "semanticBlockIds": ["commitment-first-map"] },
           { "id": "exception-claim", "semanticBlockIds": ["claim-exception"] },
           { "id": "lateral", "semanticBlockIds": ["lateral-port-drill"] },
           { "id": "path", "semanticBlockIds": ["mechanism-exception-path"] },
-          { "id": "workbook", "semanticBlockIds": ["exercise-authority-map", "ai-challenge-map"] },
-          { "id": "reveal", "semanticBlockIds": ["exercise-authority-map", "revision-after-challenge"] },
+          { "id": "room-commitment", "semanticBlockIds": ["commitment-first-map", "exercise-authority-map"] },
+          { "id": "consequence", "semanticBlockIds": ["reveal-omitted-correction", "revision-after-consequence"] },
+          { "id": "ai-challenge", "semanticBlockIds": ["ai-challenge-map"] },
+          { "id": "final-revision", "semanticBlockIds": ["revision-after-challenge"] },
           { "id": "next-question", "semanticBlockIds": ["transition-rule-placement"] }
         ]
       }
@@ -567,6 +623,8 @@
         ],
         "consequenceReveal": {
           "present": true,
+          "revealBlockId": "reveal-omitted-correction",
+          "revisionBlockId": "revision-after-consequence",
           "requiresParticipantInput": true,
           "requiredFieldIds": ["first-commitment"],
           "minimumAttemptCharacters": 24,
