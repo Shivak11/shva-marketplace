@@ -651,7 +651,18 @@
           "browserProofRequired": true
         },
         "aiRoleType": "challenge",
-        "aiRole": "Challenge the map by questioning ambiguous triggers, missing evidence, and absent appeal rights.",
+        "aiAllowedMoves": [
+          "question-ambiguity",
+          "stress-test-evidence",
+          "identify-missing-escalation"
+        ],
+        "aiAuthorityBoundary": {
+          "mayApprove": false,
+          "mayDeny": false,
+          "mayCertify": false,
+          "mayDecide": false,
+          "mayAuthorise": false
+        },
         "humanDecisionOwner": "The named organizational role accountable for the affected people decision",
         "transferPrompt": "Apply the same six fields to one rule-bound decision in your own organisation using synthetic or redacted facts.",
         "debriefQuestion": "Which part of the path changed after challenge, and which right must still remain human-owned?",

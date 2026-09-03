@@ -63,6 +63,13 @@ const allowedPresentationStatuses = new Set([
   "composite",
   "author-synthesis",
 ]);
+const allowedAiMoves = new Set([
+  "question-ambiguity",
+  "surface-alternative",
+  "stress-test-evidence",
+  "test-threshold",
+  "identify-missing-escalation",
+]);
 const requiredBlockTypes = [
   "disturbance",
   "case",
@@ -468,6 +475,18 @@ requireValue(
   duplicateValues((teaching.coreSegments ?? []).map((segment) => segment?.id).filter(Boolean)).length === 0,
   "teaching core segment ids must be unique",
 );
+requireValue(
+  duplicateValues(
+    (teaching.coreSegments ?? []).map((segment) => JSON.stringify([
+      segment?.semanticBlockIds ?? [],
+      normaliseText(segment?.facilitatorMove),
+      normaliseText(segment?.participantMove),
+      normaliseText(segment?.artifactState),
+      normaliseText(segment?.recoveryMove),
+    ])),
+  ).length === 0,
+  "teaching core segments must be materially distinct beyond their ids",
+);
 for (const [index, segment] of (teaching.coreSegments ?? []).entries()) {
   requireValue(isNonEmpty(segment?.id), `coreSegments[${index}].id is required`);
   requireValue(isPositiveInteger(segment?.minutes), `coreSegments[${index}].minutes must be a positive integer`);
@@ -490,6 +509,19 @@ requireValue(
 requireValue(
   duplicateValues((teaching.depthReserves ?? []).map((reserve) => reserve?.id).filter(Boolean)).length === 0,
   "teaching depth reserve ids must be unique",
+);
+requireValue(
+  duplicateValues(
+    (teaching.depthReserves ?? []).map((reserve) => JSON.stringify([
+      reserve?.semanticBlockIds ?? [],
+      normaliseText(reserve?.trigger),
+      normaliseText(reserve?.addedMove),
+      normaliseText(reserve?.participantMove),
+      normaliseText(reserve?.artifactState),
+      normaliseText(reserve?.rejoin),
+    ])),
+  ).length === 0,
+  "teaching depth reserves must be materially distinct beyond their ids",
 );
 for (const [index, reserve] of (teaching.depthReserves ?? []).entries()) {
   requireValue(isNonEmpty(reserve?.id), `depthReserves[${index}].id is required`);
@@ -779,7 +811,27 @@ for (const [index, exercise] of exercises.entries()) {
     );
   }
   requireValue(["challenge", "question", "stress-test"].includes(exercise?.aiRoleType), `exercises[${index}].aiRoleType must be challenge, question, or stress-test`);
-  requireValue(isNonEmpty(exercise?.aiRole), `exercises[${index}].aiRole must explain the bounded AI move`);
+  requireValue(
+    !Object.prototype.hasOwnProperty.call(exercise ?? {}, "aiRole"),
+    `exercises[${index}].aiRole free text is not allowed; use aiAllowedMoves and aiAuthorityBoundary`,
+  );
+  requireValue(nonEmptyArray(exercise?.aiAllowedMoves), `exercises[${index}].aiAllowedMoves must not be empty`);
+  requireValue(
+    duplicateValues(exercise?.aiAllowedMoves ?? []).length === 0,
+    `exercises[${index}].aiAllowedMoves must be unique`,
+  );
+  for (const [moveIndex, move] of (exercise?.aiAllowedMoves ?? []).entries()) {
+    requireValue(
+      allowedAiMoves.has(move),
+      `exercises[${index}].aiAllowedMoves[${moveIndex}] must be an approved bounded move`,
+    );
+  }
+  for (const authorityField of ["mayApprove", "mayDeny", "mayCertify", "mayDecide", "mayAuthorise"]) {
+    requireValue(
+      exercise?.aiAuthorityBoundary?.[authorityField] === false,
+      `exercises[${index}].aiAuthorityBoundary.${authorityField} must be false`,
+    );
+  }
   requireValue(isNonEmpty(exercise?.humanDecisionOwner), `exercises[${index}].humanDecisionOwner is required`);
   requireValue(isNonEmpty(exercise?.transferPrompt), `exercises[${index}].transferPrompt is required`);
   requireValue(isNonEmpty(exercise?.debriefQuestion), `exercises[${index}].debriefQuestion is required`);

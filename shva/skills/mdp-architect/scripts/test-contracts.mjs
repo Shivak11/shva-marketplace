@@ -429,6 +429,34 @@ try {
     "needs at least 3 segments for a 90-minute session regardless of the selected planning profile",
   );
 
+  const renamedCoreBlob = clone(validSession);
+  const repeatedCoreSegment = clone(renamedCoreBlob.session.surfaces.teaching.coreSegments[0]);
+  renamedCoreBlob.session.surfaces.teaching.coreSegments = Array.from({ length: 9 }, (_, index) => ({
+    ...clone(repeatedCoreSegment),
+    id: `renamed-core-${index + 1}`,
+    minutes: 10,
+  }));
+  expectFailure(
+    "one core move cloned behind unique ids",
+    sessionValidator,
+    writeMutation("renamed-core-blob", renamedCoreBlob),
+    "teaching core segments must be materially distinct beyond their ids",
+  );
+
+  const renamedReserveBlob = clone(validSession);
+  const repeatedReserve = clone(renamedReserveBlob.session.surfaces.teaching.depthReserves[0]);
+  renamedReserveBlob.session.surfaces.teaching.depthReserves = Array.from({ length: 3 }, (_, index) => ({
+    ...clone(repeatedReserve),
+    id: `renamed-reserve-${index + 1}`,
+    minutes: 10,
+  }));
+  expectFailure(
+    "one reserve move cloned behind unique ids",
+    sessionValidator,
+    writeMutation("renamed-reserve-blob", renamedReserveBlob),
+    "teaching depth reserves must be materially distinct beyond their ids",
+  );
+
   const emptySourceFacts = clone(validSession);
   emptySourceFacts.session.semanticBlocks.find((block) => block.id === "claim-exception").sourceClass = "source-backed";
   const fabricatedLedger = emptySourceFacts.session.sourceLedger.find((entry) => entry.claimId === "claim-exception");
@@ -460,6 +488,24 @@ try {
   const placeholderDecisionFork = clone(validSession);
   placeholderDecisionFork.session.exercises[0].decisionFork.question = "Decide.";
   expectFailure("placeholder decision fork", sessionValidator, writeMutation("placeholder-decision-fork", placeholderDecisionFork), "decisionFork.question must be substantive");
+
+  const freeTextAiAuthorityBypass = clone(validSession);
+  freeTextAiAuthorityBypass.session.exercises[0].aiRole = "AI will approve, deny, certify, and decide whether the named policy exception should proceed.";
+  expectFailure(
+    "free-text AI decision-authority bypass",
+    sessionValidator,
+    writeMutation("free-text-ai-authority", freeTextAiAuthorityBypass),
+    "aiRole free text is not allowed",
+  );
+
+  const structuredAiAuthorityBypass = clone(validSession);
+  structuredAiAuthorityBypass.session.exercises[0].aiAuthorityBoundary.mayDecide = true;
+  expectFailure(
+    "structured AI decision authority",
+    sessionValidator,
+    writeMutation("structured-ai-authority", structuredAiAuthorityBypass),
+    "aiAuthorityBoundary.mayDecide must be false",
+  );
 
   const duplicateDecisionOptions = clone(validSession);
   duplicateDecisionOptions.session.exercises[0].decisionFork.options[1].action = duplicateDecisionOptions.session.exercises[0].decisionFork.options[0].action;
