@@ -138,6 +138,8 @@ It is one defensible answer, not the answer key. A field that does not apply say
 
 ## 7. Game feel without interface theatre
 
+When an exercise carries a game, load `shva:learning-game-architect` and follow it. That skill owns the play contract: the object the screen is, the level architecture, reflection placement, the copy register, the stack choice and the verification ladder. This skill owns the teaching contract and passes down the decision fork, the typed actor registry with its human decision owner, the mechanism the exercise exercises, the case and the participant fields. It returns a level design and a state model, which is then validated against the schema below. Neither side edits the other's contract. A game built without loading that skill is an unverified game, whatever it looks like.
+
 Use a scored or stateful game only when the learner's choice produces a visible consequence that changes what can be chosen next. Record named states and, for every choice, its canonical decision option, origin state, destination state, visible delta, consequence, and next available choices. Initial choices cover the full decision fork exactly once. Record a replay rule that returns to the initial state, says what evidence remains, and states what becomes different. The meaningful loop is commitment → consequence → explanation → revision → transfer.
 
 Scores may represent the quality or cost of consequences. They must not reward guessing the teacher's vocabulary. Buttons, badges, confetti, progress bars, and card stacks do not create play by themselves. Two booleans claiming that “choice changes state” do not create a state model. If the decision state does not change, retain the simpler workbook.

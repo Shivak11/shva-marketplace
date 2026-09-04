@@ -1,14 +1,14 @@
 {
   "name": "shva",
-  "description": "Shiva Kakkar's personal Claude Code plugins. Cross-cutting tools that aren't tied to any single product — vocabulary briefings, prompt scaffolds, LinkedIn authoring with Shiva's voice, and personal workflow accelerators.",
+  "description": "Shiva Kakkar's personal Claude Code plugins. Cross-cutting tools that aren't tied to any single product \u2014 vocabulary briefings, prompt scaffolds, LinkedIn authoring with Shiva's voice, and personal workflow accelerators.",
   "owner": {
     "name": "Shiva Kakkar"
   },
   "plugins": [
     {
       "name": "shva",
-      "description": "Personal command + skill pack. v0.12.0 makes MDP Architect protect narrative causality and exercise integrity: concepts are earned, evidence mechanisms stay distinct, answer reveals are input-gated, and filled editions match the learner's artifact field for field.",
-      "version": "0.12.0",
+      "description": "Personal command + skill pack. v0.13.0 adds Learning Game Architect: the play contract for teaching games, called by MDP Architect whenever a session model declares a game. Stack-agnostic; it governs the object the screen is, level architecture, reflection placement, copy register and the verification ladder.",
+      "version": "0.13.0",
       "source": "./shva",
       "author": {
         "name": "Shiva Kakkar"

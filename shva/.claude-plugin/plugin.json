@@ -1,7 +1,7 @@
 {
   "name": "shva",
-  "version": "0.12.0",
-  "description": "Personal command and skill pack for Shiva. v0.12.0 makes MDP Architect protect narrative causality and exercise integrity: concepts are earned, evidence mechanisms stay distinct, answer reveals are input-gated, and filled editions match the learner's artifact field for field.",
+  "version": "0.13.0",
+  "description": "Personal command and skill pack for Shiva. v0.13.0 adds Learning Game Architect: the play contract for teaching games, called by MDP Architect whenever a session model declares a game. Stack-agnostic; it governs the object the screen is, level architecture, reflection placement, copy register and the verification ladder.",
   "author": {
     "name": "Shiva Kakkar"
   },
@@ -69,7 +69,14 @@
     "library-search",
     "owned-corpus",
     "citations",
-    "book-recommendations"
+    "book-recommendations",
+    "learning-game",
+    "teaching-game",
+    "game-design",
+    "mini-game",
+    "simulation",
+    "level-design",
+    "phaser"
   ],
   "commands": [
     "./commands/help.md",
