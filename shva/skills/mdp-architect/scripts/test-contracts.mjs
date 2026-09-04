@@ -612,6 +612,31 @@ try {
     );
   }
 
+  for (const [label, id, displayName] of [
+    ["AI identity padded with manager role", "ai-manager", "AI manager"],
+    ["algorithm identity padded with owner role", "algorithm-owner", "algorithm owner"],
+    ["GPT identity padded with reviewer role", "gpt-4-reviewer", "GPT-4 reviewer"],
+    ["robot identity padded with manager role", "robot-manager", "robot manager"],
+  ]) {
+    const mixedMachineOwner = clone(validSession);
+    const machineActor = mixedMachineOwner.session.actorRegistry.find((actor) => actor.id === "chro-delegate");
+    machineActor.id = id;
+    machineActor.displayName = displayName;
+    mixedMachineOwner.session.semanticBlocks.find((block) => block.id === "case-return-to-work").actorIds = [
+      "affected-employee",
+      "line-manager",
+      "policy-owner",
+      id,
+    ];
+    mixedMachineOwner.session.exercises[0].humanDecisionOwner.actorId = id;
+    expectFailure(
+      label,
+      sessionValidator,
+      writeMutation(`mixed-${id}`, mixedMachineOwner),
+      "human-role cannot use an explicit machine identity",
+    );
+  }
+
   const humanOwnerIntroducedAfterCommitment = clone(validSession);
   const lateOwnerBookOrder = humanOwnerIntroducedAfterCommitment.session.surfaces.book.semanticBlockIds;
   lateOwnerBookOrder.splice(lateOwnerBookOrder.indexOf("case-return-to-work"), 1);

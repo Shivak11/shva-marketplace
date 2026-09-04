@@ -83,9 +83,7 @@ const namesRecognisableHumanRole = (actor) => {
 const isExplicitMachineIdentity = (actor) => {
   const id = String(actor?.id ?? "").replace(/-/g, " ");
   const displayName = String(actor?.displayName ?? "");
-  const containsMachineIdentity = explicitMachineIdentityPattern.test(id) || explicitMachineIdentityPattern.test(displayName);
-  const containsHumanRole = explicitHumanRolePattern.test(id) || explicitHumanRolePattern.test(displayName);
-  return containsMachineIdentity && !containsHumanRole;
+  return explicitMachineIdentityPattern.test(id) || explicitMachineIdentityPattern.test(displayName);
 };
 const requiredBlockTypes = [
   "disturbance",

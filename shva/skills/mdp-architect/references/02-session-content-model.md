@@ -112,7 +112,7 @@ Each visual records:
 
 ## Decision-Closure Contract
 
-At session level, record `session.actorRegistry`. Each consequential actor has one closed record containing `id`, `displayName`, `actorType`, `automationEligible`, and `introducedInBlockId`. The introduction block binds that ID through its `actorIds`. A `human-role` cannot be automation eligible, must name a recognisable human role in both its stable ID and display name, and cannot carry an explicit machine identity. Names that remain semantically ambiguous still require human review.
+At session level, record `session.actorRegistry`. Each consequential actor has one closed record containing `id`, `displayName`, `actorType`, `automationEligible`, and `introducedInBlockId`. The introduction block binds that ID through its `actorIds`. A `human-role` cannot be automation eligible, must name a recognisable human role in both its stable ID and display name, and cannot contain an AI, model, algorithm, robot, system, or other explicit machine-identity token even when a human-role word is also present. Register a person responsible for AI by the accountable human role—such as `product-manager` or `governance-lead`—and keep the AI domain in the case context. Names that remain semantically ambiguous still require human review.
 
 Every exercise binds to the chapter rather than merely sitting after it. Record:
 
