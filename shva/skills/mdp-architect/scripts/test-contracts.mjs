@@ -589,6 +589,29 @@ try {
     "human-role cannot use an explicit machine identity",
   );
 
+  for (const [label, id, displayName] of [
+    ["GPT model relabelled as human role", "gpt-4", "GPT-4"],
+    ["robot relabelled as human role", "robot", "robot"],
+  ]) {
+    const rolelessMachineOwner = clone(validSession);
+    const machineActor = rolelessMachineOwner.session.actorRegistry.find((actor) => actor.id === "chro-delegate");
+    machineActor.id = id;
+    machineActor.displayName = displayName;
+    rolelessMachineOwner.session.semanticBlocks.find((block) => block.id === "case-return-to-work").actorIds = [
+      "affected-employee",
+      "line-manager",
+      "policy-owner",
+      id,
+    ];
+    rolelessMachineOwner.session.exercises[0].humanDecisionOwner.actorId = id;
+    expectFailure(
+      label,
+      sessionValidator,
+      writeMutation(id, rolelessMachineOwner),
+      "human-role must name a recognisable human role in both id and displayName",
+    );
+  }
+
   const humanOwnerIntroducedAfterCommitment = clone(validSession);
   const lateOwnerBookOrder = humanOwnerIntroducedAfterCommitment.session.surfaces.book.semanticBlockIds;
   lateOwnerBookOrder.splice(lateOwnerBookOrder.indexOf("case-return-to-work"), 1);

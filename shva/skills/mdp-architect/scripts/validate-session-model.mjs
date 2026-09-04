@@ -73,8 +73,13 @@ const allowedAiMoves = new Set([
   "test-threshold",
   "identify-missing-escalation",
 ]);
-const explicitMachineIdentityPattern = /(?:^|[\s-])(?:ai|artificial[\s-]+intelligence|algorithm|automated|automation|autonomous|bot|classifier|engine|machine|model|predictor|recommender|system)(?:$|[\s-])/i;
-const explicitHumanRolePattern = /(?:^|[\s-])(?:adviser|advisor|analyst|architect|authoriser|authorizer|chair|chief|clinician|controller|coordinator|delegate|director|doctor|employee|engineer|executive|faculty|head|human|lawyer|lead|manager|nurse|officer|operator|owner|person|pilot|representative|researcher|reviewer|specialist|staff|supervisor|teacher|worker)(?:$|[\s-])/i;
+const explicitMachineIdentityPattern = /(?:^|[\s-])(?:ai|artificial[\s-]+intelligence|algorithm|automated|automation|autonomous|bot|chatbot|classifier|claude|copilot|engine|gemini|gpt(?:[\s-]*\d+)?|llm|machine|model|predictor|recommender|robot|system)(?:$|[\s-])/i;
+const explicitHumanRolePattern = /(?:^|[\s-])(?:administrator|adviser|advisor|analyst|architect|author|authoriser|authorizer|buyer|captain|chair|chief|citizen|clinician|commissioner|controller|coordinator|customer|delegate|designer|developer|director|doctor|editor|employee|engineer|executive|facilitator|faculty|founder|head|human|inspector|judge|lawyer|lead|learner|manager|master|member|minister|nurse|officer|operator|owner|participant|partner|patient|person|physician|pilot|planner|president|professor|programmer|representative|researcher|resident|reviewer|secretary|seller|specialist|staff|student|supervisor|teacher|technician|worker)(?:$|[\s-])/i;
+const namesRecognisableHumanRole = (actor) => {
+  const id = String(actor?.id ?? "").replace(/-/g, " ");
+  const displayName = String(actor?.displayName ?? "");
+  return explicitHumanRolePattern.test(id) && explicitHumanRolePattern.test(displayName);
+};
 const isExplicitMachineIdentity = (actor) => {
   const id = String(actor?.id ?? "").replace(/-/g, " ");
   const displayName = String(actor?.displayName ?? "");
@@ -161,6 +166,10 @@ for (const [index, actor] of actorRegistry.entries()) {
   requireValue(typeof actor?.automationEligible === "boolean", `session.actorRegistry[${index}].automationEligible must be boolean`);
   if (actor?.actorType === "human-role") {
     requireValue(actor?.automationEligible === false, `session.actorRegistry[${index}] human-role cannot be automation eligible`);
+    requireValue(
+      namesRecognisableHumanRole(actor),
+      `session.actorRegistry[${index}] human-role must name a recognisable human role in both id and displayName`,
+    );
     requireValue(
       !isExplicitMachineIdentity(actor),
       `session.actorRegistry[${index}] human-role cannot use an explicit machine identity`,
