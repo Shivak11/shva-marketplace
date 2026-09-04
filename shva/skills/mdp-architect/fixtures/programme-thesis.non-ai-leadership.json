@@ -1,0 +1,144 @@
+{
+  "recordId": "programme-thesis-non-ai-leadership",
+  "schemaVersion": "1.0",
+  "trigger": {
+    "kind": "new-substantial-programme",
+    "reason": "A new leadership workshop needs a practical thesis and observable learner performance before activities are written.",
+    "inspectedEvidence": [
+      "Sponsor interviews about escalation failures",
+      "Facilitator notes from prior leadership simulations",
+      "Participant role and experience profile"
+    ],
+    "reusedRecord": null,
+    "materialChangeDetected": true,
+    "interviewAction": "complete-interview"
+  },
+  "programme": {
+    "subject": "Leadership when disagreement must become a joint commitment",
+    "scope": "A one-day workshop on surfacing dissent, setting decision rights, and carrying disagreement into execution",
+    "format": "workshop",
+    "audience": "Experienced functional leaders who regularly share decisions across business units",
+    "startingPoint": "Learners can argue for their own function but often leave cross-functional meetings with different versions of the commitment"
+  },
+  "thesis": {
+    "recognisedProblem": "Leaders often mistake a quiet room for agreement and discover the disagreement only after execution diverges.",
+    "recognisedProblemEvidenceId": "evidence-leadership-sponsor-pattern",
+    "promisedLearnerChange": "Learners leave able to surface a consequential disagreement, assign the decision right, and write a commitment that different functions can execute consistently.",
+    "promisedLearnerChangeId": "change-leadership-shared-commitment",
+    "centralQuestion": "How can a leader use disagreement before it becomes divergent execution?",
+    "distinctiveArgument": "The leader's work is not to remove disagreement but to make its stakes visible and convert it into one challengeable commitment.",
+    "distinctiveArgumentEvidenceId": "evidence-leadership-commitment-argument",
+    "argumentBoundary": "The workshop addresses ordinary organisational disagreement and does not replace formal grievance, ethics, or legal processes.",
+    "changedCondition": "The sponsor has asked for a practice-led workshop built around current cross-functional decisions rather than a survey of leadership styles.",
+    "changedConditionEvidenceId": "evidence-leadership-sponsor-brief"
+  },
+  "inheritedMaterial": {
+    "present": false,
+    "sources": [],
+    "audit": []
+  },
+  "transformationLens": {
+    "applicability": "Not applicable",
+    "reason": "The programme solves a standing leadership practice problem and does not depend on contrasting an inherited form with a new technological one.",
+    "governingQuestion": "",
+    "changedMechanisms": []
+  },
+  "evidenceBoundaries": [
+    {
+      "id": "evidence-leadership-sponsor-pattern",
+      "claim": "The sponsor's leaders report discovering unresolved disagreement only after functions begin executing different interpretations.",
+      "evidenceClass": "author_experience_or_teaching_observation",
+      "attribution": "Facilitator synthesis of sponsor interviews",
+      "observedScope": "Nine interviews with functional leaders in the commissioning organisation during programme discovery",
+      "known": "Interviewees supplied recent examples of commitments interpreted differently across functions.",
+      "uncertain": "The interviews do not establish the frequency or cause of every execution failure.",
+      "allowedUse": "Use to frame a relevant practice problem for this sponsor and cohort."
+    },
+    {
+      "id": "evidence-leadership-sponsor-brief",
+      "claim": "The sponsor prioritises rehearsal of current decisions over broad coverage of leadership styles.",
+      "evidenceClass": "author_experience_or_teaching_observation",
+      "attribution": "Commissioning sponsor's written programme brief",
+      "observedScope": "The approved brief and two planning conversations for this one-day workshop",
+      "known": "The requested performance and format are explicit in the planning record.",
+      "uncertain": "Individual participants may bring additional development needs not visible in the brief.",
+      "allowedUse": "Use to choose the workshop architecture while retaining a route for participant-specific practice."
+    },
+    {
+      "id": "evidence-leadership-commitment-argument",
+      "claim": "A challengeable written commitment can turn visible disagreement into comparable execution across functions.",
+      "evidenceClass": "author_synthesis",
+      "inputClaimIds": ["evidence-leadership-sponsor-pattern", "evidence-leadership-sponsor-brief"],
+      "known": "The observed failures involve different interpretations of a supposedly shared decision.",
+      "uncertain": "A written commitment will not resolve every conflict of incentives or authority.",
+      "allowedUse": "Use as the workshop's tested proposition, bounded by the formal processes outside its scope."
+    }
+  ],
+  "carriedProof": {
+    "carriedProofId": "proof-leadership-commitment-record",
+    "supportsLearnerChangeId": "change-leadership-shared-commitment",
+    "successEvidenceId": "proof-leadership-final-commitment",
+    "type": "facilitated commitment record",
+    "name": "Disagreement to Commitment Record",
+    "initialState": "A contested decision described differently by each participating function",
+    "finalState": "One bounded commitment with the disagreement, authority, action, owner, and challenge route recorded",
+    "successEvidence": "Two independent readers can state the same action, owner, boundary, and unresolved challenge from the record."
+  },
+  "capabilityProgression": [
+    {
+      "stageId": "stage-leadership-surface",
+      "stage": "Surface the disagreement",
+      "learnerChangeId": "change-leadership-name-conflict",
+      "learnerMove": "Learners state the competing commitments and the consequence each protects.",
+      "proofId": "proof-leadership-conflict-map",
+      "proofAdded": "The record shows the competing positions without reducing one to resistance.",
+      "handoff": "The visible conflict creates the need to locate the decision right."
+    },
+    {
+      "stageId": "stage-leadership-authorise",
+      "stage": "Locate the decision right",
+      "learnerChangeId": "change-leadership-name-authority",
+      "learnerMove": "Learners distinguish consultation from the authority to make the commitment.",
+      "proofId": "proof-leadership-authority-line",
+      "proofAdded": "The record names who decides, who must be heard, and what remains challengeable.",
+      "handoff": "Named authority allows the group to write one executable commitment."
+    },
+    {
+      "stageId": "stage-leadership-commit",
+      "stage": "Write the shared commitment",
+      "learnerChangeId": "change-leadership-shared-commitment",
+      "learnerMove": "Learners translate the decision into a bounded action that preserves an explicit challenge route.",
+      "proofId": "proof-leadership-final-commitment",
+      "proofAdded": "The final record can be interpreted consistently by people who were not in the meeting.",
+      "handoff": "The record travels into the learner's next cross-functional decision."
+    }
+  ],
+  "publicContribution": {
+    "intended": false,
+    "claim": "",
+    "audience": "",
+    "evidenceBoundaryId": null
+  },
+  "exclusions": {
+    "outOfScope": ["formal grievance adjudication", "individual personality assessment"],
+    "antiGoals": ["leadership slogans without a live decision", "forced consensus presented as collaboration"]
+  },
+  "openDecisions": [],
+  "approval": {
+    "status": "approved",
+    "scope": ["full"],
+    "approvedBy": "Programme sponsor",
+    "approvedAt": "2026-09-04",
+    "provenance": "The sponsor approved the one-day practice outcome and the recorded boundary in the programme planning conversation."
+  },
+  "productionDecision": {
+    "state": "proceed",
+    "nextAction": "Write the simulation and debrief around the Disagreement to Commitment Record.",
+    "blockedBy": [],
+    "bookFoundation": {
+      "required": false,
+      "status": "not-applicable",
+      "record": ""
+    }
+  }
+}

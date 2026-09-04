@@ -1,12 +1,26 @@
 {
+  "recordId": "book-foundation-public-book-draft",
   "status": "draft",
   "projectAndScope": "A proposed public book",
+  "programmeThesisLink": {
+    "recordId": "programme-thesis-public-book-draft",
+    "approvalEvidence": "The governing thesis still requires author approval.",
+    "recognisedProblem": "AI produces more analysis than the organisation can use",
+    "promisedLearnerChangeId": "change-public-book-draft",
+    "promisedLearnerChange": "",
+    "centralQuestion": "",
+    "distinctiveArgument": "",
+    "argumentBoundary": "",
+    "outOfScope": [],
+    "antiGoals": []
+  },
   "proposition": {
     "bookReader": "",
     "participantAudience": "Current executive cohort",
     "assumedKnowledgeBySurface": "",
     "recognisedProblem": "AI produces more analysis than the organisation can use",
     "promisedChange": "",
+    "centralQuestion": "",
     "centralArgument": "",
     "boundary": "",
     "evidenceBase": "Unresolved"

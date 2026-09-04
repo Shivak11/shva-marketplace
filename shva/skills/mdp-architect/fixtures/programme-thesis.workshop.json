@@ -1,0 +1,144 @@
+{
+  "recordId": "programme-thesis-maintenance-workshop",
+  "schemaVersion": "1.0",
+  "trigger": {
+    "kind": "new-substantial-programme",
+    "reason": "A new applied workshop needs a shared capability target before the facilitator guide and participant materials are produced.",
+    "inspectedEvidence": [
+      "Sponsor brief on maintenance handoff failures",
+      "Three anonymised work-order records",
+      "Participant role map for planning and field teams"
+    ],
+    "reusedRecord": null,
+    "materialChangeDetected": true,
+    "interviewAction": "complete-interview"
+  },
+  "programme": {
+    "subject": "Planning maintenance work across office and field teams",
+    "scope": "A half-day workshop on writing executable work orders and resolving exceptions before equipment downtime expands",
+    "format": "workshop",
+    "audience": "Maintenance planners, field supervisors, stores coordinators, and operations managers",
+    "startingPoint": "Learners know their own stage of the process but rarely see how assumptions change across the complete work order"
+  },
+  "thesis": {
+    "recognisedProblem": "A work order can be complete in the planning system and still be unusable when the field team reaches the equipment.",
+    "recognisedProblemEvidenceId": "evidence-maintenance-record-gap",
+    "promisedLearnerChange": "Learners leave able to write and stress-test one maintenance handoff whose information, materials, authority, and exception route remain usable in the field.",
+    "promisedLearnerChangeId": "change-maintenance-executable-handoff",
+    "centralQuestion": "What must travel with a work order for another team to execute it safely under real conditions?",
+    "distinctiveArgument": "The quality of a maintenance plan is revealed at the handoff where another team must act without reconstructing the planner's assumptions.",
+    "distinctiveArgumentEvidenceId": "evidence-maintenance-handoff-argument",
+    "argumentBoundary": "The workshop improves planning and coordination practice but does not certify technical procedures or replace site safety controls.",
+    "changedCondition": "Planning and field work now occur across separate shifts and locations, reducing the informal clarification that once repaired incomplete work orders.",
+    "changedConditionEvidenceId": "evidence-maintenance-distributed-condition"
+  },
+  "inheritedMaterial": {
+    "present": false,
+    "sources": [],
+    "audit": []
+  },
+  "transformationLens": {
+    "applicability": "Supporting",
+    "reason": "The enduring requirement is executable maintenance work, while distributed shifts change how context and exceptions must travel.",
+    "governingQuestion": "What must remain available when informal clarification is replaced by a cross-location handoff?",
+    "changedMechanisms": ["coordination", "memory"]
+  },
+  "evidenceBoundaries": [
+    {
+      "id": "evidence-maintenance-record-gap",
+      "claim": "The sampled work orders were administratively complete while field teams still needed missing context before execution.",
+      "evidenceClass": "author_experience_or_teaching_observation",
+      "attribution": "Programme designer's review of sponsor-supplied records",
+      "observedScope": "Three anonymised work orders selected by the sponsor for programme discovery",
+      "known": "Each record contained a later clarification request from the field team.",
+      "uncertain": "The small purposive sample does not estimate the frequency of the problem across all sites.",
+      "allowedUse": "Use to construct a bounded workshop problem and realistic practice case."
+    },
+    {
+      "id": "evidence-maintenance-distributed-condition",
+      "claim": "The sponsor's planning and field teams now work across separate shifts and locations.",
+      "evidenceClass": "author_experience_or_teaching_observation",
+      "attribution": "Sponsor role map and process walkthrough",
+      "observedScope": "The participating maintenance unit and the workflow selected for this workshop",
+      "known": "The named roles do not share every shift or physical location.",
+      "uncertain": "Other units may retain more direct access to planners during execution.",
+      "allowedUse": "Use to set the workshop's handoff condition without generalising across the organisation."
+    },
+    {
+      "id": "evidence-maintenance-handoff-argument",
+      "claim": "Testing whether another team can execute the work order exposes assumptions hidden by administrative completeness.",
+      "evidenceClass": "author_synthesis",
+      "inputClaimIds": ["evidence-maintenance-record-gap", "evidence-maintenance-distributed-condition"],
+      "known": "The sampled clarification requests appeared at the transfer from planning to field execution.",
+      "uncertain": "Different equipment and sites may expose different missing assumptions.",
+      "allowedUse": "Use as the workshop proposition and test it through participant-owned work orders."
+    }
+  ],
+  "carriedProof": {
+    "carriedProofId": "proof-maintenance-handoff-record",
+    "supportsLearnerChangeId": "change-maintenance-executable-handoff",
+    "successEvidenceId": "proof-maintenance-final-handoff",
+    "type": "cross-functional work record",
+    "name": "Executable Maintenance Handoff",
+    "initialState": "A work order judged complete by the team that created it",
+    "finalState": "A field-tested handoff with context, materials, authority, stop conditions, and escalation routes",
+    "successEvidence": "A different team can explain and begin the work without inventing missing assumptions."
+  },
+  "capabilityProgression": [
+    {
+      "stageId": "stage-maintenance-reconstruct",
+      "stage": "Reconstruct the handoff",
+      "learnerChangeId": "change-maintenance-see-assumptions",
+      "learnerMove": "Learners identify the assumptions that disappear between planning and field execution.",
+      "proofId": "proof-maintenance-assumption-list",
+      "proofAdded": "The handoff record distinguishes stated information from context held only by the planner.",
+      "handoff": "The missing context creates a test of field usability."
+    },
+    {
+      "stageId": "stage-maintenance-stress-test",
+      "stage": "Stress-test execution",
+      "learnerChangeId": "change-maintenance-test-field-case",
+      "learnerMove": "Learners test the work order against changed field conditions and material constraints.",
+      "proofId": "proof-maintenance-exception-test",
+      "proofAdded": "The record shows which change pauses work and who can resolve the exception.",
+      "handoff": "The tested exception route can now be written into the final handoff."
+    },
+    {
+      "stageId": "stage-maintenance-revise",
+      "stage": "Write the executable handoff",
+      "learnerChangeId": "change-maintenance-executable-handoff",
+      "learnerMove": "Learners revise their work order so that another team can execute and challenge it safely.",
+      "proofId": "proof-maintenance-final-handoff",
+      "proofAdded": "The completed handoff records information, materials, authority, stop conditions, and escalation.",
+      "handoff": "The revised record is ready for a live field review after the workshop."
+    }
+  ],
+  "publicContribution": {
+    "intended": false,
+    "claim": "",
+    "audience": "",
+    "evidenceBoundaryId": null
+  },
+  "exclusions": {
+    "outOfScope": ["technical procedure certification", "site safety accreditation"],
+    "antiGoals": ["generic teamwork discussion", "forms redesigned without field testing"]
+  },
+  "openDecisions": [],
+  "approval": {
+    "status": "approved",
+    "scope": ["full"],
+    "approvedBy": "Programme sponsor",
+    "approvedAt": "2026-09-04",
+    "provenance": "The sponsor approved the applied workshop thesis and carried performance in the design review."
+  },
+  "productionDecision": {
+    "state": "proceed",
+    "nextAction": "Write the workshop case and facilitation guide around the Executable Maintenance Handoff.",
+    "blockedBy": [],
+    "bookFoundation": {
+      "required": false,
+      "status": "not-applicable",
+      "record": ""
+    }
+  }
+}

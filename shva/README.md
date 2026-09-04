@@ -4,6 +4,18 @@
 > Commands in this plugin start with `/shva:` — that's the `shva` namespace tag.
 > (Yes, the missing "i" is on purpose. Easier to remember, impossible to collide.)
 
+## v0.14.0: Programme Thesis And Transformation Audit
+
+`/shva:mdp-architect` now establishes the argument of a substantial programme before it writes the session list. Its inspect-first Programme Thesis Interview turns a brief, inherited outline, source material, and author context into an approved record of the recognised problem, learner change, central question, distinctive author argument, evidence boundary, carried artifact, session capability progression, exclusions, and production scope. A current approved record is reused; the author is not interviewed again for ceremony.
+
+For redesigns, a transformation audit asks what function an inherited concept served, what condition changed, and whether the item should be preserved, reframed, combined, resequenced, added, or omitted. The enduring-requirement/changing-form lens is configurable as `Central`, `Supporting`, or `Not applicable`. This keeps useful lineage without making every greenfield or non-AI programme perform an old-versus-new story.
+
+Programme Thesis and Book Foundation are separate gates. Workshops settle the thesis without being asked for titles, covers, acknowledgements, or book identity. Book-shaped work imports settled proposition fields into Book Foundation, which then handles reader architecture, voice, front matter, title systems, and visual identity. A cross-record validator proves that the foundation preserves the thesis and that each new session resolves to the promised learner change, carried proof, capability stage, and stage proof. v0.14.0 preserves the v0.13.0 Learning Game Architect handoff and all existing source, exercise, actor, timing, visual, and cross-surface contracts.
+
+## v0.13.0: Learning Game Architect
+
+SHVA adds `/shva:learning-game-architect`, the play contract for a teaching game. When an MDP session declares a game, `mdp-architect` passes down the decision fork, typed actors, human decision owner, mechanism, case, and participant fields; Learning Game Architect owns the screen object, levels, visible state changes, reflection placement, copy register, stack choice, replay, and verification ladder. The two contracts remain distinct so visual play cannot disguise a weak teaching decision.
+
 ## v0.12.0: Narrative And Exercise Integrity
 
 `/shva:mdp-architect` now protects three handoffs that semantic parity alone could not: scene to concept, concept to framework, and chapter to exercise. The canonical model separates a public Book reader from the teaching cohort, records where specialist terms are earned, distinguishes common evidence problems from different mechanisms, permits zero to two useful visuals instead of requiring a diagram, and lets Slides compress declared detail without inventing new meaning.

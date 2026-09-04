@@ -1,7 +1,7 @@
 {
   "name": "shva",
-  "version": "0.13.0",
-  "description": "Personal command and skill pack for Shiva. v0.13.0 adds Learning Game Architect: the play contract for teaching games, called by MDP Architect whenever a session model declares a game. Stack-agnostic; it governs the object the screen is, level architecture, reflection placement, copy register and the verification ladder.",
+  "version": "0.14.0",
+  "description": "Personal command and skill pack for Shiva. v0.14.0 gives MDP Architect a Programme Thesis gate and transformation audit, so substantial programmes begin from a defensible learner change, use inherited material by present function, and avoid forcing AI or book identity where neither belongs. It preserves the v0.13 Learning Game Architect handoff.",
   "author": {
     "name": "Shiva Kakkar"
   },
@@ -43,6 +43,8 @@
     "mdp-sources",
     "mdp-architect",
     "programme-architecture",
+    "programme-thesis",
+    "transformation-audit",
     "book-chapter",
     "teaching-script",
     "slide-content",

@@ -1,0 +1,144 @@
+{
+  "recordId": "programme-thesis-product-thinking-greenfield",
+  "schemaVersion": "1.0",
+  "trigger": {
+    "kind": "new-substantial-programme",
+    "reason": "A new product-thinking programme needs a governing argument before individual cases and exercises are produced.",
+    "inspectedEvidence": [
+      "Author's product decision journal from two shipped products",
+      "Interview notes from product managers and designers",
+      "Existing public product-management reading list"
+    ],
+    "reusedRecord": null,
+    "materialChangeDetected": true,
+    "interviewAction": "complete-interview"
+  },
+  "programme": {
+    "subject": "Product thinking under commercial and user uncertainty",
+    "scope": "An eight-session programme from problem selection through evidence-based product revision",
+    "format": "programme",
+    "audience": "Early product managers, founders, and functional leaders moving into product decisions",
+    "startingPoint": "Learners can describe features and delivery plans but struggle to state the decision each piece of evidence should change"
+  },
+  "thesis": {
+    "recognisedProblem": "Product education often gives learners tools without showing how evidence should alter a live commitment.",
+    "recognisedProblemEvidenceId": "evidence-product-observed-gap",
+    "promisedLearnerChange": "Learners leave able to frame, test, and revise one product commitment while preserving a visible record of evidence and trade-offs.",
+    "promisedLearnerChangeId": "change-product-revisable-commitment",
+    "centralQuestion": "What makes a product decision revisable without making it directionless?",
+    "distinctiveArgument": "Product thinking is the discipline of writing a commitment together with the evidence, consequence, and threshold that could change it.",
+    "distinctiveArgumentEvidenceId": "evidence-product-commitment-argument",
+    "argumentBoundary": "The argument applies to uncertain product choices and does not replace technical feasibility, market regulation, or specialist craft.",
+    "changedCondition": "The programme is greenfield and can be organised around the author's observed decision practice rather than an inherited tool sequence.",
+    "changedConditionEvidenceId": "evidence-product-greenfield-condition"
+  },
+  "inheritedMaterial": {
+    "present": false,
+    "sources": [],
+    "audit": []
+  },
+  "transformationLens": {
+    "applicability": "Not applicable",
+    "reason": "The learning problem is a greenfield practice design rather than the transformation of an inherited programme or operating form.",
+    "governingQuestion": "",
+    "changedMechanisms": []
+  },
+  "evidenceBoundaries": [
+    {
+      "id": "evidence-product-observed-gap",
+      "claim": "Novice product leaders in the author's workshops often selected a template before stating the decision it should improve.",
+      "evidenceClass": "author_experience_or_teaching_observation",
+      "attribution": "Programme author's workshop observation notes",
+      "observedScope": "Five internal product workshops conducted across two organisations over eighteen months",
+      "known": "The sequence appeared repeatedly in the retained exercise notes.",
+      "uncertain": "The observation does not estimate prevalence outside those workshops.",
+      "allowedUse": "Use to define the programme's starting problem, not as a general fact about product managers."
+    },
+    {
+      "id": "evidence-product-greenfield-condition",
+      "claim": "The available source material consists of practice records rather than an inherited syllabus that must be retained.",
+      "evidenceClass": "author_experience_or_teaching_observation",
+      "attribution": "Programme author's source inventory",
+      "observedScope": "The named product journals, interviews, and reading list inspected for this programme",
+      "known": "No prior course outline was supplied as a production constraint.",
+      "uncertain": "Later stakeholder review may identify material that deserves incorporation.",
+      "allowedUse": "Use to justify greenfield architecture while leaving room for later sourced additions."
+    },
+    {
+      "id": "evidence-product-commitment-argument",
+      "claim": "A revisable commitment can connect product tools into one coherent learning progression.",
+      "evidenceClass": "author_synthesis",
+      "inputClaimIds": ["evidence-product-observed-gap", "evidence-product-greenfield-condition"],
+      "known": "The source records repeatedly connect decisions, evidence, thresholds, and later revisions.",
+      "uncertain": "The proposed progression has not yet been tested as a complete eight-session programme.",
+      "allowedUse": "Use as the author-owned thesis and evaluate it through the carried decision record."
+    }
+  ],
+  "carriedProof": {
+    "carriedProofId": "proof-product-decision-record",
+    "supportsLearnerChangeId": "change-product-revisable-commitment",
+    "successEvidenceId": "proof-product-final-record",
+    "type": "progressive decision record",
+    "name": "Revisable Product Commitment",
+    "initialState": "A feature proposal supported by unranked observations and unstated assumptions",
+    "finalState": "A bounded product commitment with evidence, trade-offs, thresholds, and a revision history",
+    "successEvidence": "A reviewer can identify the decision, its basis, and the evidence that would trigger revision."
+  },
+  "capabilityProgression": [
+    {
+      "stageId": "stage-product-frame",
+      "stage": "Frame the commitment",
+      "learnerChangeId": "change-product-frame-choice",
+      "learnerMove": "Learners convert a feature request into a decision with a named user and consequence.",
+      "proofId": "proof-product-framed-choice",
+      "proofAdded": "The record states one choice, one affected user, and one consequence of being wrong.",
+      "handoff": "The framed choice determines what evidence is worth seeking."
+    },
+    {
+      "stageId": "stage-product-test",
+      "stage": "Test the basis",
+      "learnerChangeId": "change-product-test-evidence",
+      "learnerMove": "Learners distinguish observations that challenge the commitment from information that merely decorates it.",
+      "proofId": "proof-product-evidence-threshold",
+      "proofAdded": "The record names a threshold and the observation that would cross it.",
+      "handoff": "A testable commitment can now be revised without erasing its history."
+    },
+    {
+      "stageId": "stage-product-revise",
+      "stage": "Revise with a record",
+      "learnerChangeId": "change-product-revisable-commitment",
+      "learnerMove": "Learners revise the original commitment and explain why the new version is more defensible.",
+      "proofId": "proof-product-final-record",
+      "proofAdded": "The final record retains the first choice, changed evidence, and the resulting revision.",
+      "handoff": "The completed record can travel into an actual product review."
+    }
+  ],
+  "publicContribution": {
+    "intended": false,
+    "claim": "",
+    "audience": "",
+    "evidenceBoundaryId": null
+  },
+  "exclusions": {
+    "outOfScope": ["software delivery management", "venture financing tactics"],
+    "antiGoals": ["template catalogue without a governing decision", "founder mythology presented as product evidence"]
+  },
+  "openDecisions": [],
+  "approval": {
+    "status": "approved",
+    "scope": ["full"],
+    "approvedBy": "Programme author",
+    "approvedAt": "2026-09-04",
+    "provenance": "The author approved the thesis after comparing three possible programme spines in the planning conversation."
+  },
+  "productionDecision": {
+    "state": "proceed",
+    "nextAction": "Build the eight-session sequence backward from the completed Revisable Product Commitment.",
+    "blockedBy": [],
+    "bookFoundation": {
+      "required": false,
+      "status": "not-applicable",
+      "record": ""
+    }
+  }
+}

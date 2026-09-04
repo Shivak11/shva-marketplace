@@ -1,0 +1,209 @@
+{
+  "recordId": "programme-thesis-ob-ai-redesign",
+  "schemaVersion": "1.0",
+  "trigger": {
+    "kind": "major-redesign",
+    "reason": "An established organisational-behaviour syllabus must now explain work performed across human and machine actors.",
+    "inspectedEvidence": [
+      "Existing twelve-session organisational-behaviour syllabus",
+      "Faculty notes from three prior participant cohorts",
+      "Current research ledger on coordination and algorithmic work"
+    ],
+    "reusedRecord": null,
+    "materialChangeDetected": true,
+    "interviewAction": "complete-interview"
+  },
+  "programme": {
+    "subject": "Organisational behaviour in workplaces shared by people and computational systems",
+    "scope": "A twelve-session course on coordination, judgment, authority, motivation, and learning at work",
+    "format": "course",
+    "audience": "Managers with workplace experience but no assumed background in organisational theory or computational systems",
+    "startingPoint": "Learners recognise familiar management problems but usually treat technology as a tool outside organisation design"
+  },
+  "thesis": {
+    "recognisedProblem": "The inherited syllabus explains human behaviour well but treats the system that performs, routes, and monitors work as stable.",
+    "recognisedProblemEvidenceId": "evidence-ob-observed-gap",
+    "promisedLearnerChange": "Learners leave able to redesign one consequential workflow by locating what people and computational systems each contribute, where judgment remains, and how exceptions travel.",
+    "promisedLearnerChangeId": "change-ob-work-redesign",
+    "centralQuestion": "How does organisational behaviour change when computational systems become participants in the work rather than tools beside it?",
+    "distinctiveArgument": "The useful unit of analysis is not a job threatened by a tool but a network of contributions whose dependencies, rights, and consequences must be redesigned.",
+    "distinctiveArgumentEvidenceId": "evidence-ob-network-argument",
+    "argumentBoundary": "The argument guides analysis of consequential workflows; it does not claim that every task should be divided or computationally performed.",
+    "changedCondition": "Prediction, representation, and routine execution can now move across human and computational actors much faster than the surrounding arrangements adapt.",
+    "changedConditionEvidenceId": "evidence-ob-changed-capability"
+  },
+  "inheritedMaterial": {
+    "present": true,
+    "sources": [
+      {
+        "id": "source-ob-course-outline",
+        "label": "Current organisational-behaviour course outline"
+      },
+      {
+        "id": "source-ob-faculty-notes",
+        "label": "Prior faculty teaching notes and participant exercises"
+      }
+    ],
+    "audit": [
+      {
+        "id": "audit-ob-job-design",
+        "sourceItemIds": ["source-ob-course-outline"],
+        "sourceConceptOrQuestion": "Motivation and job design",
+        "originalPurpose": "Explain how task structure and experienced meaning shape effort and persistence.",
+        "enduringRequirementOrFunction": "People still interpret goals, compare fairness, and decide whether the work deserves discretionary effort.",
+        "inheritedForm": "A self-contained session built around stable human jobs and manager-controlled task allocation.",
+        "changedCondition": "Individual tasks can be split across people and computational systems while accountability remains attached to the human role.",
+        "authorClaimOrSynthesis": "Motivation must be examined at the level of the contribution and its visible consequence, not only the intact job.",
+        "disposition": "reframe",
+        "dispositionReason": "The underlying motivational problem remains, but the inherited job boundary no longer describes where effort and meaning are produced.",
+        "programmeFit": "Supports the middle arc on work allocation, motivation, and accountability across actors.",
+        "evidenceStatus": "author_synthesis",
+        "evidenceBoundaryId": "evidence-ob-job-reframe",
+        "destination": "Sessions four and five",
+        "learnerMove": "Learners separate task transfer from the human consequences that remain attached to the role.",
+        "artifactProof": "The workflow map identifies both the transferred task and the retained human commitment."
+      },
+      {
+        "id": "audit-ob-coordination",
+        "sourceItemIds": ["source-ob-course-outline"],
+        "sourceConceptOrQuestion": "Coordination and interdependence",
+        "originalPurpose": "Show why different dependencies require different coordinating arrangements.",
+        "enduringRequirementOrFunction": "Dependencies still have to be managed when one actor's output becomes another actor's input.",
+        "inheritedForm": "A classification lecture followed by a conventional team coordination case.",
+        "changedCondition": "Computational actors can accelerate a handoff while hiding version state, missing context, or an absent exception route.",
+        "authorClaimOrSynthesis": "Faster information movement relocates coordination work into interfaces, monitoring, escalation, and recovery.",
+        "disposition": "resequence",
+        "dispositionReason": "Coordination becomes the opening design problem because later questions about authority and motivation depend on seeing relocated handoffs first.",
+        "programmeFit": "Creates the causal foundation for the course before specialist theories are introduced.",
+        "evidenceStatus": "author_synthesis",
+        "evidenceBoundaryId": "evidence-ob-coordination-resequence",
+        "destination": "Sessions one through three",
+        "learnerMove": "Learners trace a dependency before choosing who or what should perform each contribution.",
+        "artifactProof": "The first workflow map names information, handoffs, exceptions, and accountable people."
+      }
+    ]
+  },
+  "transformationLens": {
+    "applicability": "Central",
+    "reason": "The course exists to distinguish enduring organisational requirements from the new forms produced when computational actors enter work systems.",
+    "governingQuestion": "Which requirements remain humanly consequential even when the form and speed of performing the work change?",
+    "changedMechanisms": ["representation", "prediction", "coordination", "execution", "monitoring", "agency"]
+  },
+  "evidenceBoundaries": [
+    {
+      "id": "evidence-ob-observed-gap",
+      "claim": "Earlier cohorts treated technology as a tool choice before making work allocation and decision rights explicit.",
+      "evidenceClass": "author_experience_or_teaching_observation",
+      "attribution": "Programme author's coded facilitation notes",
+      "observedScope": "Three management cohorts taught with the inherited syllabus during the prior academic year",
+      "known": "The sequence recurred in the recorded exercises and shaped the revisions participants made.",
+      "uncertain": "The notes do not establish how often the pattern occurs beyond those cohorts.",
+      "allowedUse": "Use to define the redesign problem while keeping the observation bounded to those cohorts."
+    },
+    {
+      "id": "evidence-ob-changed-capability",
+      "claim": "Technological change can displace some tasks while creating new tasks in which people retain comparative advantage.",
+      "evidenceClass": "established_external",
+      "sourceUrl": "https://www.aeaweb.org/articles?id=10.1257/jep.33.2.3",
+      "sourceTitle": "Automation and New Tasks: How Technology Displaces and Reinstates Labor",
+      "locator": "Journal of Economic Perspectives abstract and task framework",
+      "known": "The task framework distinguishes displacement from reinstatement through new human tasks.",
+      "uncertain": "It does not determine the right allocation for any particular workplace workflow.",
+      "allowedUse": "Use to establish that task composition can change, not to predict a specific job outcome."
+    },
+    {
+      "id": "evidence-ob-network-argument",
+      "claim": "A contribution network is a more useful design unit than the intact job when work is divided across actors.",
+      "evidenceClass": "author_synthesis",
+      "inputClaimIds": ["evidence-ob-observed-gap", "evidence-ob-changed-capability"],
+      "known": "The source framework and teaching observations both reveal task-level changes hidden by job labels.",
+      "uncertain": "The contribution-network framing still needs testing across different organisational settings.",
+      "allowedUse": "Use as the programme's bounded organising argument and test it against participant workflows."
+    },
+    {
+      "id": "evidence-ob-job-reframe",
+      "claim": "Job-design teaching should separate transferred tasks from the human consequences retained by the role.",
+      "evidenceClass": "author_synthesis",
+      "inputClaimIds": ["evidence-ob-observed-gap", "evidence-ob-changed-capability"],
+      "known": "Task transfer and retained accountability can coexist within one role.",
+      "uncertain": "The motivational effect varies with the contribution, actor arrangement, and perceived fairness.",
+      "allowedUse": "Use to reframe the inherited session while presenting its motivational consequences as questions to investigate."
+    },
+    {
+      "id": "evidence-ob-coordination-resequence",
+      "claim": "Coordination should appear before actor allocation because automation can relocate rather than eliminate dependency work.",
+      "evidenceClass": "author_synthesis",
+      "inputClaimIds": ["evidence-ob-changed-capability"],
+      "known": "Dividing tasks across actors creates handoffs whose outputs and dependencies must remain usable.",
+      "uncertain": "The exact coordination failure differs across interfaces, workflows, and operating conditions.",
+      "allowedUse": "Use to justify session sequence, then test the mechanism through sourced cases rather than assertion."
+    }
+  ],
+  "carriedProof": {
+    "carriedProofId": "proof-ob-human-system-map",
+    "supportsLearnerChangeId": "change-ob-work-redesign",
+    "successEvidenceId": "proof-ob-final-redesign",
+    "type": "progressive workflow record",
+    "name": "Human and System Work Map",
+    "initialState": "A familiar workflow described only through jobs, departments, and software tools",
+    "finalState": "A defensible workflow that assigns contributions, judgment, authority, feedback, exceptions, and accountable people",
+    "successEvidence": "The final map follows named dependencies and preserves explicit judgment, exception, and accountability routes."
+  },
+  "capabilityProgression": [
+    {
+      "stageId": "stage-ob-see-work",
+      "stage": "See the work",
+      "learnerChangeId": "change-ob-trace-contributions",
+      "learnerMove": "Learners replace job labels with a trace of contributions and dependencies.",
+      "proofId": "proof-ob-dependency-trace",
+      "proofAdded": "The map names the trigger, contributions, information, and handoffs in one real workflow.",
+      "handoff": "The visible dependency pattern creates the question of actor allocation."
+    },
+    {
+      "stageId": "stage-ob-set-boundaries",
+      "stage": "Allocate with boundaries",
+      "learnerChangeId": "change-ob-bounded-allocation",
+      "learnerMove": "Learners assign contributions while locating judgment and exception rights.",
+      "proofId": "proof-ob-boundary-map",
+      "proofAdded": "The map distinguishes execution from judgment, authorisation, escalation, and appeal.",
+      "handoff": "The bounded allocation can now be tested for consequences and failure recovery."
+    },
+    {
+      "stageId": "stage-ob-redesign-workflow",
+      "stage": "Redesign the workflow",
+      "learnerChangeId": "change-ob-work-redesign",
+      "learnerMove": "Learners revise a consequential workflow using the dependencies, rights, and exception routes they have identified.",
+      "proofId": "proof-ob-final-redesign",
+      "proofAdded": "A field-complete map records the chosen allocation and the evidence that would trigger review.",
+      "handoff": "The final map becomes the basis for implementation and later review."
+    }
+  ],
+  "publicContribution": {
+    "intended": false,
+    "claim": "",
+    "audience": "",
+    "evidenceBoundaryId": null
+  },
+  "exclusions": {
+    "outOfScope": ["software engineering implementation", "vendor procurement decisions"],
+    "antiGoals": ["unchanged syllabus decorated with technology examples", "generic claims about tools replacing jobs"]
+  },
+  "openDecisions": [],
+  "approval": {
+    "status": "approved",
+    "scope": ["full"],
+    "approvedBy": "Programme author",
+    "approvedAt": "2026-09-04",
+    "provenance": "The author approved the recorded thesis, progression, and production boundary after reviewing the provisional diagnosis."
+  },
+  "productionDecision": {
+    "state": "proceed",
+    "nextAction": "Build the programme architecture backward from the final Human and System Work Map.",
+    "blockedBy": [],
+    "bookFoundation": {
+      "required": false,
+      "status": "not-applicable",
+      "record": ""
+    }
+  }
+}

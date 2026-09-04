@@ -42,13 +42,25 @@ try {
   const approvedFoundation = path.join(fixturesDir, "book-foundation.approved.json");
   const draftFoundation = path.join(fixturesDir, "book-foundation.draft.json");
   const validSessionPath = path.join(fixturesDir, "who-owns-the-exception.valid.json");
+  const nonAiSessionPath = path.join(fixturesDir, "non-ai-leadership.valid.json");
   const broadInvalidPath = path.join(fixturesDir, "who-owns-the-exception.invalid.json");
   const approvedFoundationRecord = JSON.parse(fs.readFileSync(approvedFoundation, "utf8"));
   const validSession = JSON.parse(fs.readFileSync(validSessionPath, "utf8"));
+  const nonAiSession = JSON.parse(fs.readFileSync(nonAiSessionPath, "utf8"));
 
   expectPass("approved full book foundation", foundationValidator, approvedFoundation, ["full"]);
   expectPass("approved book foundation defaults to full", foundationValidator, approvedFoundation);
   expectFailure("draft book foundation", foundationValidator, draftFoundation, "status must be approved before production");
+
+  const legacyV013Foundation = clone(approvedFoundationRecord);
+  delete legacyV013Foundation.recordId;
+  delete legacyV013Foundation.programmeThesisLink;
+  delete legacyV013Foundation.proposition.centralQuestion;
+  expectPass(
+    "legacy v0.13 book foundation remains locally readable",
+    foundationValidator,
+    writeMutation("legacy-v013-foundation", legacyV013Foundation),
+  );
 
   const proseOnlyFoundation = clone(approvedFoundationRecord);
   proseOnlyFoundation.approval.scopes = ["prose"];
@@ -120,6 +132,192 @@ try {
   );
 
   expectPass("valid session model", sessionValidator, validSessionPath);
+  assert.equal(
+    Object.prototype.hasOwnProperty.call(validSession.session, "aiUse"),
+    false,
+    "the v0.13 fixture must remain a legacy model without an aiUse declaration",
+  );
+  const explicitlyAiPresent = clone(validSession);
+  explicitlyAiPresent.session.aiUse = { present: true };
+  expectPass(
+    "explicit AI-present session model",
+    sessionValidator,
+    writeMutation("explicit-ai-present", explicitlyAiPresent),
+  );
+  expectPass("non-AI leadership session model", sessionValidator, nonAiSessionPath);
+
+  const nonAiWithoutChangedInformation = clone(nonAiSession);
+  const nonAiConsequenceBlockIds = new Set(["reveal-mixed-label-roll", "revision-after-record"]);
+  nonAiWithoutChangedInformation.session.semanticBlocks = nonAiWithoutChangedInformation.session.semanticBlocks.filter(
+    (block) => !nonAiConsequenceBlockIds.has(block.id),
+  );
+  nonAiWithoutChangedInformation.session.sourceLedger = nonAiWithoutChangedInformation.session.sourceLedger.filter(
+    (entry) => !nonAiConsequenceBlockIds.has(entry.claimId),
+  );
+  for (const surface of Object.values(nonAiWithoutChangedInformation.session.surfaces)) {
+    surface.semanticBlockIds = surface.semanticBlockIds.filter((id) => !nonAiConsequenceBlockIds.has(id));
+  }
+  for (const segment of nonAiWithoutChangedInformation.session.surfaces.teaching.coreSegments) {
+    segment.semanticBlockIds = segment.semanticBlockIds.filter((id) => !nonAiConsequenceBlockIds.has(id));
+  }
+  for (const reserve of nonAiWithoutChangedInformation.session.surfaces.teaching.depthReserves) {
+    reserve.semanticBlockIds = reserve.semanticBlockIds.filter((id) => !nonAiConsequenceBlockIds.has(id));
+  }
+  for (const beat of nonAiWithoutChangedInformation.session.surfaces.slides.beats) {
+    beat.semanticBlockIds = beat.semanticBlockIds.filter((id) => !nonAiConsequenceBlockIds.has(id));
+  }
+  nonAiWithoutChangedInformation.session.exercises[0].consequenceReveal = {
+    present: false,
+    notUsedReason: "The exercise compares already visible leadership responses, so no changed fact is needed to make the learner revise the commitment.",
+  };
+  expectPass(
+    "non-AI exercise without changed-information reveal",
+    sessionValidator,
+    writeMutation("non-ai-without-changed-information", nonAiWithoutChangedInformation),
+  );
+
+  const missingNoAiRationale = clone(nonAiSession);
+  delete missingNoAiRationale.session.aiUse.noAiRationale;
+  expectFailure(
+    "non-AI session without rationale",
+    sessionValidator,
+    writeMutation("non-ai-missing-rationale", missingNoAiRationale),
+    "session.aiUse.noAiRationale must substantively explain why this session does not use AI",
+  );
+
+  const smuggledAiChallenge = clone(nonAiSession);
+  smuggledAiChallenge.session.semanticBlocks.push({
+    id: "smuggled-ai-challenge",
+    type: "ai-challenge",
+    sourceClass: "teaching-synthesis",
+    requiredAcrossSurfaces: false,
+    renderFromExerciseContract: true,
+  });
+  smuggledAiChallenge.session.sourceLedger.push({
+    claimId: "smuggled-ai-challenge",
+    classification: "teaching-synthesis",
+    origin: "Adversarial no-AI portability mutation",
+    sourceType: "contract mutation",
+    presentationStatus: "author-synthesis",
+    checkedOn: "2026-09-04",
+    confidence: "high",
+    surfaces: [],
+    supportedFacts: [],
+    teachingInference: "This block should be rejected before it can enter a visible surface.",
+    factualBoundary: "A test mutation rather than session content.",
+  });
+  expectFailure(
+    "AI challenge smuggled into non-AI session",
+    sessionValidator,
+    writeMutation("non-ai-smuggled-challenge", smuggledAiChallenge),
+    "cannot contain an ai-challenge when session.aiUse.present is false",
+  );
+
+  const smuggledAiActor = clone(nonAiSession);
+  smuggledAiActor.session.actorRegistry.push({
+    id: "dispatch-ai-system",
+    displayName: "dispatch AI system",
+    actorType: "ai-system",
+    automationEligible: true,
+    introducedInBlockId: "case-allergen-label",
+  });
+  smuggledAiActor.session.semanticBlocks.find((block) => block.id === "case-allergen-label").actorIds.push("dispatch-ai-system");
+  expectFailure(
+    "AI-system actor smuggled into non-AI session",
+    sessionValidator,
+    writeMutation("non-ai-smuggled-actor", smuggledAiActor),
+    "cannot declare an ai-system when session.aiUse.present is false",
+  );
+
+  const smuggledAiExerciseField = clone(nonAiSession);
+  smuggledAiExerciseField.session.exercises[0].aiAllowedMoves = ["question-ambiguity"];
+  expectFailure(
+    "AI move smuggled into non-AI exercise",
+    sessionValidator,
+    writeMutation("non-ai-smuggled-move", smuggledAiExerciseField),
+    "cannot declare AI exercise or authority fields when session.aiUse.present is false",
+  );
+
+  const smuggledCommitBeforeAi = clone(nonAiSession);
+  smuggledCommitBeforeAi.session.exercises[0].commitBeforeAI = true;
+  expectFailure(
+    "commit-before-AI field smuggled into non-AI exercise",
+    sessionValidator,
+    writeMutation("non-ai-smuggled-commit-before-ai", smuggledCommitBeforeAi),
+    "cannot declare AI exercise or authority fields when session.aiUse.present is false",
+  );
+
+  const smuggledAiAuthority = clone(nonAiSession);
+  smuggledAiAuthority.session.exercises[0].aiAuthorityBoundary = {
+    mayApprove: false,
+    mayDeny: false,
+    mayCertify: false,
+    mayDecide: false,
+    mayAuthorise: false,
+  };
+  expectFailure(
+    "AI authority boundary smuggled into non-AI exercise",
+    sessionValidator,
+    writeMutation("non-ai-smuggled-authority", smuggledAiAuthority),
+    "cannot declare AI exercise or authority fields when session.aiUse.present is false",
+  );
+
+  const smuggledHyphenatedAiField = clone(nonAiSession);
+  smuggledHyphenatedAiField.session.exercises[0]["ai-role"] = "AI will recommend the final decision";
+  expectFailure(
+    "hyphenated AI shadow field smuggled into non-AI exercise",
+    sessionValidator,
+    writeMutation("non-ai-hyphenated-shadow", smuggledHyphenatedAiField),
+    "cannot declare AI exercise or authority fields when session.aiUse.present is false",
+  );
+
+  const smuggledAiText = clone(nonAiSession);
+  smuggledAiText.session.exercises[0]["assistant-note"] = "ChatGPT recommends whether the plant director should release the shipment.";
+  expectFailure(
+    "AI terminology smuggled through an unrelated no-AI field",
+    sessionValidator,
+    writeMutation("non-ai-shadow-text", smuggledAiText),
+    "cannot contain AI terminology when session.aiUse.present is false",
+  );
+
+  const thesisLinkedWithoutAiDeclaration = clone(nonAiSession);
+  delete thesisLinkedWithoutAiDeclaration.session.aiUse;
+  expectFailure(
+    "new thesis-linked session omits AI declaration",
+    sessionValidator,
+    writeMutation("thesis-linked-no-ai-declaration", thesisLinkedWithoutAiDeclaration),
+    "must explicitly declare session.aiUse.present",
+  );
+
+  for (const idField of ["recordId", "capabilityStageId", "capabilityProofId", "promisedLearnerChangeId", "carriedProofId"]) {
+    const unstableThesisId = clone(nonAiSession);
+    unstableThesisId.session.programmeThesisLink[idField] = "not a stable id";
+    expectFailure(
+      `programme thesis link with unstable ${idField}`,
+      sessionValidator,
+      writeMutation(`unstable-thesis-${idField}`, unstableThesisId),
+      `session.programmeThesisLink.${idField} must be a stable non-empty id`,
+    );
+  }
+
+  const weakQuestionAlignment = clone(nonAiSession);
+  weakQuestionAlignment.session.programmeThesisLink.centralQuestionAlignment = "It aligns.";
+  expectFailure(
+    "programme thesis link with weak central-question alignment",
+    sessionValidator,
+    writeMutation("weak-question-alignment", weakQuestionAlignment),
+    "centralQuestionAlignment must substantively connect the session question to the promised learner change",
+  );
+
+  const weakArtifactAdvance = clone(nonAiSession);
+  weakArtifactAdvance.session.programmeThesisLink.artifactAdvance = "It advances.";
+  expectFailure(
+    "programme thesis link with weak artifact advance",
+    sessionValidator,
+    writeMutation("weak-artifact-advance", weakArtifactAdvance),
+    "artifactAdvance must substantively explain how the carried artifact advances the promised proof",
+  );
+
   expectFailure("broad invalid session model", sessionValidator, broadInvalidPath, "must commit before AI");
 
   const duplicateExerciseRecord = clone(validSession);

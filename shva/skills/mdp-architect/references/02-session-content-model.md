@@ -4,7 +4,7 @@
 
 Store the session once before writing Book Chapter, Teaching Script, or Slide Content. Use stable IDs for every shared item. Render surfaces from those IDs. Do not write three independent versions and attempt to reconcile them later.
 
-Copy `fixtures/who-owns-the-exception.valid.json` as the starting contract. The validator reads JSON, and the fixture shows every required field and exact classification value. The fixture demonstrates the schema; it is not a content template and its case should be replaced.
+Use `fixtures/who-owns-the-exception.valid.json` for an AI-present session or `fixtures/non-ai-leadership.valid.json` for a session that deliberately uses no AI. The validator reads JSON, and the fixtures show every required field and exact classification value. They demonstrate two contract branches; neither case is a content template and both should be replaced.
 
 Set `programme.officialSessionMinutes`, `programme.preparedRunwayMinutes`, and `programme.planningProfile` from the approved brief and author profile. The planning profile carries the narrative-word range, maximum headings, pull lines, body callout cards, substantive visuals, and minimum facilitation segments. These limits are explicit configuration, not hidden assumptions in a supposedly neutral engine. Declared counts remain planning checks; the rendered artifact must be counted independently.
 
@@ -19,23 +19,72 @@ The model must distinguish:
 
 A source cohort can be function-specific while the Book addresses a general reader. Do not let a CHRO, banking, manufacturing, or academic cohort narrow the public prose by accident.
 
+## Link the session to the programme thesis
+
+New models should carry `session.programmeThesisLink` so the session is traceable to the approved Programme Thesis Record:
+
+```json
+{
+  "recordId": "leadership-under-pressure-v1",
+  "capabilityStageId": "stage-02-hold-credible-dissent",
+  "capabilityProofId": "proof-02-dissent-response",
+  "promisedLearnerChangeId": "change-from-defensiveness-to-testable-pause",
+  "carriedProofId": "proof-dissent-to-decision-protocol",
+  "centralQuestionAlignment": "The session question makes the promised learner change observable by requiring a decision under late dissent.",
+  "artifactAdvance": "The carried protocol advances the proof by adding a pause threshold, owner, action, and review condition."
+}
+```
+
+The first five fields are stable IDs, not display copy. `capabilityStageId` and
+`capabilityProofId` must resolve to the same stage in the Programme Thesis
+Record. `centralQuestionAlignment` explains why this session's central question
+tests or advances the promised learner change. `artifactAdvance` explains how
+`session.carriedArtifact` changes the proof named by `carriedProofId`; repeating
+the artifact title is not enough.
+
+The session validator can prove that this link is closed, structurally valid,
+and substantive. It reads only the session model, so it cannot prove that the
+five IDs exist in a separate Programme Thesis Record or that their values match
+that record. Run `scripts/validate-programme-chain.mjs` with the thesis and
+session files for that cross-record proof. Existing v0.13 fixtures without
+`programmeThesisLink` remain valid for backward compatibility.
+
+## Declare whether AI is part of the session
+
+New models declare the choice once under `session.aiUse`:
+
+```json
+{ "present": true }
+```
+
+or:
+
+```json
+{
+  "present": false,
+  "noAiRationale": "The capability is practised through human dissent and revision, and neither the case nor the learner workflow needs an AI contribution."
+}
+```
+
+Omitting `aiUse` preserves the v0.13 AI-present contract only for backward compatibility. Do not omit it in a newly authored model. When `present` is false, the rationale names the learning or domain reason for exclusion; “AI is not relevant” is not a substantive rationale. A no-AI session cannot contain an `ai-challenge` block, an `ai-system` actor, `commitBeforeAI`, an `aiChallengeBlockId`, or any `ai...` exercise or authority field. Do not retain empty AI placeholders merely to resemble the AI fixture.
+
 ## Required semantic blocks
 
 | Block | Required content |
 | --- | --- |
-| `disturbance` | A concrete opening situation and the decision or consequence that makes it matter. |
+| `disturbance` | A concrete opening problem or task and the decision, interpretation, diagnosis, craft move, demonstration, or consequence that makes it matter. The stable type name does not require an organisational crisis. |
 | `case` | One sustained case with typed actor references, stakes, constraint, incomplete evidence, evidence boundary, decision, and purposeful return points. |
 | `claim` | Plain-language claim, source classification, and surfaces that use it. |
 | `lateral-example` | Optional bounded example with a distinct conceptual job, mechanism, factual status, boundary, and explicit return to the human or organisational question. |
 | `exercise-case` | Optional common transfer case used only by the exercise when it lowers setup cost and tests the same mechanism. |
 | `mechanism` | One earned causal relation. A branded label is optional, never required. |
-| `commitment` | What participants map, choose, rank, allocate, or write before AI or a filled edition appears. |
-| `ai-challenge` | A bounded challenge that tests interpretation, threshold, evidence boundary, or alternative. It never makes or authorises the decision. |
+| `commitment` | What participants map, choose, rank, allocate, or write before a consequence, challenge, or filled edition appears. |
+| `ai-challenge` | Required only when `session.aiUse.present` is true. A bounded challenge that tests interpretation, threshold, evidence boundary, or alternative. It never makes or authorises the decision. |
 | `revision` | How the participant retains, rejects, or changes the committed artifact and why. |
 | `exercise` | Starting material, ordered steps, decision boundary, output, comparison, transfer, and debrief. |
 | `transition` | The unresolved consequence and artifact state passed onward without a meta announcement. |
 
-Every block declares `requiredAcrossSurfaces`. The validator owns the rule for core block types: disturbance, sustained case, claim, mechanism, commitment, AI challenge, revision, exercise, and transition must be true and must appear in Book, Teaching, and Slides. Only supporting material such as a bounded lateral example may be declared optional. An `exercise-case` becomes required across surfaces when an exercise uses it. Surface omission is allowed for genuinely supporting material; surface invention is not.
+Every block declares `requiredAcrossSurfaces`. The validator owns the rule for core block types: disturbance, sustained case, claim, mechanism, commitment, revision, exercise, and transition must be true and must appear in Book, Teaching, and Slides. AI challenge joins that core set only in an AI-present session. Only supporting material such as a bounded lateral example may be declared optional. An `exercise-case` becomes required across surfaces when an exercise uses it. Surface omission is allowed for genuinely supporting material; surface invention is not.
 
 ## Causal Hinge Ledger
 
@@ -112,7 +161,7 @@ Each visual records:
 
 ## Decision-Closure Contract
 
-At session level, record `session.actorRegistry`. Each consequential actor has one closed record containing `id`, `displayName`, `actorType`, `automationEligible`, and `introducedInBlockId`. The introduction block binds that ID through its `actorIds`. A `human-role` cannot be automation eligible, must name a recognisable human role in both its stable ID and display name, and cannot contain an AI, model, algorithm, robot, system, or other explicit machine-identity token even when a human-role word is also present. Register a person responsible for AI by the accountable human role—such as `product-manager` or `governance-lead`—and keep the AI domain in the case context. Names that remain semantically ambiguous still require human review.
+At session level, record `session.actorRegistry`. Each consequential actor has one closed record containing `id`, `displayName`, `actorType`, `automationEligible`, and `introducedInBlockId`. The introduction block binds that ID through its `actorIds`. A `human-role` cannot be automation eligible, must name a recognisable human role in both its stable ID and display name, and cannot contain an AI, model, algorithm, robot, system, or other explicit machine-identity token even when a human-role word is also present. In AI-present sessions, register a person responsible for AI by the accountable human role—such as `product-manager` or `governance-lead`—and keep the AI domain in the case context. In no-AI sessions, every registered actor is a `human-role`; an `ai-system` actor is a contract violation. Names that remain semantically ambiguous still require human review.
 
 Every exercise binds to the chapter rather than merely sitting after it. Record:
 
@@ -123,8 +172,9 @@ Every exercise binds to the chapter rather than merely sitting after it. Record:
 - `decisionFork.question` and two to four options, each with a stable ID, action, and accepted consequence;
 - `steps`, each with a stable ID, prompt, observable output, and the participant fields it writes; every participant field must be written by at least one step;
 - `participantFields`, in display order;
-- commitment, AI-challenge, and revision block IDs, with every typed lifecycle block owned by exactly one exercise;
-- `aiRoleType`, one or more allow-listed `aiAllowedMoves`, and a closed-key `aiAuthorityBoundary` that explicitly denies approval, denial, certification, decision, and authorisation authority; the owning `ai-challenge` block renders from this contract and carries no parallel free-text or shadow field;
+- commitment and revision block IDs, with every typed lifecycle block owned by exactly one exercise;
+- when AI is present, `commitBeforeAI: true`, an `aiChallengeBlockId`, `aiRoleType`, one or more allow-listed `aiAllowedMoves`, and a closed-key `aiAuthorityBoundary` that explicitly denies approval, denial, certification, decision, and authorisation authority; the owning `ai-challenge` block renders from this contract and carries no parallel free-text or shadow field;
+- when AI is absent, none of those AI fields; the lifecycle moves directly from commitment through any declared consequence to human revision;
 - `humanDecisionOwner`: one closed object containing only `actorId`, `actorType: human-role`, `automationEligible: false`, `mustBeNamedBeforeUse: true`, and `accountableFor: final-decision`; `actorId` resolves through `session.actorRegistry` to a non-automatable human role in the exercise case, introduced before commitment on every surface; repeated owner flags cannot substitute for that reference;
 - `consequenceReveal.present`: whether changed information drives this exercise;
 - when present, `consequenceReveal`: its reveal and consequence-revision semantic block IDs, proper required-field subset, minimum attempt length, trigger and immediately following revision steps, revealed fact, provenance, and decision consequence; each typed reveal or consequence-revision block belongs to exactly one exercise;
@@ -140,7 +190,7 @@ A game records at least two visible states with distinct visible consequences, a
 
 ## Required sequence
 
-Use this order unless the brief gives a reason to depart from it:
+Use this order for an AI-present session unless the brief gives a reason to depart from it:
 
 1. Disturbance: let the organisation fail or hesitate in view of the reader.
 2. First reading: make the plausible but incomplete explanation visible.
@@ -153,7 +203,15 @@ Use this order unless the brief gives a reason to depart from it:
 9. Filled-edition comparison: reveal the same artifact only after all comparison fields contain meaningful attempts.
 10. Transfer and transition: apply the changed model elsewhere and leave a causally unresolved consequence.
 
-Encode the sequence. Each teaching core segment and slide beat carries ordered `semanticBlockIds`, and their first-use order must exactly match the parent Teaching or Slide surface order. Each exercise names its commitment, AI-challenge, and final-revision blocks, and every semantic block carrying one of those types belongs to exactly one exercise. An exercise with a consequence reveal also names required-across-surfaces reveal and consequence-revision blocks; every surface preserves commitment → reveal → immediate human revision → AI challenge → final revision. Without changed information, every surface preserves commitment → AI challenge → revision and the model records why the early reveal is absent. Discussion about AI that is not part of this lifecycle uses a supporting semantic type rather than an unowned `ai-challenge` block.
+For a no-AI session, preserve the same learner agency without inventing a machine role:
+
+1. Participant commitment.
+2. Optional consequence reveal when changed information drives the learning.
+3. Immediate consequence-led revision when that reveal is present.
+4. Final human revision that makes the decision or artifact executable and reviewable.
+5. Filled-edition comparison, transfer, and transition.
+
+Encode the selected sequence. Each teaching core segment and slide beat carries ordered `semanticBlockIds`, and their first-use order must exactly match the parent Teaching or Slide surface order. Each exercise always names its commitment and final-revision blocks, and every semantic block carrying one of those types belongs to exactly one exercise. In an AI-present exercise it also names an AI-challenge block; every surface preserves commitment → reveal → immediate human revision → AI challenge → final revision when a consequence reveal is used, or commitment → AI challenge → revision when it is not. In a no-AI exercise, every surface preserves commitment → reveal → immediate consequence revision → final human revision, or commitment → human revision when no changed information is needed. An exercise with a consequence reveal still names required-across-surfaces reveal and consequence-revision blocks in either mode. Discussion about AI that is not part of the exercise lifecycle uses a supporting semantic type in an AI-present session, never an unowned `ai-challenge` block.
 
 ## Source ledger
 

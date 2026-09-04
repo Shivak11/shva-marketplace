@@ -1,6 +1,6 @@
 # Book Foundation Interview
 
-Run this interview before producing a new book or a substantial book-shaped programme. Its job is to settle the editorial decisions required by the next production scope; HTML, a cover, a chapter model, or a slide deck cannot settle those choices safely on their own.
+Run this interview before producing a new book or a substantial book-shaped programme. Its job is to settle the editorial decisions required by the next production scope; HTML, a cover, a chapter model, or a slide deck cannot settle those choices safely on their own. It complements the Programme Thesis Record. It does not replace that record or ask the author to recreate it.
 
 ## 1. Decide whether the gate applies
 
@@ -18,7 +18,7 @@ Premise, Book reader, reader change, argument, evidence boundary, and prose regi
 
 ## 2. Run short, choice-led rounds
 
-Before asking, retrieve an existing taste profile, wiki record, prior foundation record, and the latest relevant artifact when available. Do not ask the author to repeat a preference already supported by current evidence. Ask no more than three questions in one turn. Start with what the brief, programme files, or verified context already establish. For every unresolved taste-sensitive choice, show two or three concrete candidates, mark one as recommended, and explain the trade-off. Combine uncontested fields when doing so reduces interview drag; required fields are fixed, not the number of conversational rounds. Do not send a blank questionnaire when a useful hypothesis can be offered.
+Before asking, retrieve the approved Programme Thesis Record, existing taste profile, wiki record, prior foundation record, and latest relevant artifact when available. Import settled proposition fields from the thesis record and identify only genuine book-specific consequences or inconsistencies. Record the thesis by stable record ID, not by a local path that will break when the project moves. Do not ask the author to repeat a thesis, fact, or preference already supported by current evidence. Ask no more than three questions in one turn. Start with what the thesis, brief, programme files, or verified context already establish. For every unresolved taste-sensitive choice, show two or three concrete candidates, mark one as recommended, and explain the trade-off. Combine uncontested fields when doing so reduces interview drag; required fields are fixed, not the number of conversational rounds. Do not send a blank questionnaire when a useful hypothesis can be offered.
 
 Keep a running distinction between:
 
@@ -31,7 +31,9 @@ Keep a running distinction between:
 
 ### Round 1: proposition
 
-Establish the Book reader, the problem they recognise, the change the book promises, the central argument, the boundary of the argument, and the evidence base. Record the teaching participant audience separately when the chapter also belongs to a course. A CHRO cohort can generate the material without becoming the permanent public reader; seniority does not imply knowledge of every specialist noun.
+Import the recognised problem, promised learner change, central question, author argument, evidence boundary, and exclusions from the approved Programme Thesis Record. Then settle only what changes when the programme becomes a book: the Book reader, the reader's starting knowledge, the reading promise, and any narrower or broader claim boundary. Record the teaching participant audience separately when the chapter also belongs to a course. A source cohort can generate the material without becoming the permanent public reader; seniority does not imply knowledge of every specialist noun.
+
+Record the thesis record ID, approval evidence, and exact imported fields. If the Book needs a different recognised problem, promise, central question, argument, boundary, or exclusion, amend the Programme Thesis Record first. Do not use Book Foundation to create a conflicting programme in parallel.
 
 Ask questions that force a choice between real reader situations, not demographic abstractions. Capture what the book will not claim as carefully as what it will.
 
@@ -106,17 +108,20 @@ A prose-only record may pass with title and visual identity deferred. The same r
 ```markdown
 # Book Foundation Record
 
-Status: proposed | approved
+Status: draft | approved
 Project and scope:
 Approval scopes: prose | front-matter | visual-production | full
 
 ## Proposition
 
+- Programme Thesis Record ID and approval evidence:
+- Exact imported thesis fields: recognised problem, promised learner change and ID, central question, distinctive argument, argument boundary, out-of-scope boundaries, and anti-goals.
 - Reader:
 - Teaching participant audience, if different:
 - Assumed knowledge by surface:
 - Recognised problem:
 - Promised change:
+- Central question:
 - Central argument:
 - Boundary:
 - Evidence base and source status:
@@ -174,3 +179,28 @@ Approval scopes: prose | front-matter | visual-production | full
 ## 5. Handoff after approval
 
 Use the approved record as the editorial source of truth. Persist it with planning material only after approval. Then bind the programme workspace, assemble the source ledger, build the programme architecture, create the canonical session model, and produce the requested surfaces. If a later decision would contradict the record, surface it as an amendment instead of quietly changing the HTML.
+
+For machine-readable JSON, give the Book Foundation Record its own stable
+`recordId` and store the exact import under `programmeThesisLink`:
+
+```json
+{
+  "recordId": "stable-book-foundation-id",
+  "programmeThesisLink": {
+    "recordId": "stable-programme-thesis-id",
+    "approvalEvidence": "Where the governing thesis approval was recorded",
+    "recognisedProblem": "Exact imported text",
+    "promisedLearnerChangeId": "stable-learner-change-id",
+    "promisedLearnerChange": "Exact imported text",
+    "centralQuestion": "Exact imported text",
+    "distinctiveArgument": "Exact imported text",
+    "argumentBoundary": "Exact imported text",
+    "outOfScope": ["Exact imported boundary"],
+    "antiGoals": ["Exact imported anti-goal"]
+  }
+}
+```
+
+The Book Foundation validator checks that this import is structurally complete.
+The programme-chain validator receives both files and proves that the record
+IDs and imported values are identical to the approved Programme Thesis Record.

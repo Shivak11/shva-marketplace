@@ -1,0 +1,140 @@
+{
+  "recordId": "book-foundation-city-heat",
+  "status": "approved",
+  "projectAndScope": "A general-reader book and companion learning journey about turning heat warnings into public protection",
+  "programmeThesisLink": {
+    "recordId": "programme-thesis-city-heat-book",
+    "approvalEvidence": "The author approved the programme thesis and this linked book foundation on 2026-09-04.",
+    "recognisedProblem": "A city can measure dangerous heat accurately while responsibility for changing work, transport, shelter, and care remains fragmented.",
+    "promisedLearnerChangeId": "change-heat-warning-to-action",
+    "promisedLearnerChange": "Readers leave able to trace one heat warning into a bounded public commitment with named responsibilities, thresholds, and feedback.",
+    "centralQuestion": "What must happen between a reliable warning and protection that reaches the people exposed?",
+    "distinctiveArgument": "The decisive public capacity is not prediction alone but the arrangement that converts a forecast into coordinated, revisable commitments.",
+    "argumentBoundary": "The book explains the path from warning to public action and does not offer clinical advice or claim one plan fits every city.",
+    "outOfScope": [
+      "individual clinical treatment",
+      "universal city blueprint"
+    ],
+    "antiGoals": [
+      "climate fatalism",
+      "technical forecasting presented as complete public action"
+    ]
+  },
+  "proposition": {
+    "bookReader": "General readers and civic practitioners with no assumed background in climate science or public administration",
+    "participantAudience": "Civic leaders and practitioners using the companion learning journey",
+    "assumedKnowledgeBySurface": "The book assumes only ordinary experience of hot weather; teaching may draw on participants' knowledge of local services.",
+    "recognisedProblem": "A city can measure dangerous heat accurately while responsibility for changing work, transport, shelter, and care remains fragmented.",
+    "promisedChange": "Readers leave able to trace one heat warning into a bounded public commitment with named responsibilities, thresholds, and feedback.",
+    "centralQuestion": "What must happen between a reliable warning and protection that reaches the people exposed?",
+    "centralArgument": "The decisive public capacity is not prediction alone but the arrangement that converts a forecast into coordinated, revisable commitments.",
+    "boundary": "The book explains the path from warning to public action and does not offer clinical advice or claim one plan fits every city.",
+    "evidenceBase": "Verified public-health and civic sources, clearly bounded cases, and author synthesis identified as synthesis"
+  },
+  "architecture": {
+    "carriedQuestionOrArtifact": "A Warning to Protection Map revised across the book",
+    "sectionLogic": "Read the warning, trace the response, and write a revisable public commitment",
+    "chapterPromises": "Each chapter resolves one break between measured hazard and public protection, then hands forward a harder coordination question.",
+    "openingMode": "A verified heat event introduced through a concrete public decision and enough context for a novice reader",
+    "programmeTablePlacement": "Interactive companion shell only; omitted from the public book reading flow"
+  },
+  "titleSystems": [
+    {
+      "name": "After the Warning",
+      "title": "After the Warning",
+      "subtitle": "How Cities Turn Heat Forecasts into Public Protection",
+      "promise": "Names the unresolved work that begins when a technically sound warning has already been issued.",
+      "tradeOff": "Clear and human, though the subtitle must carry the heat-specific category.",
+      "coverConnection": "A warning line continues beyond a forecast boundary into several coordinated civic actions."
+    },
+    {
+      "name": "The Degrees Between Us",
+      "title": "The Degrees Between Us",
+      "subtitle": "Heat, Responsibility, and the Design of Public Action",
+      "promise": "Connects physical temperature with the institutional distance between information and protection.",
+      "tradeOff": "More literary and distinctive, but less immediately explicit about the practical method.",
+      "coverConnection": "Measured heat bands intersect an incomplete map of shelters, transport, work, and care."
+    }
+  ],
+  "selectedTitleSystem": "After the Warning",
+  "authorAndFrontMatter": {
+    "selectedOrder": [
+      "cover",
+      "title page",
+      "contents",
+      "author note",
+      "prologue",
+      "parts",
+      "chapters",
+      "notes"
+    ],
+    "authorNoteJob": "Explain the author's vantage and why reliable warnings still leave a public design problem.",
+    "authorNoteFacts": [],
+    "acknowledgements": [],
+    "approvedLinks": [],
+    "sourceBoundary": "No biography, thanks, endorsement, institution, or link is inferred from the programme thesis."
+  },
+  "voiceContract": {
+    "positiveMechanics": [
+      "connected causal paragraphs",
+      "verified unfamiliar public cases",
+      "frameworks introduced after the practical problem"
+    ],
+    "antiRegister": [
+      "climate sermon",
+      "punchline ladder",
+      "research-paper procession",
+      "generic resilience language"
+    ],
+    "paragraphMovement": "Each paragraph changes what the reader can explain about the path from warning to protection.",
+    "exampleStandard": "One sustained verified case and only bounded lateral examples that expose a different dependency.",
+    "densityAndHumour": "Substantive and direct, with no levity that diminishes human exposure or public responsibility.",
+    "vocabularyPolicy": "Introduce technical and civic terms through the decision they alter, define them plainly, and reuse them in consequence.",
+    "emphasisPolicy": "Book prose may use sparse semantic italics after a term or question has earned attention."
+  },
+  "visualIdentity": {
+    "directions": [
+      {
+        "name": "Warning Line",
+        "premiseConnection": "Shows a forecast continuing into public decisions rather than ending at publication.",
+        "composition": "One measured line crosses a quiet field and branches into a sparse civic route.",
+        "paletteRoles": "Warm paper ground, dark civic ink, one controlled heat signal colour.",
+        "typographyMood": "Editorial serif paired with restrained map annotations.",
+        "figureGrammar": "Thresholds, handoffs, and feedback paths drawn as plain causal relations.",
+        "prohibitedMotifs": "Burning globes, alarm icons, generic skylines, and dashboard mosaics.",
+        "differenceFromRecentWork": "A continuous public route rather than a centred emblem or technology object."
+      },
+      {
+        "name": "Exposure Ledger",
+        "premiseConnection": "Makes the gap between measured temperature and protected people visible.",
+        "composition": "A spare ledger pairs heat observations with the public actions still missing.",
+        "paletteRoles": "Off-white ground, near-black typography, rust and blue marks with distinct evidentiary jobs.",
+        "typographyMood": "Archival public-record typography with contemporary spacing.",
+        "figureGrammar": "Records, omissions, and annotations tied to their source or responsible institution.",
+        "prohibitedMotifs": "Stock photography, neon gradients, crowded cards, and decorative thermometers.",
+        "differenceFromRecentWork": "An evidence object rather than a path-led or illustrated-scene cover."
+      }
+    ],
+    "selectedDirection": "Warning Line"
+  },
+  "exerciseDirection": {
+    "format": "Progressive workbook",
+    "caseMode": "A bounded public-warning case followed by transfer to the reader's own locality",
+    "observableArtifact": "A Warning to Protection Map with comparable decision fields",
+    "commitmentRule": "The reader completes the relevant map fields before a consequence or worked comparison appears.",
+    "revealRule": "A consequential condition becomes available only after the reader records an initial public response.",
+    "workedComparisonJob": "Show one defensible completed map field by field without claiming it is a universal city plan."
+  },
+  "openItems": {
+    "blocking": [],
+    "deferred": []
+  },
+  "approval": {
+    "scopes": [
+      "full"
+    ],
+    "approvedBy": "Book author",
+    "approvedOn": "2026-09-04",
+    "evidence": "Explicit approval recorded alongside the linked Programme Thesis Record"
+  }
+}

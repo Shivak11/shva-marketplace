@@ -24,6 +24,7 @@ try {
 const errors = [];
 const isNonEmpty = (value) => typeof value === "string" && value.trim().length > 0;
 const nonEmptyArray = (value) => Array.isArray(value) && value.length > 0;
+const isStableId = (value) => typeof value === "string" && /^[a-z][a-z0-9]*(?:-[a-z0-9]+)+$/.test(value);
 const normalise = (value) => String(value ?? "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 const distinctFingerprints = (items, fields) => new Set(
   (items ?? []).map((item) => fields.map((field) => normalise(item?.[field])).join("|")),
@@ -41,10 +42,53 @@ const visual = record?.visualIdentity ?? {};
 const exercise = record?.exerciseDirection ?? {};
 const openItems = record?.openItems ?? {};
 const approval = record?.approval ?? {};
+const thesisLink = record?.programmeThesisLink ?? {};
+const hasThesisLink = Object.prototype.hasOwnProperty.call(record ?? {}, "programmeThesisLink")
+  || Object.prototype.hasOwnProperty.call(record ?? {}, "recordId");
 
 requireValue(record?.status === "approved", "status must be approved before production");
 requireValue(isNonEmpty(record?.projectAndScope), "projectAndScope is required");
 requireValue(allowedScopes.has(requestedScope), "requested scope must be prose, front-matter, visual-production, or full");
+
+const thesisLinkFields = [
+  "recordId",
+  "approvalEvidence",
+  "recognisedProblem",
+  "promisedLearnerChangeId",
+  "promisedLearnerChange",
+  "centralQuestion",
+  "distinctiveArgument",
+  "argumentBoundary",
+  "outOfScope",
+  "antiGoals",
+];
+if (hasThesisLink) {
+  requireValue(isStableId(record?.recordId), "recordId must be a stable kebab-case identifier");
+  const actualThesisLinkFields = thesisLink && typeof thesisLink === "object" && !Array.isArray(thesisLink)
+    ? Object.keys(thesisLink).sort()
+    : [];
+  requireValue(
+    JSON.stringify(actualThesisLinkFields) === JSON.stringify([...thesisLinkFields].sort()),
+    "programmeThesisLink must contain exactly the declared imported thesis fields",
+  );
+  for (const field of [
+    "approvalEvidence",
+    "recognisedProblem",
+    "promisedLearnerChange",
+    "centralQuestion",
+    "distinctiveArgument",
+    "argumentBoundary",
+  ]) {
+    requireValue(isNonEmpty(thesisLink[field]), `programmeThesisLink.${field} is required`);
+  }
+  for (const field of ["recordId", "promisedLearnerChangeId"]) {
+    requireValue(isStableId(thesisLink[field]), `programmeThesisLink.${field} must be a stable kebab-case identifier`);
+  }
+  requireValue(nonEmptyArray(thesisLink.outOfScope), "programmeThesisLink.outOfScope must contain imported boundaries");
+  requireValue(nonEmptyArray(thesisLink.antiGoals), "programmeThesisLink.antiGoals must contain imported anti-goals");
+  requireValue(thesisLink.outOfScope?.every(isNonEmpty), "programmeThesisLink.outOfScope must contain only non-empty strings");
+  requireValue(thesisLink.antiGoals?.every(isNonEmpty), "programmeThesisLink.antiGoals must contain only non-empty strings");
+}
 
 const declaredScopes = Array.isArray(approval.scopes) ? approval.scopes : [];
 requireValue(nonEmptyArray(declaredScopes), "approval.scopes must not be empty");
@@ -56,6 +100,14 @@ const needsVisualProduction = requestedScope === "full" || requestedScope === "v
 
 for (const field of ["bookReader", "participantAudience", "assumedKnowledgeBySurface", "recognisedProblem", "promisedChange", "centralArgument", "boundary", "evidenceBase"]) {
   requireValue(isNonEmpty(proposition[field]), `proposition.${field} is required`);
+}
+if (hasThesisLink) {
+  requireValue(isNonEmpty(proposition.centralQuestion), "proposition.centralQuestion is required for a thesis-linked Book Foundation Record");
+  requireValue(proposition.recognisedProblem === thesisLink.recognisedProblem, "proposition.recognisedProblem must preserve the imported programme thesis text");
+  requireValue(proposition.promisedChange === thesisLink.promisedLearnerChange, "proposition.promisedChange must preserve the imported programme thesis text");
+  requireValue(proposition.centralQuestion === thesisLink.centralQuestion, "proposition.centralQuestion must preserve the imported programme thesis text");
+  requireValue(proposition.centralArgument === thesisLink.distinctiveArgument, "proposition.centralArgument must preserve the imported programme thesis text");
+  requireValue(proposition.boundary === thesisLink.argumentBoundary, "proposition.boundary must preserve the imported programme thesis text");
 }
 
 for (const field of ["carriedQuestionOrArtifact", "sectionLogic", "chapterPromises", "openingMode", "programmeTablePlacement"]) {

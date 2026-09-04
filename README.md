@@ -7,7 +7,7 @@
 
 | Plugin | Version | What it does |
 |---|---|---|
-| [`shva`](./shva) | 0.12.0 | Personal command and skill pack for cross-cutting work. v0.12.0 adds causal-hinge, evidence-path, visual-budget, and decision-closure contracts to `mdp-architect`, with scope-safe foundation approval, staged reveal tests, traversable game states, and field-matched filled editions. |
+| [`shva`](./shva) | 0.14.0 | Personal command and skill pack for cross-cutting work. v0.14.0 adds a Programme Thesis gate and inherited-material transformation audit to `mdp-architect`, retains the Learning Game Architect handoff, and allows non-AI programmes without weakening AI authority checks where AI is used. |
 
 ## Why a separate marketplace
 

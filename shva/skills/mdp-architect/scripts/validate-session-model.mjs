@@ -25,6 +25,9 @@ const normaliseText = (value) => String(value ?? "").toLowerCase().replace(/[^a-
 const isSubstantive = (value, minimumCharacters = 24, minimumWords = 4) =>
   isNonEmpty(value) && value.trim().length >= minimumCharacters && wordCount(value) >= minimumWords;
 const isPositiveInteger = (value) => Number.isInteger(Number(value)) && Number(value) > 0;
+const isPlainRecord = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+const isStableId = (value) =>
+  isNonEmpty(value) && /^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$/.test(value);
 const sumMinutes = (items) =>
   Array.isArray(items)
     ? items.reduce((total, item) => total + (Number(item?.minutes) || 0), 0)
@@ -36,6 +39,12 @@ const orderedUnique = (values) =>
 const sameValuesInOrder = (left, right) =>
   Array.isArray(left) && Array.isArray(right) && JSON.stringify(left) === JSON.stringify(right);
 const nonEmptyArray = (value) => Array.isArray(value) && value.length > 0;
+const flattenStrings = (value) => {
+  if (typeof value === "string") return [value];
+  if (Array.isArray(value)) return value.flatMap(flattenStrings);
+  if (isPlainRecord(value)) return Object.values(value).flatMap(flattenStrings);
+  return [];
+};
 
 function requireValue(condition, message) {
   if (!condition) errors.push(message);
@@ -44,6 +53,12 @@ function requireValue(condition, message) {
 const programme = model?.programme ?? {};
 const planningProfile = programme?.planningProfile ?? {};
 const session = model?.session ?? {};
+const aiUseDeclared = Object.prototype.hasOwnProperty.call(session, "aiUse");
+const thesisLinkDeclared = Object.prototype.hasOwnProperty.call(session, "programmeThesisLink");
+const aiUse = session?.aiUse;
+// Omission preserves the v0.13 contract, in which AI is present. New models
+// should declare the choice explicitly; only a literal false selects no-AI mode.
+const aiPresent = !aiUseDeclared || aiUse?.present !== false;
 const semanticBlocks = Array.isArray(session.semanticBlocks) ? session.semanticBlocks : [];
 const blockIds = semanticBlocks.map((block) => block?.id).filter(Boolean);
 const blockIdSet = new Set(blockIds);
@@ -91,19 +106,80 @@ const requiredBlockTypes = [
   "claim",
   "mechanism",
   "commitment",
-  "ai-challenge",
+  ...(aiPresent ? ["ai-challenge"] : []),
   "revision",
   "exercise",
   "transition",
 ];
 const allowedBlockTypes = new Set([
   ...requiredBlockTypes,
+  "ai-challenge",
   "lateral-example",
   "exercise-case",
   "consequence-reveal",
   "consequence-revision",
 ]);
 const visibleSurfaceNames = ["book", "teaching", "slides"];
+
+if (aiUseDeclared) {
+  requireValue(isPlainRecord(aiUse), "session.aiUse must be an object when declared");
+  requireValue(
+    isPlainRecord(aiUse) && Object.keys(aiUse).every((key) => ["present", "noAiRationale"].includes(key)),
+    "session.aiUse may contain only present and noAiRationale",
+  );
+  requireValue(typeof aiUse?.present === "boolean", "session.aiUse.present must be boolean");
+  if (aiUse?.present === false) {
+    requireValue(
+      isSubstantive(aiUse?.noAiRationale, 72, 12),
+      "session.aiUse.noAiRationale must substantively explain why this session does not use AI",
+    );
+  } else if (aiUse?.present === true) {
+    requireValue(
+      !Object.prototype.hasOwnProperty.call(aiUse, "noAiRationale"),
+      "session.aiUse.noAiRationale is allowed only when present is false",
+    );
+  }
+}
+
+if (thesisLinkDeclared) {
+  requireValue(
+    aiUseDeclared,
+    "new thesis-linked session models must explicitly declare session.aiUse.present",
+  );
+}
+
+if (thesisLinkDeclared) {
+  const thesisLink = session?.programmeThesisLink;
+  const thesisLinkFields = [
+    "recordId",
+    "capabilityStageId",
+    "capabilityProofId",
+    "promisedLearnerChangeId",
+    "carriedProofId",
+    "centralQuestionAlignment",
+    "artifactAdvance",
+  ];
+  requireValue(isPlainRecord(thesisLink), "session.programmeThesisLink must be an object when declared");
+  requireValue(
+    isPlainRecord(thesisLink)
+      && sameValuesInOrder(Object.keys(thesisLink).sort(), [...thesisLinkFields].sort()),
+    "session.programmeThesisLink must contain only the seven declared traceability fields",
+  );
+  for (const field of ["recordId", "capabilityStageId", "capabilityProofId", "promisedLearnerChangeId", "carriedProofId"]) {
+    requireValue(
+      isStableId(thesisLink?.[field]),
+      `session.programmeThesisLink.${field} must be a stable non-empty id`,
+    );
+  }
+  requireValue(
+    isSubstantive(thesisLink?.centralQuestionAlignment, 64, 10),
+    "session.programmeThesisLink.centralQuestionAlignment must substantively connect the session question to the promised learner change",
+  );
+  requireValue(
+    isSubstantive(thesisLink?.artifactAdvance, 64, 10),
+    "session.programmeThesisLink.artifactAdvance must substantively explain how the carried artifact advances the promised proof",
+  );
+}
 
 requireValue(isNonEmpty(programme.title), "programme.title is required");
 requireValue(isPositiveInteger(programme.officialSessionMinutes), "programme.officialSessionMinutes must be a positive integer");
@@ -162,6 +238,12 @@ for (const [index, actor] of actorRegistry.entries()) {
   requireValue(isSubstantive(actor?.displayName, 4, 1), `session.actorRegistry[${index}].displayName must name the actor plainly`);
   requireValue(["human-role", "ai-system"].includes(actor?.actorType), `session.actorRegistry[${index}].actorType must be human-role or ai-system`);
   requireValue(typeof actor?.automationEligible === "boolean", `session.actorRegistry[${index}].automationEligible must be boolean`);
+  if (!aiPresent) {
+    requireValue(
+      actor?.actorType !== "ai-system",
+      `session.actorRegistry[${index}] cannot declare an ai-system when session.aiUse.present is false`,
+    );
+  }
   if (actor?.actorType === "human-role") {
     requireValue(actor?.automationEligible === false, `session.actorRegistry[${index}] human-role cannot be automation eligible`);
     requireValue(
@@ -181,6 +263,12 @@ requireValue(duplicateValues(blockIds).length === 0, "semantic block ids must be
 for (const [index, block] of semanticBlocks.entries()) {
   requireValue(isNonEmpty(block?.id), `semanticBlocks[${index}].id is required`);
   requireValue(allowedBlockTypes.has(block?.type), `semanticBlocks[${index}].type must be a supported canonical type`);
+  if (!aiPresent) {
+    requireValue(
+      block?.type !== "ai-challenge",
+      `semanticBlocks[${index}] cannot contain an ai-challenge when session.aiUse.present is false`,
+    );
+  }
   if (Object.prototype.hasOwnProperty.call(block ?? {}, "actorIds")) {
     requireValue(nonEmptyArray(block?.actorIds), `semanticBlocks[${index}].actorIds must not be empty when declared`);
     requireValue(duplicateValues(block?.actorIds ?? []).length === 0, `semanticBlocks[${index}].actorIds must be unique`);
@@ -724,12 +812,31 @@ for (const [index, exercise] of exercises.entries()) {
     ).length === 0,
     `exercises[${index}].decisionFork options must be materially distinct`,
   );
-  requireValue(exercise?.commitBeforeAI === true, `exercises[${index}] must commit before AI`);
+  if (aiPresent) {
+    requireValue(exercise?.commitBeforeAI === true, `exercises[${index}] must commit before AI`);
+  } else {
+    const forbiddenAiExerciseFields = Object.keys(exercise ?? {}).filter(
+      (key) => key === "commitBeforeAI" || /^(?:ai|machine|model|algorithm|automat)/i.test(key),
+    );
+    requireValue(
+      forbiddenAiExerciseFields.length === 0,
+      `exercises[${index}] cannot declare AI exercise or authority fields when session.aiUse.present is false`,
+    );
+    const forbiddenAiExerciseText = /\b(?:AI|artificial intelligence|LLM|large language model|machine learning|ChatGPT|Claude|Gemini|Copilot)\b/i.test(
+      flattenStrings(exercise).join("\n"),
+    );
+    requireValue(
+      !forbiddenAiExerciseText,
+      `exercises[${index}] cannot contain AI terminology when session.aiUse.present is false`,
+    );
+  }
   claimedCommitmentBlockIds.push(exercise?.commitmentBlockId);
-  claimedAiChallengeBlockIds.push(exercise?.aiChallengeBlockId);
+  if (aiPresent) claimedAiChallengeBlockIds.push(exercise?.aiChallengeBlockId);
   claimedRevisionBlockIds.push(exercise?.revisionBlockId);
   requireValue(blockTypeById.get(exercise?.commitmentBlockId) === "commitment", `exercises[${index}].commitmentBlockId must reference a commitment semantic block`);
-  requireValue(blockTypeById.get(exercise?.aiChallengeBlockId) === "ai-challenge", `exercises[${index}].aiChallengeBlockId must reference an ai-challenge semantic block`);
+  if (aiPresent) {
+    requireValue(blockTypeById.get(exercise?.aiChallengeBlockId) === "ai-challenge", `exercises[${index}].aiChallengeBlockId must reference an ai-challenge semantic block`);
+  }
   requireValue(blockTypeById.get(exercise?.revisionBlockId) === "revision", `exercises[${index}].revisionBlockId must reference a revision semantic block`);
   const consequenceReveal = exercise?.consequenceReveal ?? {};
   requireValue(typeof consequenceReveal.present === "boolean", `exercises[${index}].consequenceReveal.present must be boolean`);
@@ -761,9 +868,9 @@ for (const [index, exercise] of exercises.entries()) {
   }
   for (const [surfaceName, order] of Object.entries(sequenceOrders)) {
     const commitmentIndex = order.indexOf(exercise?.commitmentBlockId);
-    const challengeIndex = order.indexOf(exercise?.aiChallengeBlockId);
     const revisionIndex = order.indexOf(exercise?.revisionBlockId);
-    if (hasConsequenceReveal) {
+    if (hasConsequenceReveal && aiPresent) {
+      const challengeIndex = order.indexOf(exercise?.aiChallengeBlockId);
       const revealIndex = order.indexOf(consequenceReveal.revealBlockId);
       const consequenceRevisionIndex = order.indexOf(consequenceReveal.revisionBlockId);
       requireValue(
@@ -774,11 +881,27 @@ for (const [index, exercise] of exercises.entries()) {
           && challengeIndex < revisionIndex,
         `${surfaceName} must preserve commitment -> consequence reveal -> consequence revision -> AI challenge -> revision for exercises[${index}]`,
       );
-    } else {
+    } else if (hasConsequenceReveal) {
+      const revealIndex = order.indexOf(consequenceReveal.revealBlockId);
+      const consequenceRevisionIndex = order.indexOf(consequenceReveal.revisionBlockId);
+      requireValue(
+        commitmentIndex >= 0 && revealIndex >= 0 && consequenceRevisionIndex >= 0 && revisionIndex >= 0
+          && commitmentIndex < revealIndex
+          && consequenceRevisionIndex === revealIndex + 1
+          && consequenceRevisionIndex < revisionIndex,
+        `${surfaceName} must preserve commitment -> consequence reveal -> consequence revision -> human revision for exercises[${index}]`,
+      );
+    } else if (aiPresent) {
+      const challengeIndex = order.indexOf(exercise?.aiChallengeBlockId);
       requireValue(
         commitmentIndex >= 0 && challengeIndex >= 0 && revisionIndex >= 0
           && commitmentIndex < challengeIndex && challengeIndex < revisionIndex,
         `${surfaceName} must preserve commitment -> AI challenge -> revision for exercises[${index}]`,
+      );
+    } else {
+      requireValue(
+        commitmentIndex >= 0 && revisionIndex >= 0 && commitmentIndex < revisionIndex,
+        `${surfaceName} must preserve commitment -> human revision for exercises[${index}]`,
       );
     }
   }
@@ -893,32 +1016,34 @@ for (const [index, exercise] of exercises.entries()) {
       `exercises[${index}] filled edition needs a substantive completeness.${field}`,
     );
   }
-  requireValue(["challenge", "question", "stress-test"].includes(exercise?.aiRoleType), `exercises[${index}].aiRoleType must be challenge, question, or stress-test`);
-  requireValue(
-    !Object.prototype.hasOwnProperty.call(exercise ?? {}, "aiRole"),
-    `exercises[${index}].aiRole free text is not allowed; use aiAllowedMoves and aiAuthorityBoundary`,
-  );
-  requireValue(nonEmptyArray(exercise?.aiAllowedMoves), `exercises[${index}].aiAllowedMoves must not be empty`);
-  requireValue(
-    duplicateValues(exercise?.aiAllowedMoves ?? []).length === 0,
-    `exercises[${index}].aiAllowedMoves must be unique`,
-  );
-  for (const [moveIndex, move] of (exercise?.aiAllowedMoves ?? []).entries()) {
+  if (aiPresent) {
+    requireValue(["challenge", "question", "stress-test"].includes(exercise?.aiRoleType), `exercises[${index}].aiRoleType must be challenge, question, or stress-test`);
     requireValue(
-      allowedAiMoves.has(move),
-      `exercises[${index}].aiAllowedMoves[${moveIndex}] must be an approved bounded move`,
+      !Object.prototype.hasOwnProperty.call(exercise ?? {}, "aiRole"),
+      `exercises[${index}].aiRole free text is not allowed; use aiAllowedMoves and aiAuthorityBoundary`,
     );
-  }
-  const authorityFields = ["mayApprove", "mayDeny", "mayCertify", "mayDecide", "mayAuthorise"];
-  requireValue(
-    sameValuesInOrder(Object.keys(exercise?.aiAuthorityBoundary ?? {}).sort(), [...authorityFields].sort()),
-    `exercises[${index}].aiAuthorityBoundary must contain only the five declared authority flags`,
-  );
-  for (const authorityField of authorityFields) {
+    requireValue(nonEmptyArray(exercise?.aiAllowedMoves), `exercises[${index}].aiAllowedMoves must not be empty`);
     requireValue(
-      exercise?.aiAuthorityBoundary?.[authorityField] === false,
-      `exercises[${index}].aiAuthorityBoundary.${authorityField} must be false`,
+      duplicateValues(exercise?.aiAllowedMoves ?? []).length === 0,
+      `exercises[${index}].aiAllowedMoves must be unique`,
     );
+    for (const [moveIndex, move] of (exercise?.aiAllowedMoves ?? []).entries()) {
+      requireValue(
+        allowedAiMoves.has(move),
+        `exercises[${index}].aiAllowedMoves[${moveIndex}] must be an approved bounded move`,
+      );
+    }
+    const authorityFields = ["mayApprove", "mayDeny", "mayCertify", "mayDecide", "mayAuthorise"];
+    requireValue(
+      sameValuesInOrder(Object.keys(exercise?.aiAuthorityBoundary ?? {}).sort(), [...authorityFields].sort()),
+      `exercises[${index}].aiAuthorityBoundary must contain only the five declared authority flags`,
+    );
+    for (const authorityField of authorityFields) {
+      requireValue(
+        exercise?.aiAuthorityBoundary?.[authorityField] === false,
+        `exercises[${index}].aiAuthorityBoundary.${authorityField} must be false`,
+      );
+    }
   }
   const humanDecisionOwnerFields = [
     "actorId",
@@ -1091,11 +1216,12 @@ for (const [index, exercise] of exercises.entries()) {
   }
 }
 
-for (const [blockType, claimedBlockIds] of [
+const lifecycleOwnership = [
   ["commitment", claimedCommitmentBlockIds],
-  ["ai-challenge", claimedAiChallengeBlockIds],
+  ...(aiPresent ? [["ai-challenge", claimedAiChallengeBlockIds]] : []),
   ["revision", claimedRevisionBlockIds],
-]) {
+];
+for (const [blockType, claimedBlockIds] of lifecycleOwnership) {
   for (const block of semanticBlocks.filter((item) => item.type === blockType)) {
     requireValue(
       claimedBlockIds.filter((blockId) => blockId === block.id).length === 1,

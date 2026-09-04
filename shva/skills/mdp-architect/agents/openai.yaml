@@ -1,7 +1,7 @@
 interface:
   display_name: "MDP Architect"
   short_description: "Build coherent, source-grounded executive programmes"
-  default_prompt: "Use $mdp-architect to turn this brief into a coherent MDP architecture and develop the first session across Book Chapter, Teaching Script, and Slide Content."
+  default_prompt: "Use $mdp-architect to establish the programme thesis, turn this brief into a coherent learning architecture, and develop the first session across the requested canonical surfaces."
 
 policy:
   allow_implicit_invocation: true

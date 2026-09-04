@@ -1,12 +1,26 @@
 {
+  "recordId": "book-foundation-decision-path",
   "status": "approved",
   "projectAndScope": "A public book grown through a five-session executive programme",
+  "programmeThesisLink": {
+    "recordId": "programme-thesis-decision-path",
+    "approvalEvidence": "The example author approved the governing programme thesis in the project conversation.",
+    "recognisedProblem": "The organisation can generate analysis faster than it can turn evidence into an accountable action",
+    "promisedLearnerChangeId": "change-analysis-to-accountable-action",
+    "promisedLearnerChange": "Readers learn to inspect the path from a noticed change to an action that can be questioned and revised",
+    "centralQuestion": "How can an organisation turn faster analysis into an accountable action that remains open to challenge and revision?",
+    "distinctiveArgument": "Faster analysis improves decisions only when evidence, judgment, authority, action, and feedback are designed together",
+    "argumentBoundary": "The book does not claim that one universal workflow fits every consequential decision",
+    "outOfScope": ["a universal operating model for every organisation"],
+    "antiGoals": ["generic AI optimism presented as organisation design"]
+  },
   "proposition": {
     "bookReader": "A general reader responsible for decisions that AI can inform but not own",
     "participantAudience": "Mixed-function senior managers attending the programme",
     "assumedKnowledgeBySurface": "The Book assumes no organisation-design vocabulary; Teaching may build on participant experience of consequential decisions",
     "recognisedProblem": "The organisation can generate analysis faster than it can turn evidence into an accountable action",
     "promisedChange": "Readers learn to inspect the path from a noticed change to an action that can be questioned and revised",
+    "centralQuestion": "How can an organisation turn faster analysis into an accountable action that remains open to challenge and revision?",
     "centralArgument": "Faster analysis improves decisions only when evidence, judgment, authority, action, and feedback are designed together",
     "boundary": "The book does not claim that one universal workflow fits every consequential decision",
     "evidenceBase": "Verified organisational cases, primary research, clearly labelled composites, and author synthesis"

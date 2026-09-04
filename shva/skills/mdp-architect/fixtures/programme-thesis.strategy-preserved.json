@@ -1,0 +1,235 @@
+{
+  "recordId": "programme-thesis-strategy-preserved",
+  "schemaVersion": "1.0",
+  "trigger": {
+    "kind": "major-redesign",
+    "reason": "An existing strategy course needs a new applied thread without discarding a coherent diagnostic and choice sequence.",
+    "inspectedEvidence": [
+      "Approved strategy course outline and session notes",
+      "Participant case submissions from two prior deliveries",
+      "Sponsor brief requesting faster review and revision practice"
+    ],
+    "reusedRecord": null,
+    "materialChangeDetected": true,
+    "interviewAction": "complete-interview"
+  },
+  "programme": {
+    "subject": "Strategy as diagnosis, choice, coordinated action, and revision",
+    "scope": "A six-session course that preserves the existing strategic core while strengthening implementation and review",
+    "format": "course",
+    "audience": "Business-unit leaders who contribute to strategy but do not work as specialist strategists",
+    "startingPoint": "Learners can describe goals and initiatives but often leave the governing diagnosis and rejected alternatives implicit"
+  },
+  "thesis": {
+    "recognisedProblem": "The existing course produces credible strategic choices but its final exercises do not show how assumptions will be monitored and revised.",
+    "recognisedProblemEvidenceId": "evidence-strategy-review-gap",
+    "promisedLearnerChange": "Learners leave able to defend one strategic choice, connect it to coordinated action, and specify the evidence that would trigger revision.",
+    "promisedLearnerChangeId": "change-strategy-revisable-choice",
+    "centralQuestion": "How can a strategy remain coherent while becoming easier to challenge and revise?",
+    "distinctiveArgument": "A strategy becomes usable when diagnosis, choice, action, and revision share one visible chain of reasoning.",
+    "distinctiveArgumentEvidenceId": "evidence-strategy-chain-argument",
+    "argumentBoundary": "The course develops the reasoning architecture of a strategy and does not substitute for industry modelling or specialist financial analysis.",
+    "changedCondition": "The sponsor now needs leaders to revisit strategic assumptions during execution rather than only at the annual planning cycle.",
+    "changedConditionEvidenceId": "evidence-strategy-sponsor-change"
+  },
+  "inheritedMaterial": {
+    "present": true,
+    "sources": [
+      {
+        "id": "source-strategy-outline",
+        "label": "Approved six-session strategy outline"
+      },
+      {
+        "id": "source-strategy-case-pack",
+        "label": "Participant case pack and completed assignments"
+      }
+    ],
+    "audit": [
+      {
+        "id": "audit-strategy-diagnosis",
+        "sourceItemIds": ["source-strategy-outline"],
+        "sourceConceptOrQuestion": "Diagnosis before goals",
+        "originalPurpose": "Require learners to explain the obstacle before choosing an aspiration or initiative.",
+        "enduringRequirementOrFunction": "A strategic choice still needs a causal account of the obstacle it is meant to overcome.",
+        "inheritedForm": "An opening case comparison followed by a written diagnosis of the learner's own business situation.",
+        "changedCondition": "The new brief changes review frequency but does not remove the need for a governing diagnosis.",
+        "authorClaimOrSynthesis": "The opening diagnosis sequence remains the right foundation for every later commitment in the course.",
+        "disposition": "preserve",
+        "dispositionReason": "Prior submissions show that the sequence exposes assumptions that remain necessary for choice and later revision.",
+        "programmeFit": "Retains the opening capability and supplies the baseline against which changing evidence can be interpreted.",
+        "evidenceStatus": "author_synthesis",
+        "evidenceBoundaryId": "evidence-strategy-preserve-diagnosis",
+        "destination": "Session one opening",
+        "learnerMove": "Learners write a causal diagnosis before naming their preferred initiative.",
+        "artifactProof": "The strategy record begins with an obstacle and causal explanation rather than a goal list."
+      },
+      {
+        "id": "audit-strategy-choice",
+        "sourceItemIds": ["source-strategy-outline"],
+        "sourceConceptOrQuestion": "Choice and rejected alternatives",
+        "originalPurpose": "Make strategy selective by recording what the organisation will not pursue.",
+        "enduringRequirementOrFunction": "Scarce attention and resources still make trade-offs unavoidable.",
+        "inheritedForm": "A decision table comparing three strategic alternatives against the diagnosis.",
+        "changedCondition": "More frequent review changes when a choice may be reopened, not the need to make one.",
+        "authorClaimOrSynthesis": "The explicit comparison should remain intact and acquire a later revision threshold.",
+        "disposition": "preserve",
+        "dispositionReason": "The comparison already performs essential selection work and can accept the new threshold without structural replacement.",
+        "programmeFit": "Keeps the course selective while linking each rejected option to evidence that could reopen it.",
+        "evidenceStatus": "author_synthesis",
+        "evidenceBoundaryId": "evidence-strategy-preserve-choice",
+        "destination": "Sessions two and three",
+        "learnerMove": "Learners choose among plausible alternatives and state why the others remain rejected.",
+        "artifactProof": "The strategy record contains one selected option, two rejected options, and their decision criteria."
+      },
+      {
+        "id": "audit-strategy-implementation",
+        "sourceItemIds": ["source-strategy-outline", "source-strategy-case-pack"],
+        "sourceConceptOrQuestion": "Coordinated action and case application",
+        "originalPurpose": "Translate strategic choice into reinforcing actions and expose contradictions through participant cases.",
+        "enduringRequirementOrFunction": "A strategy still depends on actions that reinforce rather than cancel one another.",
+        "inheritedForm": "Separate implementation lecture and end-of-course participant case presentation.",
+        "changedCondition": "The new brief requires assumptions and review thresholds to travel with coordinated actions during execution.",
+        "authorClaimOrSynthesis": "Implementation and case application should become one working session that attaches review evidence to each coordinated action.",
+        "disposition": "combine",
+        "dispositionReason": "Joining the lecture and case work lets learners test coordination and revision on the same strategic record instead of transferring between two artifacts.",
+        "programmeFit": "Creates the bridge from strategic choice to monitored action without altering the inherited diagnostic core.",
+        "evidenceStatus": "author_synthesis",
+        "evidenceBoundaryId": "evidence-strategy-combine-implementation",
+        "destination": "Sessions four through six",
+        "learnerMove": "Learners attach owners, reinforcing actions, assumptions, and revision evidence to the selected strategy.",
+        "artifactProof": "The final strategy record shows how each action supports the choice and what evidence would reopen it."
+      }
+    ]
+  },
+  "transformationLens": {
+    "applicability": "Supporting",
+    "reason": "Most of the inherited architecture remains sound, while the review cycle changes the form in which assumptions and implementation evidence must travel.",
+    "governingQuestion": "What must remain coherent when strategic review moves from an annual event into ongoing execution?",
+    "changedMechanisms": []
+  },
+  "evidenceBoundaries": [
+    {
+      "id": "evidence-strategy-review-gap",
+      "claim": "Prior final exercises rarely specified the evidence that would cause learners to revise their selected strategy.",
+      "evidenceClass": "author_experience_or_teaching_observation",
+      "attribution": "Programme author's review of participant submissions",
+      "observedScope": "Twenty-four final submissions from two deliveries of the existing six-session course",
+      "known": "Most submissions named initiatives but omitted explicit revision thresholds.",
+      "uncertain": "The submissions do not show whether learners used undocumented thresholds in later practice.",
+      "allowedUse": "Use to identify a course-design gap within the reviewed deliveries."
+    },
+    {
+      "id": "evidence-strategy-sponsor-change",
+      "claim": "The sponsor expects strategic assumptions to be reviewed during execution rather than only in the annual planning cycle.",
+      "evidenceClass": "author_experience_or_teaching_observation",
+      "attribution": "Commissioning sponsor's programme brief",
+      "observedScope": "The approved brief and follow-up design conversation for this course revision",
+      "known": "The requested change in review practice is explicit in the sponsor record.",
+      "uncertain": "The organisation has not yet chosen one review cadence for every business unit.",
+      "allowedUse": "Use to redesign the practice sequence while leaving local cadence choices open."
+    },
+    {
+      "id": "evidence-strategy-chain-argument",
+      "claim": "A shared chain from diagnosis through revision can connect the preserved and changed parts of the course.",
+      "evidenceClass": "author_synthesis",
+      "inputClaimIds": ["evidence-strategy-review-gap", "evidence-strategy-sponsor-change"],
+      "known": "The existing work supplies diagnosis and choice while the new brief requires explicit review.",
+      "uncertain": "The integrated chain still requires learner testing before wider use.",
+      "allowedUse": "Use as the organising argument for this revision and test it through the carried record."
+    },
+    {
+      "id": "evidence-strategy-preserve-diagnosis",
+      "claim": "The inherited diagnosis sequence remains necessary because later revision requires a baseline explanation.",
+      "evidenceClass": "author_synthesis",
+      "inputClaimIds": ["evidence-strategy-review-gap"],
+      "known": "A revision cannot be explained without knowing which original diagnosis it changes.",
+      "uncertain": "The existing opening case may still need a lighter facilitation format.",
+      "allowedUse": "Use to preserve the causal function while allowing minor delivery improvements."
+    },
+    {
+      "id": "evidence-strategy-preserve-choice",
+      "claim": "The inherited alternatives table should remain because explicit rejection makes later reopening interpretable.",
+      "evidenceClass": "author_synthesis",
+      "inputClaimIds": ["evidence-strategy-review-gap", "evidence-strategy-sponsor-change"],
+      "known": "The table already records selected and rejected options against a diagnosis.",
+      "uncertain": "Its criteria may require adaptation for particular participant industries.",
+      "allowedUse": "Use to retain the selection mechanism while adding an evidence threshold."
+    },
+    {
+      "id": "evidence-strategy-combine-implementation",
+      "claim": "Combining implementation teaching with participant cases can attach revision evidence directly to coordinated action.",
+      "evidenceClass": "author_synthesis",
+      "inputClaimIds": ["evidence-strategy-review-gap", "evidence-strategy-sponsor-change"],
+      "known": "The two inherited components currently use separate artifacts despite contributing to one final decision.",
+      "uncertain": "The combined session timing must be tested with a live cohort.",
+      "allowedUse": "Use to combine the two components while preserving an optional timing reserve."
+    }
+  ],
+  "carriedProof": {
+    "carriedProofId": "proof-strategy-decision-record",
+    "supportsLearnerChangeId": "change-strategy-revisable-choice",
+    "successEvidenceId": "proof-strategy-final-record",
+    "type": "progressive strategy record",
+    "name": "Revisable Strategy Record",
+    "initialState": "A strategic aspiration accompanied by initiatives but no explicit revision condition",
+    "finalState": "A causal diagnosis, selective choice, coordinated actions, assumptions, and revision thresholds in one record",
+    "successEvidence": "A reviewer can trace why the strategy was chosen and which evidence would reopen the choice."
+  },
+  "capabilityProgression": [
+    {
+      "stageId": "stage-strategy-diagnose",
+      "stage": "Diagnose the obstacle",
+      "learnerChangeId": "change-strategy-causal-diagnosis",
+      "learnerMove": "Learners replace an aspiration with a causal account of the obstacle.",
+      "proofId": "proof-strategy-diagnosis",
+      "proofAdded": "The record states the obstacle, mechanism, and evidence supporting the diagnosis.",
+      "handoff": "A defensible diagnosis creates criteria for strategic choice."
+    },
+    {
+      "stageId": "stage-strategy-choose",
+      "stage": "Make the trade-off",
+      "learnerChangeId": "change-strategy-select-option",
+      "learnerMove": "Learners select one option and record why plausible alternatives remain rejected.",
+      "proofId": "proof-strategy-choice-table",
+      "proofAdded": "The record compares one selected and two rejected alternatives against explicit criteria.",
+      "handoff": "The selected option now needs coordinated actions and revision evidence."
+    },
+    {
+      "stageId": "stage-strategy-revise",
+      "stage": "Prepare for revision",
+      "learnerChangeId": "change-strategy-revisable-choice",
+      "learnerMove": "Learners attach reinforcing actions, assumptions, and review thresholds to their strategic choice.",
+      "proofId": "proof-strategy-final-record",
+      "proofAdded": "The final record links each action to the choice and names evidence that would reopen it.",
+      "handoff": "The record is ready for use in an operating review."
+    }
+  ],
+  "publicContribution": {
+    "intended": false,
+    "claim": "",
+    "audience": "",
+    "evidenceBoundaryId": null
+  },
+  "exclusions": {
+    "outOfScope": ["industry valuation modelling", "portfolio capital allocation"],
+    "antiGoals": ["reinvention for its own sake", "preservation without a functional reason"]
+  },
+  "openDecisions": [],
+  "approval": {
+    "status": "approved",
+    "scope": ["full"],
+    "approvedBy": "Programme author and sponsor",
+    "approvedAt": "2026-09-04",
+    "provenance": "The author and sponsor approved the hybrid architecture after reviewing the item-level transformation audit."
+  },
+  "productionDecision": {
+    "state": "proceed",
+    "nextAction": "Revise the six session plans around the approved Revisable Strategy Record.",
+    "blockedBy": [],
+    "bookFoundation": {
+      "required": false,
+      "status": "not-applicable",
+      "record": ""
+    }
+  }
+}

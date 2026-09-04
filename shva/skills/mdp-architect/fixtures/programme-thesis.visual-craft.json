@@ -1,0 +1,155 @@
+{
+  "recordId": "programme-thesis-observational-drawing",
+  "schemaVersion": "1.0",
+  "trigger": {
+    "kind": "new-substantial-programme",
+    "reason": "A new studio course needs a coherent progression from looking carefully to producing and explaining a measured drawing.",
+    "inspectedEvidence": [
+      "Instructor notes from three introductory drawing cohorts",
+      "Representative first-session and final-session learner drawings",
+      "Studio brief for the proposed course"
+    ],
+    "reusedRecord": null,
+    "materialChangeDetected": true,
+    "interviewAction": "complete-interview"
+  },
+  "programme": {
+    "subject": "Observational drawing through proportion, negative space, and revision",
+    "scope": "A six-session studio course in which beginners learn to observe, measure, revise, and explain one drawing from life",
+    "format": "course",
+    "audience": "Adults beginning observational drawing without prior studio training",
+    "startingPoint": "Learners can name the objects they see but often draw remembered symbols instead of comparing visible relationships"
+  },
+  "thesis": {
+    "recognisedProblem": "A beginner may look continuously at a subject while still drawing the idea of the object rather than its visible proportions and spaces.",
+    "recognisedProblemEvidenceId": "evidence-drawing-observation-pattern",
+    "promisedLearnerChange": "Learners leave able to construct, test, revise, and explain an observational drawing using visible proportional and spatial relationships.",
+    "promisedLearnerChangeId": "change-drawing-measured-observation",
+    "centralQuestion": "How can a learner draw what is visibly present instead of the convenient symbol already held in memory?",
+    "distinctiveArgument": "Observation becomes a learnable craft when learners externalise comparison, test relationships on the page, and preserve revision as evidence of seeing more accurately.",
+    "distinctiveArgumentEvidenceId": "evidence-drawing-practice-argument",
+    "argumentBoundary": "The course develops introductory observational practice and does not prescribe one expressive style or assess professional artistic merit.",
+    "changedCondition": "The proposed course replaces demonstration-heavy classes with repeated short cycles of observation, comparison, drawing, and revision.",
+    "changedConditionEvidenceId": "evidence-drawing-studio-brief"
+  },
+  "inheritedMaterial": {
+    "present": false,
+    "sources": [],
+    "audit": []
+  },
+  "transformationLens": {
+    "applicability": "Not applicable",
+    "reason": "The course is a greenfield craft progression and does not depend on an inherited operating form or technological transformation claim.",
+    "governingQuestion": "",
+    "changedMechanisms": []
+  },
+  "evidenceBoundaries": [
+    {
+      "id": "evidence-drawing-observation-pattern",
+      "claim": "Beginning learners in the instructor's prior cohorts often substituted familiar object symbols for observed proportional relationships.",
+      "evidenceClass": "author_experience_or_teaching_observation",
+      "attribution": "Course instructor's comparison of learner work and critique notes",
+      "observedScope": "Three introductory adult cohorts taught by the instructor, with twelve representative drawing sequences reviewed",
+      "known": "The reviewed sequences contain repeated mismatches between stated observation and relationships drawn on the page.",
+      "uncertain": "The small teaching sample does not establish how common the pattern is across drawing education.",
+      "allowedUse": "Use to frame this course's learner problem within the observed cohorts and proposed studio design."
+    },
+    {
+      "id": "evidence-drawing-studio-brief",
+      "claim": "The commissioned course prioritises repeated learner practice and revision over long instructor demonstrations.",
+      "evidenceClass": "author_experience_or_teaching_observation",
+      "attribution": "Approved studio course brief",
+      "observedScope": "The design requirements recorded for this six-session introductory course",
+      "known": "The brief specifies short demonstrations followed by observable learner practice in every session.",
+      "uncertain": "The optimum duration of each practice cycle will require adjustment after the first cohort.",
+      "allowedUse": "Use to determine the course architecture while preserving timing as a pilot variable."
+    },
+    {
+      "id": "evidence-drawing-practice-argument",
+      "claim": "Externalised comparison and visible revision can organise a progression from looking to measured observational drawing.",
+      "evidenceClass": "author_synthesis",
+      "inputClaimIds": [
+        "evidence-drawing-observation-pattern",
+        "evidence-drawing-studio-brief"
+      ],
+      "known": "The learner problem and commissioned practice format both make comparison and revision observable on the page.",
+      "uncertain": "The progression still needs learner testing before it can be treated as a generally effective sequence.",
+      "allowedUse": "Use as the bounded design proposition for this course and revise it from portfolio evidence."
+    }
+  ],
+  "carriedProof": {
+    "carriedProofId": "proof-drawing-observation-portfolio",
+    "supportsLearnerChangeId": "change-drawing-measured-observation",
+    "successEvidenceId": "proof-drawing-final-revision",
+    "type": "progressive observational drawing portfolio",
+    "name": "Seeing and Revision Portfolio",
+    "initialState": "An unmeasured first drawing accompanied by the learner's account of what was noticed",
+    "finalState": "A drawing revised through explicit proportion and negative-space checks with the changes explained",
+    "successEvidence": "The learner can identify a visible relationship, show how it was tested, revise the drawing, and explain what changed in the observation."
+  },
+  "capabilityProgression": [
+    {
+      "stageId": "stage-drawing-frame-relationships",
+      "stage": "Frame visible relationships",
+      "learnerChangeId": "change-drawing-compare-proportion",
+      "learnerMove": "Learners compare the height, width, angle, and placement of major shapes before outlining named objects.",
+      "proofId": "proof-drawing-proportion-map",
+      "proofAdded": "The portfolio marks at least three measured relationships used to place the main shapes.",
+      "handoff": "Placed shapes create enclosed spaces whose accuracy can be tested without relying on object names."
+    },
+    {
+      "stageId": "stage-drawing-test-negative-space",
+      "stage": "Test the spaces between forms",
+      "learnerChangeId": "change-drawing-use-negative-space",
+      "learnerMove": "Learners compare the shapes around and between objects to detect errors in placement and proportion.",
+      "proofId": "proof-drawing-space-check",
+      "proofAdded": "The portfolio shows one negative-space comparison and the correction it caused.",
+      "handoff": "The corrected construction can now be developed and revised without concealing the evidence of change."
+    },
+    {
+      "stageId": "stage-drawing-revise-explain",
+      "stage": "Revise and explain the drawing",
+      "learnerChangeId": "change-drawing-measured-observation",
+      "learnerMove": "Learners test the developed drawing against the subject, revise a consequential relationship, and explain the evidence for that revision.",
+      "proofId": "proof-drawing-final-revision",
+      "proofAdded": "The final portfolio preserves the before state, the observed discrepancy, the revision, and the learner's explanation.",
+      "handoff": "The learner can apply the same observation and revision cycle to a new subject without an instructor demonstration."
+    }
+  ],
+  "publicContribution": {
+    "intended": false,
+    "claim": "",
+    "audience": "",
+    "evidenceBoundaryId": null
+  },
+  "exclusions": {
+    "outOfScope": [
+      "professional art certification",
+      "prescription of one expressive style"
+    ],
+    "antiGoals": [
+      "long demonstrations without learner practice",
+      "polished final images with no visible revision evidence"
+    ]
+  },
+  "openDecisions": [],
+  "approval": {
+    "status": "approved",
+    "scope": [
+      "full"
+    ],
+    "approvedBy": "Studio course owner",
+    "approvedAt": "2026-09-04",
+    "provenance": "The course owner approved the craft progression, evidence boundary, and portfolio proof in the design review."
+  },
+  "productionDecision": {
+    "state": "proceed",
+    "nextAction": "Build the six studio sessions backward from the Seeing and Revision Portfolio.",
+    "blockedBy": [],
+    "bookFoundation": {
+      "required": false,
+      "status": "not-applicable",
+      "record": ""
+    }
+  }
+}

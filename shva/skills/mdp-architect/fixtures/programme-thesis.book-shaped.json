@@ -1,0 +1,153 @@
+{
+  "recordId": "programme-thesis-city-heat-book",
+  "schemaVersion": "1.0",
+  "trigger": {
+    "kind": "new-substantial-programme",
+    "reason": "A public-facing book and companion course need one programme thesis before chapter production and a separate foundation for book identity.",
+    "inspectedEvidence": [
+      "Author's research ledger on heat and public decisions",
+      "Provisional reader and participant profiles",
+      "Existing Book Foundation Record for title, voice, front matter, and visual identity"
+    ],
+    "reusedRecord": null,
+    "materialChangeDetected": true,
+    "interviewAction": "complete-interview"
+  },
+  "programme": {
+    "subject": "How cities turn heat warnings into protection for people",
+    "scope": "A general-reader book with a companion learning journey from measurement through accountable public action",
+    "format": "book",
+    "audience": "General readers and civic practitioners with no assumed background in climate science or public administration",
+    "startingPoint": "Readers recognise extreme heat as a hazard but may assume that better forecasts automatically produce timely protection"
+  },
+  "thesis": {
+    "recognisedProblem": "A city can measure dangerous heat accurately while responsibility for changing work, transport, shelter, and care remains fragmented.",
+    "recognisedProblemEvidenceId": "evidence-heat-governance-gap",
+    "promisedLearnerChange": "Readers leave able to trace one heat warning into a bounded public commitment with named responsibilities, thresholds, and feedback.",
+    "promisedLearnerChangeId": "change-heat-warning-to-action",
+    "centralQuestion": "What must happen between a reliable warning and protection that reaches the people exposed?",
+    "distinctiveArgument": "The decisive public capacity is not prediction alone but the arrangement that converts a forecast into coordinated, revisable commitments.",
+    "distinctiveArgumentEvidenceId": "evidence-heat-capacity-argument",
+    "argumentBoundary": "The book explains the path from warning to public action and does not offer clinical advice or claim one plan fits every city.",
+    "changedCondition": "More frequent and intense heat events increase the value of forecasts while compressing the time available for coordinated response.",
+    "changedConditionEvidenceId": "evidence-heat-changed-condition"
+  },
+  "inheritedMaterial": {
+    "present": false,
+    "sources": [],
+    "audit": []
+  },
+  "transformationLens": {
+    "applicability": "Central",
+    "reason": "The book asks which public protections remain necessary as warning systems become faster and climatic conditions become less familiar.",
+    "governingQuestion": "Which public requirements endure when the form, speed, and frequency of heat warning change?",
+    "changedMechanisms": ["monitoring", "coordination"]
+  },
+  "evidenceBoundaries": [
+    {
+      "id": "evidence-heat-changed-condition",
+      "claim": "Climate change is increasing the frequency, duration, and magnitude of extreme heat in many regions.",
+      "evidenceClass": "established_external",
+      "sourceUrl": "https://www.who.int/news-room/fact-sheets/detail/climate-change-heat-and-health",
+      "sourceTitle": "Climate change, heat and health",
+      "locator": "World Health Organization fact sheet overview",
+      "known": "Extreme heat already creates serious health burdens and exposure is increasing in many settings.",
+      "uncertain": "Local timing, exposure, and effective response vary by city and population.",
+      "allowedUse": "Use to establish the changed hazard condition without projecting one city's future."
+    },
+    {
+      "id": "evidence-heat-governance-gap",
+      "claim": "A reliable warning does not itself assign or coordinate the public actions needed to reduce exposure.",
+      "evidenceClass": "author_synthesis",
+      "inputClaimIds": ["evidence-heat-changed-condition"],
+      "known": "Forecasting and public response are different contributions with different owners and operating constraints.",
+      "uncertain": "The most consequential coordination gap depends on local institutions and infrastructure.",
+      "allowedUse": "Use as a bounded problem statement that each chapter tests against sourced cases."
+    },
+    {
+      "id": "evidence-heat-capacity-argument",
+      "claim": "Public protection depends on connecting prediction to coordinated and revisable commitments.",
+      "evidenceClass": "author_synthesis",
+      "inputClaimIds": ["evidence-heat-changed-condition", "evidence-heat-governance-gap"],
+      "known": "Warnings and protective actions occupy distinct parts of the response path.",
+      "uncertain": "The proposed arrangement must remain adaptable to different city capabilities.",
+      "allowedUse": "Use as the book's governing argument, not as a universal prescription."
+    },
+    {
+      "id": "evidence-heat-public-contribution",
+      "claim": "The warning-to-commitment frame can give general readers a practical way to inspect public heat response.",
+      "evidenceClass": "author_synthesis",
+      "inputClaimIds": ["evidence-heat-governance-gap", "evidence-heat-capacity-argument"],
+      "known": "The frame translates a technical warning into visible decisions, owners, thresholds, and review.",
+      "uncertain": "Reader testing is needed to establish whether the frame travels beyond the initial cases.",
+      "allowedUse": "Use as the intended public contribution and evaluate it during manuscript testing."
+    }
+  ],
+  "carriedProof": {
+    "carriedProofId": "proof-heat-commitment-map",
+    "supportsLearnerChangeId": "change-heat-warning-to-action",
+    "successEvidenceId": "proof-heat-final-map",
+    "type": "progressive public decision map",
+    "name": "Warning to Protection Map",
+    "initialState": "A heat alert treated as if publication completes the public response",
+    "finalState": "A warning connected to thresholds, affected groups, authorised actions, responsible institutions, and review evidence",
+    "successEvidence": "A reader can identify what changes after the warning, who may commit resources, and what would revise the response."
+  },
+  "capabilityProgression": [
+    {
+      "stageId": "stage-heat-read-warning",
+      "stage": "Read the warning",
+      "learnerChangeId": "change-heat-separate-measurement",
+      "learnerMove": "Readers distinguish what the forecast establishes from what public action still requires judgment.",
+      "proofId": "proof-heat-warning-boundary",
+      "proofAdded": "The map separates measured hazard, exposed people, and unresolved public choices.",
+      "handoff": "The unresolved choices create the need to trace responsibility."
+    },
+    {
+      "stageId": "stage-heat-trace-response",
+      "stage": "Trace the response",
+      "learnerChangeId": "change-heat-locate-responsibility",
+      "learnerMove": "Readers locate the institutions, thresholds, and handoffs between warning and protection.",
+      "proofId": "proof-heat-response-path",
+      "proofAdded": "The map names the decision right and action expected at each consequential handoff.",
+      "handoff": "The visible route can now be tested for missing people, exceptions, and feedback."
+    },
+    {
+      "stageId": "stage-heat-write-commitment",
+      "stage": "Write the commitment",
+      "learnerChangeId": "change-heat-warning-to-action",
+      "learnerMove": "Readers revise one warning response into an authorised and reviewable public commitment.",
+      "proofId": "proof-heat-final-map",
+      "proofAdded": "The completed map connects warning, authority, action, affected groups, exceptions, and later evidence.",
+      "handoff": "The reader can apply the map to a public warning beyond the book's cases."
+    }
+  ],
+  "publicContribution": {
+    "intended": true,
+    "claim": "The book offers a practical warning-to-commitment frame for examining why accurate public information does or does not become protection.",
+    "audience": "General readers, civic leaders, journalists, and practitioners concerned with public heat response",
+    "evidenceBoundaryId": "evidence-heat-public-contribution"
+  },
+  "exclusions": {
+    "outOfScope": ["individual clinical treatment", "universal city blueprint"],
+    "antiGoals": ["climate fatalism", "technical forecasting presented as complete public action"]
+  },
+  "openDecisions": [],
+  "approval": {
+    "status": "approved",
+    "scope": ["full"],
+    "approvedBy": "Book author",
+    "approvedAt": "2026-09-04",
+    "provenance": "The author approved the programme thesis after separately approving the named Book Foundation Record."
+  },
+  "productionDecision": {
+    "state": "proceed",
+    "nextAction": "Build the chapter sequence and companion learning journey backward from the Warning to Protection Map.",
+    "blockedBy": [],
+    "bookFoundation": {
+      "required": true,
+      "status": "approved",
+      "record": "book-foundation-city-heat"
+    }
+  }
+}

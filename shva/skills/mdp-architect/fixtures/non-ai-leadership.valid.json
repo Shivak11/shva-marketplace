@@ -1,0 +1,630 @@
+{
+  "programme": {
+    "title": "Leading Under Operational Pressure",
+    "officialSessionMinutes": 60,
+    "preparedRunwayMinutes": 75,
+    "planningProfile": {
+      "minimumCoreSegments": 6,
+      "narrativeWordRange": {
+        "minimum": 2600,
+        "maximum": 3800
+      },
+      "maximumBookHeadings": 3,
+      "maximumPullLines": 2,
+      "maximumBodyCalloutCards": 0,
+      "maximumSubstantiveVisuals": 2
+    },
+    "slideBeatRange": {
+      "minimum": 6,
+      "maximum": 9
+    }
+  },
+  "session": {
+    "title": "The Dissent Before Dispatch",
+    "bookReader": "A general reader interested in leadership when credible dissent arrives late",
+    "participantAudience": "Operational leaders responsible for consequential release and escalation decisions",
+    "assumedKnowledge": {
+      "book": "No prior knowledge of manufacturing, quality assurance, or escalation design",
+      "teaching": "Experience making time-sensitive decisions with colleagues who hold different evidence"
+    },
+    "centralQuestion": "How should a leader respond when credible dissent arrives after the team has committed to dispatch?",
+    "carriedArtifact": "Dissent-to-Decision Protocol",
+    "nextQuestion": "How can the organisation make productive dissent repeatable without turning every concern into a stop?",
+    "aiUse": {
+      "present": false,
+      "noAiRationale": "The capability being practised is a human leadership response to late dissent, and neither the case nor the learner workflow needs an AI contribution."
+    },
+    "programmeThesisLink": {
+      "recordId": "programme-thesis-non-ai-leadership",
+      "capabilityStageId": "stage-leadership-commit",
+      "capabilityProofId": "proof-leadership-final-commitment",
+      "promisedLearnerChangeId": "change-leadership-shared-commitment",
+      "carriedProofId": "proof-leadership-commitment-record",
+      "centralQuestionAlignment": "The question makes the promised shift observable by asking leaders to act on credible dissent after commitment has created pressure to continue.",
+      "artifactAdvance": "The carried protocol advances the promised proof by recording a pause threshold, evidence check, decision owner, executable response, and review condition."
+    },
+    "actorRegistry": [
+      {
+        "id": "quality-manager",
+        "displayName": "quality manager",
+        "actorType": "human-role",
+        "automationEligible": false,
+        "introducedInBlockId": "case-allergen-label"
+      },
+      {
+        "id": "plant-director",
+        "displayName": "plant director",
+        "actorType": "human-role",
+        "automationEligible": false,
+        "introducedInBlockId": "case-allergen-label"
+      },
+      {
+        "id": "distribution-lead",
+        "displayName": "distribution lead",
+        "actorType": "human-role",
+        "automationEligible": false,
+        "introducedInBlockId": "case-allergen-label"
+      },
+      {
+        "id": "line-supervisor",
+        "displayName": "line supervisor",
+        "actorType": "human-role",
+        "automationEligible": false,
+        "introducedInBlockId": "case-allergen-label"
+      }
+    ],
+    "semanticBlocks": [
+      {
+        "id": "disturbance-release-clock",
+        "type": "disturbance",
+        "text": "A packaged-food shipment is ready to leave when the quality manager says one label record does not match the approved allergen statement.",
+        "sourceClass": "illustrative",
+        "requiredAcrossSurfaces": true
+      },
+      {
+        "id": "case-allergen-label",
+        "type": "case",
+        "text": "The plant director must decide whether to release, inspect, or hold the shipment while the quality manager, distribution lead, and line supervisor hold different pieces of the record.",
+        "sourceClass": "illustrative",
+        "requiredAcrossSurfaces": true,
+        "decision": "Whether to release, inspect, or hold the shipment before dispatch",
+        "actorIds": ["quality-manager", "plant-director", "distribution-lead", "line-supervisor"],
+        "stakes": "A needless hold can waste stock and miss delivery, while a mistaken release can expose customers and require a recall",
+        "constraint": "The dispatch window closes in twenty minutes and the discrepancy has not yet been explained",
+        "incompleteEvidence": "The team has the approved artwork and the line log but has not inspected the remaining label roll",
+        "evidenceBoundary": "The case is an illustrative composite designed to test leadership under late dissent",
+        "returnPoints": [
+          {
+            "afterBlockId": "claim-dissent-duty",
+            "purpose": "Re-read the interruption as decision work rather than disloyalty or delay",
+            "newCausalWork": "Shows why a leader needs a testable response before accepting or dismissing the warning"
+          },
+          {
+            "afterBlockId": "mechanism-dissent-path",
+            "purpose": "Trace the warning from dissent to a bounded and executable decision",
+            "newCausalWork": "Makes the pause threshold, independent check, owner, and restart condition visible"
+          }
+        ]
+      },
+      {
+        "id": "claim-dissent-duty",
+        "type": "claim",
+        "text": "Late dissent becomes useful when a leader converts it into a bounded test instead of rewarding agreement or rewarding alarm.",
+        "sourceClass": "teaching-synthesis",
+        "requiredAcrossSurfaces": true
+      },
+      {
+        "id": "mechanism-dissent-path",
+        "type": "mechanism",
+        "text": "Credible dissent moves through a pause threshold, an independent evidence check, a named decision, an explanation, and a review condition.",
+        "sourceClass": "teaching-synthesis",
+        "requiredAcrossSurfaces": true,
+        "labelStrategy": "descriptive"
+      },
+      {
+        "id": "commitment-release-call",
+        "type": "commitment",
+        "text": "Participants choose an immediate course and record the operational consequence they knowingly accept before the missing record is revealed.",
+        "sourceClass": "teaching-synthesis",
+        "requiredAcrossSurfaces": true
+      },
+      {
+        "id": "exercise-dissent-protocol",
+        "type": "exercise",
+        "text": "Write the pause threshold, evidence check, decision owner, action, explanation duty, and review condition for the dispatch decision.",
+        "sourceClass": "teaching-synthesis",
+        "requiredAcrossSurfaces": true
+      },
+      {
+        "id": "reveal-mixed-label-roll",
+        "type": "consequence-reveal",
+        "text": "Inspection finds two labels with the old allergen statement mixed into the unused portion of the roll.",
+        "sourceClass": "illustrative",
+        "requiredAcrossSurfaces": true
+      },
+      {
+        "id": "revision-after-record",
+        "type": "consequence-revision",
+        "text": "Participants retain or revise the dispatch decision and identify which part of the new record changed their reasoning.",
+        "sourceClass": "teaching-synthesis",
+        "requiredAcrossSurfaces": true
+      },
+      {
+        "id": "revision-final-protocol",
+        "type": "revision",
+        "text": "Participants convert the revised decision into a protocol another shift can execute and challenge without private knowledge.",
+        "sourceClass": "teaching-synthesis",
+        "requiredAcrossSurfaces": true
+      },
+      {
+        "id": "transition-repeatable-dissent",
+        "type": "transition",
+        "text": "The next session asks how a useful pause can become an organisational capability without making stoppage the default response.",
+        "sourceClass": "teaching-synthesis",
+        "requiredAcrossSurfaces": true,
+        "derivedFromBlockIds": ["mechanism-dissent-path", "revision-final-protocol"],
+        "unresolvedBecause": "One defensible dispatch decision does not yet establish when other teams should pause or continue",
+        "artifactState": "The Dissent-to-Decision Protocol contains a review condition but no organisation-wide adoption rule"
+      }
+    ],
+    "narrativeHinges": {
+      "sceneToConcept": {
+        "fromBlockId": "case-allergen-label",
+        "toBlockId": "claim-dissent-duty",
+        "bridge": "The shipment cannot move safely until the director treats the disagreement as evidence that can be tested rather than a challenge to authority",
+        "unresolvedConsequence": "Silencing the warning risks release, while an unbounded stop rewards alarm without resolving the discrepancy",
+        "nextMove": "The claim gives the director a way to turn the interruption into bounded decision work"
+      },
+      "conceptToFramework": {
+        "fromBlockId": "claim-dissent-duty",
+        "toBlockId": "mechanism-dissent-path",
+        "bridge": "Once dissent is treated as work, the team can specify the threshold, evidence check, owner, and restart condition that make it useful",
+        "unresolvedConsequence": "A respectful hearing still leaves the shipment unresolved unless the warning changes an executable choice",
+        "nextMove": "The mechanism converts the leadership principle into a sequence that can govern the remaining minutes"
+      },
+      "chapterToExercise": {
+        "fromBlockId": "mechanism-dissent-path",
+        "toBlockId": "exercise-dissent-protocol",
+        "bridge": "The reader must now decide what qualifies for a pause and who can release the shipment after the evidence check",
+        "unresolvedConsequence": "The sequence remains descriptive until someone accepts a cost, names the owner, and writes the restart condition",
+        "nextMove": "The exercise requires that commitment before disclosing what the remaining label roll contains"
+      }
+    },
+    "terms": [],
+    "termAudit": {
+      "noNewTermsReason": "The session uses ordinary operational language and explains the allergen-label context inside the case."
+    },
+    "evidenceComparisons": [],
+    "comparisonAudit": {
+      "noComparisonNeededReason": "The session tests one late-dissent mechanism and does not compare separate evidence-production paths."
+    },
+    "sourceLedger": [
+      {
+        "claimId": "disturbance-release-clock",
+        "classification": "illustrative",
+        "origin": "Synthetic dispatch scenario created for portability testing",
+        "sourceType": "synthetic teaching case",
+        "presentationStatus": "composite",
+        "checkedOn": "2026-09-04",
+        "confidence": "high",
+        "surfaces": ["book", "teaching", "slides"],
+        "supportedFacts": [],
+        "teachingInference": "A late discrepancy forces a leader to decide whether and how to pause.",
+        "factualBoundary": "The organisation and events are fictional."
+      },
+      {
+        "claimId": "case-allergen-label",
+        "classification": "illustrative",
+        "origin": "Composite food-manufacturing workflow created for portability testing",
+        "sourceType": "composite teaching case",
+        "presentationStatus": "composite",
+        "checkedOn": "2026-09-04",
+        "confidence": "high",
+        "surfaces": ["book", "teaching", "slides"],
+        "supportedFacts": [],
+        "teachingInference": "Leadership becomes visible in the treatment of credible dissent under time pressure.",
+        "factualBoundary": "The workflow is plausible but does not describe a named company."
+      },
+      {
+        "claimId": "claim-dissent-duty",
+        "classification": "teaching-synthesis",
+        "origin": "MDP Architect synthesis of dissent and decision design",
+        "sourceType": "author synthesis",
+        "presentationStatus": "author-synthesis",
+        "checkedOn": "2026-09-04",
+        "confidence": "medium",
+        "surfaces": ["book", "teaching", "slides"],
+        "supportedFacts": [],
+        "teachingInference": "A bounded test protects both candour and forward movement.",
+        "factualBoundary": "A design proposition rather than an empirical universal."
+      },
+      {
+        "claimId": "mechanism-dissent-path",
+        "classification": "teaching-synthesis",
+        "origin": "MDP Architect leadership-session mechanism",
+        "sourceType": "author synthesis",
+        "presentationStatus": "author-synthesis",
+        "checkedOn": "2026-09-04",
+        "confidence": "medium",
+        "surfaces": ["book", "teaching", "slides"],
+        "supportedFacts": [],
+        "teachingInference": "A warning becomes operational through a threshold, check, owner, explanation, and review.",
+        "factualBoundary": "The sequence must be adapted to the real decision and legal context."
+      },
+      {
+        "claimId": "commitment-release-call",
+        "classification": "teaching-synthesis",
+        "origin": "Commitment-before-reveal learning design",
+        "sourceType": "learning-design synthesis",
+        "presentationStatus": "author-synthesis",
+        "checkedOn": "2026-09-04",
+        "confidence": "medium",
+        "surfaces": ["book", "teaching", "slides"],
+        "supportedFacts": [],
+        "teachingInference": "A recorded first choice makes the effect of changed information inspectable.",
+        "factualBoundary": "Learning effectiveness requires live cohort observation."
+      },
+      {
+        "claimId": "exercise-dissent-protocol",
+        "classification": "teaching-synthesis",
+        "origin": "MDP Architect workbook design",
+        "sourceType": "learning-design synthesis",
+        "presentationStatus": "author-synthesis",
+        "checkedOn": "2026-09-04",
+        "confidence": "medium",
+        "surfaces": ["book", "teaching", "slides"],
+        "supportedFacts": [],
+        "teachingInference": "Writing the decision path exposes missing authority and execution details.",
+        "factualBoundary": "The participant output is not an approved operating procedure."
+      },
+      {
+        "claimId": "reveal-mixed-label-roll",
+        "classification": "illustrative",
+        "origin": "Synthetic consequence added to the dispatch scenario",
+        "sourceType": "synthetic consequence reveal",
+        "presentationStatus": "composite",
+        "checkedOn": "2026-09-04",
+        "confidence": "high",
+        "surfaces": ["book", "teaching", "slides"],
+        "supportedFacts": [],
+        "teachingInference": "Changed evidence tests whether the learner can revise without hiding the first choice.",
+        "factualBoundary": "The mixed label roll is invented for the exercise."
+      },
+      {
+        "claimId": "revision-after-record",
+        "classification": "teaching-synthesis",
+        "origin": "Commitment, consequence, and revision sequence",
+        "sourceType": "learning-design synthesis",
+        "presentationStatus": "author-synthesis",
+        "checkedOn": "2026-09-04",
+        "confidence": "medium",
+        "surfaces": ["book", "teaching", "slides"],
+        "supportedFacts": [],
+        "teachingInference": "The learner must connect changed action to the fact that changed it.",
+        "factualBoundary": "Revision quality still requires human review."
+      },
+      {
+        "claimId": "revision-final-protocol",
+        "classification": "teaching-synthesis",
+        "origin": "Leadership transfer and operationalisation sequence",
+        "sourceType": "learning-design synthesis",
+        "presentationStatus": "author-synthesis",
+        "checkedOn": "2026-09-04",
+        "confidence": "medium",
+        "surfaces": ["book", "teaching", "slides"],
+        "supportedFacts": [],
+        "teachingInference": "A defensible response becomes reusable only when another shift can execute and challenge it.",
+        "factualBoundary": "The protocol remains a learning artifact."
+      },
+      {
+        "claimId": "transition-repeatable-dissent",
+        "classification": "teaching-synthesis",
+        "origin": "Leading Under Operational Pressure curriculum architecture",
+        "sourceType": "curriculum synthesis",
+        "presentationStatus": "author-synthesis",
+        "checkedOn": "2026-09-04",
+        "confidence": "medium",
+        "surfaces": ["book", "teaching", "slides"],
+        "supportedFacts": [],
+        "teachingInference": "One case leaves open how the organisation should scale pause rights.",
+        "factualBoundary": "The next-session question is a curriculum design choice."
+      }
+    ],
+    "surfaces": {
+      "book": {
+        "centralQuestion": "How should a leader respond when credible dissent arrives after the team has committed to dispatch?",
+        "semanticBlockIds": [
+          "disturbance-release-clock",
+          "case-allergen-label",
+          "claim-dissent-duty",
+          "mechanism-dissent-path",
+          "commitment-release-call",
+          "exercise-dissent-protocol",
+          "reveal-mixed-label-roll",
+          "revision-after-record",
+          "revision-final-protocol",
+          "transition-repeatable-dissent"
+        ],
+        "headings": ["Twenty Minutes to Dispatch", "What Dissent Asks of a Leader", "Write the Pause Before You Need It"],
+        "narrativeWords": 3200,
+        "workbookWords": 420,
+        "bodyCalloutCards": 0,
+        "pullLines": 1,
+        "visuals": []
+      },
+      "teaching": {
+        "centralQuestion": "How should a leader respond when credible dissent arrives after the team has committed to dispatch?",
+        "semanticBlockIds": [
+          "disturbance-release-clock",
+          "case-allergen-label",
+          "claim-dissent-duty",
+          "mechanism-dissent-path",
+          "commitment-release-call",
+          "exercise-dissent-protocol",
+          "reveal-mixed-label-roll",
+          "revision-after-record",
+          "revision-final-protocol",
+          "transition-repeatable-dissent"
+        ],
+        "coreSegments": [
+          {
+            "id": "dispatch-opening",
+            "minutes": 10,
+            "semanticBlockIds": ["disturbance-release-clock", "case-allergen-label"],
+            "facilitatorMove": "Present the final twenty minutes without resolving whether the discrepancy is harmless or dangerous.",
+            "participantMove": "Choose release, inspect, or hold and state the operational cost they accept.",
+            "artifactState": "Each protocol contains a visible first dispatch decision.",
+            "recoveryMove": "If participants ask for certainty, return to the closing dispatch window."
+          },
+          {
+            "id": "dissent-reading",
+            "minutes": 8,
+            "semanticBlockIds": ["claim-dissent-duty"],
+            "facilitatorMove": "Separate respectful listening from the bounded work needed to test the warning.",
+            "participantMove": "Name one response that suppresses dissent and one that rewards alarm without resolution.",
+            "artifactState": "The protocol distinguishes hearing a concern from acting on it.",
+            "recoveryMove": "If the discussion becomes personal, return to the decision and evidence."
+          },
+          {
+            "id": "build-dissent-path",
+            "minutes": 10,
+            "semanticBlockIds": ["mechanism-dissent-path"],
+            "facilitatorMove": "Build the pause, check, ownership, explanation, and review sequence from the case.",
+            "participantMove": "Mark the first step the current case cannot execute without further design.",
+            "artifactState": "The protocol shows a concrete break rather than a general concern about culture.",
+            "recoveryMove": "If participants jump to values, ask who does what in the next five minutes."
+          },
+          {
+            "id": "commit-release-call",
+            "minutes": 8,
+            "semanticBlockIds": ["commitment-release-call", "exercise-dissent-protocol"],
+            "facilitatorMove": "Open the workbook and keep the unused label-roll inspection hidden.",
+            "participantMove": "Write the first action, its owner, and the consequence knowingly accepted.",
+            "artifactState": "Every learner has a traceable commitment before changed information appears.",
+            "recoveryMove": "If answers stay abstract, require an actor, action, clock, and accepted cost."
+          },
+          {
+            "id": "reveal-and-revise",
+            "minutes": 14,
+            "semanticBlockIds": ["reveal-mixed-label-roll", "revision-after-record", "revision-final-protocol"],
+            "facilitatorMove": "Reveal the mixed labels, preserve the first answer, and ask what the record changes.",
+            "participantMove": "Revise or retain the dispatch call, then finish a protocol another shift can use.",
+            "artifactState": "The protocol shows the first choice, changed evidence, revision, and executable rule together.",
+            "recoveryMove": "If everyone changes automatically, ask what evidence would justify holding course."
+          },
+          {
+            "id": "carry-forward",
+            "minutes": 10,
+            "semanticBlockIds": ["transition-repeatable-dissent"],
+            "facilitatorMove": "Compare completed protocols and isolate the unresolved organisation-wide pause rule.",
+            "participantMove": "Carry forward one condition that should trigger review beyond this single case.",
+            "artifactState": "The protocol is usable for the case and names its remaining adoption question.",
+            "recoveryMove": "If the room seeks a universal rule, test it against a minor reversible discrepancy."
+          }
+        ],
+        "depthReserves": [
+          {
+            "id": "test-pause-threshold",
+            "minutes": 5,
+            "semanticBlockIds": ["claim-dissent-duty", "mechanism-dissent-path"],
+            "trigger": "Most participants choose an indefinite hold without a testable threshold.",
+            "addedMove": "Pairs rewrite the pause condition so another shift can apply it.",
+            "participantMove": "Each pair tests one threshold against a minor reversible discrepancy.",
+            "rejoin": "Return when each pair can distinguish a pause from routine correction.",
+            "artifactState": "The protocol contains an observable pause threshold."
+          },
+          {
+            "id": "test-release-owner",
+            "minutes": 5,
+            "semanticBlockIds": ["exercise-dissent-protocol", "revision-final-protocol"],
+            "trigger": "Protocols stop the shipment but do not name who may restart it.",
+            "addedMove": "Groups specify the release owner and minimum evidence required.",
+            "participantMove": "Each group writes one restart instruction and one challenge route.",
+            "rejoin": "Return after another group can execute the restart instruction.",
+            "artifactState": "The protocol names a release owner and evidence boundary."
+          },
+          {
+            "id": "compare-defensible-routes",
+            "minutes": 5,
+            "semanticBlockIds": ["revision-after-record", "transition-repeatable-dissent"],
+            "trigger": "The filled-edition comparison ends with five minutes available.",
+            "addedMove": "Compare inspection and full-hold routes using the same changed evidence.",
+            "participantMove": "Groups defend one route by naming the cost and reversal condition.",
+            "rejoin": "Return with one organisation-wide adoption question.",
+            "artifactState": "The protocol records one defensible alternative route."
+          }
+        ]
+      },
+      "slides": {
+        "centralQuestion": "How should a leader respond when credible dissent arrives after the team has committed to dispatch?",
+        "semanticBlockIds": [
+          "disturbance-release-clock",
+          "case-allergen-label",
+          "claim-dissent-duty",
+          "mechanism-dissent-path",
+          "commitment-release-call",
+          "exercise-dissent-protocol",
+          "reveal-mixed-label-roll",
+          "revision-after-record",
+          "revision-final-protocol",
+          "transition-repeatable-dissent"
+        ],
+        "beats": [
+          {"id": "dispatch-case", "semanticBlockIds": ["disturbance-release-clock", "case-allergen-label"]},
+          {"id": "dissent-claim", "semanticBlockIds": ["claim-dissent-duty"]},
+          {"id": "decision-path", "semanticBlockIds": ["mechanism-dissent-path"]},
+          {"id": "first-commitment", "semanticBlockIds": ["commitment-release-call", "exercise-dissent-protocol"]},
+          {"id": "changed-record", "semanticBlockIds": ["reveal-mixed-label-roll", "revision-after-record", "revision-final-protocol"]},
+          {"id": "next-rule", "semanticBlockIds": ["transition-repeatable-dissent"]}
+        ]
+      }
+    },
+    "exercises": [
+      {
+        "id": "exercise-dissent-protocol",
+        "name": "Dissent-to-Decision Protocol",
+        "caseMode": "sustained-case",
+        "exerciseCaseBlockId": "case-allergen-label",
+        "mechanismBlockId": "mechanism-dissent-path",
+        "chapterConnection": {
+          "fromBlockId": "mechanism-dissent-path",
+          "unresolvedConsequence": "The shipment still cannot move defensibly because the chapter has exposed the sequence without fixing its threshold, owner, or restart condition.",
+          "firstParticipantAction": "The learner must choose release, inspect, or hold and state the cost that choice accepts.",
+          "mechanismUsed": "Each workbook field converts one step in the dissent path into a named and testable commitment."
+        },
+        "decisionFork": {
+          "question": "What should the plant director do during the remaining twenty minutes before the shipment leaves?",
+          "options": [
+            {
+              "id": "release-recorded-batch",
+              "action": "Release the batch using the approved artwork and completed line record.",
+              "acceptedConsequence": "Delivery remains on time while the unexplained discrepancy may travel with the shipment."
+            },
+            {
+              "id": "inspect-before-release",
+              "action": "Pause dispatch and inspect the remaining label roll before deciding.",
+              "acceptedConsequence": "The team risks missing the dispatch window to test the specific warning."
+            },
+            {
+              "id": "hold-entire-batch",
+              "action": "Hold the entire batch until a complete quality review is finished.",
+              "acceptedConsequence": "Customer exposure is contained while delay, stock loss, and escalation costs increase."
+            }
+          ]
+        },
+        "commitmentBlockId": "commitment-release-call",
+        "revisionBlockId": "revision-final-protocol",
+        "usesIdentifiableData": false,
+        "steps": [
+          {
+            "id": "commit",
+            "prompt": "Choose release, inspect, or hold and record the operational consequence you accept.",
+            "output": "A traceable first dispatch commitment",
+            "requiredFieldIds": ["first-commitment"]
+          },
+          {
+            "id": "revise-after-record",
+            "prompt": "After the remaining roll is inspected, retain or revise the first choice and explain why.",
+            "output": "A visible revision tied to changed evidence",
+            "requiredFieldIds": ["revised-decision", "evidence-test"]
+          },
+          {
+            "id": "bound",
+            "prompt": "Name the pause threshold, decision owner, consultation duty, and challenge route.",
+            "output": "A bounded leadership and escalation rule",
+            "requiredFieldIds": ["authority-boundary"]
+          },
+          {
+            "id": "act",
+            "prompt": "Write the actor, action, communication, and timing another shift could execute.",
+            "output": "An executable dispatch instruction",
+            "requiredFieldIds": ["executable-action"]
+          },
+          {
+            "id": "review",
+            "prompt": "State what observation, owner, and date would trigger revision of the protocol.",
+            "output": "A reviewable revision condition",
+            "requiredFieldIds": ["revision-condition"]
+          }
+        ],
+        "participantFields": [
+          {"id": "first-commitment", "label": "First decision and accepted consequence"},
+          {"id": "revised-decision", "label": "Decision after the changed record"},
+          {"id": "evidence-test", "label": "Evidence that changes the choice"},
+          {"id": "authority-boundary", "label": "Pause, release, consultation, and challenge rights"},
+          {"id": "executable-action", "label": "Actor, action, communication, and timing"},
+          {"id": "revision-condition", "label": "Observation, owner, and review date"}
+        ],
+        "consequenceReveal": {
+          "present": true,
+          "revealBlockId": "reveal-mixed-label-roll",
+          "revisionBlockId": "revision-after-record",
+          "requiresParticipantInput": true,
+          "requiredFieldIds": ["first-commitment"],
+          "minimumAttemptCharacters": 24,
+          "afterStepId": "commit",
+          "revisionStepId": "revise-after-record",
+          "revealedFact": "Inspection finds two labels carrying the old allergen statement mixed into the unused portion of the roll.",
+          "provenance": "Illustrative fact introduced by the synthetic case designer rather than evidence about a named manufacturer.",
+          "decisionConsequence": "The learner must decide whether the physical mismatch changes the dispatch action, its scope, or only the explanation required."
+        },
+        "filledEditionReveal": {
+          "requiresParticipantInput": true,
+          "requiredFieldIds": ["first-commitment", "revised-decision", "evidence-test", "authority-boundary", "executable-action", "revision-condition"],
+          "minimumAttemptCharacters": 24,
+          "startsClosed": true,
+          "controlLabel": "Reveal a filled edition",
+          "fieldBindingAttribute": "data-participant-field-id",
+          "browserProofRequired": true
+        },
+        "humanDecisionOwner": {
+          "actorId": "plant-director",
+          "actorType": "human-role",
+          "automationEligible": false,
+          "mustBeNamedBeforeUse": true,
+          "accountableFor": "final-decision"
+        },
+        "transferPrompt": "Apply the same fields to one late dissent decision in your own work using synthetic or redacted facts.",
+        "debriefQuestion": "Which fact changed the decision, and what leadership rule would let another team respond without private context?",
+        "filledEdition": {
+          "present": true,
+          "fields": [
+            {
+              "id": "first-commitment",
+              "answer": "Pause dispatch for a ten-minute inspection of the remaining roll; accept the risk of missing the carrier while testing the precise label discrepancy."
+            },
+            {
+              "id": "revised-decision",
+              "answer": "Hold the affected batch, quarantine the label roll, and release nothing until quality confirms the scope of the mixed labels."
+            },
+            {
+              "id": "evidence-test",
+              "answer": "Inspect the remaining roll, reconcile issued and unused label counts, and compare every sampled label against the approved allergen artwork."
+            },
+            {
+              "id": "authority-boundary",
+              "answer": "The quality manager may pause dispatch on a documented label mismatch; the plant director owns release after consultation with distribution, and the line supervisor may challenge an incorrect batch boundary."
+            },
+            {
+              "id": "executable-action",
+              "answer": "The line supervisor quarantines the batch and roll now, quality begins a documented scope check within fifteen minutes, and distribution receives a revised dispatch decision within one hour."
+            },
+            {
+              "id": "revision-condition",
+              "answer": "The quality manager reviews three subsequent print runs within seven days; any second mismatch triggers supplier escalation and revision of the line-clearance protocol."
+            }
+          ],
+          "completeness": {
+            "actors": "Quality manager, plant director, distribution lead, and line supervisor are named.",
+            "liveAlternative": "A bounded inspection competes with immediate release and a full batch hold.",
+            "evidenceDiscriminator": "Roll inspection, label counts, and approved artwork can distinguish record error from physical mixing.",
+            "authorityBoundary": "Quality may pause; the plant director releases after consultation; the supervisor can challenge scope.",
+            "executableAction": "The batch is quarantined now, checked within fifteen minutes, and reconsidered within one hour.",
+            "revisionCondition": "Three later print runs are reviewed, with any second mismatch triggering protocol revision.",
+            "appealOrChallengeRoute": "The line supervisor can challenge an incorrect quarantine boundary with the batch and label records."
+          }
+        }
+      }
+    ]
+  }
+}
